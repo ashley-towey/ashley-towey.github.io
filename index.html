@@ -1,15 +1,124 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="/style.css">
-        <title>Ashley Towey Design</title>
-    </head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <h1>Hello World</h1>
-    <p>I'm hosted with GitHub Pages.</p>
+    <title>WOOP</title>
+    <link rel="shortcut icon" type="image/png" href="https://cdn.glitch.com/9a3cae90-021c-4079-89a8-8ba33c0ff634%2FAsset%201.png?v=1607443249175">
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    
+    <!-- import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+    
+    <link rel="stylesheet" href="https://use.typekit.net/pyf1yji.css">
+  </head>  
+  
+  <body>
+    
+    <div class="animation">
+      
+      <img class="center" src="https://cdn.glitch.com/9a3cae90-021c-4079-89a8-8ba33c0ff634%2FWOOP-branding-2.png?v=1607460535201"/>
+           
+    <div class="eyes">
+      <div class="eye">
+        <div class="ball"></div>
+      </div>
+      
+      <div class="eye">
+        <div class="ball"></div>     
+      </div>
+    </div>
+      
+    </div>
+    
+    <! Javascript functions >
+    <script>
+      var balls = document.getElementsByClassName("ball");
+      document.onmousemove = function(){
+        var x = event.clientX * 100 / window.innerWidth + "%";
+        var y = event.clientY * 100 / window.innerHeight + "%";
+        
+        for(var i=0;i<2;i++){
+          balls[i].style.left = x;
+          balls[i].style.top = y;
+          balls[i].style.transform = "translate(-"+x+",-"+y+")";
+        }
+      }
+    </script>
+    
+    <br>
+    
+    <div class="introduction">
+      
+      <img class="woop-horizontal" src="https://cdn.glitch.com/9a3cae90-021c-4079-89a8-8ba33c0ff634%2Fwoop-horizontal.png?v=1607525593607"/>
+      <p>
+        WOOP is the early warning system for cyclists, designed to inform riders of what is going on behind them while still focussing on the road ahead. The rear light fitting includes an integrated radar sensor to detect cars approaching from behind. This information is then transmitted to your head unit or phone where lights display green, amber or red depending on how close the following vehicle is to you. The radar system offers much needed reassurance to be able to enjoy any ride, whether you’re commuting or just out for a weekend spin. 
+      </p>
+    </div>
+    
+    <br>
+    
+    <img class="bg" src="https://cdn.glitch.com/9a3cae90-021c-4079-89a8-8ba33c0ff634%2Fradar-graphic.jpg?v=1607515095165"/>
+         
+    <br>
+    
+    <div class="concept">
+      
+      <div class="row">
+        <div class="column">
+          <h2>
+            Functionality
+          </h2>
+          <p>
+            WOOP works using ant+ and bluetooth connectivity to connect to your head unit or phone. Ant+ is used to ensure connection across different devices, meaning that WOOP will be compatible with all head units on the market. Bluetooth technology gives the rider the ability to use the WOOP  sensor on their phone in a pinch.
+          </p>
+        </div>
+        <div class="column">
+          <h2>
+            Proof of Concept
+          </h2>
+          <p>
+            To demonstrate WOOP’s functionality you can click the link below and watch a short video demonstrating the technology using Arduino Uno and a radar sensor. The traffic light system shown will give the rider intuitive input as to how close cars are while following them. 
+          </p>
+          <a href="https://childlike-florentine-emery.glitch.me/" class="button">Arduino Demo</a>
+        </div>
+      </div>
+    </div>
+    <br>
+    
+    <img class="bg" src="https://cdn.glitch.com/9a3cae90-021c-4079-89a8-8ba33c0ff634%2Fwahoo-graphic.jpg?v=1607517496470"/>
+    
+    <br>
+    
+      <div class="concept">
 
-</body>
-
+      <div class="row">
+        <div class="column">
+          <h2>
+            Wahoo x WOOP
+          </h2>
+          <p>
+            In collaboration with Wahoo, WOOP will integrate seamlessly with the light bar on the Wahoo ELEMNT range. Displaying different colours depending on how close you are being followed by a vehicle. This offers the rider instant knowledge of what’s going on behind them, while remaining focussed on the road ahead. 
+          </p>
+        </div>
+        <div class="column">
+          <img class="wahoo" src="https://cdn.glitch.com/9a3cae90-021c-4079-89a8-8ba33c0ff634%2Fwahoo%20x%20lights.jpg?v=1607518425154"/>
+        </div>
+      </div>
+    </div>
+    
+    <br>
+    
+    <footer>
+      <p class="author">Website and concept:</p>
+      <p class="footer-text">Ashley Towey</p>
+      <a class="email" href="mailto:a.towey0220201@arts.ac.uk">a.towey0220201@arts.ac.uk</a>
+    </footer>
+    
+  </body>
 </html>
+
