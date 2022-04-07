@@ -6,6 +6,13 @@ body {
 .intro {
   background-color: coral;
   margin: 0%;
-  padding: 10%;
-  height: 70vh;
+  padding: 2%;
+  height: 100vh;
+}
+
+.projects-intro {
+  background-color: blue;
+  margin: 0%;
+  padding: 2%;
+  height: 80vh;
 }
