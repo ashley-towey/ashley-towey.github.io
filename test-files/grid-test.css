@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+  }
+  
+  .image-grid {
+    --gap: 16px;
+    --num-cols: 3;
+    --row-height: width;
+  
+    box-sizing: border-box;
+    padding: var(--gap);
+  
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols), 1fr);
+    grid-auto-rows: var(--row-height);
+    gap: var(--gap);
+  }
+  
+  .image-grid > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* only need these if I want an image that covers more than one column or row
+  .image-grid-col-2 {
+    grid-column: span 2;
+  }
+  
+  .image-grid-row-2 {
+    grid-row: span 2;
+  }
+  */
+  
+  /* Anything under 1024px */
+  @media screen and (max-width: 1024px) {
+    .image-grid {
+      --num-cols: 2;
+      --row-height: width;
+    }
+  }
+
+  /* Anything under 767px */
+  @media screen and (max-width: 767px) {
+    .image-grid {
+      --num-cols: 1;
+      --row-height: width;
+    }
+  }
+  
