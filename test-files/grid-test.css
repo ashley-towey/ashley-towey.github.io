@@ -1,6 +1,15 @@
 body {
     margin: 0;
+    margin-bottom: 50px;
   }
+
+  p {
+    font-family: source-code-pro, monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: small;
+    padding-left: 1em;
+}
   
   .image-grid {
     --gap: 50px;
@@ -8,7 +17,13 @@ body {
     --row-height: width;
   
     box-sizing: border-box;
-    padding: var(--gap);
+    padding-left: var(--gap);
+    padding-right: var(--gap);
+    padding-top: 0px;
+    padding-bottom: 0px;
+    /* adding padding as an experiment */
+    /* padding-top: 0px; */
+    /* padding-bottom: 0px; */
   
     display: grid;
     grid-template-columns: repeat(var(--num-cols), 1fr);
@@ -27,6 +42,9 @@ body {
     object-fit: cover;
   }
   
+  .image-grid > p {
+    padding-top: 0px;
+  }
   /* only need these if I want an image that covers more than one column or row
   .image-grid-col-2 {
     grid-column: span 2;
@@ -57,32 +75,38 @@ body {
 
   /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #333;
+  background-color: #fff;
   overflow: hidden;
+  padding-left: 50px;
+  padding-top: 45px;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
   display: block;
-  color: #f2f2f2;
+  color: #000;
+  font-family: source-code-pro, monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
 }
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #ddd;
   color: black;
+  font-weight:500;
 }
 
 /* Add an active class to highlight the current page */
-.topnav a.active {
+/*.topnav a.active {
   background-color: #04AA6D;
   color: white;
 }
+*/
 
 /* Hide the link that should open and close the topnav on small screens */
 .topnav .icon {
