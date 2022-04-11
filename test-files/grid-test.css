@@ -12,22 +12,26 @@ body {
 }
   
   .image-grid {
+    margin-top: 30px;
     --gap: 50px;
     --num-cols: 3;
     --row-height: width;
   
     box-sizing: border-box;
+    padding-left: 50px;
+    padding-right: 50px;
+    /*
     padding-left: var(--gap);
     padding-right: var(--gap);
-    padding-top: 0px;
-    padding-bottom: 0px;
-    /* adding padding as an experiment */
-    /* padding-top: 0px; */
-    /* padding-bottom: 0px; */
+    /*
+    padding-top: var(--slot);
+    padding-bottom: var(--slot);
+    */
   
     display: grid;
     grid-template-columns: repeat(var(--num-cols), 1fr);
     grid-auto-rows: var(--row-height);
+  
     gap: var(--gap);
   }
   
@@ -43,7 +47,9 @@ body {
   }
   
   .image-grid > p {
-    padding-top: 0px;
+    padding-bottom: 10px;
+    margin: 0px;
+    text-align: center;
   }
   /* only need these if I want an image that covers more than one column or row
   .image-grid-col-2 {
