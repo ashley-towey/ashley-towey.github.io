@@ -2,7 +2,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   textAlign(CENTER); //adjust the anchor point of text alignment to the horizontal and vertical centers
   textSize(20); //make the text 20 pixels in size
-  frameRate(2);
+  frameRate(20);
 }
 
 function draw() {
