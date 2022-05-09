@@ -1,14 +1,14 @@
 let content = 'WELCOME TO THE INFINITE SCROLL '; //variable for text string
-let yStart = 0; //starting position of the text wall
-let customFont; //variable for custom font
+// let yStart = 0; //starting position of the text wall
+// let customFont; //variable for custom font
 
-function preload() {
-  customFont = loadFont('SpaceMono-Regular.ttf'); //use  preload to load the custom font
-}
+// function preload() {
+//   customFont = loadFont('SpaceMono-Regular.ttf'); //use  preload to load the custom font
+// }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  textFont(customFont); //use the custom font for text display
+  // textFont(customFont); //use the custom font for text display
   textAlign(CENTER, CENTER); //adjust the anchor point of text alignment to the horizontal and vertical centers
   textSize(20); //make the text 20 pixels in size
   //frameRate(20);
@@ -24,5 +24,5 @@ function draw() {
     fill(255);
     text(word, width / 2, y); //display text
   }
-  yStart--; //move the starting point of the loop up to create the scrolling animation, yStart-- is the same as yStart = yStart -1 or yStart-=1
+  // yStart--; //move the starting point of the loop up to create the scrolling animation, yStart-- is the same as yStart = yStart -1 or yStart-=1
 }
