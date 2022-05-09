@@ -2,7 +2,7 @@
 let x, y, speed;
 
 function setup() {
-  createCanvas(720, 400);
+  createCanvas(400, 400);
   // Starts in the middle
   x = width / 2;
   y = height;
