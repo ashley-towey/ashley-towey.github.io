@@ -1,15 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script-->
-    <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js"></script-->
-    <script src="../p5.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
 
-    <link rel="stylesheet" type="text/css" href="../data-currency/data-currency.css">
-    <meta charset="utf-8" />
+    #textHolder {
+      width: 100vw;
+      background-color: grey;
+      color: black;
+      position: absolute;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  
+  <p id="textHolder"></p>
 
-  </head>
-  <body>
-    <script src="../data-currency/data-currency.js"></script>
-  </body>
+  <script>
+    const textArray = [
+      "Hello1",
+      "Hello2",
+      "Hello3",
+      "Hello4",
+      "Hello5",
+      "Hello6",
+      "Hello7",
+      "Hello8",
+      "Hello9",
+      "Hello10",
+      "Hello11",
+      "Hello12",
+      "Hello13",
+      "Hello14",
+      "Hello15",
+      "Hello16",
+      "Hello17",
+      "Hello18"
+    ]
+  </script>
+
+  <script>
+    const getRandomTextLine = () => {
+      let randomNumber = Math.floor(Math.random() * textArray.length)
+      return textArray[randomNumber];
+    }
+
+    setInterval(() => {
+      document.getElementById('textHolder').innerHTML += getRandomTextLine() + "<br>";
+    }, 200)
+
+    var requestAnimFrame = (function(){
+      return  window.requestAnimationFrame || 
+        window.webkitRequestAnimationFrame || 
+        window.mozRequestAnimationFrame    || 
+        window.oRequestAnimationFrame      || 
+        window.msRequestAnimationFrame     || 
+        function( callback, element ){
+          window.setTimeout(callback, 1000 / 60);
+        };
+    })()
+
+    var startTime = +(new Date());
+    var horizon = document.getElementById('textHolder');
+
+    (function update() {
+        var dif = (new Date()).getTime() - startTime;
+        dif *= 0.025;
+        horizon.style.top = (0 - dif)+'px';
+        requestAnimFrame( update, horizon );
+    })();
+  </script>
+</body>
 </html>
