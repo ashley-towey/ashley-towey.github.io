@@ -1,14 +1,18 @@
 body {
   font-family:Helvetica, Arial, sans-serif;
   line-height: 1.55em;;
-  margin: 0%;
+  margin: 0;
 }
 
-img {
-  /* border: 1px solid #ddd; */
-  /* border-radius: 4px; */
-  padding: 5px;
-  width: 80%;
+* {
+  box-sizing: border-box;
+}
+
+.cropped1 {
+  width: 100%; /* width of container */
+  height: 40em; /* height of container */
+  object-fit: cover;
+  /* border: 5px solid black; */
 }
 
 .navigation-section {
@@ -16,19 +20,19 @@ img {
   line-height: 1.55em;;
   /* background-color: #B8D8D8; */
   margin: 0%;
-  padding-left: 20%;
-  padding-right: 20%;
+  padding-left: 10%;
+  padding-right: 10%;
   padding-top: 5%;
   padding-bottom: 5%;
 }
 
-.second-section {
+.vs-section {
   font-family:Helvetica, Arial, sans-serif;
   line-height: 1.55em;;
   background-color: #7A9E9F;
   margin: 0%;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 15%;
+  padding-right: 15%;
   padding-top: 15%;
   padding-bottom: 15%;
 }
