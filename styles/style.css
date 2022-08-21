@@ -99,7 +99,21 @@ hr {
 
 
 
+/* W3Schools fitting images next to each other tutorial */
 
+* {
+  box-sizing: border-box;
+}
+
+.row2 {
+  display: flex;
+}
+
+/* Create three equal columns that sits next to each other */
+.column2 {
+  flex: 33.33%;
+  padding: 5px;
+}
 
 
 
