@@ -18,96 +18,30 @@
   
   <body>
 
-  <!-- SLATE Section with text and image-->
-  <div class="slate-section">
-    <h1>
-      SLATE
-    </h1>
-      <p>
-        Creating a product will help to solidify this intention and be a consolidation of the visual language.
-This will take the form of a 3D tile based experience involving arranging activities in the order of your morning or evening routine. In order to officially launch the semiotic language which I have created, it needed a brand under which to operate. This is where SLATE comes in. The name is symbolic of taking each day as it comes, and offers the user a fresh slate from which to communicate their routine.
-
-It is key that the brand produces kinaesthetic experiences, and they should feel very tactile in order to maintain engagement.
-
-In particular this will be helpful for people with various levels of additional needs to communicate with their carers, guardians and family.
-      </p>
-      <img src="../img/SLATE/slate-box-1.jpg" alt="Slate Box">
-
-      <!-- SLATE image gallery -->
-      <h2>Images Side by Side</h2>
-      <p>How to create side-by-side images with CSS Flexbox:</p>
-      
-      <div class="row2">
-        <div class="column2">
-          <img src="../img/SLATE/slate-box-1.jpg" alt="Snow" style="width:100%">
-        </div>
-        <div class="column2">
-          <img src="../img/SLATE/slate-2.jpg" alt="Forest" style="width:100%">
-        </div>
-        <div class="column2">
-          <img src="../img/SLATE/slate-3.jpg" alt="Mountains" style="width:100%">
-        </div>
-      </div>
-     <hr>
-  </div>
-
-  <!-- Visual Thinking Publication Section here -->
-  <div class="vs-container-section">
-  <div class="vs-section">
-    <h1>Visual Thinking</h1>
-      <p>
-        Visual Thinking shows the collective effort of Information & Systems Stage 2 students exploring alternative ways of displaying information. The work shown is a product of five weeks of designing and conceptualizing. Through group discussions, we were able to push the boundaries by challenging what it means to communicate visually. 
-This process began by investigating and displaying daily activities which then became more focused toward an individual topic. Despite everyone’s outcomes being vastly different in both content and visual approach, we as editors were able to arrange them into four sections that follow a narrative sequence. Routine, Movement, Perception and Identity. 
-Whilst we have arbitrarily separated each individual project into sections, they all exist within the same space. What unites us is our focus toward producing images that work, whether that be to instruct, inform or explore. We invite you to read this publication as a narrative - from front to back - or to jump right in and engage with a specific project. Regardless of how you engage with this publication it will exist as a record of our collective thoughts on visual thinking.
-      </p>
-  </div>
-
-<!-- Testing out W3Schools Tab Group with inline styling-->
-<!-- The four columns -->
-<div class="row">
-  <div class="column">
-    <img src="../img/visual-thinking/visual-thinking-2.jpg" alt="Nature" style="width:100%" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img src="../img/square.png" alt="Snow" style="width:100%" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img src="../img/visual-thinking/visual-thinking-1.jpg" alt="Mountains" style="width:100%" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img src="../img/visual-thinking/visual-thinking-3.jpg" alt="Lights" style="width:100%" onclick="myFunction(this);">
-  </div>
-</div>
-
-<div class="container">
-  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="width:100%">
-  <div id="imgtext"></div>
-</div>
-
-</div>
-
-
-<script>
-function myFunction(imgs) {
-  var expandImg = document.getElementById("expandedImg");
-  var imgText = document.getElementById("imgtext");
-  expandImg.src = imgs.src;
-  imgText.innerHTML = imgs.alt;
-  expandImg.parentElement.style.display = "block";
-}
-</script>
-  <!-- End of W3Schools Tab group inline styling -->
-
-    <div class="navigation-section">
-      <h1>Navigation Tests</h1>
-      <ul>
-        <li><a href="projects/project-WOOP.html">WOOP Project</a></li>
-        <li><a href="projects/generative-isotype.html">Generative Isotype</a></li>
-        <li><a href="test-files/grid-test.html">Grid Test</a></li>
-        <li><a href="data-currency/data-currency.html">Data Currency</a></li>
+ <!-- W3Schools Full Height Side Nav-->
+<ul>
+  <li><a class="ashley-towey-home" href="#home">Ashley Towey</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#news">Projects</a></li>
+    <ul class="project-navigation">
+      <li><a href="#slate">Slate</a></li>
+      <li><a href="visualthinking">Visual Thinking</a></li>
+      <li><a href="projects/project-WOOP.html">WOOP Project</a></li>
+      <li><a href="projects/generative-isotype.html">Generative Isotype</a></li>
+      <li><a href="test-files/grid-test.html">Grid Test</a></li>
+      <li><a href="data-currency/data-currency.html">Data Currency</a></li>
     </ul>
-  </div>
+</ul>
+
+ <!-- SLATE Project -->
+ <div class="slate-section">
+  <h1>
+    SLATE
+  </h1>
+    <p> 
+      Creating a product will help to solidify this intention and be a consolidation of the visual language. This will take the form of a 3D tile based experience involving arranging activities in the order of your morning or evening routine. In order to officially launch the semiotic language which I have created, it needed a brand under which to operate. This is where SLATE comes in. The name is symbolic of taking each day as it comes, and offers the user a fresh slate from which to communicate their routine. It is key that the brand produces kinaesthetic experiences, and they should feel very tactile in order to maintain engagement. In particular this will be helpful for people with various levels of additional needs to communicate with their carers, guardians and family.
+    </p>
+    <img src="img/SLATE/slate-box-1.jpg" alt="Slate Box">
 
   </body>
 </html>

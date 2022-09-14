@@ -4,27 +4,11 @@ body {
   margin: 0;
 }
 
-hr {
-  margin-top: 5%;
-}
-
-.vs-section {
-  margin: 0%;
-  padding-left: 11%;
-  padding-right: 11%;
-  padding-top: 5%;
-  padding-bottom: 0%;
-}
-
-.vs-container-section {
-  padding-bottom: 2%;
-}
-
 .slate-section {
-  padding-left: 11%;
-  padding-right: 11%;
-  padding-top: 10%;
-  padding-bottom: 0%;
+  margin-left:25%;
+  height:1000px;
+  padding-top: 6em;
+  padding-right: 3em;
 }
 
 .slate-section img {
@@ -32,99 +16,6 @@ hr {
     height: 35em;
     object-fit: cover;
   }
-
-/* W3Schools Tab Group styling */
-
-* {
-  box-sizing: border-box;
-}
-
-/* Bring the margins in using the row class */
-.row{
-  padding-left: 10%;
-  padding-right: 10%;
-}
-/* The grid: Four equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 25%;
-  padding: 10px;
-}
-
-/* Style the images inside the grid */
-.column img {
-  opacity: 0.8; 
-  cursor: pointer; 
-}
-
-.column img:hover {
-  opacity: 1;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* The expanding image container */
-.container {
-  position: relative;
-  display: none;
-  padding-left: 13%;
-  padding-right: 13%;
-  padding-bottom: 2%;
-}
-
-/* Expanding image text */
-#imgtext {
-  position: relative;
-  bottom: 60px;
-  left: 30px;
-  color: grey;
-  font-size: 1.5em;
-}
-
-/* Closable button inside the expanded image */
-.closebtn {
-  position: relative;
-  top: 60px;
-  left: 30px;
-  color: grey;
-  font-size: 2em;
-  cursor: pointer;
-}
-/* End of W3Schools Tab group styling */
-
-
-
-/* W3Schools fitting images next to each other tutorial */
-
-* {
-  box-sizing: border-box;
-}
-
-.row2 {
-  display: flex;
-}
-
-/* Create three equal columns that sits next to each other */
-.column2 {
-  flex: 33.33%;
-  padding: 5px;
-}
-
-
-
-
-
-.cropped1 {
-  width: 100%; /* width of container */
-  height: 40em; /* height of container */
-  object-fit: cover;
-  /* border: 5px solid black; */
-}
 
 .navigation-section {
   font-family:Helvetica, Arial, sans-serif;
@@ -137,13 +28,41 @@ hr {
   padding-bottom: 5%;
 }
 
-.fourth-section {
-  font-family:Helvetica, Arial, sans-serif;
-  line-height: 1.55em;;
-  background-color: #EEF5DB;
-  margin: 0%;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-top: 15%;
-  padding-bottom: 15%;
+/* W3Schools Full Height Side Nav Styling */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 3em;
+  width: 25%;
+  /*background-color: #f1f1f1; /* use for testing */
+  position: fixed;
+  height: 100%;
+  overflow: auto;
 }
+
+ul.project-navigation {
+  padding: 0px;
+  padding-left: 1em;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+li a {
+  display: block;
+  color: #000;
+  /* padding: 12px 16px; */
+  padding: 12px 0px 0px 80px;
+  text-decoration: none;
+}
+
+li a.ashley-towey-home {
+  font-weight: bold;
+  font-size:larger;
+  padding-bottom: 1.5em;
+}
+
+li a:hover:not(.active) {
+  font-weight: bolder;
+}
+/* W3Schools Full Height Side Nav End */
