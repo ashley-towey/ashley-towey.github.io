@@ -4,7 +4,25 @@ body {
   margin: 0;
 }
 
+footer {
+  background-color: beige;
+  padding: 7em;
+}
+
 img {
   max-width: 100%;
   height: auto;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+}
+
+.content-area {
+  margin: 7em;
 }
