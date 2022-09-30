@@ -28,7 +28,7 @@ a:hover {
 }
 
 /* Flexbox styling test */
-.some-page-wrapper {
+.content-wrapper {
   margin: 0vw;
   background-color: red;
 }
