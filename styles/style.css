@@ -6,7 +6,9 @@ body {
 
 footer {
   background-color: #ffffff;
-  padding: 5vw;
+  padding-bottom: 5vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
 }
 
 img {
