@@ -25,6 +25,10 @@ a:hover {
   color: grey;
 }
 
+hr {
+  border-top: 1px solid black;
+}
+
 /* styles the outer margin */
 .content-area { 
   margin: 5vw;
@@ -68,6 +72,17 @@ a:hover {
   .column {
     flex: 1
   }
+}
+
+.read-more-button {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.read-more-button.hover {
+  background-color: #555555;
+  color: white;
 }
 
 #more {
