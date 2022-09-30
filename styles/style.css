@@ -69,3 +69,7 @@ a:hover {
     flex: 1
   }
 }
+
+.more {
+  display: none;
+}
