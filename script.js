@@ -1,16 +1,17 @@
-function mySlateFunction() {
-  var dots = document.getElementById("dots");
-  var moreText = document.getElementById("more");
-  var btnText = document.getElementById("myBtn");
-
-  if (dots.style.display === "none") {
-    dots.style.display = "inline";
+function myFunction(btn_id) {
+  
+  var btnText = document.getElementById(btn_id.id);
+  var parentElem = btn_id.parentElement;
+  var childElemP = parentElem.childNodes;
+  var spanElem = childElemP[1].childNodes;
+  
+  if (spanElem[1].style.display === "none") {
+    spanElem[1].style.display = "inline";
     btnText.innerHTML = "Read more"; 
-    moreText.style.display = "none";
+    spanElem[2].style.display = "none";
   } else {
-    dots.style.display = "none";
+    spanElem[1].style.display = "none";
     btnText.innerHTML = "Read less"; 
-    moreText.style.display = "inline";
+    spanElem[2].style.display = "inline";
   }
 }
-
