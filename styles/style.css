@@ -31,6 +31,7 @@ a:hover {
 /* text content area styling */
 .text-content-area {
   padding: 1vw;
+  width: 57vw;
 }
 
 /* Flexbox styling test */
@@ -55,7 +56,13 @@ a:hover {
   padding: 1vw;
 }
 
-@media screen and (min-width: 800px) {
+@media only screen and (max-width: 1000px) {
+  .text-content-area {
+    width: 97%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
   .column {
     flex: 1
   }
