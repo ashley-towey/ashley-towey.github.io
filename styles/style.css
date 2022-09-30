@@ -26,3 +26,44 @@ a:hover {
 .content-area {
   margin: 5vw;
 }
+
+/* Flexbox styling test */
+.some-page-wrapper {
+  margin: 0vw;
+  background-color: red;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+.column-one {
+  background-color: orange;
+}
+
+.column-two {
+  background-color: blue;
+}
+
+.column-three {
+  background-color: green;
+}
+
+@media screen and (min-width: 800px) {
+  .column {
+    flex: 1
+  }
+
+  .double-column {
+    flex: 2
+  }
+}
