@@ -23,14 +23,19 @@ a:hover {
   color: grey;
 }
 
-.content-area {
+/* styles the outer margin */
+.content-area { 
   margin: 5vw;
 }
 
+/* text content area styling */
+.text-content-area {
+  padding: 1vw;
+}
+
 /* Flexbox styling test */
-.content-wrapper {
+.image-wrapper {
   margin: 0vw;
-  background-color: red;
 }
 
 .row {
@@ -46,24 +51,12 @@ a:hover {
   flex-basis: 100%;
 }
 
-.column-one {
-  background-color: orange;
-}
-
-.column-two {
-  background-color: blue;
-}
-
-.column-three {
-  background-color: green;
+.item {
+  padding: 1vw;
 }
 
 @media screen and (min-width: 800px) {
   .column {
     flex: 1
-  }
-
-  .double-column {
-    flex: 2
   }
 }
