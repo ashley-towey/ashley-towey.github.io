@@ -80,9 +80,9 @@ hr {
     border: 1px solid black;
 }
 
-.read-more-button.hover {
-  background-color: #555555;
-  color: white;
+.read-more-button:hover {
+  background-color: rgb(227, 227, 227);
+  color: black;
 }
 
 #more {
