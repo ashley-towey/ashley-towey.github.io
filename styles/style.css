@@ -43,6 +43,7 @@ hr {
 /* Flexbox styling test */
 .image-wrapper {
   margin: 0vw;
+  align-items: center;
 }
 
 .row {
@@ -74,6 +75,7 @@ hr {
   }
 }
 
+/* read more button styling */
 .read-more-button {
     background-color: white;
     color: black;
