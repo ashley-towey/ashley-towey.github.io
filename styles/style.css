@@ -43,6 +43,7 @@ hr {
 /* Flexbox styling test */
 .image-wrapper {
   margin: 0vw;
+  align-items: center;
 }
 
 .row {
