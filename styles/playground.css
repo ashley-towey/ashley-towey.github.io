@@ -110,3 +110,11 @@ body {
       flex: 1
     }
   }
+
+  /* Square button area */
+  .project-button {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    padding: 7.5px;
+}
