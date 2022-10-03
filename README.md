@@ -1,10 +1,8 @@
-# ashley-towey.github.io
-This is going to be my new website, hosted on GitHub pages. 
+# ashley-towey.github.io. 
+Portfolio website including finished projects and playground experiments. 
 
-- Ashley Towey
+- Author: Ashley Towey
 
 - ashleytowey.com/My Graphic Design portfolio website
 
 - http://ashleytowey.com / https://www.instagram.com/echelon__design/ 
-
-- dm on 
