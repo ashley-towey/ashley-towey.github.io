@@ -1,4 +1,31 @@
-let x = 1;
+function setup() {
+  createCanvas(700, 700);
+}
+
+function draw() {
+  background('#FFFDD0');
+  textAlign(CENTER);
+  textSize(10);
+  noStroke();
+
+  fill(240, 0, 0);
+  ellipse(100, 100, 100);
+  fill(0, 0, 240);
+  ellipse(500, 450, 50);
+  fill('#fceea7');
+  ellipse(150, 550, 200);
+  fill(0, 240, 0);
+  ellipse(400, 120, 40);
+
+  fill(255);
+  text('let there be life', 100, 100);
+  text('help', 500, 450);
+  text('oops...', 150, 550);
+  text('look!', 400, 120);
+}
+
+
+/* let x = 1;
 
 function printmsg(){
     let msg = 'Test ' + x;
@@ -11,7 +38,7 @@ function printmsg(){
 printmsg();
 printmsg();
 printmsg();
-
+*/
 
 /*
 // Brief: Design a colour picker for an image. 
@@ -21,8 +48,8 @@ let img1, img2;
 let imgResult;
 
 function preload() {
-  img = loadImage('assets/shapes.jpg');
-  img2 = loadImage('assets/shapes2.jpg');
+  img = loadImage('../img/square.png');
+  img2 = loadImage('../img/square.png');
 }
 
 function setup() {
@@ -62,4 +89,5 @@ function mousePressed() {
   imgResult = !imgResult;
 }
 */
+
 
