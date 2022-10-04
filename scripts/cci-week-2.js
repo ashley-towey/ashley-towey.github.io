@@ -22,6 +22,8 @@ function draw() {
   text('help', 500, 450);
   text('oops...', 150, 550);
   text('look!', 400, 120);
+
+  ellipse(mouseX, mouseY, 50);
 }
 
 
