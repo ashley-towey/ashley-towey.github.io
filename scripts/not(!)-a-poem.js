@@ -1,6 +1,6 @@
 
   function displayMessage(){
-    let theMsg = document.getElementById("firstName").value;
+    let theMsg = document.getElementById("firstName"+"lastname").value;
     if (theMsg){
         document.getElementById("showinputhere").innerHTML = theMsg;
     }
