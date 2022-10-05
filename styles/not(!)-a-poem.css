@@ -7,6 +7,7 @@ body {
     height: 100vh;
     width: 100vw;
     padding: 5vw;
+    padding-top: 15vw;
 }
 
 #display-data {
@@ -32,10 +33,31 @@ p.terms {
     margin-top: 5vh;
 }
 
-.submit-button {
-    background-color: aqua;
-}
-
 label {
     display: inline-block;
   }
+
+/* read more button styling */
+.submit-button {
+    display:inline-block;
+    text-align: center;
+    /* padding-top: 10vw; */
+    background-color: rgb(178, 3, 3);
+    color: white;
+    border: 1px solid black;
+    padding: 5vw;
+    width: 50vw;
+    height: 15vw;
+    text-decoration: none;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.submit-button:hover {
+  background-color: rgb(255, 168, 168);
+  color: rgb(178, 3, 3);
+}
+
+.submit-area {
+    margin-top: 5vw;
+}
