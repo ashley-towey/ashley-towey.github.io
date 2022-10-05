@@ -1,10 +1,10 @@
-
   function displayMessage(){
-    let theMsg = document.getElementById("firstName"+"lastname").value;
-    if (theMsg){
-        document.getElementById("showinputhere").innerHTML = theMsg;
-    }
-    else{
-        document.getElementById("showinputhere").innerHTML = "No data received";
+    let fName = document.getElementById("firstName").value;
+    let lName = document.getElementById("lastName").value;
+
+    if (fName + lName){
+        document.getElementById("showinputhere").innerHTML = fName + lName;
+    } else {
+        document.getElementById("showinputhere").innerHTML = "Not enough data given";
     }
 }
