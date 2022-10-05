@@ -11,10 +11,10 @@ body {
 }
 
 #display-data {
-    padding-top: 50vh;
+    padding-top: 45vh;
     padding-bottom: 50vh;
     padding-left: 5vw;
-    background-color:antiquewhite;
+    background-color:rgb(255, 168, 168);
 }
 
 p.terms {
@@ -62,4 +62,14 @@ label {
 
 .submit-area {
     margin-top: 5vw;
+}
+
+#showinputhere {
+    color: black;
+    font-size: 1.1em;
+}
+
+.countup-timer {
+    font-weight: bold;
+    font-size: 1.5em;
 }
