@@ -40,13 +40,18 @@
     <!-- import javascript file -->
     <script src="../scripts/not(!)-a-poem.js"></script>
 
+    <!-- Accept terms and conditions statement which displays name data -->
+    <br>
+    <input onclick="displayData()"  type="checkbox">
+    <p>By checking this box, you are agreeing to our terms of service and allowing us to use your data in whatever way we see fit.</p>
+
     <!-- SUBMIT button and display data -->
     <br>
-    <button onclick="displayData()" href="#displayData">Submit</button>
+    <a href="#display-data" class="submit-button">Submit</a>
 
-    <div id="displayData">
+    <div id="display-data">
         <!-- display users name-->
-        <p id="showinputhere"></p>
+        <p id="showinputhere">some text for testing</p>
 
         <!-- display users current time on earth -->
         <p class="countup-timer"></p>
