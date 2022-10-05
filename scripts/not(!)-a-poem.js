@@ -5,6 +5,6 @@
     if (fName + lName){
         document.getElementById("showinputhere").innerHTML = fName + lName;
     } else {
-        document.getElementById("showinputhere").innerHTML = "Not enough data given";
+        document.getElementById("showinputhere").innerHTML = "Not enough data provided.";
     }
 }
