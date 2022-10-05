@@ -20,32 +20,30 @@
         <!-- Name form -->
         <h1>Information Input</h1>
 
-        <p>First Name</p>
-        <input type="text" id="firstName">
-        <p>Last Name</p>
-        <input type="text" id="lastName">
+            <label for="firstName">First Name:</label>
+                <input type="text" id="firstName">
+                <br>
+            <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName">
+                <br>
 
         <!-- Date of Birth input -->
-        <p>Date ofg Birth</p>
-
-        <!-- <div class="container"> -->
-            <!-- Testing date time calculator -->
-            <input type="datetime-local" id="local_time">
-        <!-- </div> -->
+            <label for="local_time">Date of Birth:</label>
+                <input type="datetime-local" id="local_time">
 
         <!-- mood slider function to control background -->
-        <p>Mood</p>
+        <!-- <p>Mood</p>
         <input type="range" min="1" max="255" value="150" id="slider-output" onchange="changeBgCol()">
-
+        -->
         <!-- Why does the javascript function for the timer only work when it's in the body? -->
         <!-- import javascript file -->
         <script src="../scripts/not(!)-a-poem.js"></script>
 
         <!-- Accept terms and conditions statement which displays name data -->
-        <br>
-        <input onclick="displayData()"  type="checkbox">
-        <p class="terms">By checking this box, you are agreeing to our terms of service and the use of your data in whatever way we see fit.</p>
-
+        <div class="terms-and-conditions">
+            <input onclick="displayData()"  type="checkbox">
+            <p class="terms">By checking this box, you are agreeing to our terms of service and the use of your data in whatever way we see fit.</p>
+        </div>
         <!-- SUBMIT button and display data -->
         <br>
         <a href="#display-data" class="submit-button">Submit</a>

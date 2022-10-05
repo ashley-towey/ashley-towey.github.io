@@ -13,9 +13,29 @@ body {
     padding-top: 50vh;
     padding-bottom: 50vh;
     padding-left: 5vw;
-    /* background-color:antiquewhite; */
+    background-color:antiquewhite;
 }
 
 p.terms {
     font-size: .7em;
 }
+
+#firstName {
+    margin-bottom: 1vh;
+}
+
+#lastName {
+    margin-bottom: 1vh;
+}
+
+.terms-and-conditions {
+    margin-top: 5vh;
+}
+
+.submit-button {
+    background-color: aqua;
+}
+
+label {
+    display: inline-block;
+  }
