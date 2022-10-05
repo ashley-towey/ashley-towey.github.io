@@ -11,8 +11,7 @@
     <!-- 
     <script src="../scripts/p5.js"></script>
     -->
-    <!-- import javascript file -->
-    <script src="../scripts/not(!)-a-poem.js"></script>
+
 </head>
 
 <body>
@@ -25,16 +24,33 @@
     <p>Last Name</p>
     <input type="text" id="lastName">
 
-    <p>Date of Birth</p>
-    <input type="date" id="DOB">
-
     <p>Default range slider:</p>
     <input type="range" min="1" max="100" value="50">
 
-    <br><br>
-    <button onclick="displayMessage()">Submit</button>
+    <!-- Date of Birth input -->
+    <p>Date of Birth</p>
 
-    <p id="showinputhere"></p>
+    <!-- <div class="container"> -->
+        <!-- Testing date time calculator -->
+        <input type="datetime-local" id="local_time">
+    <!-- </div> -->
+
+
+    <!-- Why does the javascript function for the timer only work when it's in the body? -->
+    <!-- import javascript file -->
+    <script src="../scripts/not(!)-a-poem.js"></script>
+
+    <!-- SUBMIT button and display data -->
+    <br>
+    <button onclick="displayData()" href="#displayData">Submit</button>
+
+    <div id="displayData">
+        <!-- display users name-->
+        <p id="showinputhere"></p>
+
+        <!-- display users current time on earth -->
+        <p class="countup-timer"></p>
+    </div>
 
 </body>
 </html>
