@@ -13,7 +13,7 @@ setInterval(function() {
     let minutes = Math.floor((finalDate % (1000 * 60 *60)) / (1000 * 60));
     let seconds = Math.floor((finalDate % (1000 * 60)) / 1000);
 
-    counter.innerHTML = days+"d"+hours+"h"+minutes+"m"+seconds+"s";
+    counter.innerHTML = days+" days "+hours+" hours "+minutes+" minutes "+seconds+" seconds ";
 }, 1000) 
 }
 

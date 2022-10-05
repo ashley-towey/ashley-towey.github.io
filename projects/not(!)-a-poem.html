@@ -16,38 +16,40 @@
 
 <body>
 
-    <!-- Name form -->
-    <h1>Information Input</h1>
+    <div class="information-input-area">
+        <!-- Name form -->
+        <h1>Information Input</h1>
 
-    <p>First Name</p>
-    <input type="text" id="firstName">
-    <p>Last Name</p>
-    <input type="text" id="lastName">
+        <p>First Name</p>
+        <input type="text" id="firstName">
+        <p>Last Name</p>
+        <input type="text" id="lastName">
 
-    <p>Default range slider:</p>
-    <input type="range" min="1" max="100" value="50">
+        <!-- Date of Birth input -->
+        <p>Date of Birth</p>
 
-    <!-- Date of Birth input -->
-    <p>Date of Birth</p>
+        <!-- <div class="container"> -->
+            <!-- Testing date time calculator -->
+            <input type="datetime-local" id="local_time">
+        <!-- </div> -->
 
-    <!-- <div class="container"> -->
-        <!-- Testing date time calculator -->
-        <input type="datetime-local" id="local_time">
-    <!-- </div> -->
+        <!-- mood slider function to control background -->
+        <p>Mood</p>
+        <input type="range" min="1" max="100" value="50">
 
+        <!-- Why does the javascript function for the timer only work when it's in the body? -->
+        <!-- import javascript file -->
+        <script src="../scripts/not(!)-a-poem.js"></script>
 
-    <!-- Why does the javascript function for the timer only work when it's in the body? -->
-    <!-- import javascript file -->
-    <script src="../scripts/not(!)-a-poem.js"></script>
+        <!-- Accept terms and conditions statement which displays name data -->
+        <br>
+        <input onclick="displayData()"  type="checkbox">
+        <p class="terms">By checking this box, you are agreeing to our terms of service and the use of your data in whatever way we see fit.</p>
 
-    <!-- Accept terms and conditions statement which displays name data -->
-    <br>
-    <input onclick="displayData()"  type="checkbox">
-    <p>By checking this box, you are agreeing to our terms of service and allowing us to use your data in whatever way we see fit.</p>
-
-    <!-- SUBMIT button and display data -->
-    <br>
-    <a href="#display-data" class="submit-button">Submit</a>
+        <!-- SUBMIT button and display data -->
+        <br>
+        <a href="#display-data" class="submit-button">Submit</a>
+    </div>
 
     <div id="display-data">
         <!-- display users name-->
