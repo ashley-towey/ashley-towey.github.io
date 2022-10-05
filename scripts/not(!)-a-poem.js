@@ -27,3 +27,10 @@ function displayData(){
         document.getElementById("showinputhere").innerHTML = "Not enough data provided.";
     }
 }
+
+function changeBgCol() {
+    let bgCol = parseInt(document.getElementById("slider-output").value);
+    // let bgCol = document.getElementById("slider-output");
+
+    document.body.style.backgroundColor = rgb(bgCol + ',' + bgCol + ',' + bgCol);
+}
