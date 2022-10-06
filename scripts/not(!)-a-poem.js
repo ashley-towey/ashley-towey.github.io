@@ -17,12 +17,12 @@ setInterval(function() {
 }, 1000) 
 }
 
-function displayData(){
-    let fName = document.getElementById("firstName").value;
-    let lName = document.getElementById("lastName").value;
+function displayUsersName(){
+    let firstName = document.getElementById("fName").value;
+    let lastName = document.getElementById("lName").value;
 
-    if (fName + lName){
-        document.getElementById("showinputhere").innerHTML = fName + " " + lName + " has been alive for";
+    if (firstName + lastName){
+        document.getElementById("showinputhere").innerHTML = firstName + " " + lastName + " has been alive for";
     } else {
         document.getElementById("showinputhere").innerHTML = "Not enough data provided.";
     }

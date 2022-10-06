@@ -21,10 +21,10 @@
         <h1>Information Input</h1>
 
             <label for="firstName">First Name:</label>
-                <input type="text" id="firstName">
+                <input type="text" id="fName">
                 <br>
             <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName">
+                <input type="text" id="lName">
                 <br>
 
         <!-- Date of Birth input -->
@@ -41,8 +41,16 @@
 
         <!-- Accept terms and conditions statement which displays name data -->
         <div class="terms-and-conditions">
-            <p class="terms">By checking this box, you are agreeing to our terms of service and the use of your data in whatever way we see fit.</p>
-            <input onclick="displayData()"  type="checkbox">
+            <input onclick="displayUsersName()"  type="checkbox">
+            <p class="terms">By checking this box you are agreeing to the running of this function:</p>
+            <div class="code-block">
+                <pre class="line-numbers">function displayUsersName(){ <code class=”language-javascript> 
+                <pre class="line-numbers">  let firstName = document.getElementById("fName").value;<code class=”language-javascript> 
+                <pre class="line-numbers"><code class=”language-javascript> 
+                <pre class="line-numbers"><code class=”language-javascript> 
+                <pre class="line-numbers"><code class=”language-javascript> 
+            </div>
+
         </div>
     
         <!-- SUBMIT button and display data -->
