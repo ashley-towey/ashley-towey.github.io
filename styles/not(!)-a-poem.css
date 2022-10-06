@@ -76,5 +76,6 @@ label {
 }
 
 .code-block {
+    margin-top: 1.5em;
     line-height: .2em;
 }

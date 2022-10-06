@@ -17,7 +17,7 @@ setInterval(function() {
 }, 1000) 
 }
 
-function displayUsersName(){
+function displayUserLifespan(){
     let firstName = document.getElementById("fName").value;
     let lastName = document.getElementById("lName").value;
 

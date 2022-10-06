@@ -41,14 +41,20 @@
 
         <!-- Accept terms and conditions statement which displays name data -->
         <div class="terms-and-conditions">
-            <input onclick="displayUsersName()"  type="checkbox">
+            <input onclick="displayUserLifespan()"  type="checkbox">
             <p class="terms">By checking this box you are agreeing to the running of this function:</p>
             <div class="code-block">
-                <pre class="line-numbers">function displayUsersName(){ <code class=”language-javascript> 
+                <pre class="line-numbers">function displayUserLifespan(){ <code class=”language-javascript> 
                 <pre class="line-numbers">  let firstName = document.getElementById("fName").value;<code class=”language-javascript> 
+                <pre class="line-numbers">  let lastName = document.getElementById("lName").value;<code class=”language-javascript> 
                 <pre class="line-numbers"><code class=”language-javascript> 
-                <pre class="line-numbers"><code class=”language-javascript> 
-                <pre class="line-numbers"><code class=”language-javascript> 
+                <pre class="line-numbers">  if (firstName + lastName){<code class=”language-javascript> 
+                <pre class="line-numbers">  document.getElementById("showinputhere").innerHTML = firstName + " " + lastName + " has been alive for";<code class=”language-javascript> 
+                <pre class="line-numbers">  } else {<code class=”language-javascript> 
+                <pre class="line-numbers">  document.getElementById("showinputhere").innerHTML = "Not enough data provided.";<code class=”language-javascript> 
+                <pre class="line-numbers">  }<code class=”language-javascript> 
+                <pre class="line-numbers">}<code class=”language-javascript> 
+
             </div>
 
         </div>
