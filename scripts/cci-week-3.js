@@ -87,7 +87,7 @@ function draw() {
 */
 
 /* Push and pop examples using arrays and loops */
-/*
+
 let angles = [0, 0, 0, 0, 0];
 let speeds = [1, 3, 6, 3, 1];
 let words = ["hello", "world", "what's", "the", "weather"];
@@ -130,7 +130,7 @@ function draw() {
         pop();
     }
 }
-*/
+
 
 /* Coding Challenge #1 
 Draw a checkerboard grid of shapes and colours of your choice 
@@ -213,7 +213,9 @@ function setup() {
 function draw() {
 
 }
-*/
+*/ 
+/* Coding Challenge #3 */
+/*
 let x = 0;
 let y = 0; 
 let angle = 0;
@@ -255,3 +257,4 @@ function draw() {
     pop ();
 
 }
+*/
