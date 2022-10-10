@@ -87,7 +87,7 @@ function draw() {
 */
 
 /* Push and pop examples using arrays and loops */
-/* 
+/*
 let angles = [0, 0, 0, 0, 0];
 let speeds = [1, 3, 6, 3, 1];
 let words = ["hello", "world", "what's", "the", "weather"];
@@ -143,7 +143,7 @@ if (number%2 === 0) {
 Console.log('even');
 }
 */
-/* 
+/*
 let counter = 0;
 let step = 80;
 let x = step/2;
@@ -185,6 +185,7 @@ commands and translate() | rotate().
 Hint: explore the commands blendMode(DIFFERENCE) and
 blendMode(BLEND)
 */
+/*
     let x = 400;
     let y = 400;
 
@@ -204,10 +205,53 @@ function setup() {
         translate(70, 80);
         ellipse(x, y, 330);
     pop();
-
-    triangle(30, 75, 58, 20, 86, 75);
+    push();
+    translate(70, 80);
+    triangle(0, 350, 350/2, 0, 350, 350);
+    pop();
 }
 function draw() {
 
 }
+*/
+let x = 0;
+let y = 0; 
+let angle = 0;
 
+function setup() {
+    createCanvas(800, 800);
+
+    noStroke();
+    fill(250, 230, 0);
+    angleMode(DEGREES);
+}
+function draw() {
+    background(0);
+
+    // central 'sun' ellipse
+    push();
+    translate(400, 400);
+    rotate(angle);
+    ellipse(x, y, 85, 100);
+    pop();
+
+    // moon 1 ellipse
+    push ();
+        translate (400, 400);
+        rotate (angle);
+        fill(255, 0, 0);
+        ellipse(x+100, y+100, 40, 50);
+        angle = angle + 1;
+
+            // moon 2 ellipse
+            push();
+                translate(x+100, y+100);
+                rotate (angle);
+                fill(0, 0, 255);
+                ellipse(50, 50, 30, 35);
+                angle = angle + 1;
+            pop();
+
+    pop ();
+
+}
