@@ -87,6 +87,7 @@ function draw() {
 */
 
 /* Push and pop examples using arrays and loops */
+/* 
 let angles = [0, 0, 0, 0, 0];
 let speeds = [1, 3, 6, 3, 1];
 let words = ["hello", "world", "what's", "the", "weather"];
@@ -128,5 +129,85 @@ function draw() {
             angles[i] = angles[i] + speeds[i];
         pop();
     }
+}
+*/
+
+/* Coding Challenge #1 
+Draw a checkerboard grid of shapes and colours of your choice 
+using a while loops and conditional statements. 
+
+Hint: Use a conditional statement with a modulo (%) to determine 
+whether your counter is odd or even. 
+
+if (number%2 === 0) {
+Console.log('even');
+}
+*/
+/* 
+let counter = 0;
+let step = 80;
+let x = step/2;
+let y = step/2;
+
+function setup() {
+    createCanvas(400, 400);
+    background(0);
+}
+
+function draw() {
+    while(counter < width*height) {
+        noStroke();
+        if (counter%2) {
+            fill(250, 200, 0);
+        } else {
+            fill(153, 50, 204);
+        }
+        ellipse(x, y, step, step);
+        x += step;
+
+        if(x >= width) {
+            x = step/2;
+            y += step;
+        }
+        
+        counter++;
+    }
+}
+*/
+
+/* Coding Challenge #2
+Explore the blendMode() command by drawing a series of shapes 
+on top of each other. 
+
+Adjust their position on the canvas using the push() and pop() 
+commands and translate() | rotate().
+
+Hint: explore the commands blendMode(DIFFERENCE) and
+blendMode(BLEND)
+*/
+    let x = 400;
+    let y = 400;
+
+function setup() {
+    createCanvas(800, 800);
+
+    blendMode(DIFFERENCE);
+
+    background(0);
+
+    rectMode(CENTER);
+    noStroke();
+
+    fill (255);
+    rect(x, y, 350);
+    push();
+        translate(70, 80);
+        ellipse(x, y, 330);
+    pop();
+
+    triangle(30, 75, 58, 20, 86, 75);
+}
+function draw() {
+
 }
 
