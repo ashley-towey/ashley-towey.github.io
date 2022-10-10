@@ -88,7 +88,7 @@ function draw() {
 
 /* Push and pop examples using arrays and loops */
 let angles = [0, 0, 0, 0, 0];
-let speeds = [1, 25, 10, 5, 2];
+let speeds = [1, 3, 6, 3, 1];
 let xpos = 80;
 let xstep = 60;
 
@@ -99,14 +99,26 @@ function setup() {
 }
 
 function draw() {
-    background(0);
+    background(240);
 
     for (let i = 0; i < angles.length; i++) {
         push();
-            fill (153, 50, 204);
+            strokeWeight(3);
+            // if statement for different colours on each rectangle
+            if (i == 1) {
+                stroke(255, 0, 0);
+                fill(255, 0, 0, 100);
+            } else if ( i == 3) {
+                stroke(0, 0, 255) 
+                fill(0, 0, 255, 100);
+            } else {
+                stroke (240, 200, 0);
+                fill (240, 200, 0, 100);
+            }
+
             translate(xpos + (xstep * i), height/2);
             rotate(angles[i]);
-            rect(0, 0, 50, 50);
+            rect(0, 0, 100, 100);
             angles[i] = angles[i] + speeds[i];
         pop();
     }
