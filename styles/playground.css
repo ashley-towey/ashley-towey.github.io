@@ -123,3 +123,7 @@ body {
 .footer-line {
     margin-top: 5vw;
 }
+
+li {
+  list-style-type: none;
+}

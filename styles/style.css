@@ -91,3 +91,7 @@ hr {
 #more {
   display: none;
 }
+
+li {
+  list-style-type: none;
+}

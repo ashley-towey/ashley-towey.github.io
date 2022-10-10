@@ -89,11 +89,12 @@ function draw() {
 /* Push and pop examples using arrays and loops */
 let angles = [0, 0, 0, 0, 0];
 let speeds = [1, 3, 6, 3, 1];
-let xpos = 80;
+let words = ["hello", "world", "what's", "the", "weather"];
+let xpos = 175;
 let xstep = 60;
 
 function setup() {
-    createCanvas(400, 400);
+    createCanvas(600, 600);
     angleMode(DEGREES);
     rectMode(CENTER);
 }
@@ -119,6 +120,11 @@ function draw() {
             translate(xpos + (xstep * i), height/2);
             rotate(angles[i]);
             rect(0, 0, 100, 100);
+            fill(255);
+            noStroke();
+            textSize(15);
+            textAlign(CENTER);
+            text(words[i], 0, 30);
             angles[i] = angles[i] + speeds[i];
         pop();
     }
