@@ -68,6 +68,7 @@ body {
   /* styles the outer margin */
   .content-area { 
     margin: 5vw;
+    padding-top: 5vh;
   }
   
   /* text content area styling */
@@ -97,6 +98,8 @@ body {
   
   .item {
     padding: 1vw;
+    padding-bottom: 5vh;
+
   }
   
   @media only screen and (max-width: 1000px) {
