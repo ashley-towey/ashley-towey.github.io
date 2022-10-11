@@ -90,7 +90,7 @@ function draw() {
 
 let angles = [0, 0, 0, 0, 0];
 let speeds = [1, 3, 6, 3, 1];
-let words = ["hello", "world", "what's", "the", "weather"];
+let words = ["Week", "three", "mega", "coding", "challenges."];
 let xpos = 175;
 let xstep = 60;
 

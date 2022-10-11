@@ -1,21 +1,22 @@
 body {
     font-family: Helvetica, Arial, sans-serif;
-    line-height: 1.55em;;
-    margin: 0;
-}
-
-.content-area {
+    line-height: 1.55em;
     margin: 5vw;
 }
 
-
-/* 
+/*
+.content-area {
+    margin: 5vw;
+}
+*/
+/*
 .p5-origin {
-    margin-top: 0px;
+    margin-left: 50px;
 }
 */
 
-
+/*
 .challenge-3 {
     margin-left: 5vw;
 }
+*/
