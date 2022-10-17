@@ -1,20 +1,3 @@
-/*
-function setup() {
-    createCanvas(400, 400);
-    background(0);
-
-    rectMode(CENTER);
-    noStroke();
-    blendMode(DIFFERENCE);
-    fill (255);
-    rect (200, 200, 150);
-    ellipse(220, 220, 150);
-
-}
-
-function draw() {
-}
-*/
 /* Coding Challenge #2
 Explore the blendMode() command by drawing a series of shapes 
 on top of each other. 
