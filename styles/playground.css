@@ -2,6 +2,7 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     line-height: 1.55em;;
     margin: 0;
+    cursor: none;
   }
   
   footer {
@@ -82,6 +83,15 @@ body {
     margin: 0vw;
     align-items: center;
   }
+
+  /* custom cursor 
+.rounded {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+*/
   
   .row {
     display: flex;
