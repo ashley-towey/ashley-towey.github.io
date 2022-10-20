@@ -1,7 +1,7 @@
 // UPDATE: I was able to get this working again... Enjoy!
 
-var cursor = document.querySelector('.cursor');
-var cursorinner = document.querySelector('.cursor2');
+var cursor = document.getElementById('cursor');
+var cursorinner = document.getElementById('cursor2');
 var a = document.querySelectorAll('a');
 
 document.addEventListener('mousemove', function(e){
