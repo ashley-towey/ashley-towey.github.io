@@ -1,12 +1,15 @@
 body{
-  background-color: #1D1E22;
+  background-color: #ffffff;
   cursor: none;
   height: 150vh;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.55em;;
+  margin: 0;
 }
 .rounded{
   width: 30px;
   height: 30px;
-  border: 2px solid rgb(8, 237, 16);
+  border: 2px solid rgb(237, 8, 8);
   border-radius: 50%;
 }
 .pointed{
@@ -15,4 +18,102 @@ body{
   background-color: rgb(124, 44, 44);
   border-radius: 50%;
   margin-bottom: 20rem;
+}
+/* base html styling */
+
+footer {
+  background-color: #ffffff;
+  padding-bottom: 5vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: grey;
+}
+
+hr {
+  border-top: 1px solid black;
+}
+
+/* styles the outer margin */
+.content-area { 
+  margin: 5vw;
+}
+
+/* text content area styling */
+.text-content-area {
+  padding: 1vw;
+  width: 57vw;
+}
+
+/* Flexbox styling test */
+.image-wrapper {
+  margin: 0vw;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+.item {
+  padding: 1vw;
+}
+
+@media only screen and (max-width: 1000px) {
+  .text-content-area {
+    width: 97%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .column {
+    flex: 1
+  }
+}
+
+/* read more button styling */
+.read-more-button {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    padding: 7.5px;
+}
+
+.read-more-button:hover {
+  background-color: rgb(227, 227, 227);
+  color: black;
+}
+
+#more {
+  display: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+.img-border {
+  /* border: 1px solid; */
+  box-shadow: 0px 0px 10px #c8c8c8;
 }
