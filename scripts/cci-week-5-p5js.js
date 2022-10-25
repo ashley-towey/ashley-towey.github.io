@@ -32,6 +32,10 @@ function draw() {
   /* describe(`horizontal wave pattern effected by mouse x-position
     & updating noise values.`); 
 } */
+let gX = [];
+let gY = [];
+
+circleMove = 0;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -39,14 +43,23 @@ function setup() {
   
   function draw() {
     background(0);
-    noFill();
-    stroke(255);
+    // noFill();
+    stroke(200);
   
+    /*
     beginShape();
     for (var x = 0; x < width; x++) {
-      var nx = map(x, 0, width, 0, 5);
+      var nx = map(x, 0, width, 0, 1);
       var y = height * noise(nx);
       vertex(x, y);
+
     }
     endShape();
+    */
+
+    for (let i = 0; i < width; i++) {
+        fill(255, 0, 0);
+        ellipse(i, 50, 50);
+    }
+
   }
