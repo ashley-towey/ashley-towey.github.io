@@ -33,7 +33,7 @@ function draw() {
     & updating noise values.`); 
 } */
 
-let noiseValue = 1.3;
+let noiseValue = 4;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
