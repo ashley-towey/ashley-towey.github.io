@@ -1,13 +1,9 @@
-let xPos = 5;
+/*let xPos = 5;
 let xStep = 15;
-let fillCol; // background colour variable
-let c;
 
 function setup() {
-    createCanvas(600, 600);
+    createCanvas(windowWidth, windowHeight);
     rectMode(CENTER);
-
-    fillCol = [color('#c0392b'), color('#e67e22'), color('#f1c40f'), color('#2ecc71'), color('#3498db'), color('#8e44ad')]; // an array of fill colours
 
 }
 
@@ -15,18 +11,42 @@ function draw() {
     background(200);
 
     for(let i = 0; i < width/xStep; i++){
-        noStroke();
-            for(let j = 0; j > fillCol.length; j++){
-                c = Math.round(random(0, 5)); // random circle colour
-                fill (color(fillCol[c+j]));
-
-            }
-
         factor = i/10;
         let yPos = map(noise(factor), 0, 1, 0, height); // use perlin noise for the y value
-        rect(xPos+(xStep*i), yPos, xStep, xStep); // draw the rectangle
+        // rect(xPos+(xStep*i), yPos, xStep, xStep); // draw the rectangle
+        line (i, yPos, i, height);
 
     }
-
-
 }
+*/
+/*
+let noiseScale=0.02;
+
+function draw() {
+  background(0);
+  for (let x=0; x < width; x++) {
+    let noiseVal = noise((mouseX+x)*noiseScale, mouseY*noiseScale);
+    stroke(noiseVal*255);
+    line(x, mouseY+noiseVal*80, x, height);
+  }
+  /* describe(`horizontal wave pattern effected by mouse x-position
+    & updating noise values.`); 
+} */
+
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+  }
+  
+  function draw() {
+    background(0);
+    noFill();
+    stroke(255);
+  
+    beginShape();
+    for (var x = 0; x < width; x++) {
+      var nx = map(x, 0, width, 0, 5);
+      var y = height * noise(nx);
+      vertex(x, y);
+    }
+    endShape();
+  }
