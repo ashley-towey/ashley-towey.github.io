@@ -25,17 +25,15 @@ let noiseScale=0.02;
 function draw() {
   background(0);
   for (let x=0; x < width; x++) {
-    let noiseVal = noise((mouseX+x)*noiseScale, mouseY*noiseScale);
+    let noiseVal = noise((mouseX+x)*noiseScale, mouseY*noiseScale); 
     stroke(noiseVal*255);
     line(x, mouseY+noiseVal*80, x, height);
   }
   /* describe(`horizontal wave pattern effected by mouse x-position
     & updating noise values.`); 
 } */
-let gX = [];
-let gY = [];
 
-circleMove = 0;
+let noiseValue = 1.3;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -43,23 +41,18 @@ function setup() {
   
   function draw() {
     background(0);
-    // noFill();
-    stroke(200);
+    noFill();
+    stroke(255);
   
-    /*
+    
     beginShape();
-    for (var x = 0; x < width; x++) {
-      var nx = map(x, 0, width, 0, 1);
+    for (var x = -150; x < width+150; x++) {
+      var nx = map(x, 0, width, 0, noiseValue);
       var y = height * noise(nx);
-      vertex(x, y);
-
+      //vertex(x, y);
+      strokeWeight(.2);
+      ellipse(x, y, 300);
     }
     endShape();
-    */
-
-    for (let i = 0; i < width; i++) {
-        fill(255, 0, 0);
-        ellipse(i, 50, 50);
-    }
 
   }
