@@ -9,8 +9,10 @@ body{
 .rounded{
   width: 30px;
   height: 30px;
+  background-color:rgb(237, 8, 8);
   border: 2px solid rgb(237, 8, 8);
   border-radius: 50%;
+  box-shadow: 0 0 5px 10px rgb(237, 8, 8);
 }
 .pointed{
   width: 7px;
