@@ -1,4 +1,26 @@
-const cursorRounded = document.querySelector('.rounded');
+const cursor = document.querySelector('.custom-cursor');
+    
+// Custom cursor follow the default cursor
+document.addEventListener('mousemove', e => {
+    cursor.setAttribute('style', 'top: '+(e.pageY - 10)+'px; left: ' +(e.pageX - 10)+'px;')
+});
+
+const links = document.querySelectorAll('a');
+
+// Custom cursor change style on hover links
+for(let x of links) {
+
+    x.addEventListener('mouseenter', () => {
+     cursor.classList.add('hover');
+    });
+
+    x.addEventListener('mouseleave', () => {
+     cursor.classList.remove('hover');
+    });
+        
+}
+
+/* const cursorRounded = document.querySelector('.rounded');
 const cursorPointed = document.querySelector('.pointed');
 
 let prevX = null;
@@ -16,7 +38,7 @@ const moveCursor = (e)=> {
 }
 
 window.addEventListener('mousemove', moveCursor);
-
+*/
 /*
 let prevX = null
 let prevY = null
