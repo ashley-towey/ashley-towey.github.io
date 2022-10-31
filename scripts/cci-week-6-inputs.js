@@ -1,15 +1,14 @@
 let angle = 0;
-let h = 240;
-let s = 50;
-let b = 50;
-// let bgCol = 0;
+let h = 240; // hue
+let s = 50; // saturation
+let b = 50; // brightness
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
     angleMode(DEGREES);
     noStroke();
     // background colour changes colour of blue
-    colorMode(HSB);
+    colorMode(HSB); // declare a new colour colour mode to address brightness easily
 
     // initiate day with button
     btnDay = createButton("Day");
@@ -26,12 +25,6 @@ function setup() {
     slider.position(50, height-100);
     slider.style('width', '200px');
 
-    // watch a full days rotation
-    btnCycle = createButton("24 Hours");
-    btnCycle.position(50, height-125);
-    /*
-    btnCycle.mousePressed(dailyCycle);
-    */
 }
 
 function draw() {
@@ -69,19 +62,6 @@ function theNight() {
     angle = 180;
     slider.value(180);
 }
-
-// create a function to watch the day go by
-/*
-function dailyCycle() {
-    for (let i = 0; i < 360; i++) {
-        angle = i;
-    }*
-    for (let i = 0; i < 360; i++) {
-        console.log(i);
-        angle = i;
-      }
-}
-*/
 
 function drawStars() {
     for (let i = 0; i < 100; i++) {
