@@ -13,12 +13,13 @@ function setup() {
 }
 
 function draw() {
+    background(r, g, b);
+
     // create a button
     myButton = createButton('Change colour');
     myButton.position(x-50, y-100);
     myButton.mousePressed(myButtonClick);
     myButton.style('background', 'rgb(100, 150, 200)');
-    background(r, g, b);
 
     // button that changes the shape in the center of the canvas
     push();
@@ -50,6 +51,7 @@ function draw() {
         } else if (keyIsPressed === true && keyCode === 40) {
             y += 10;
         }
+    pop();
 }
 
 function myButtonClick() {
