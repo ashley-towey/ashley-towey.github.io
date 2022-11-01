@@ -10,6 +10,7 @@ function setup() {
     // background colour changes colour of blue
     colorMode(HSB); // declare a new colour colour mode to address brightness easily
 
+    // frameRate(1);
     // initiate day with button
     btnDay = createButton("Day");
     btnDay.position(50, height-175);
@@ -50,7 +51,7 @@ function draw() {
 
     b = map(angle, 0, 180, 100, 40);
 
-    console.log(angle);
+    // console.log(angle);
 }
 
 function theDay() {
@@ -59,8 +60,15 @@ function theDay() {
 }
 
 function theNight() {
-    angle = 180;
-    slider.value(180);
+    if(angle < 180) {
+        for(let i = 0; i < 180; i++){
+            angle = angle + 1;
+            slider.value(angle);
+            console.log(angle);
+        }
+        slider.value(180);
+    }
+    // angle = 180;
 }
 
 function drawStars() {
