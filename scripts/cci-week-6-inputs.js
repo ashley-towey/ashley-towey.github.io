@@ -2,6 +2,8 @@ let angle = 0;
 let h = 240; // hue
 let s = 50; // saturation
 let b = 50; // brightness
+let rotateNight = false;
+let rotateDay = false;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -47,32 +49,52 @@ function draw() {
     fill (350, 28, b);
     rect (0, height/2, width, height/2);
 
-    angle = slider.value();
-
     b = map(angle, 0, 180, 100, 40);
 
-    // 
+    // make a function that adds value to angle and slider value
+    // which moves smoothly between day and night
+    if (rotateNight === true) {
+        // angle = 180;
+        // slider.value(180);
+        for(let i = 0; i < 180; i++){
+            angle = angle + i;
+            slider.value(angle);
+            console.log('night angle: ' + angle);
+        }
+    } 
+    if (rotateDay === true) {
+        // angle = 0;
+        // slider.value(0);
+        for (let i = 180; i > 0; i++) {
+            angle = angle - i;
+            slider.value(angle);
+            console.log('day angle: ' + angle);
+        }
+    }
 
-    // console.log(angle);
+    console.log(angle);
+    console.log('night rotation: ' + rotateNight);
+    console.log('day rotation: '+ rotateDay);
+
+    angle = slider.value();
+
 }
 
+
+
+
 function theDay() {
-    angle = 0;
-    slider.value(0);
+    rotateDay = true;
+    rotateNight = false;
 }
 
 function theNight() {
-    /*
-    if(angle < 180) {
-        for(let i = 0; i < 180; i++){
-            angle = angle + 1;
-            slider.value(angle);
-            console.log(angle);
-        }*/
-        slider.value(180);
-    //}
-    // angle = 180;
+    rotateNight = true;
+    rotateDay = false;
 }
+
+
+
 
 function drawStars() {
     for (let i = 0; i < 100; i++) {
