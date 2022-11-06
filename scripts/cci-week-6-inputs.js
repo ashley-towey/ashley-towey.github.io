@@ -40,7 +40,7 @@ function draw() {
         fill(0, 0, 39.2);
         ellipse(0, 100, 100, 100);
         // draw stars
-        drawStars();
+        //drawStars();
     pop();
 
     // draw the ground
@@ -51,6 +51,8 @@ function draw() {
 
     b = map(angle, 0, 180, 100, 40);
 
+    // 
+
     // console.log(angle);
 }
 
@@ -60,14 +62,15 @@ function theDay() {
 }
 
 function theNight() {
+    /*
     if(angle < 180) {
         for(let i = 0; i < 180; i++){
             angle = angle + 1;
             slider.value(angle);
             console.log(angle);
-        }
+        }*/
         slider.value(180);
-    }
+    //}
     // angle = 180;
 }
 
