@@ -42,7 +42,7 @@ function draw() {
     }
 
     // timer function to retrieve data every 60 seconds
-    if(millis() > resetTime + 10000 || typeof table=="undefined") {
+    if(millis() > resetTime + 60000 || typeof table=="undefined") {
         table = loadTable(url, 'csv', 'header');
         // resetTime set to the current millisecond output
         resetTime = millis();
