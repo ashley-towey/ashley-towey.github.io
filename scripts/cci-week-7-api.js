@@ -9,7 +9,7 @@ function setup() {
 }
 
 function draw() {
-    background(220);
+    background(255);
 
     // grab the table data
     if (table.getRowCount()==0) return;
@@ -23,6 +23,7 @@ function draw() {
         // draw and fill the circle with colour relative to the magnitude
         fillCol = map(magnitude, 0, 5, 0, 255);
         fill(fillCol, 0, 0);
+        noStroke();
         ellipse(x, y, magnitude*50);
 
         // split the name into multiple lines based on location and region
