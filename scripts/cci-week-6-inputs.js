@@ -24,9 +24,9 @@ function setup() {
     btnNight.mousePressed(theNight);
 
     // slider to rotate night and day movement
-    slider = createSlider(0, 180, 0);
-    slider.position(50, height-100);
-    slider.style('width', '200px');
+    // slider = createSlider(0, 180, 0);
+    // slider.position(50, height-100);
+    // slider.style('width', '200px');
 
 }
 
@@ -54,29 +54,29 @@ function draw() {
     // make a function that adds value to angle and slider value
     // which moves smoothly between day and night
     if (rotateNight === true) {
-        // angle = 180;
+        angle = 180;
         // slider.value(180);
         for(let i = 0; i < 180; i++){
             angle = angle + i;
-            slider.value(angle);
+            // slider.value(angle);
             console.log('night angle: ' + angle);
         }
     } 
     if (rotateDay === true) {
-        // angle = 0;
+        angle = 0;
         // slider.value(0);
         for (let i = 180; i > 0; i++) {
             angle = angle - i;
-            slider.value(angle);
+            //slider.value(angle);
             console.log('day angle: ' + angle);
         }
     }
 
     console.log(angle);
-    console.log('night rotation: ' + rotateNight);
-    console.log('day rotation: '+ rotateDay);
+    // console.log('night rotation: ' + rotateNight);
+    // console.log('day rotation: '+ rotateDay);
 
-    angle = slider.value();
+    // angle = slider.value();
 
 }
 
@@ -86,21 +86,31 @@ function draw() {
 function theDay() {
     rotateDay = true;
     rotateNight = false;
+    // if (angle === 0) {
+    //     angle = 0;
+    // } else if (angle === 180) {
+    //     angle = angle - 10;
+    // }
 }
 
 function theNight() {
     rotateNight = true;
     rotateDay = false;
+    // if (angle === 180) {
+    //     angle = 180;
+    // }   else if (angle = 0) {
+    //     angle = angle + 10;
+    // }
 }
 
 
 
 
-function drawStars() {
-    for (let i = 0; i < 100; i++) {
-        let x = random(-width, width);
-        let y = random(0, height);
-        fill (60, 100, 100, 50);
-        ellipse(x, y, 2);
-    }
-}
+// function drawStars() {
+//     for (let i = 0; i < 100; i++) {
+//         let x = random(-width, width);
+//         let y = random(0, height);
+//         fill (60, 100, 100, 50);
+//         ellipse(x, y, 2);
+//     }
+// }
