@@ -55,7 +55,7 @@ function draw() {
   let rain = weatherjson.daily.rain_sum;
 
   // Add gradiated image to the background
-  let pos = map(temp, -20, 40, -500, 0);
+  let pos = map(temp, -2, 20, -300, 0);
   image(img, 0, pos); // Position is linked to the temp
 
   // Draw the counters 
@@ -79,7 +79,7 @@ function draw() {
   fill(43, 142, 240);
   y = height-height/2;
   speed = map(rain, 0, 15, 0.01, 0.09); // Map rain to wave speed
-  length = map(temp, -2, 15, 10.0, 150.0); // Map temperature to length of waves
+  length = map(rain, 0, 15, 50.0, 100.0);
   newwave(y, 8,  length, speed);  // Ypos, spacing, freq
   newwave(y+100, 8,  length*2, speed);  // Ypos, spacing, freq
   newwave(y+200, 8,  length*3, speed); // Ypos, spacing, freq
