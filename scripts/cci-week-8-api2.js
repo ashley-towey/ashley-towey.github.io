@@ -21,7 +21,7 @@ function countdown(){
   // Timer to load JSON data every 30 seconds
   if(counter<0){
     // Reset countdown to 30 secs
-    counter = 30;        
+    counter = 15;        
     yr = int(random(1963, 2022));
     // Build date strings for the API URL and to draw
     let apidate = `${yr}-${m}-${d}`;
@@ -66,21 +66,23 @@ function draw() {
   text("Loaded: "+weatherloaded, width-25-45, 18+8);
 
   // Draw the date, temp, and rainfall text
-  let x = 10;
+  let x = 23;
   let y = 30;
   textAlign(LEFT);
-  text(`  Date: ${ukdate}`, x, y);
-  text(`  Temp:  ${temp}°C`, x, y+15);
-  text(`  Rain:  ${rain}mm`, x, y+30);
+  text('Location:  London', x, y);
+  text(`Date:  ${ukdate}`, x, y+15);
+  text(`Temp:  ${temp}°C`, x, y+30);
+  text(`Rain:  ${rain}mm`, x, y+45);
 
   // Draw some waves 
   noStroke();
   fill(43, 142, 240);
   y = height-height/2;
   speed = map(rain, 0, 15, 0.01, 0.09); // Map rain to wave speed
-  newwave(y, 8/*spacing of circles*/,  60.0/*length of wave*/, speed);      // Ypos, spacing, freq
-  newwave(y+100, 8,  180.0, speed);  // Ypos, spacing, freq
-  newwave(y+200, 8,  360.0, speed); // Ypos, spacing, freq
+  length = map(temp, -2, 15, 10.0, 150.0); // Map temperature to length of waves
+  newwave(y, 8,  length, speed);  // Ypos, spacing, freq
+  newwave(y+100, 8,  length*2, speed);  // Ypos, spacing, freq
+  newwave(y+200, 8,  length*3, speed); // Ypos, spacing, freq
 }
 
 // Derived from:  https://p5js.org/examples/math-sine-wave.html
