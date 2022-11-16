@@ -4,6 +4,7 @@ let counter = 0;
 let yr, ukdate; 
 let theta = 0.0; // Calculating speed of waves
 let img;
+let amplitude = 10.0;
 
 function setup() {
   createCanvas(600, 600);
@@ -43,7 +44,7 @@ function loadedweather(json){
 
 
 function draw() {
-  // Draw a grey background and the timer 
+  // Draw a white background
   background(255);
 
   // If the JSON hasn't loaded then don't go any further
@@ -75,11 +76,11 @@ function draw() {
   // Draw some waves 
   noStroke();
   fill(43, 142, 240);
-  y = height-100;   
+  y = height-height/2;
   speed = map(rain, 0, 15, 0.01, 0.09); // Map rain to wave speed
-  newwave(y, 9,  30.0, speed);      // Ypos, spacing, freq
-  newwave(y+40, 11,  60.0, speed);  // Ypos, spacing, freq
-  newwave(y+70, 13,  150.0, speed); // Ypos, spacing, freq
+  newwave(y, 8/*spacing of circles*/,  60.0/*length of wave*/, speed);      // Ypos, spacing, freq
+  newwave(y+100, 8,  180.0, speed);  // Ypos, spacing, freq
+  newwave(y+200, 8,  360.0, speed); // Ypos, spacing, freq
 }
 
 // Derived from:  https://p5js.org/examples/math-sine-wave.html
@@ -92,7 +93,7 @@ function newwave(ypos, xspace, freq, speed){
   // For every x value calculate a y value with sine function
   let x = theta;
   for (let i=0; i < yvals.length; i++) {
-    yvals[i] = sin(x)*10.0; // Height of wave
+    yvals[i] = sin(x)*amplitude; // Height of wave
     x += dx;
   }
 
