@@ -6,10 +6,16 @@ let theta = 0.0; // Calculating speed of waves
 let img;
 let amplitude = 10.0;
 
+let url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.csv'; // import earthquake data
+let table;
+
 function setup() {
   createCanvas(600, 600);
   setInterval(countdown, 1000); // Call 'setcounter' every second
   img = loadImage('../img/cci-wk8/temp.png'); 
+
+  table = loadTable(url, 'csv', 'header'); // load the earthquake data
+
 }
 
 function countdown(){
@@ -49,6 +55,38 @@ function draw() {
 
   // If the JSON hasn't loaded then don't go any further
   if(weatherjson===false) return;
+
+  // Check if the table has loaded, otherwise don't go any further
+  if (table.getRowCount()==0) return;
+  let rows = table.getRowCount(); // get the number of rows in the table
+
+  let xPos = 100;
+  let yPos = 100;
+
+  for (let row = 0; row < rows; row ++) {
+    let name = table.getString(row, 'place');
+    let magnitude = table.getString(row, 'mag');
+    // draw and fill the circle with colour relative to the magnitude
+    // fillCol = map(magnitude, 0, 5, 0, 255);
+    fill(230);
+    noStroke();
+    ellipse(xPos, yPos, magnitude*50);
+
+    // split the name into multiple lines based on location and region
+    fill(0);
+    name1 = name.split(",")[0];
+    name2 = name.split(",") [1];
+    
+    text(name1+'\n'+'Region: '+name2+'\n'+magnitude, xPos-magnitude*25, yPos+(magnitude*25)+20);
+
+    // positioning of the x and y to increment
+    xPos += width/3;
+    if (xPos > width - 100) {
+        yPos += 250;
+        xPos = 100;
+    }
+    console.log('accessed earthquake data');
+}
 
   // Otherwise get the date, temp, and rain
   let temp = weatherjson.daily.temperature_2m_max;
