@@ -1,7 +1,11 @@
+let equipment = "V60";
+
 function setup() {
     createCanvas(400, 400);
 }
 
 function draw() {
-    background(200);
+    background(240);
+
+    console.log(equipment);
 }
