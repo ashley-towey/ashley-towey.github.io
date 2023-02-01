@@ -30,6 +30,9 @@ let bC; // shortened 'brewCounter' to jump through the different arrays of data 
 let ratio = [16, 6, 12, 2]; // ratio of water to coffee. This controls a lot of the output. 
 let coffeeOutput; // user inputted value, used in calculations
 
+let coffeeWeight; // weight of ground beans to be used calculation=[coffeeOutput/ratio[bC]]
+let waterInput; // total water needed to start the brew with calculation=[coffeeOutput + 2*coffeeWeight]
+
 function setup() {
   createCanvas(400, 400);
   
@@ -81,13 +84,24 @@ function draw() {
 
   }
 
-  if (!coffeeOutput) {
+  if (!coffeeOutput || !selectedEquipment) {
     // coffeeOutput is initially undefined
     // Prompt the user to input output weight
-    text("Please select the desired output (below)", 50, 200);
+    text("Please select the output and equipment (below)", 50, 200);
   } else {
     // show the selection
     text("Coffee output: " + coffeeOutput + "ml", 50, 200); // show the total coffee output
+
+    coffeeWeight = coffeeOutput/ratio[bC]; // calculation for the precise coffee weight
+    text("Coffee: " + coffeeWeight + "g", 50, 220); 
+
+    // convert to floats in order to make the calculations
+    // there's probably a more elegant way of doing this
+    let coffeeOutputFloat = float(coffeeOutput);
+    let coffeeWeightFloat = float(coffeeWeight);
+    waterInput = coffeeOutputFloat + coffeeWeightFloat*2; // calculation for water input factoring in losses of 2x the coffee weight
+    text("Water input: " + waterInput + "ml", 50, 240);
+    
   }
 
 }
