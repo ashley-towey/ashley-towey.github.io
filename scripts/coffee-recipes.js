@@ -28,6 +28,7 @@ let selectedEquipment;
 // variables for coffee ratio and recipe
 let bC; // shortened 'brewCounter' to jump through the different arrays of data about the various brew methods
 let ratio = [16, 6, 12, 2]; // ratio of water to coffee. This controls a lot of the output. 
+let coffeeOutput; // user inputted value, used in calculations
 
 function setup() {
   createCanvas(400, 400);
@@ -54,8 +55,8 @@ function setup() {
   // create an input to put the total output weight
   submitInput = createInput();
 //   submitInput.position(50, 250); // add this line in when I am ready to position things
-submitInput
-  
+  submitInput.input(isNumber); // restrict the input to numbers
+
   // add a submit button for coffee output weight
   submit = createButton('Submit');
   // submit.position(x, y);
@@ -63,25 +64,6 @@ submitInput
 
 }
 
-function changeEquipment() {
-    selectedEquipment = dropdown.value();
-    // update brewCounter(bC) when the brew method is changed
-    // this creates the counter function that changes other variables
-    if (selectedEquipment == 'V60'){
-        bC = 0;
-    } else if (selectedEquipment == 'Aeropress'){
-        bC = 1;
-    } else if (selectedEquipment == 'French Press'){
-        bC = 2;
-    } else if (selectedEquipment == 'Dedica EC685'){
-        bC = 3;
-    }
-}
-
-function updateRecipe() {
-    const coffeeOutput = submitInput.value();
-    console.log(coffeeOutput); // check that the coffee output has been logged
-}
 
 function draw() {
   background(240);
@@ -99,4 +81,58 @@ function draw() {
 
   }
 
+  if (!coffeeOutput) {
+    // coffeeOutput is initially undefined
+    // Prompt the user to input output weight
+    text("Please select the desired output (below)", 50, 200);
+  } else {
+    // show the selection
+    text("Coffee output: " + coffeeOutput + "ml", 50, 200); // show the total coffee output
+  }
+
 }
+
+
+
+function changeEquipment() {
+    selectedEquipment = dropdown.value();
+    // update brewCounter(bC) when the brew method is changed
+    // this creates the counter function that changes other variables
+    if (selectedEquipment == 'V60'){
+        bC = 0;
+    } else if (selectedEquipment == 'Aeropress'){
+        bC = 1;
+    } else if (selectedEquipment == 'French Press'){
+        bC = 2;
+    } else if (selectedEquipment == 'Dedica EC685'){
+        bC = 3;
+    }
+}
+
+function updateRecipe() {
+    coffeeOutput = submitInput.value();
+    console.log(coffeeOutput); // check that the coffee output has been logged
+
+
+}
+
+// function that restricts the input field to numbers and 4 characters
+function isNumber() {
+    let s = this.value();
+    let c = s.charCodeAt(s.length - 1);
+    // console.log(c); // logs that character code to the console
+  
+    if (!(c > 47 && c < 58)) {
+      
+      //is not a number
+      this.value(s.substring(0, s.length - 1));
+  
+    } else {
+      //is a number
+          if (s.length <= 4) {
+  
+      } else {
+        this.value(s.substring(0, s.length - 1));
+      }
+    }
+  }
