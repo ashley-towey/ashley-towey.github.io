@@ -34,7 +34,7 @@ let coffeeWeight; // weight of ground beans to be used calculation=[coffeeOutput
 let waterInput; // total water needed to start the brew with calculation=[coffeeOutput + 2*coffeeWeight]
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight);
   
   // creates an HTML checkbox with the text 'draw circle' next
   // to it, initially unchecked (false)
