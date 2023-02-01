@@ -1,37 +1,25 @@
-// let equipment = ["V60", "AeroPress", "Dedica EC685"]; // need to become an array to accomodate more options
-// let ratio = [16, 6, 2]; // make array shortly
-// let water = 250;
+/* Coffee Recipe Generator
+ * ---
+ * Based on the desired output [millitres or number of people]
+ * Generate a recipe to brew some coffee with the selected equipment 
+ * Downloadable recipe in the form of a text file
+ * Mobile and desktop friendly [to be hosted on my website]
+ * Live graphical representation of ratios, process [input/machine/output]
+ */
 
-// testArray = 0;
-
-// function setup() {
-//     createCanvas(400, 400);
-//     // console.log(water/ratio[testArray]);
-// }
-
-// function draw() {
-//     background(240);
-
-//     // if (equipment == "V60") {
-//     text('Method: ' + equipment[testArray], 10, 30);
-//     text('Ratio: 1:' + ratio[testArray], 10, 50);
-//     text('Water: ' + water + 'ml', 10, 70);
-//     text('Coffee: ' + water/ratio[testArray] + 'g', 10, 90);
-//     // }
-// }
-
-/*
- * Code adapted from user 'kjhollen' on p5js web editor
+/*[CREDITS]
+ * ---
+ * Dropdown - code adapted from user 'kjhollen' on p5js web editor
  * hyperlink: https://editor.p5js.org/kjhollen/sketches/sI3IJNmVj 
- * -- Adapted for use with my Coffee Project --
- * *********************
- * sets up a dropdown menu in HTML and updates the user's sketch
- * based on the selection.
+ * ---
+ * Restrict input field to numerical values - code adapted from user 'Bassam' on p5js web editor
+ * hyperlink: https://editor.p5js.org/Bassam/sketches/Sn2W53QtO
+ * ---
  */
 
 // variables for the dropdown functionality
 let dropdown;
-let selectedCoffeeBrewMethod;
+let selectedEquipment; 
 
 // variables for coffee ratio and recipe
 let bC; // shortened 'brewCounter' to jump through the different arrays of data about the various brew methods
@@ -43,6 +31,7 @@ function setup() {
   // creates an HTML checkbox with the text 'draw circle' next
   // to it, initially unchecked (false)
   dropdown = createSelect();
+  // dropdown.position(50, 200); // add this line in when I am ready to position things
   
   // this option will show initially, but can't be chosen
   dropdown.option('-- choose a brew method --');
@@ -56,34 +45,51 @@ function setup() {
   dropdown.option('Dedica EC685');
 
   // call this function when the item in the dropdown changes
-  dropdown.changed(brewMethodSelected);
+  dropdown.changed(changeEquipment);
+
+  // create an input to put the total output weight
+  submitInput = createInput();
+//   submitInput.position(50, 250); // add this line in when I am ready to position things
+submitInput
+  
+  // add a submit button for coffee output weight
+  submit = createButton('Submit');
+  // submit.position(x, y);
+  submit.mousePressed(updateRecipe); // update the recipe based on the coffee output
+
 }
 
-function brewMethodSelected() {
-    selectedCoffeeBrewMethod = dropdown.value();
+function changeEquipment() {
+    selectedEquipment = dropdown.value();
     // update brewCounter(bC) when the brew method is changed
-    if (selectedCoffeeBrewMethod == 'V60'){
+    // this creates the counter function that changes other variables
+    if (selectedEquipment == 'V60'){
         bC = 0;
-    } else if (selectedCoffeeBrewMethod == 'Aeropress'){
+    } else if (selectedEquipment == 'Aeropress'){
         bC = 1;
-    } else if (selectedCoffeeBrewMethod == 'French Press'){
+    } else if (selectedEquipment == 'French Press'){
         bC = 2;
-    } else if (selectedCoffeeBrewMethod == 'Dedica EC685'){
+    } else if (selectedEquipment == 'Dedica EC685'){
         bC = 3;
     }
+}
+
+function updateRecipe() {
+    const coffeeOutput = submitInput.value();
+    console.log(coffeeOutput); // check that the coffee output has been logged
 }
 
 function draw() {
   background(240);
   
-  if (!selectedCoffeeBrewMethod) {
-    // selectedCoffeeBrewMethod is initially undefined, so this only
+  if (!selectedEquipment) {
+    // selectedEquipment is initially undefined, so this only
     // shows up when the sketch first starts and user has yet
     // to select an option.
     text("Please select a brew method (below)", 50, 100);
   } else {
     // show the selection
-    text("Looking at a recipe for " + selectedCoffeeBrewMethod, 50, 100);
+    text("Recipe for " + selectedEquipment, 50, 100);
     // show other data below to test functionality
     text("Brew ratio: 1:" + ratio[bC], 50, 120);
 
