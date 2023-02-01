@@ -35,6 +35,9 @@ let waterInput; // total water needed to start the brew with calculation=[coffee
 
 // drawing shapes variables
 squareSize = 400; // size of the squares
+xPos = 525; 
+yPos = 110;
+recY = 280;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -42,13 +45,13 @@ function setup() {
   // creates an HTML checkbox with the text 'draw circle' next
   // to it, initially unchecked (false)
   dropdown = createSelect();
-  dropdown.position(50, 500); // add this line in when I am ready to position things
+  dropdown.position(xPos, yPos); // add this line in when I am ready to position things
   
   // this option will show initially, but can't be chosen
   dropdown.option('-- choose a brew method --');
   dropdown.disable('-- choose a brew method --');
   dropdown.selected('-- choose a brew method --');
-  
+
   // other options
   dropdown.option('V60');
   dropdown.option('Aeropress');
@@ -60,14 +63,19 @@ function setup() {
 
   // create an input to put the total output weight
   submitInput = createInput();
-  submitInput.position(300, 500); // add this line in when I am ready to position things
+  submitInput.position(xPos, yPos + 75); // add this line in when I am ready to position things
   submitInput.input(isNumber); // restrict the input to numbers
 
   // add a submit button for coffee output weight
-  submit = createButton('Submit');
-  // submit.position(x, y);
+  submit = createButton('Brew!');
+  submit.position(xPos, yPos + 100);
   submit.mousePressed(updateRecipe); // update the recipe based on the coffee output
 
+  // add a download button that will save the recipe as a .txt file
+  // need to create this later
+  download = createButton('Download');
+  download.position(xPos, recY + 120);
+  // download.mousePressed(downloadRecipe);
 }
 
 
@@ -75,42 +83,61 @@ function draw() {
   background(240);
 
   // draw the various elements of the input -> machine -> output diagram
+  fill(255);
   rect(50, 50, squareSize, squareSize);
   rect(squareSize + 100, 50, squareSize); 
   rect(squareSize * 2 + 150, 50, squareSize); 
-
+  fill(0); // turn to fill black after drawing squares
   
   if (!selectedEquipment) {
     // selectedEquipment is initially undefined, so this only
     // shows up when the sketch first starts and user has yet
     // to select an option.
-    text("Please select a brew method (below)", 50, 100);
+    text("What brew method do you have?", xPos, 100);
   } else {
     // show the selection
-    text("Recipe for " + selectedEquipment, 50, 100);
+    text("You are brewing with " + selectedEquipment, xPos, 100);
     // show other data below to test functionality
-    text("Brew ratio: 1:" + ratio[bC], 50, 120);
-
+    textStyle(BOLD)
+    text("Brew Recipe", xPos, recY);
+    textStyle(NORMAL);
   }
 
   if (!coffeeOutput || !selectedEquipment) {
     // coffeeOutput is initially undefined
     // Prompt the user to input output weight
-    text("Please select the output and equipment (below)", 50, 200);
+    text("How much coffee do you want?", xPos, yPos + 65);
   } else {
     // show the selection
-    text("Coffee output: " + coffeeOutput + "ml", 50, 200); // show the total coffee output
+    text("And you'll get " + coffeeOutput + "ml of coffee", xPos, yPos + 65); // show the total coffee output
+    
+    text("Ratio: 1:" + ratio[bC], xPos, recY + 20); // display the brew ratio
 
-    coffeeWeight = coffeeOutput/ratio[bC]; // calculation for the precise coffee weight
-    text("Coffee: " + coffeeWeight + "g", 50, 220); 
+    // calculation for the precise coffee weight
+    coffeeWeight = coffeeOutput/ratio[bC];
+    text("Coffee: " + coffeeWeight + "g", xPos, recY + 60);
 
     // convert to floats in order to make the calculations
     // there's probably a more elegant way of doing this
     let coffeeOutputFloat = float(coffeeOutput);
     let coffeeWeightFloat = float(coffeeWeight);
-    waterInput = coffeeOutputFloat + coffeeWeightFloat*2; // calculation for water input factoring in losses of 2x the coffee weight
-    text("Water input: " + waterInput + "ml", 50, 240);
-    
+    waterInput = coffeeOutputFloat + coffeeWeightFloat*1; // calculation for water input factoring in losses of 2x the coffee weight
+    text("Water input: " + waterInput + "ml", xPos, recY + 40);
+    text("Grind size: ", xPos, recY + 80)
+  
+    coffeeHeight = squareSize/ratio[bC];
+    // console.log(coffeeHeight);
+    fill(145,42,42);
+    rect(50, 450-coffeeHeight, squareSize, coffeeHeight);
+    waterHeight = squareSize - coffeeHeight;
+    fill(135, 206, 235);
+    rect(50, 50, squareSize, waterHeight);
+
+    for(i = 0; i < 100; i++) {
+        console.log(i);
+        waterHeight = waterHeight - i;
+        /********** Start back here tomorrow creating a for loop that decrements */
+    }
   }
 
 }
@@ -135,7 +162,6 @@ function changeEquipment() {
 function updateRecipe() {
     coffeeOutput = submitInput.value();
     console.log(coffeeOutput); // check that the coffee output has been logged
-
 
 }
 
