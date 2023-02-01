@@ -1,3 +1,5 @@
+/*************************************************************/
+
 /* Coffee Recipe Generator
  * ---
  * Based on the desired output [millitres or number of people]
@@ -16,6 +18,8 @@
  * hyperlink: https://editor.p5js.org/Bassam/sketches/Sn2W53QtO
  * ---
  */
+
+/*************************************************************/
 
 // variables for the dropdown functionality
 let dropdown;
