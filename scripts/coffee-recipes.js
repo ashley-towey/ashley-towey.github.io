@@ -33,13 +33,16 @@ let coffeeOutput; // user inputted value, used in calculations
 let coffeeWeight; // weight of ground beans to be used calculation=[coffeeOutput/ratio[bC]]
 let waterInput; // total water needed to start the brew with calculation=[coffeeOutput + 2*coffeeWeight]
 
+// drawing shapes variables
+squareSize = 400; // size of the squares
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   
   // creates an HTML checkbox with the text 'draw circle' next
   // to it, initially unchecked (false)
   dropdown = createSelect();
-  // dropdown.position(50, 200); // add this line in when I am ready to position things
+  dropdown.position(50, 500); // add this line in when I am ready to position things
   
   // this option will show initially, but can't be chosen
   dropdown.option('-- choose a brew method --');
@@ -57,7 +60,7 @@ function setup() {
 
   // create an input to put the total output weight
   submitInput = createInput();
-//   submitInput.position(50, 250); // add this line in when I am ready to position things
+  submitInput.position(300, 500); // add this line in when I am ready to position things
   submitInput.input(isNumber); // restrict the input to numbers
 
   // add a submit button for coffee output weight
@@ -70,6 +73,12 @@ function setup() {
 
 function draw() {
   background(240);
+
+  // draw the various elements of the input -> machine -> output diagram
+  rect(50, 50, squareSize, squareSize);
+  rect(squareSize + 100, 50, squareSize); 
+  rect(squareSize * 2 + 150, 50, squareSize); 
+
   
   if (!selectedEquipment) {
     // selectedEquipment is initially undefined, so this only
