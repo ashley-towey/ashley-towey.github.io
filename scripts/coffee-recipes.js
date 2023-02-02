@@ -24,19 +24,17 @@
 // variables for the dropdown functionality
 let dropdown;
 let selectedEquipment; 
-
 // variables for coffee ratio and recipe
 let bC; // shortened 'brewCounter' to jump through the different arrays of data about the various brew methods
 let ratio = [16, 6, 12, 2]; // ratio of water to coffee. This controls a lot of the output. 
+let grindSize = ['Medium', 'Fine', 'Coarse', 'Very Fine']; // grind size for the various brew methods
 let coffeeOutput; // user inputted value, used in calculations
-
 let coffeeWeight; // weight of ground beans to be used calculation=[coffeeOutput/ratio[bC]]
 let waterInput; // total water needed to start the brew with calculation=[coffeeOutput + 2*coffeeWeight]
-
 // drawing shapes variables
 let squareSize = 400; // size of the squares
-let xPos = 525; 
-let yPos = 110;
+let xPos = 525; // x position for GUI elements
+let yPos = 110; // y position for GUI elements
 let recY = 280;
 // variable to change the size of water rectangle
 let waterHeight;
@@ -90,79 +88,81 @@ function setup() {
 
 
 function draw() {
-  background(240);
+  background(255);
 
-  // draw the various elements of the input -> machine -> output diagram
-  fill(255);
-  rect(50, 50, squareSize, squareSize);
-  rect(squareSize + 100, 50, squareSize); 
-  rect(squareSize * 2 + 150, 50, squareSize); 
-  fill(0); // turn to fill black after drawing squares
-  
-  if (!selectedEquipment) {
+  if (!coffeeOutput || !selectedEquipment) {
     // selectedEquipment is initially undefined, so this only
     // shows up when the sketch first starts and user has yet
     // to select an option.
     text("What brew method do you have?", xPos, 100);
-  } else {
-    // show the selection
-    text("You are brewing with " + selectedEquipment, xPos, 100);
-    // show other data below to test functionality
-    textStyle(BOLD)
-    text("Brew Recipe", xPos, recY);
-    textStyle(NORMAL);
-  }
-
-  if (!coffeeOutput || !selectedEquipment) {
-    // coffeeOutput is initially undefined
-    // Prompt the user to input output weight
     text("How much coffee do you want?", xPos, yPos + 65);
   } else {
     // show the selection
+    writeRecipe(); // write the text recipe
+    animateCoffee(); // animate the coffee brewing process and ratio
+  }
+
+  drawDiagram();
+}
+
+function drawDiagram(){
+    // draw the various elements of the input -> machine -> output diagram
+    stroke(0);
+    noFill();
+    rect(50, 50, squareSize, squareSize);
+    rect(squareSize + 100, 50, squareSize); 
+    rect(squareSize * 2 + 150, 50, squareSize); 
+    fill(0); // turn to fill black after drawing squares
+    noStroke();
+}
+function writeRecipe(){
+    // replace the initial text with current brewing text
+    text("You are brewing with " + selectedEquipment, xPos, 100); // show the chosen equipment
     text("And you'll get " + coffeeOutput + "ml of coffee", xPos, yPos + 65); // show the total coffee output
     
+    // Display the Brew Recipe
+    /*************************/
+    textStyle(BOLD) // bolden the title to differentiate the text
+    text("Brew Recipe", xPos, recY);
+    textStyle(NORMAL); // reset the text weight
     text("Ratio: 1:" + ratio[bC], xPos, recY + 20); // display the brew ratio
-
-    // calculation for the precise coffee weight
-    coffeeWeight = coffeeOutput/ratio[bC];
-    text("Coffee: " + coffeeWeight + "g", xPos, recY + 60);
-
+    coffeeWeight = coffeeOutput/ratio[bC]; // calculation for the precise coffee weight
+    text("Coffee: " + round(coffeeWeight, 1) + "g", xPos, recY + 40); // display the weight of coffee in grams
     // convert to floats in order to make the calculations
     // there's probably a more elegant way of doing this
-    let coffeeOutputFloat = float(coffeeOutput);
-    let coffeeWeightFloat = float(coffeeWeight);
-    waterInput = coffeeOutputFloat + coffeeWeightFloat*1; // calculation for water input factoring in losses of 2x the coffee weight
-    text("Water input: " + waterInput + "ml", xPos, recY + 40);
-    text("Grind size: ", xPos, recY + 80)
-  
-    coffeeHeight = squareSize/ratio[bC];
-    // console.log(coffeeHeight);
-    fill(145,42,42);
-    rectMode(CORNER);
-    rect(50, 450-coffeeHeight, squareSize, coffeeHeight); // coffee rectangle
-    waterHeight = squareSize - coffeeHeight;
-    fill(135, 206, 235);
+    // but my brain isn't functioning enough to sort
+    let coffeeOutputFloat = float(coffeeOutput); // float conversion
+    let coffeeWeightFloat = float(coffeeWeight); // float conversion
+    waterInput = coffeeOutputFloat + coffeeWeightFloat*1; // calculation for water input factoring in losses of 1x the coffee weight
+    text("Water input: " + round(waterInput) + "ml", xPos, recY + 80); // round water to whole number and display
+    text("Grind size: " + grindSize[bC], xPos, recY + 60); // round grind size to 1 decimal place and display
+
+}
+
+function animateCoffee(){
+    coffeeHeight = squareSize/ratio[bC]; // calculate the height of the coffee cube
+    fill(111-20, 78-20, 55-20); // slightly darker brown than the brewed coffee 
+    rect(50, 450-coffeeHeight, squareSize, coffeeHeight); // dry coffee cube
+    waterHeight = squareSize - coffeeHeight; // calculate the leftover space in the cube for water
+    fill(135+20, 206+20, 235+20); // blue/water colour
     rectMode(CORNERS); // CHANGED in order to control the height
     rect(50, yVal, 450, waterHeight + 50); // water rectangle
+
     // brewed coffee appearing on the other side
-    fill(111, 78, 55);
-    rectMode(CORNERS);
+    fill(111, 78, 55); // brown colour
     rect(950, 50, 1350, brewHeight); // brewed coffee rectangle
-    rectMode(CORNER);
-  }
+    rectMode(CORNER); // reset to default rectMode
+
     // increment the y value to animate the brewing process
     if (yVal < waterHeight + 50){
-    yVal = yVal + adder;
-    // console.log(yVal); // just checking it works how I was thinking it would tehe
+        yVal = yVal + adder;
+        // console.log(yVal); // just checking it works how I was thinking it would tehe
     }
     // the same animation with the brewed coffee but going all the way to the bottom of the cube
     if (brewHeight < 450) {
         brewHeight = brewHeight + adder;
     }
-
 }
-
-
 
 function changeEquipment() {
     selectedEquipment = dropdown.value();
@@ -182,13 +182,13 @@ function changeEquipment() {
 function updateRecipe() {
     coffeeOutput = submitInput.value();
     console.log(coffeeOutput); // check that the coffee output has been logged
-    yVal = 50;
-    brewHeight = 50;
+    yVal = 50; // when 'Brew!' is pressed reset the position of water animation
+    brewHeight = 50; // when 'Brew!' is pressed reset the starting position of brewed coffee
 
 }
 
-// function that restricts the input field to numbers and 4 characters
 function isNumber() {
+    // function that restricts the input field to numbers and 4 characters
     let s = this.value();
     let c = s.charCodeAt(s.length - 1);
     // console.log(c); // logs that character code to the console
