@@ -34,10 +34,15 @@ let coffeeWeight; // weight of ground beans to be used calculation=[coffeeOutput
 let waterInput; // total water needed to start the brew with calculation=[coffeeOutput + 2*coffeeWeight]
 
 // drawing shapes variables
-squareSize = 400; // size of the squares
-xPos = 525; 
-yPos = 110;
-recY = 280;
+let squareSize = 400; // size of the squares
+let xPos = 525; 
+let yPos = 110;
+let recY = 280;
+// variable to change the size of water rectangle
+let waterHeight;
+let brewHeight;
+let yVal; // total height of the water square
+let adder; // changes the speed of growing and shrinking
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -76,6 +81,11 @@ function setup() {
   download = createButton('Download');
   download.position(xPos, recY + 120);
   // download.mousePressed(downloadRecipe);
+
+  // variable to change the size of water rectangle
+  yVal = 50; // total height of the water square
+  brewHeight = 50; // starting position of the brewed coffee
+  adder = .35; // changes the speed of brew time
 }
 
 
@@ -128,17 +138,27 @@ function draw() {
     coffeeHeight = squareSize/ratio[bC];
     // console.log(coffeeHeight);
     fill(145,42,42);
-    rect(50, 450-coffeeHeight, squareSize, coffeeHeight);
+    rectMode(CORNER);
+    rect(50, 450-coffeeHeight, squareSize, coffeeHeight); // coffee rectangle
     waterHeight = squareSize - coffeeHeight;
     fill(135, 206, 235);
-    rect(50, 50, squareSize, waterHeight);
-
-    for(i = 0; i < 100; i++) {
-        console.log(i);
-        waterHeight = waterHeight - i;
-        /********** Start back here tomorrow creating a for loop that decrements */
-    }
+    rectMode(CORNERS); // CHANGED in order to control the height
+    rect(50, yVal, 450, waterHeight + 50); // water rectangle
+    // brewed coffee appearing on the other side
+    fill(111, 78, 55);
+    rectMode(CORNERS);
+    rect(950, 50, 1350, brewHeight); // brewed coffee rectangle
+    rectMode(CORNER);
   }
+    // increment the y value to animate the brewing process
+    if (yVal < waterHeight + 50){
+    yVal = yVal + adder;
+    // console.log(yVal); // just checking it works how I was thinking it would tehe
+    }
+    // the same animation with the brewed coffee but going all the way to the bottom of the cube
+    if (brewHeight < 450) {
+        brewHeight = brewHeight + adder;
+    }
 
 }
 
@@ -162,6 +182,8 @@ function changeEquipment() {
 function updateRecipe() {
     coffeeOutput = submitInput.value();
     console.log(coffeeOutput); // check that the coffee output has been logged
+    yVal = 50;
+    brewHeight = 50;
 
 }
 
