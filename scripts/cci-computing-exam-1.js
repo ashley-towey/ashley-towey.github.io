@@ -127,6 +127,17 @@
 // }
 // }
 
-window. setTimeout ( function( ){
-    console. log( 'Hello world');
-    }, 2000);
+// window. setTimeout ( function( ){
+//     console. log( 'Hello world');
+//     }, 2000);
+let wave = new Array();
+
+function setup() {
+    createCanvas(400, 400);
+
+}
+function draw() {
+    // stroke(255, 0, 0);
+    // rect(200, 200, 200);
+    console.log(wave);
+}

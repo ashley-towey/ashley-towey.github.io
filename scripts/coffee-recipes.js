@@ -103,6 +103,20 @@ function draw() {
   }
 
   drawDiagram();
+
+  /****** delete */
+  // creating a weird intersection to mask out the corners of the coffee
+  // seems like the only way because masking is difficult in p5js
+  // noFill();
+  // stroke(0);
+  // blendMode(DIFFERENCE);
+  // fill(0);
+//   rect(950-40, 390, 100, 100);
+//   // fill(200);
+//   ellipse(950+60, 450-60, 120);
+//   noStroke();
+
+
 }
 
 function drawDiagram(){
@@ -111,7 +125,7 @@ function drawDiagram(){
     noFill();
     rect(50, 50, squareSize, squareSize);
     rect(squareSize + 100, 50, squareSize); 
-    rect(squareSize * 2 + 150, 50, squareSize); 
+    rect(squareSize * 2 + 150, 50, squareSize, squareSize); 
     fill(0); // turn to fill black after drawing squares
     noStroke();
 }
@@ -150,8 +164,9 @@ function animateCoffee(){
 
     // brewed coffee appearing on the other side
     fill(111, 78, 55); // brown colour
-    rect(950, 50, 1350, brewHeight); // brewed coffee rectangle
+    rect(1350, brewHeight, 950, 450); // brewed coffee rectangle
     rectMode(CORNER); // reset to default rectMode
+    console.log(brewHeight);
 
     // increment the y value to animate the brewing process
     if (yVal < waterHeight + 50){
@@ -159,8 +174,8 @@ function animateCoffee(){
         // console.log(yVal); // just checking it works how I was thinking it would tehe
     }
     // the same animation with the brewed coffee but going all the way to the bottom of the cube
-    if (brewHeight < 450) {
-        brewHeight = brewHeight + adder;
+    if (brewHeight > 50) {
+        brewHeight = brewHeight - adder;
     }
 }
 
@@ -182,8 +197,10 @@ function changeEquipment() {
 function updateRecipe() {
     coffeeOutput = submitInput.value();
     console.log(coffeeOutput); // check that the coffee output has been logged
+
+    // resetting animation variables to trigger
     yVal = 50; // when 'Brew!' is pressed reset the position of water animation
-    brewHeight = 50; // when 'Brew!' is pressed reset the starting position of brewed coffee
+    brewHeight = 450; // when 'Brew!' is pressed reset the starting position of brewed coffee
 
 }
 
