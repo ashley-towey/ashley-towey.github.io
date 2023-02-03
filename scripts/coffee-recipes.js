@@ -78,7 +78,7 @@ function setup() {
   // need to create this later
   download = createButton('Download');
   download.position(xPos, recY + 120);
-  // download.mousePressed(downloadRecipe);
+  download.mousePressed(downloadRecipe);
 
   // variable to change the size of water rectangle
   yVal = 50; // total height of the water square
@@ -103,19 +103,6 @@ function draw() {
   }
 
   drawDiagram();
-
-  /****** delete */
-  // creating a weird intersection to mask out the corners of the coffee
-  // seems like the only way because masking is difficult in p5js
-  // noFill();
-  // stroke(0);
-  // blendMode(DIFFERENCE);
-  // fill(0);
-//   rect(950-40, 390, 100, 100);
-//   // fill(200);
-//   ellipse(950+60, 450-60, 120);
-//   noStroke();
-
 
 }
 
@@ -166,7 +153,7 @@ function animateCoffee(){
     fill(111, 78, 55); // brown colour
     rect(1350, brewHeight, 950, 450); // brewed coffee rectangle
     rectMode(CORNER); // reset to default rectMode
-    console.log(brewHeight);
+    // console.log(brewHeight);
 
     // increment the y value to animate the brewing process
     if (yVal < waterHeight + 50){
@@ -196,7 +183,7 @@ function changeEquipment() {
 
 function updateRecipe() {
     coffeeOutput = submitInput.value();
-    console.log(coffeeOutput); // check that the coffee output has been logged
+    // console.log(coffeeOutput); // check that the coffee output has been logged
 
     // resetting animation variables to trigger
     yVal = 50; // when 'Brew!' is pressed reset the position of water animation
@@ -224,3 +211,36 @@ function isNumber() {
       }
     }
   }
+
+  function downloadRecipe() { 
+    // let name = nameInput.value();
+    // let age = ageInput.value();
+    // let height = heightInput.value();
+
+    // Save the current canvas to file as png 
+    let s = second();
+    let h = hour();
+    let min = minute();
+    let d = day();
+    let m = month();
+    let y = year();
+    //let mood = sel.value();
+    let seed = random(100, 999);
+    // round(seed, [0]);
+    
+    // creates a file called 'name-data.txt'
+    let writer = createWriter(h + min + "_" + d + "-"+ m + "recipe.txt"); // 
+    // write 'Hello world!'' to the file
+    writer.write('Receipt #' + round(seed));
+    writer.write('\n\nThis is the raw data that you inputted on ' + d + '/' + m + '/' + y + ' at ' + h + ':' + min + ':' + s + '.\n\n');
+    // writer.write('Name: ' + name + '\n');
+    // writer.write('Age: ' + age + '\n');
+    // writer.write('Height: ' + height + '\n');
+    // writer.write('Mood: ' + mood + '\n\n');
+    writer.write('Does this reflect your identity?')
+    // close the PrintWriter and save the file
+    writer.close();
+    
+    saveCanvas(+ h + '-' + min + ' ' + d + '-' + m + '-' + y, 'jpg');
+    
+  } 
