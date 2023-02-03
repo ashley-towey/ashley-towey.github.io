@@ -183,7 +183,7 @@ function changeEquipment() {
 
 function updateRecipe() {
     coffeeOutput = submitInput.value();
-    // console.log(coffeeOutput); // check that the coffee output has been logged
+    // console.log(coffeeOutput); // check that the coffee output is what I expect
 
     // resetting animation variables to trigger
     yVal = 50; // when 'Brew!' is pressed reset the position of water animation
@@ -213,34 +213,31 @@ function isNumber() {
   }
 
   function downloadRecipe() { 
-    // let name = nameInput.value();
-    // let age = ageInput.value();
-    // let height = heightInput.value();
-
-    // Save the current canvas to file as png 
+    // Initialise time variables to document brew time
     let s = second();
     let h = hour();
     let min = minute();
     let d = day();
     let m = month();
     let y = year();
-    //let mood = sel.value();
-    let seed = random(100, 999);
-    // round(seed, [0]);
+    let seed = random(100, 999); // random seed to differentiate recipes
     
-    // creates a file called 'name-data.txt'
-    let writer = createWriter(h + min + "_" + d + "-"+ m + "recipe.txt"); // 
-    // write 'Hello world!'' to the file
-    writer.write('Receipt #' + round(seed));
-    writer.write('\n\nThis is the raw data that you inputted on ' + d + '/' + m + '/' + y + ' at ' + h + ':' + min + ':' + s + '.\n\n');
-    // writer.write('Name: ' + name + '\n');
-    // writer.write('Age: ' + age + '\n');
-    // writer.write('Height: ' + height + '\n');
-    // writer.write('Mood: ' + mood + '\n\n');
-    writer.write('Does this reflect your identity?')
+    // creates a file called 'example-name.txt'
+    let writer = createWriter(selectedEquipment + " Recipe #" + round(seed) + ".txt"); 
+    // writes .txt file content
+    writer.write("Recipe by the Coffee Recipe Generator" + '\n');
+    writer.write("Available here: https://ashleytowey.com/projects/coffee-recipes.html" + '\n');
+    writer.write('Created ' + d + '/' + m + '/' + y + ' at ' + h + ':' + min + ':' + s);
+    writer.write('\n\n'); // new paragraph/double line space
+    writer.write("** The Recipe **" + '\n');
+    writer.write("Brew method: " + selectedEquipment + '\n');
+    writer.write("Ratio: 1:" + ratio[bC] + '\n');
+    writer.write("Coffee grounds: " + round(coffeeWeight, 1) + "g" + '\n');
+    writer.write("Grind size: " + grindSize[bC] + '\n');
+    writer.write("Water input: " + round(waterInput, 0) + "ml" + '\n'); 
+    writer.write("Coffee output: " + round(coffeeOutput, 0) + "ml" + '\n');
+    writer.write('\n\n' + "Happy Brewing!")
     // close the PrintWriter and save the file
     writer.close();
-    
-    saveCanvas(+ h + '-' + min + ' ' + d + '-' + m + '-' + y, 'jpg');
-    
+        
   } 
