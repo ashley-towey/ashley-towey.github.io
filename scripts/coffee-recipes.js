@@ -5,7 +5,7 @@
  * Based on the desired output [millitres or number of people]
  * Generate a recipe to brew some coffee with the selected equipment 
  * Downloadable recipe in the form of a text file
- * Mobile and desktop friendly [to be hosted on my website]
+ * [to be hosted on my website]
  * Live graphical representation of ratios, process [input/machine/output]
  */
 
