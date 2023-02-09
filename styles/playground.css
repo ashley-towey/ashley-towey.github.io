@@ -70,6 +70,7 @@ body {
   .content-area { 
     margin: 5vw;
     padding-top: 5vh;
+    margin-top: 2.5vw;
   }
   
   /* text content area styling */
@@ -144,3 +145,23 @@ li {
 small.tribute {
   float: right
 }
+
+/* Nav-bar styling */
+nav {
+  padding: 1vw;
+}
+
+ul {
+  padding: 0vw;
+  font-size: 1.2em;
+  line-height: 1.7em;
+}
+
+li {
+  display: inline;
+}
+
+li.nav-bar{
+  padding-right: 4vw;
+}
+/* */

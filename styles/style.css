@@ -106,7 +106,22 @@ li {
   box-shadow: 0px 0px 10px #c8c8c8;
 }
 
-.header-navigation {
-  padding-top: 0vw;
-  padding-bottom: 1.2vw;
+/* Nav-bar styling */
+nav {
+  padding: 1vw;
 }
+
+ul {
+  padding: 0vw;
+  font-size: 1.2em;
+  line-height: 1.7em;
+}
+
+li {
+  display: inline;
+}
+
+li.nav-bar{
+  padding-right: 4vw;
+}
+/* */
