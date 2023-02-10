@@ -69,7 +69,6 @@ body {
   /* styles the outer margin */
   .content-area { 
     margin: 5vw;
-    padding-top: 5vh;
     margin-top: 2.5vw;
   }
   
@@ -84,15 +83,6 @@ body {
     margin: 0vw;
     align-items: center;
   }
-
-  /* custom cursor 
-.rounded {
-    width: 30px;
-    height: 30px;
-    border: 2px solid #fff;
-    border-radius: 50%;
-}
-*/
   
   .row {
     display: flex;

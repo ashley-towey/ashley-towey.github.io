@@ -117,11 +117,8 @@ ul {
   line-height: 1.7em;
 }
 
-li {
-  display: inline;
-}
-
 li.nav-bar{
   padding-right: 4vw;
+  display: inline;
 }
 /* */
