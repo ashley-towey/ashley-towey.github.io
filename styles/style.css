@@ -6,9 +6,9 @@ body {
 
 footer {
   background-color: #ffffff;
-  padding-bottom: 5vw;
-  padding-left: 5vw;
-  padding-right: 5vw;
+  padding-bottom: 0vh;
+  padding-left: 1vw;
+  padding-right: 1vw;
 }
 
 .footer-line {
@@ -126,3 +126,9 @@ li.nav-bar{
   display: inline;
 }
 /* */
+
+h3.my-tag {
+  font-weight: lighter;
+  font-size: 2em;
+  text-align: right;
+}
