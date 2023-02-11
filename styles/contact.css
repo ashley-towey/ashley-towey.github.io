@@ -1,0 +1,140 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 1.55em;;
+    margin: 0;
+  }
+  
+  footer {
+    background-color: #ffffff;
+    padding-bottom: 0vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+  }
+  
+  .footer-line {
+    margin-top: 5vw;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 100%;
+  }
+  
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: grey;
+  }
+
+  hr {
+    border-top: 1px solid black;
+  }
+
+  /* styles the outer margin */
+.content-area { 
+    margin: 5vw;
+    margin-top: 2.5vw;
+  }
+  
+  /* text content area styling */
+  .text-content-area {
+    padding: 1vw;
+    width: 57vw;
+  }
+  
+  /* Flexbox styling test */
+  .image-wrapper {
+    margin: 0vw;
+    align-items: center;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+  }
+  
+  .item {
+    padding: 1vw;
+  }
+  
+  @media only screen and (max-width: 1000px) {
+    .text-content-area {
+      width: 97%;
+    }
+  }
+  
+  @media screen and (min-width: 1000px) {
+    .column {
+      flex: 1
+    }
+  }
+  
+  /* read more button styling */
+  .read-more-button {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+      padding: 7.5px;
+  }
+  
+  .read-more-button:hover {
+    background-color: rgb(227, 227, 227);
+    color: black;
+  }
+  
+  #more {
+    display: none;
+  }
+  
+  li {
+    list-style-type:none;
+  }
+
+  li.work {
+    list-style-type:disc;
+  }
+  
+  .img-border {
+    /* border: 1px solid; */
+    box-shadow: 0px 0px 10px #c8c8c8;
+  }
+  
+  /* Nav-bar styling */
+  nav {
+    padding: 1vw;
+  }
+  
+  ul {
+    padding: 0vw;
+    font-size: 1.2em;
+    line-height: 1.7em;
+
+  }
+  
+  li.nav-bar{
+    padding-right: 4vw;
+    display: inline;
+  }
+  /* */
+  
+  h3.my-tag {
+    font-weight: lighter;
+    font-size: 2em;
+    text-align: right;
+  }
+
+  .about-section {
+    padding-top: 2vw;
+  }
