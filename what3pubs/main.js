@@ -1,5 +1,5 @@
-var id = '1hYu36_X0pmoUFSHooBS8d8zYDjHUdFt5w9b-_KD19Dc';
-var sheet_name = 'DGU_Recent';
+var id = '1QNGCvWaGR8FYQ_O1NJGALYS6sQwAXzLge6WkMO0lu4Q';
+var sheet_name = 'what3pubs';
 var key = "AIzaSyB5b_wv4yQMDoHTCDDZydcbYxLZ5ISrGbQ"
 var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + id + '/values/' + sheet_name + '?alt=json&key=' + key;
 
@@ -7,3 +7,4 @@ var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + id + '/values/' + s
 fetch(url)
   .then(response => response.json())
   .then(data => console.log(data));
+
