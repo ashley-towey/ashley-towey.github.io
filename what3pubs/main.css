@@ -9,10 +9,13 @@ body{
 
 #content{
     margin: 0vw;
+    margin-right: 5vw;
+
 }
 
 li{
     margin: 0vw;
+    margin-right: 5vw;
 }
 
 ul{
@@ -20,5 +23,9 @@ ul{
 }
 
 small.content{
+    margin: 0px;
+}
+
+#content.ul{
     margin: 0px;
 }
