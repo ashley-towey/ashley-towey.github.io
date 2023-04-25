@@ -7,3 +7,26 @@ body{
     padding: 0vw;
 }
 
+h1{
+    line-height: 2vh;
+}
+
+h3{
+    font-size: medium;
+    line-height: 1vh;
+}
+
+p{
+    font-size: smaller;
+    line-height: 1.5vh;
+}
+
+.button {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    padding: 7.5px;
+    margin-bottom: 30px;
+}
+
+
