@@ -12,9 +12,13 @@ function processData(rows) {
 
   rows.forEach(row => {
     console.log(row[4]);
+    content.innerHTML += "<small>" + "Contributed by: " + row[0]+", "+ row[1] + ", of " + row[2] + "</small>";
     content.innerHTML += "<h1>"+row[3]+"</h1>";
     content.innerHTML += "<h3>"+"Location: "+row[4]+"</h3>";
     content.innerHTML += "<p>" + "Price: " + row[5] + "</p>";
+    content.innerHTML += "<p>" + "Vibe: " + row[6] + "</p>";
+    content.innerHTML += "<p>" + "Food: " + row[8] + "</p>";
+    content.innerHTML += "<p>" + "Beer Garden: " + row[9] + "</p>";
     content.innerHTML += "<hr>";
     
   });
