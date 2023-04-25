@@ -3,29 +3,7 @@ body{
     font-family: Helvetica, Arial, sans-serif;
 }
 
-#container{
-    margin: 0vw;
-}
-
 #content{
-    margin: 0vw;
-    margin-right: 5vw;
-
+    padding: 0vw;
 }
 
-li{
-    margin: 0vw;
-    margin-right: 5vw;
-}
-
-ul{
-    margin: 0vw;
-}
-
-small.content{
-    margin: 0px;
-}
-
-#content.ul{
-    margin: 0px;
-}
