@@ -3,6 +3,8 @@ let excitedSound; // create a variable for "Excited"
 let anxiousSound; // create a variable for "Anxious"
 let sadSound; // create a variable for "Sad"
 
+let bgCol;
+
 function preload() {
   soundFormats('mp3', 'ogg');
   happySound = loadSound('../data/happy.mp3');
@@ -13,10 +15,11 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+    bgCol = 50;
 }
 
 function draw() {
-    background(200);
+    background(bgCol);
 
     /* Happy Section */
     strokeWeight(2.5);
