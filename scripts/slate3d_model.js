@@ -15,7 +15,7 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    bgCol = 50;
+    bgCol = 200;
 }
 
 function draw() {
