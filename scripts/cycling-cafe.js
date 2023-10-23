@@ -49,7 +49,7 @@ function draw() {
   ellipse(radius-20, radius-20, 200);
   pop();
   // make it blurry
-  drawingContext.filter = 'blur(10px)';
+  drawingContext.filter = 'blur(25px)';
 
   angle = angle + speed;
 }
