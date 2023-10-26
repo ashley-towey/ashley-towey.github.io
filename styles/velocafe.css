@@ -45,8 +45,9 @@ body {
   
   /* text content area styling */
   .text-content-area {
+    text-align: center;
     padding: 1vw;
-    width: 57vw;
+    width: 100%;
   }
   
   /* Flexbox styling test */
