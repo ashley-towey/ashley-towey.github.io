@@ -133,3 +133,17 @@ body {
     font-size: 2em;
     text-align: right;
   }
+
+  .clock-face {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;  
+}
+
+.subtitle {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%; 
+}
