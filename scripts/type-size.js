@@ -1,4 +1,3 @@
-let button;
 let permissionGranted = false;
 
 function setup() {
@@ -7,11 +6,18 @@ function setup() {
     // DeviceOrientationEvent, DeviceMotion Event
     if (typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
         // ios 13 device
-        // background(255, 0, 0);
-        button = createButton("click to allow access to sensors");
+        DeviceOrientationEvent.requestPermission()
+        .catch(() => {
+            // show permission dialog only the first time
+        let button = createButton("click to allow access to sensors");
         button.style("font-size", "24px");
         button.center();
         button.mousePressed( requestAccess );
+        })
+        .then(() => {
+            // on any subsquent visits
+            permissionGranted = true;
+        })
 
     } else { 
         // non ios 13 device
@@ -26,11 +32,13 @@ function requestAccess() {
     .then(response => {
         if (response == 'granted') {
             permissionGranted = true;
+        } else {
+            permissionGranted = false;
         }
     })
     .catch(console.error);
 
-    button.remove();
+    this.remove();
 }
 
 function draw() {
