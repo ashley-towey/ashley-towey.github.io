@@ -13,6 +13,8 @@ function setup() {
         button.style("font-size", "24px");
         button.center();
         button.mousePressed( requestAccess );
+
+        throw error;
         })
         .then(() => {
             // on any subsquent visits
