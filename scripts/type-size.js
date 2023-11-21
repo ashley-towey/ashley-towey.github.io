@@ -28,7 +28,9 @@ function requestAccess() {
             permissionGranted = true;
         }
     })
-    .cartch(console.error);
+    .catch(console.error);
+
+    button.remove();
 }
 
 function draw() {
@@ -36,7 +38,7 @@ function draw() {
     if (!permissionGranted) return;
 
     background(255);
-    
+
     textSize(72);
     text(rotationX, 100, 100);
 }
