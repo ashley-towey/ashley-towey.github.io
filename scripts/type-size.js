@@ -49,5 +49,5 @@ function draw() {
 
     textSize(72);
     text("Rotation X: " + rotationX, 100, 100);
-    text("Rotation Y: " + rotationY, 100, 100);
+    text("Rotation Y: " + rotationY, 100, 200);
 }
