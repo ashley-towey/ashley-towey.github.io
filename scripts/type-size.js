@@ -40,5 +40,6 @@ function draw() {
     background(255);
 
     textSize(72);
-    text(rotationX, 100, 100);
+    text("Rotation X: " + rotationX, 100, 100);
+    text("Rotation Y: " + rotationY, 100, 100);
 }
