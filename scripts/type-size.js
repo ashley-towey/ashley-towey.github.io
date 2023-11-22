@@ -67,8 +67,8 @@ function requestAccess() {
 function draw() {
     // adding the sliders for the variable font
     // weight = mouseX;
-    let weight = map(mouseX, 0, windowWidth, 300, 1000);
-    let aero = map(mouseY, 0, windowHeight, -15, 0);
+    let weight = map(rotationX, -180, 180, 300, 1000);
+    let aero = map(rotationY, -180, 180, -15, 0);
     //aero = mouseY;
 
     variable.style('font-weight', weight);
