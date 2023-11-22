@@ -66,12 +66,16 @@ function requestAccess() {
 
 function draw() {
     // adding the sliders for the variable font
-    weight = mouseX;
+    // weight = mouseX;
+    let weight = map(mouseX, 0, windowWidth, 300, 1000);
+    let aero = map(mouseY, 0, windowHeight, -15, 0);
+    //aero = mouseY;
 
     variable.style('font-weight', weight);
-    variable.style('font-variation-settings', "'slnt' " + slantSlider.value());
+    variable.style('font-variation-settings', "'slnt' " + aero);
     
     console.log(weight);
+    //console.log(aero);
     //  console.log(slantSlider.value());
 
     if (!permissionGranted) return;
