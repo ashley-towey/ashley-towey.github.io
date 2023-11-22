@@ -16,8 +16,8 @@ function setup() {
     // weightSlider = createSlider(300, 1000, 300);
     // weightSlider.style('width', '180px');
     
-    slantSlider = createSlider(-15, 0, 0);
-    slantSlider.style('width', '180px');
+    // slantSlider = createSlider(-15, 0, 0);
+    // slantSlider.style('width', '180px');
     
     // casualSlider = createSlider(0, 1, 0, 0.01);
     // casualSlider.style('width', '180px');
