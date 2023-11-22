@@ -65,11 +65,11 @@ function requestAccess() {
 }
 
 function draw() {
+    let roundedX = round(rotationX);
+
     // adding the sliders for the variable font
-    // weight = mouseX;
     let weight = map(rotationX, -180, 180, 300, 1000);
-    let aero = map(rotationY, -180, 180, -15, 0);
-    //aero = mouseY;
+    let aero = map(rotationY, -90, 90, -15, 0);
 
     variable.style('font-weight', weight);
     variable.style('font-variation-settings', "'slnt' " + aero);
@@ -83,7 +83,7 @@ function draw() {
     background(255);
 
     textSize(72);
-    text("Rotation X: " + rotationX, 100, 100);
+    text("Rotation X: " + roundedX, 100, 100);
     text("Rotation Y: " + rotationY, 100, 200);
 
     // rotationX & rotationY to do something here...
