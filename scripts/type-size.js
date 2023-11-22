@@ -68,9 +68,6 @@ function requestAccess() {
 }
 
 function draw() {
-    // adding the sliders for the variable font
-    variable.style('font-weight', rotationX);
-    variable.style('font-variation-settings', "'slnt' " + slantSlider.value() + ", 'CASL' " + casualSlider.value());
 
     if (!permissionGranted) return;
 
@@ -79,6 +76,10 @@ function draw() {
     textSize(72);
     text("Rotation X: " + rotationX, 100, 100);
     text("Rotation Y: " + rotationY, 100, 200);
+
+    // adding the sliders for the variable font
+    variable.style('font-weight', rotationX);
+    variable.style('font-variation-settings', "'slnt' " + slantSlider.value() + ", 'CASL' " + casualSlider.value());
 
     // rotationX & rotationY to do something here...
     // weight & aero
