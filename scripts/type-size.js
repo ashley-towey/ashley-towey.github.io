@@ -68,11 +68,10 @@ function requestAccess() {
 }
 
 function draw() {
-    // background(200);
-          // adding the sliders for the variable font
-          variable.style('font-weight', weightSlider.value())
-          variable.style('font-variation-settings', "'slnt' " + slantSlider.value() + ", 'CASL' " + casualSlider.value());
-          
+    // adding the sliders for the variable font
+    variable.style('font-weight', rotationX)
+    variable.style('font-variation-settings', "'slnt' " + slantSlider.value() + ", 'CASL' " + casualSlider.value());
+
     if (!permissionGranted) return;
 
     background(255);
