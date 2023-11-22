@@ -1,20 +1,30 @@
 let permissionGranted = false;
 let weight;
-let aero;
+// let aero;
 
 // variables from the variable font example
 let weightSlider;
 let slantSlider;
-let casualSlider;
+// let casualSlider;
 let variable;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth, 500);
 
-    weight = 50;
-    aero = 50;
 
-    // DeviceOrientationEvent, DeviceMotion Event
+    // initialising the sliders from the variable font example
+    weightSlider = createSlider(300, 1000, 300);
+    weightSlider.style('width', '180px');
+    
+    slantSlider = createSlider(-15, 0, 0);
+    slantSlider.style('width', '180px');
+    
+    // casualSlider = createSlider(0, 1, 0, 0.01);
+    // casualSlider.style('width', '180px');
+    
+    variable = select('.variable');
+
+    DeviceOrientationEvent, DeviceMotion Event
     if (typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
         // ios 13 device
         DeviceOrientationEvent.requestPermission()
@@ -34,22 +44,9 @@ function setup() {
 
     } else { 
         // non ios 13 device
-        // background(0, 255, 0);
         textSize(48);
         text("non ios 13 device", 100, 100);
-    }
-
-    // initialising the sliders from the variable font example
-    // weightSlider = createSlider(300, 1000, 300);
-    // weightSlider.style('width', '180px');
-    
-    slantSlider = createSlider(-15, 0, 0);
-    slantSlider.style('width', '180px');
-    
-    casualSlider = createSlider(0, 1, 0, 0.01);
-    casualSlider.style('width', '180px');
-    
-    variable = select('.variable');
+         }
 
 }
 
@@ -68,6 +65,14 @@ function requestAccess() {
 }
 
 function draw() {
+    // adding the sliders for the variable font
+    weight = mouseX;
+
+    variable.style('font-weight', weight);
+    variable.style('font-variation-settings', "'slnt' " + slantSlider.value());
+    
+    console.log(weight);
+    //  console.log(slantSlider.value());
 
     if (!permissionGranted) return;
 
@@ -77,17 +82,13 @@ function draw() {
     text("Rotation X: " + rotationX, 100, 100);
     text("Rotation Y: " + rotationY, 100, 200);
 
-    // adding the sliders for the variable font
-    variable.style('font-weight', rotationX);
-    variable.style('font-variation-settings', "'slnt' " + slantSlider.value() + ", 'CASL' " + casualSlider.value());
-
     // rotationX & rotationY to do something here...
     // weight & aero
     // const weight = constrain(rotationX, 0, 100);
     // const aero = constrain(rotationY, 0, 100);
       // variable.style('font-weight', 300+mouseX);
 
-      // just using this to send another push update
+      
 
 
 
