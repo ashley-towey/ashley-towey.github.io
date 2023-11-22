@@ -1,7 +1,12 @@
 let permissionGranted = false;
+let weight;
+let aero;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+
+    weight = 50;
+    aero = 50;
 
     // DeviceOrientationEvent, DeviceMotion Event
     if (typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
@@ -54,4 +59,8 @@ function draw() {
     text("Rotation Y: " + rotationY, 100, 200);
 
     // rotationX & rotationY to do something here...
+    // weight & aero
+    // const weight = constrain(rotationX, 0, 100);
+    // const aero = constrain(rotationY, 0, 100);
+
 }
