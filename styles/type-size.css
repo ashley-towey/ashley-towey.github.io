@@ -13,18 +13,19 @@ html, body {
   input {
     display: block;
   }
+
   .variable {
     margin-top: 15%;
     font-weight: 300;
     text-align: center;
-    font-size: larger;
+    font-size: 170%;
   }
 
   p {
     font-family: Arial, Helvetica, sans-serif;
     font-size: large;
     text-align: center;
-    margin-top: 10%;
+    margin-top: 8%;
     margin-left: 10%;
     margin-right: 10%;
   }
