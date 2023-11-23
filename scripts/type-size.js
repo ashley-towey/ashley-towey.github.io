@@ -72,6 +72,8 @@ function requestAccess() {
 }
 
 function draw() {
+    background(255);
+
     let roundedX = round(rotationX);
     let roundedY = round(rotationY);
 
@@ -81,30 +83,13 @@ function draw() {
 
     variable.style('font-weight', weight);
     variable.style('font-variation-settings', "'slnt' " + aero);
-    
-    console.log(weight);
-    console.log(aero);
-    //  console.log(slantSlider.value());
 
     if (!permissionGranted) return;
 
-    background(255);
-
-    // textFont(font);
-    textSize(30);
-    text("Rotation X: " + roundedX, 100, 100);
-    text("Rotation Y: " + roundedY, 100, 200);
-    text("weight: " + weight, 100, 300);
-    text("CDA: "+ aero, 100, 400);
-
-    // rotationX & rotationY to do something here...
-    // weight & aero
-    // const weight = constrain(rotationX, 0, 100);
-    // const aero = constrain(rotationY, 0, 100);
-      // variable.style('font-weight', 300+mouseX);
-
-      
-
-
-
+    // // testing text below
+    // textSize(30);
+    // text("Rotation X: " + roundedX, 100, 100);
+    // text("Rotation Y: " + roundedY, 100, 200);
+    // text("weight: " + weight, 100, 300);
+    // text("CDA: "+ aero, 100, 400);
 }
