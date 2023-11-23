@@ -90,10 +90,11 @@ function draw() {
 
     background(255);
 
-    textFont(font);
-    textSize(72);
+    // textFont(font);
+    textSize(30);
     text("Rotation X: " + roundedX, 100, 100);
     text("Rotation Y: " + roundedY, 100, 200);
+    text("aero: "+ aero, 100, 300);
 
     // rotationX & rotationY to do something here...
     // weight & aero
