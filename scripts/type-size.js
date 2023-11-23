@@ -2,6 +2,13 @@ let permissionGranted = false;
 let weight;
 let aero;
 
+// load in the font
+let font;
+
+function preload() {
+  font = loadFont('../data/AeroDynamic_2VF.ttf');
+}
+
 // variables from the variable font example
 let weightSlider;
 let slantSlider;
