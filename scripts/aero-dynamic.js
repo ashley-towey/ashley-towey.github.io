@@ -30,5 +30,7 @@ function draw() {
   
   // variable.style('font-weight', 300+mouseX);
   variable.style('font-weight', weightSlider.value())
-  variable.style('font-variation-settings', "'slnt' " + slantSlider.value());
+  variable.style('font-variation-settings', "'slnt' " + 50);
+
+  console.log(slantSlider.value());
 }

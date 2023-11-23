@@ -77,10 +77,10 @@ function draw() {
 
     // adding the sliders for the variable font
     let weight = map(roundedX, 50, -50, 0, 100);
-    let aero = map(rotationY, 50, -50, 0, 100);
+    let aero = map(rotationY, -50, 50, 0, 100);
 
     variable.style('font-weight', weight);
-    variable.style('font-variation-settings', "'slnt' " + 80);
+    variable.style('font-variation-settings', "'slnt' " + aero);
     
     // console.log(weight);
     // console.log(aero);
@@ -90,6 +90,7 @@ function draw() {
 
     background(255);
 
+    textFont(font);
     textSize(72);
     text("Rotation X: " + roundedX, 100, 100);
     text("Rotation Y: " + roundedY, 100, 200);
