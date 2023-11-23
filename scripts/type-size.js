@@ -77,6 +77,6 @@ function draw() {
     // textSize(30);
     // text("Rotation X: " + roundedX, 100, 100);
     // text("Rotation Y: " + roundedY, 100, 200);
-    // text("weight: " + weight, 100, 300);
-    // text("CDA: "+ aero, 100, 400);
+    text("weight: " + weight, 100, 300);
+    text("CDA: "+ aero, 100, 400);
 }
