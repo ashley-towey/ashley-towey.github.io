@@ -82,8 +82,8 @@ function draw() {
     variable.style('font-weight', weight);
     variable.style('font-variation-settings', "'slnt' " + aero);
     
-    // console.log(weight);
-    // console.log(aero);
+    console.log(weight);
+    console.log(aero);
     //  console.log(slantSlider.value());
 
     if (!permissionGranted) return;
