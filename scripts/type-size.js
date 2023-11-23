@@ -9,25 +9,11 @@ function preload() {
   font = loadFont('../data/AeroDynamic_2VF.ttf');
 }
 
-// variables from the variable font example
-let weightSlider;
-let slantSlider;
-// let casualSlider;
+// variable to affect the HTML DOM element type
 let variable;
 
 function setup() {
     createCanvas(windowWidth, 500);
-
-
-    // initialising the sliders from the variable font example
-    // weightSlider = createSlider(300, 1000, 300);
-    // weightSlider.style('width', '180px');
-    
-    // slantSlider = createSlider(-15, 0, 0);
-    // slantSlider.style('width', '180px');
-    
-    // casualSlider = createSlider(0, 1, 0, 0.01);
-    // casualSlider.style('width', '180px');
     
     variable = select('.variable');
 
@@ -74,6 +60,7 @@ function requestAccess() {
 function draw() {
     background(255);
 
+    // rounding the numbers to make animation smooth
     let roundedX = round(rotationX);
     let roundedY = round(rotationY);
 
