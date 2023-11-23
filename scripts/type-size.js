@@ -80,10 +80,10 @@ function draw() {
     let aero = map(rotationY, 50, -50, 0, 100);
 
     variable.style('font-weight', weight);
-    variable.style('font-variation-settings', "'slnt' " + aero);
+    variable.style('font-variation-settings', "'slnt' " + 80);
     
-    console.log(weight);
-    console.log(aero);
+    // console.log(weight);
+    // console.log(aero);
     //  console.log(slantSlider.value());
 
     if (!permissionGranted) return;
