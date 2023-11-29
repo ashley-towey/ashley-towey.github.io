@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Aero-Dynamic;
+    src: url(../data/AeroDynamic_2VF.ttf);
+  }
+
 html, body {
     margin: auto;
     width: 95%;
@@ -30,6 +35,11 @@ html, body {
     /* margin-right: 10%;*/
   }
 
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 70%;
+  }
+
   h3 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: small;
@@ -40,12 +50,18 @@ html, body {
   }
   
   .row {
+    
     display: flex;
   }
   
   /* Create two equal columns that sits next to each other */
   .column {
     flex: 50%;
-    padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
+    padding: 5px;
+    margin-bottom: 1%;
+    /* height: 300px; /* Should be removed. Only for demonstration */
   }
+
+#navigation {
+    text-align: right;
+}

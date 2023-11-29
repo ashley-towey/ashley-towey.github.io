@@ -2,6 +2,9 @@ let weightSlider;
 let slantSlider;
 let variable;
 
+// variable to hold the state of the navigation
+let Navigation
+
 // new variables that will hold the speed and gradient values
 let Speed;
 let Gradient;
@@ -25,10 +28,18 @@ function setup() {
   // set the starting point for Speed & Gradient
   let Speed = 0;
   let Gradient = 0;
+
 }
 
 function draw() {
   background(220);
+
+    // change the turn signal based on MouseX position
+    if (mouseX > windowWidth/2) {
+        Navigation = "&rarr;";
+      } else {
+        Navigation = "&larr;";  
+    }
   
     // adding the sliders for the variable font
     Aero = map(mouseX, 0, windowWidth, 0, 100);
@@ -42,7 +53,11 @@ function draw() {
   variable.style('font-weight', Weight);
   variable.style('font-variation-settings', "'slnt' " + Aero);
 
+  // console.log(Gradient);
+
   document.getElementById("actual-speed").innerHTML = round(Speed)+" kph";
   document.getElementById("actual-gradient").innerHTML = round(Gradient)+" %";
+
+  document.getElementById("navigation").innerHTML = Navigation;
 
 }
