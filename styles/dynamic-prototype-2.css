@@ -10,6 +10,9 @@ html, body {
 
     font-family: 'AeroDynamic_2VF', sans-serif;
     font-size:100px;
+
+    background-color: black;
+
   }
   canvas {
     display: block;
@@ -24,11 +27,13 @@ html, body {
     font-weight: 300;
     text-align: center;
     font-size: 160%;
+    color: white;
   }
 
   p {
     font-family: Arial, Helvetica, sans-serif;
     font-size: large;
+    color: white;
     /* text-align: center;*/
     /* margin-top: 8%;*/
     /* margin-left: 10%;*/
@@ -38,6 +43,7 @@ html, body {
   h2 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 70%;
+    color: white;
   }
 
   h3 {
@@ -50,7 +56,7 @@ html, body {
   }
   
   .row {
-    
+
     display: flex;
   }
   
