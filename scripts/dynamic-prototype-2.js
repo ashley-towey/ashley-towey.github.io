@@ -58,6 +58,8 @@ function draw() {
     Aero = map(mouseX, 0, windowWidth, 0, 100);
     Weight = map(mouseY, 0, windowHeight, 100, 0);
 
+    console.log(Weight);
+
     // map the values of Aero and Weight to Speed and Gradient
     Speed = map(Aero, 0, 100, 0, 40);
     Gradient = map(Weight, 0, 100, -10, 10);
@@ -95,7 +97,7 @@ function processData(rows) {
   
 
     content.innerHTML += "<p>" + "Type: " + outputData[0] + "</p>";
-    content.innerHTML += "<h1>" +outputData[2]+"</h1>";
+    content.innerHTML += "<p>" +outputData[2]+"<p>";
     content.innerHTML += "<p>" + "Location: " + outputData[3] + "</p>";
 
 }
