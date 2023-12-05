@@ -16,6 +16,19 @@ let Aero;
 // load in the font
 // let font;
 
+// variables for the google sheets API
+var idNum = '1j8z_HROnw6KDso52nrUP63gJ5D3AJbhbRy9y-MGxVqU';
+var sheet_name = 'Stories';
+var key = "AIzaSyB5b_wv4yQMDoHTCDDZydcbYxLZ5ISrGbQ"
+var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + idNum + '/values/' + sheet_name + '?alt=json&key=' + key;
+
+let testVar;
+let rowCounter;
+let inputData;
+let outputData;
+
+// https://docs.google.com/spreadsheets/d/1j8z_HROnw6KDso52nrUP63gJ5D3AJbhbRy9y-MGxVqU/edit?usp=sharing
+
 function preload() {
   font = loadFont('../data/AeroDynamic_2VF.ttf');
 }
@@ -29,6 +42,7 @@ function setup() {
   let Speed = 0;
   let Gradient = 0;
 
+  testVar = 0;
 }
 
 function draw() {
@@ -60,4 +74,47 @@ function draw() {
 
   document.getElementById("navigation").innerHTML = Navigation;
 
+}
+
+// functions from the google sheets API
+function processData(rows) {
+  let headers = rows[0];
+  let content = document.getElementById('content');
+  rows.shift();
+
+  rowCounter = rows.length - 1; // counts through the rows 
+  //console.log(testVar);
+  // cycling through the data here
+  let inputData = 0;
+  let outputData = rows[inputData];
+
+  // console.log(inputData);
+  // console.log(outputData);
+
+  // console.log(rows.length);
+  // console.log(rowCounter);
+  
+  rows.forEach(row => {
+    // console.log(row[4]);
+    content.innerHTML += "<p>" + "Type: " + outputData[0] + "</p>";
+    content.innerHTML += "<h1>" +outputData[2]+"</h1>";
+    content.innerHTML += "<p>" + "Location: " + outputData[3] + "</p>";
+    content.innerHTML += "<hr>";
+  });
+
+}
+
+//this gets the data from the google sheet
+fetch(url)
+  .then(response => response.json())
+  .then(data => processData(data.values));
+
+
+function mousePressed() {
+  testVar = testVar + 1;
+
+  if (testVar > rowCounter) {
+    testVar = 0;
+  }
+  console.log(testVar);
 }
