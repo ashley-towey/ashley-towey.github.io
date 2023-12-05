@@ -42,7 +42,6 @@ function setup() {
   let Speed = 0;
   let Gradient = 0;
 
-  testVar = 0;
 }
 
 function draw() {
@@ -73,7 +72,7 @@ function draw() {
   document.getElementById("actual-gradient").innerHTML = round(Gradient)+" %";
 
   document.getElementById("navigation").innerHTML = Navigation;
-
+  
 }
 
 // functions from the google sheets API
@@ -82,10 +81,10 @@ function processData(rows) {
   let content = document.getElementById('content');
   rows.shift();
 
-  rowCounter = rows.length - 1; // counts through the rows 
-  //console.log(testVar);
-  // cycling through the data here
-  let inputData = 0;
+  rowCounter = round(random(0, rows.length - 1)); // finds a random number that is relevant and displays that information. 
+  console.log(rowCounter);
+
+  let inputData = rowCounter;
   let outputData = rows[inputData];
 
   // console.log(inputData);
@@ -94,13 +93,10 @@ function processData(rows) {
   // console.log(rows.length);
   // console.log(rowCounter);
   
-  rows.forEach(row => {
-    // console.log(row[4]);
+
     content.innerHTML += "<p>" + "Type: " + outputData[0] + "</p>";
     content.innerHTML += "<h1>" +outputData[2]+"</h1>";
     content.innerHTML += "<p>" + "Location: " + outputData[3] + "</p>";
-    content.innerHTML += "<hr>";
-  });
 
 }
 
@@ -111,10 +107,6 @@ fetch(url)
 
 
 function mousePressed() {
-  testVar = testVar + 1;
-
-  if (testVar > rowCounter) {
-    testVar = 0;
-  }
-  console.log(testVar);
+// redraw was called
+  location.reload();
 }
