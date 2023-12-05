@@ -53,7 +53,7 @@ function draw() {
   variable.style('font-weight', Weight);
   variable.style('font-variation-settings', "'slnt' " + Aero);
 
-  // console.log(Gradient);
+  // working but without input field
 
   document.getElementById("actual-speed").innerHTML = round(Speed)+" kph";
   document.getElementById("actual-gradient").innerHTML = round(Gradient)+" %";
