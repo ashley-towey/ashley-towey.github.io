@@ -74,6 +74,9 @@ function draw() {
   document.getElementById("actual-gradient").innerHTML = round(Gradient)+" %";
 
   document.getElementById("navigation").innerHTML = Navigation;
+
+  // add an event listener to see if any button has been pressed
+  document.body.addEventListener('keypress', myFunction);
   
 }
 
@@ -96,9 +99,11 @@ function processData(rows) {
   // console.log(rowCounter);
   
 
-    content.innerHTML += "<small>" + "Type: " + outputData[0] + "</small>";
+    content.innerHTML += "<small>" + outputData[0] + "</small>";
     content.innerHTML += "<p>" +outputData[2]+"<p>";
-    content.innerHTML += "<small>" + "Location: " + outputData[3] + "</small>";
+    content.innerHTML += "<small><a href=https://what3words.com/" + outputData[3] + ">" + outputData[3] + "</a></small>";
+
+    // https://what3words.com/
 
 }
 
@@ -108,8 +113,17 @@ fetch(url)
   .then(data => processData(data.values));
 
 
-function mousePressed() {
-// redraw was called
+// function mousePressed() {
+// // redraw was called
+//   location.reload();
+// }
+
+function myFunction(){
+  //do what you want after key is pressed
+  // redraw was called
   location.reload();
 }
+
+function externalLinks() {   for(var c = document.getElementsByTagName("a"), a = 0;a < c.length;a++) {     var b = c[a];     b.getAttribute("href") && b.hostname !== location.hostname && (b.target = "_blank")   } } ; externalLinks();
+
 
