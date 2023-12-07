@@ -1,6 +1,6 @@
 @font-face {
     font-family: Aero-Dynamic;
-    src: url(../data/AeroDynamic_2VF.ttf);
+    src: url(../data/AeroDynamicWeightVF.ttf);
   }
 
 html, body {
@@ -8,7 +8,7 @@ html, body {
     width: 95%;
     padding: 10px;
 
-    font-family: 'AeroDynamic_2VF', sans-serif;
+    font-family: 'Aero-Dynamic', sans-serif;
     font-size:100px;
 
     background-color: black;
@@ -47,13 +47,16 @@ html, body {
 
   small {
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: small;
+    font-size: 20%;
+    text-transform: lowercase;
   }
 
   p {
-    font-size: large;
+    font-size: 60%;
     color: white;
+    text-transform: lowercase;
+    margin: 0px;
+    padding: 0px;
   }
 
   a {
@@ -98,4 +101,8 @@ color: black;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#content {
+  margin-top: -20%;
 }

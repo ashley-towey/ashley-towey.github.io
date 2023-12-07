@@ -96,9 +96,9 @@ function processData(rows) {
   // console.log(rowCounter);
   
 
-    content.innerHTML += "<p>" + "Type: " + outputData[0] + "</p>";
+    content.innerHTML += "<small>" + "Type: " + outputData[0] + "</small>";
     content.innerHTML += "<p>" +outputData[2]+"<p>";
-    content.innerHTML += "<p>" + "Location: " + outputData[3] + "</p>";
+    content.innerHTML += "<small>" + "Location: " + outputData[3] + "</small>";
 
 }
 
@@ -112,3 +112,4 @@ function mousePressed() {
 // redraw was called
   location.reload();
 }
+
