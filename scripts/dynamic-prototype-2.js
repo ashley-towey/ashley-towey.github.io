@@ -18,7 +18,7 @@ let Aero;
 
 // variables for the google sheets API
 var idNum = '1j8z_HROnw6KDso52nrUP63gJ5D3AJbhbRy9y-MGxVqU';
-var sheet_name = 'Stories';
+var sheet_name = 'Stories_Curated';
 var key = "AIzaSyB5b_wv4yQMDoHTCDDZydcbYxLZ5ISrGbQ"
 var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + idNum + '/values/' + sheet_name + '?alt=json&key=' + key;
 
