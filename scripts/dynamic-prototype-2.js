@@ -18,7 +18,7 @@ let Aero;
 
 // variables for the google sheets API
 var idNum = '1j8z_HROnw6KDso52nrUP63gJ5D3AJbhbRy9y-MGxVqU';
-var sheet_name = 'Stories';
+var sheet_name = 'Responses_Duplicate';
 var key = "AIzaSyB5b_wv4yQMDoHTCDDZydcbYxLZ5ISrGbQ"
 var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + idNum + '/values/' + sheet_name + '?alt=json&key=' + key;
 
@@ -58,7 +58,7 @@ function draw() {
     Aero = map(mouseX, 0, windowWidth, 0, 100);
     Weight = map(mouseY, 0, windowHeight, 100, 0);
 
-    console.log(Weight);
+    // console.log(Weight);
 
     // map the values of Aero and Weight to Speed and Gradient
     Speed = map(Aero, 0, 100, 0, 40);
@@ -87,7 +87,7 @@ function processData(rows) {
   rows.shift();
 
   rowCounter = round(random(0, rows.length - 1)); // finds a random number that is relevant and displays that information. 
-  console.log(rowCounter);
+  console.log(headers);
 
   let inputData = rowCounter;
   let outputData = rows[inputData];
@@ -99,9 +99,9 @@ function processData(rows) {
   // console.log(rowCounter);
   
 
-    content.innerHTML += "<small>" + outputData[0] + "</small>";
-    content.innerHTML += "<p>" +outputData[2]+"<p>";
-    content.innerHTML += "<small><a href=https://what3words.com/" + outputData[3] + ">" + outputData[3] + "</a></small>";
+    content.innerHTML += "<small>" + outputData[14] + "</small>";
+    content.innerHTML += "<p>" +outputData[15]+"<p>";
+    content.innerHTML += "<small><a href=https://what3words.com/" + outputData[16] + ">" + outputData[16] + "</a></small>";
 
     // https://what3words.com/
 
@@ -128,3 +128,4 @@ function externalLinks() {   for(var c = document.getElementsByTagName("a"), a =
 
 
 // updated font including punctuation
+
