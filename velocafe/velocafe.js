@@ -10,17 +10,25 @@ function processData(rows) {
   var content = document.getElementById('content');
   rows.shift();
 
-  console.log(rows);
+  // console.log(rows[1]);
 
   rows.forEach(row => {
-    content.innerHTML += "<small>" + "Contributed by: " + row[0]+", "+ row[1] + ", of " + row[2] + "</small>";
-    content.innerHTML += "<h1>"+row[3]+"</h1>";
-    content.innerHTML += "<h3>"+"Location: "+row[4]+"</h3>";
-    content.innerHTML += "<p>" + "Price: " + row[5] + "</p>";
-    content.innerHTML += "<p>" + "Vibe: " + row[6] + "</p>";
-    content.innerHTML += "<p>" + "Food: " + row[8] + "</p>";
-    content.innerHTML += "<p>" + "Beer Garden: " + row[9] + "</p>";
-    content.innerHTML += "<hr>";
+    console.log(row[1]);
+
+    content.innerHTML += "<p>" + "Coffee: " + row[1] + "</p>"; // coffee 
+    content.innerHTML += "<p>" + "Cake: " + row[2] + "</p>"; // cake
+    content.innerHTML += "<p>" + "Safety: " + row[3] + "</p>"; // safety
+    content.innerHTML += "<p>" + "Welcome: " + row[4] + "</p>"; // welcome
+
+    // previous information display here
+    // content.innerHTML += "<small>" + "Contributed by: " + row[0]+", "+ row[1] + ", of " + row[2] + "</small>";
+    // content.innerHTML += "<h1>"+row[3]+"</h1>";
+    // content.innerHTML += "<h3>"+"Location: "+row[4]+"</h3>";
+    // content.innerHTML += "<p>" + "Price: " + row[5] + "</p>";
+    // content.innerHTML += "<p>" + "Vibe: " + row[6] + "</p>";
+    // content.innerHTML += "<p>" + "Food: " + row[8] + "</p>";
+    // content.innerHTML += "<p>" + "Beer Garden: " + row[9] + "</p>";
+    // content.innerHTML += "<hr>";
   });
 }
 //this gets the data from the google sheet
