@@ -1,6 +1,6 @@
 @font-face {
     font-family: Aero-Dynamic;
-    src: url(../data/AeroDynamicWeightVF2.ttf);
+    src: url(../data/AeroDynamicWeight55VF.ttf);
   }
 
 html, body {
@@ -48,13 +48,11 @@ html, body {
   small {
     color: white;
     font-size: 20%;
-    text-transform: lowercase;
   }
 
   p {
     font-size: 60%;
     color: white;
-    text-transform: lowercase;
     margin: 0px;
     padding: 0px;
     margin-bottom: -3%;
