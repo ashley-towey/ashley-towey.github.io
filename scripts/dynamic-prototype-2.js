@@ -55,8 +55,8 @@ function draw() {
     }
   
     // adding the sliders for the variable font
-    Aero = map(mouseX, 0, windowWidth, 0, 100);
-    Weight = map(mouseY, 0, windowHeight, 100, 0);
+    Aero = map(mouseX, 0+100, windowWidth - 100, 0, 100);
+    Weight = map(mouseY, 0+100, windowHeight - 100, 100, 0);
 
     // console.log(Weight);
 
@@ -66,7 +66,7 @@ function draw() {
 
   // variable.style('font-weight', 300+mouseX);
   variable.style('font-weight', Weight);
-  variable.style('font-variation-settings', "'slnt' " + Aero);
+  variable.style('font-variation-settings', "'opsz' " + Aero);
 
   // working but without input field
 
