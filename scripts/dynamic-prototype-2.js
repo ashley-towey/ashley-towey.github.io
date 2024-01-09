@@ -30,7 +30,7 @@ let outputData;
 // https://docs.google.com/spreadsheets/d/1j8z_HROnw6KDso52nrUP63gJ5D3AJbhbRy9y-MGxVqU/edit?usp=sharing
 
 function preload() {
-  font = loadFont('../data/AeroDynamic_2VF.ttf');
+  font = loadFont('../data/AeroDynamicWeightSlantVF.ttf');
 }
 
 function setup() {
