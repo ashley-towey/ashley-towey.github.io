@@ -159,5 +159,42 @@ a:link {
 
   @media only screen and (max-width: 768px) {
   /* For mobile phones: */
+  body {
+    padding-left: 5vw;
+    padding-right: 5vw;
 
+    /* background image settings */
+    background-image: url("../project_stories/img/road.jpeg");
+    background-size: 110vh;
+    background-repeat: no-repeat;
+    background-position: 30%; /* this is more of a hack than an actual solution */ 
+}
+h1 {
+    font-variation-settings: 'opsz' 100;
+    font-weight: 100;
+    font-size: 3.5em;
+
+    padding-top: 8vh; 
+    padding-left: 0vw;
+    padding-right: 0vw;
+}
+p {
+    font-variation-settings: 'opsz' 100;
+    font-weight: 10;
+    font-size: 1em;
+}
+a {
+    font-size: 1.2em;
+}
+.button {
+    padding: 1.5rem;
+    padding-top: .7rem;
+    padding-bottom: .7rem;
+}
+.row {
+    padding-top: 5%;
+}
+.item {
+    margin: 5%;
+}
 }
