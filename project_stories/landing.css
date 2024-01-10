@@ -1,3 +1,121 @@
+@font-face {
+    font-family: Aero-Dynamic;
+    src: url(../data/AeroDynamicWeightSlantVF.ttf);
+  }
+
 body {
+    /* background image settings */
+    background-image: url("../project_stories/img/road.jpeg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: -0px; /* this is more of a hack than an actual solution */ 
+    background-blend-mode: multiply;
+    background-color: #494949;
+
+    /* font styling */ 
+    font-family: 'Aero-Dynamic', sans-serif;
+    /* font-variation-settings: 'wght' 100; */ 
+    font-variation-settings: 'opsz' 100;
+    color: white;
+
+    margin: 0%;
+    padding-left: 20vw;
+    padding-right: 20vw;
+  }
+
+  h1 {
+    font-variation-settings: 'opsz' 100;
+    font-weight: 100;
+    text-align: center;
+    font-size: 4.5em;
+
+    margin: 0%;
+    padding-top: 20vh;
+  }
+
+  p {
+    font-variation-settings: 'opsz' 100;
+    font-weight: 10;
+    text-align: center;
+    font-size: 1.2em;
+
+  }
+
+  .button {
+    border-style: solid;
+    border-color: white;
+    color: white;
+
+    border-radius: 15px;
+    padding: 15px;
+  }
+
+  .button:hover {
+    background: white;
     color: black;
+  }
+
+  /* link styling, resetting to remain white */ 
+a {
+    font-size: 1.5em;
+    text-decoration: none;
 }
+   /* unvisited link */
+a:link {
+    color: white;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: white;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: white;
+  }
+
+  /* selected link */
+  a:active {
+    color: white;
+  } 
+
+  /* MEDIA Query to change the layout based on which device is being used */ 
+
+/* Flexbox styling test */
+
+  
+  .row {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+
+    padding-top: 20vh;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+
+    align-items: center;
+  }
+  
+  .item {
+    padding: 1vw;
+
+  }
+  
+  @media only screen and (max-width: 1000px) {
+    .text-content-area {
+      width: 97%;
+    }
+  }
+  
+  @media screen and (min-width: 1000px) {
+    .column {
+      flex: 1
+    }
+  }
