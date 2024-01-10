@@ -4,6 +4,16 @@
   }
 
 body {
+    /* font styling */ 
+    font-family: 'Aero-Dynamic', sans-serif;
+    /* font-variation-settings: 'wght' 100; */ 
+    font-variation-settings: 'opsz' 100;
+    color: #0A0A0A;
+
+    margin: 0%;
+  }
+
+  .hero-section{
     /* background image settings */
     background-image: url("../project_stories/img/_road.jpeg");
     background-size: 100%;
@@ -12,15 +22,11 @@ body {
     background-blend-mode: multiply;
     background-color: #494949;
 
-    /* font styling */ 
-    font-family: 'Aero-Dynamic', sans-serif;
-    /* font-variation-settings: 'wght' 100; */ 
-    font-variation-settings: 'opsz' 100;
-    color: white;
-
-    margin: 0%;
     padding-left: 20vw;
     padding-right: 20vw;
+    padding-bottom: 20vh;
+
+    color: white;
   }
 
   h1 {
@@ -33,18 +39,80 @@ body {
     padding-top: 20vh;
   }
 
+  h2 {
+    font-variation-settings: 'opsz' 100;
+    font-weight: 100;
+    text-align: center;
+    font-size: 3em;
+  }
+
+  h3 {
+    font-variation-settings: 'opsz' 100;
+    font-weight: 100;
+    text-align: center;
+    font-size: 2em;
+  }
+
+  h4 {
+    font-variation-settings: 'opsz' 100;
+    font-weight: 60;
+    text-align: center;
+    font-size: 2em;
+  }
+
+  h4.recommendation {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+
   p {
     font-variation-settings: 'opsz' 100;
-    font-weight: 10;
+    font-weight: 40;
     text-align: center;
     font-size: 1.2em;
 
+  }
+
+
+hr {
+    width: 100%;
+}
+  /* link styling, resetting to remain white */ 
+a {
+    font-size: 1.2em;
+    text-decoration: none;
+}
+   /* unvisited link */
+a:link {
+    color: black;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: black;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: black;
+  }
+
+  /* selected link */
+  a:active {
+    color: black;
+  } 
+
+  a.button{
+    color: white;
   }
 
   .button {
     border-style: solid;
     border-color: white;
     color: white;
+
+    font-size: 1.5em;
+    text-decoration: none;
 
     border-radius: 1.3em;
     padding: 1.2em;
@@ -56,32 +124,6 @@ body {
     background: white;
     color: black;
   }
-
-  /* link styling, resetting to remain white */ 
-a {
-    font-size: 1.5em;
-    text-decoration: none;
-}
-   /* unvisited link */
-a:link {
-    color: white;
-  }
-  
-  /* visited link */
-  a:visited {
-    color: white;
-  }
-  
-  /* mouse over link */
-  a:hover {
-    color: white;
-  }
-
-  /* selected link */
-  a:active {
-    color: white;
-  } 
-
 
 /* Flexbox styling test */
 
@@ -107,6 +149,11 @@ a:link {
   .item {
     padding: 1vw;
 
+  }
+
+  .directory-section {
+    margin-left: 15%;
+    margin-right: 15%;
   }
   
 /* MEDIA Query to change the layout based on which device is being used */ 

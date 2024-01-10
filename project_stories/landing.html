@@ -6,15 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stories for the Road</title>
 
+    <!-- Link the p5js online library link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
 
     <!-- Link to CSS file -->
     <link rel="stylesheet" type="text/css" href="../project_stories/landing.css"> 
 
+    <!-- Link the pages javascript file -->
+    <script src="../project_stories/landing.js"></script>
+
 </head>
 <body>
 
-<h1>Stories for the Road</h1>
-<p>Stories for the Road is a speculative tool for cyclists to be able share Recommendations, Encouragements, and Stories at a specific location. This tool serves as a proposal for the possible ways in which we could use technology to foster community within cycling by taking back ownership of the roads. Select your device, click through other people’s submissions, and then contribute by adding your own. </p>
+<!-- hero section -->
+<div class="hero-section">
+    <h1>Stories for the Road</h1>
+    <p>Stories for the Road is a speculative tool for cyclists to be able share Recommendations, Encouragements, and Stories at a specific location. This tool serves as a proposal for the possible ways in which we could use technology to foster community within cycling by taking back ownership of the roads. Select your device, click through other people’s submissions, and then contribute by adding your own. </p>
 
       <!-- Flexbox gallery to control buttons -->
         <div class='row'>
@@ -34,6 +41,23 @@
             </div>
           </div>
         </div>
+    </div>
+
+    <!-- Directory section to display all the information-->
+    <div class="directory-section">
+        <h2>The Directory</h2>
+        <p>
+            A collection of submissions from fellow riders - especially useful if you get lost. 
+        </p>
+        <hr>
+        <!-- div below where the results will be listed -->
+        <div id="recommendation">
+            <!-- content will go here on the web-page -->
+            <div id="landscape">
+                <!-- image to be placed here-->
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
