@@ -123,6 +123,9 @@ a:link {
         background-position: 40%; /* this is more of a hack than an actual solution */ 
     }
     h1 {
+        font-variation-settings: 'opsz' 100;
+        font-weight: 100;
+
         padding-top: 12vh; 
         padding-left: 8vw;
         padding-right: 8vw;
@@ -131,10 +134,10 @@ a:link {
         font-size: 1.8em;
     }
     .row {
-        padding-top: 10vh;
+        padding-top: 5%;
     }
     .item {
-        margin: 8%;
+        margin: 5%;
     }
     .text-content-area {
         width: 97%;
