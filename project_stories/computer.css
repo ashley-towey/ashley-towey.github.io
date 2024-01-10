@@ -14,42 +14,28 @@ html, body {
     background-color: grey;
 
   }
-  canvas {
-    display: block;
-  }
-  
-  input {
-    display: block;
-  }
 
   .variable {
     /* margin-top: 15%;*/
     text-align: center;
-    font-size: 160%;
+    font-size: 100%;
     color: white;
+
+    line-height: 1rem;
   }
 
-  h1 {
-    color: white;
-    font-size: medium;
-  }
-
-  h2 {
-    font-size: 70%;
-    color: black;
-  }
-
+  /* Small type above and below the message */
   h3 {
     font-variation-settings: 'opsz' 100;
-    font-weight: 100;
+    font-weight: 60;
 
     color: white;
-    font-size: 20%;
+    font-size: 30%;
   }
 
   /* This is being used to write the main message */ 
   small {
-    font-size: 60%;
+    font-size: 90%;
     color: white;
     margin: 0px;
     padding: 0px;
@@ -57,61 +43,68 @@ html, body {
   }
 
   p {
-    font-size: 60%;
     color: white;
     margin: 0px;
     padding: 0px;
     margin-bottom: -3%;
   }
 
-  a {
-    color: white;
+    /* link styling, resetting to remain white */ 
+a {
+    font-size: 100%;
     text-align: center;
     text-decoration: none;
-    font-size: xx-large;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-  
-  .row {
-    display: flex;
-    margin-bottom: -10%;
+}
+   /* unvisited link */
+a:link {
+    color: white;
   }
   
-  /* Create two equal columns that sits next to each other */
-  .column {
-    flex: 50%;
-    padding: 5px;
-    margin-bottom: 1%;
-    /* height: 300px; /* Should be removed. Only for demonstration */
+  /* visited link */
+  a:visited {
+    color: white;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: white;
   }
 
-#navigation {
-    text-align: right;
-}
+  /* selected link */
+  a:active {
+    color: white;
+  } 
 
-.read-more-button {
-  background-color: white;
-  color: black;
-  border: 1px solid green;
-  padding: 20px;
-  font-size: large;
-}
+  .button {
+    font-size: 30%;
+    font-variation-settings: 'opsz' 100;
+    font-weight: 60;
 
-.read-more-button:hover {
-background-color: rgb(227, 227, 227);
-color: black;
-}
+    border-style: solid;
+    border-color: white;
 
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    border-radius: 1rem;
+    padding: .1rem;
+    padding-top: .15rem;
+    padding-bottom: .13rem;
 
-#content {
-  margin-top: 3%;
-}
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+  }
+
+  .button:hover {
+    background: white;
+    color: black;
+  }
+
+  .button-area {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+  }
+
+
 

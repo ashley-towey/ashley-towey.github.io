@@ -53,7 +53,7 @@ function processData(rows) {
   
     // write the information from the google sheet to the html page
     content.innerHTML += "<h3>" + outputData[14] + "</h3>";
-    content.innerHTML += "<p>" +outputData[15]+"<p>";
+    content.innerHTML += "<small>" +outputData[15]+"</small>";
     content.innerHTML += "<h3><a href=https://what3words.com/" + outputData[16] + ">" + outputData[16] + "</a></h3>";
 
 }
