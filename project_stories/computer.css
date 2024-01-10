@@ -1,0 +1,117 @@
+@font-face {
+    font-family: Aero-Dynamic;
+    src: url(../data/AeroDynamicWeightSlantVF.ttf);
+  }
+
+html, body {
+    margin: auto;
+    width: 95%;
+    padding: 10px;
+
+    font-family: 'Aero-Dynamic', sans-serif;
+    font-size:100px;
+
+    background-color: grey;
+
+  }
+  canvas {
+    display: block;
+  }
+  
+  input {
+    display: block;
+  }
+
+  .variable {
+    /* margin-top: 15%;*/
+    text-align: center;
+    font-size: 160%;
+    color: white;
+  }
+
+  h1 {
+    color: white;
+    font-size: medium;
+  }
+
+  h2 {
+    font-size: 70%;
+    color: black;
+  }
+
+  h3 {
+    font-variation-settings: 'opsz' 100;
+    font-weight: 100;
+
+    color: white;
+    font-size: 20%;
+  }
+
+  /* This is being used to write the main message */ 
+  small {
+    font-size: 60%;
+    color: white;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: -3%;
+  }
+
+  p {
+    font-size: 60%;
+    color: white;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: -3%;
+  }
+
+  a {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: xx-large;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  .row {
+    display: flex;
+    margin-bottom: -10%;
+  }
+  
+  /* Create two equal columns that sits next to each other */
+  .column {
+    flex: 50%;
+    padding: 5px;
+    margin-bottom: 1%;
+    /* height: 300px; /* Should be removed. Only for demonstration */
+  }
+
+#navigation {
+    text-align: right;
+}
+
+.read-more-button {
+  background-color: white;
+  color: black;
+  border: 1px solid green;
+  padding: 20px;
+  font-size: large;
+}
+
+.read-more-button:hover {
+background-color: rgb(227, 227, 227);
+color: black;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#content {
+  margin-top: 3%;
+}
+
