@@ -115,6 +115,12 @@ a:link {
     body {
         padding-left: 8vw;
         padding-right: 8vw;
+
+        /* background image settings */
+        background-image: url("../project_stories/img/road.jpeg");
+        background-size: 100vh;
+        background-repeat: no-repeat;
+        background-position: 40%; /* this is more of a hack than an actual solution */ 
     }
     h1 {
         padding-top: 12vh; 
