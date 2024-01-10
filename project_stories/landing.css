@@ -93,7 +93,7 @@ a:link {
     flex-wrap: wrap;
     width: 100%;
 
-    padding-top: 20vh;
+    padding-top: 12%;
   }
   
   .column {
@@ -118,7 +118,7 @@ a:link {
 
         /* background image settings */
         background-image: url("../project_stories/img/road.jpeg");
-        background-size: 100vh;
+        background-size: 110vh;
         background-repeat: no-repeat;
         background-position: 40%; /* this is more of a hack than an actual solution */ 
     }
@@ -153,5 +153,11 @@ a:link {
     .column {
       flex: 1
     }
-
   }
+
+  /* Phone Media query */
+
+  @media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+
+}
