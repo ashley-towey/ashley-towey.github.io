@@ -8,7 +8,7 @@ body {
     background-image: url("../project_stories/img/road.jpeg");
     background-size: 100%;
     background-repeat: no-repeat;
-    background-position: -0px; /* this is more of a hack than an actual solution */ 
+    background-position: 0px; /* this is more of a hack than an actual solution */ 
     background-blend-mode: multiply;
     background-color: #494949;
 
@@ -46,8 +46,10 @@ body {
     border-color: white;
     color: white;
 
-    border-radius: 15px;
-    padding: 15px;
+    border-radius: 1.3em;
+    padding: 1.2em;
+    padding-top: .7em;
+    padding-bottom: .7em;
   }
 
   .button:hover {
@@ -80,7 +82,6 @@ a:link {
     color: white;
   } 
 
-  /* MEDIA Query to change the layout based on which device is being used */ 
 
 /* Flexbox styling test */
 
@@ -108,14 +109,36 @@ a:link {
 
   }
   
+/* MEDIA Query to change the layout based on which device is being used */ 
+
   @media only screen and (max-width: 1000px) {
-    .text-content-area {
-      width: 97%;
+    body {
+        padding-left: 8vw;
+        padding-right: 8vw;
     }
+    h1 {
+        padding-top: 12vh; 
+        padding-left: 8vw;
+        padding-right: 8vw;
+    }
+    a {
+        font-size: 1.8em;
+    }
+    .row {
+        padding-top: 10vh;
+    }
+    .item {
+        margin: 8%;
+    }
+    .text-content-area {
+        width: 97%;
+      }
+
   }
   
   @media screen and (min-width: 1000px) {
     .column {
       flex: 1
     }
+
   }
