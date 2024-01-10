@@ -83,10 +83,23 @@ a:link {
     color: white;
   } 
 
-  .location-information {
-    position: absolute;
-    left: 70%;
+  #location-information {
+    /* position: absolute;
+    text-align: center;
+    left: 42%;
+    bottom: 20%; */
     color: blue;
+    text-align:center;
+  }
+
+  .location-area {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    position: absolute;
+    left: 35%;
+    bottom: 20%;
   }
 
   .button {
@@ -122,6 +135,8 @@ a:link {
     left: 35%;
     bottom: 10%;
   }
+
+
 
 
 
