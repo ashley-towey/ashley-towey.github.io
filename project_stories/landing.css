@@ -130,6 +130,10 @@ a:link {
         padding-left: 8vw;
         padding-right: 8vw;
     }
+    p {
+        font-variation-settings: 'opsz' 100;
+        font-weight: 10;
+    }
     a {
         font-size: 1.8em;
     }
