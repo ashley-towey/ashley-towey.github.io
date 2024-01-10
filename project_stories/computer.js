@@ -55,8 +55,8 @@ function processData(rows) {
     content.innerHTML += "<h3>" + outputData[14] + "</h3>";
     content.innerHTML += "<small>" +outputData[15]+"</small>";
     content.innerHTML += "<h3><a href=https://what3words.com/" + outputData[16] + ">" + outputData[16] + "</a></h3>";
-    content.innerHTML +=  "";
-
+    // background image auto fetches based on the what3words
+    document.body.style.backgroundImage = "url('../project_stories/img/" + outputData[16] + ".png')"; 
 }
 
 //this gets the data from the google sheet
