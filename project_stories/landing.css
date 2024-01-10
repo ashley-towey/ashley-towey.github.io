@@ -5,7 +5,7 @@
 
 body {
     /* background image settings */
-    background-image: url("../project_stories/_img/road.jpeg");
+    background-image: url("../project_stories/img/_road.jpeg");
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: 0px; /* this is more of a hack than an actual solution */ 
