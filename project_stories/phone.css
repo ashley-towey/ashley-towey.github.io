@@ -11,52 +11,44 @@
     font-family: 'Aero-Dynamic', Helvetica, sans-serif;
     font-variation-settings: 'opsz' 100;
     font-weight: 60;
-  }
-  /*
-html, body {
-    margin: auto;
-    width: 95%;
-    padding: 10px;
+    color: white;
 
-    font-family: 'Aero-Dynamic', sans-serif;
-    font-size:100px;
-  }
-  canvas {
-    display: block;
-  }
-  
-  input {
-    display: block;
-  }
-
-  .variable {
-    margin-top: 15%;
-    font-weight: 300;
-    text-align: center;
-    font-size: 160%;
-  }
-
-  p {
-    font-family: Aero-Dynamic, Arial, Helvetica, sans-serif;
-    font-size: large;
-    text-align: center;
-    margin-top: 8%;
-    margin-left: 10%;
-    margin-right: 10%;
-  }
-  */
-
-  /* H3 and SMALL will change the main hero section text */ 
-  /* h3 {
-    font-size: 10%;
+    /* background image styling, not sure it's working */
+    background-size: 200vh;
+    background-repeat: no-repeat;
+    background-position-x: -190vw; /* this is more of a hack than an actual solution */ 
+    /* background-position-y: -20px; */
+    background-blend-mode: multiply;
+    background-color: #494949;
   }
 
   small {
-    font-size: 40%;
-    line-height: 5%;
+    font-size: 150%;
   }
 
-  a {
-    font-size: 40%;
+/* link styling, resetting to remain white */ 
+a {
+    font-size: 100%;
+    text-align: center;
+    text-decoration: none;
+}
+   /* unvisited link */
+a:link {
+    color: white;
   }
-  */
+  
+  /* visited link */
+  a:visited {
+    color: white;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: white;
+  }
+
+  /* selected link */
+  a:active {
+    color: white;
+  } 
+

@@ -24,7 +24,7 @@ let inputData;
 let outputData;
 
 function setup() {
-    createCanvas(windowWidth, 500);
+    noCanvas(); // just display the text directly onto the webpage
     
     variable = select('.variable');
 
@@ -111,7 +111,7 @@ function processData(rows) {
       document.getElementById('location-information').innerHTML += "<h3><a href=https://what3words.com/" + outputData[16] + ">" + outputData[16] + "</a></h3>";
       // background image auto fetches based on the what3words
       // below will bring back the background image
-      // document.body.style.backgroundImage = "url('../project_stories/img/" + outputData[16] + ".png')"; 
+      document.body.style.backgroundImage = "url('../project_stories/img/" + outputData[16] + ".png')"; 
   }
   
   //this gets the data from the google sheet
