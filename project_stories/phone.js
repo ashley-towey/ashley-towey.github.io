@@ -76,7 +76,7 @@ function draw() {
     let roundedY = round(rotationY);
 
     // mapping the variability from the orientation to the typeface values
-    let weight = map(roundedX, 0, 50, 0, 100);
+    let weight = map(roundedX, 0, 45, 0, 100);
     let aero = map(roundedY, -30, 30, 0, 100);
 
     variable.style('font-weight', weight);
