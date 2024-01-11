@@ -13,7 +13,7 @@ body {
 
   .hero-section {
     /* background image settings */
-    background-image: url("../project_stories/img/road.jpeg");
+    background-image: url("../project_stories/img/road.png");
     background-size: 100vh;
     background-repeat: no-repeat;
     /* background-position: 0px; /* this is more of a hack than an actual solution */ 
