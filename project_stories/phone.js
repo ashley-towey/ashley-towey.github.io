@@ -83,14 +83,14 @@ function draw() {
     // CHANGE the values based on whether the device is in portrait or landscape
     let portrait = window.matchMedia("(orientation: portrait)");
 
-portrait.addEventListener("change", function(e) {
-    if(e.matches) {
-        // Portrait mode
-        text("portrait mode");
-    } else {
-        // Landscape
-        text("landscape mode");
-    }
+    portrait.addEventListener("change", function(e) {
+        if(e.matches) {
+            // Portrait mode
+            text("portrait mode", 100, 500);
+        } else {
+            // Landscape
+            text("landscape mode", 100, 550);
+        }
 })
 
     variable.style('font-weight', weight);
