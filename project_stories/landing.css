@@ -78,8 +78,11 @@ hr {
 }
   /* link styling, resetting to remain white */ 
 a {
-    font-size: 1.2em;
-    text-decoration: none;
+  font-variation-settings: 'opsz' 100;
+  font-weight: 100;
+  font-size: 120%;
+
+  text-decoration: none;
 }
    /* unvisited link */
 a:link {
@@ -114,9 +117,9 @@ a:link {
     text-decoration: none;
 
     border-radius: 1.3em;
-    padding: 1.2em;
-    padding-top: .7em;
-    padding-bottom: .7em;
+    padding: 1.3em;
+    padding-top: .5em;
+    padding-bottom: .5em;
   }
 
   .button:hover {
@@ -135,6 +138,7 @@ a:link {
     width: 100%;
 
     padding-top: 12%;
+    padding-bottom: 12%;
   }
   
   .column {
@@ -146,7 +150,7 @@ a:link {
   }
   
   .item {
-    padding: 1vw;
+    padding: 6%;
 
   }
 
