@@ -143,11 +143,9 @@ a:link {
     small {
         font-size: 380%;
       }
- }
- 
- /* Large devices (laptops/desktops, 992px and up) */
- @media only screen and (min-width: 992px) {
-    small {
-        font-size: 400%;
+      .variable {
+        margin-top: 5%;
+    
       }
  }
+ 
