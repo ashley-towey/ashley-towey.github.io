@@ -134,7 +134,7 @@ a:link {
  /* Small devices (portrait tablets and large phones, 600px and up) */
  @media only screen and (min-width: 600px) {
     small {
-        font-size: 350%;
+        font-size: 400%;
       }
       .instructions {
         bottom: 5%;
@@ -144,10 +144,10 @@ a:link {
  /* Medium devices (landscape tablets, 768px and up) */
  @media only screen and (min-width: 768px) {
     small {
-        font-size: 380%;
+        font-size: 400%;
       }
       .variable {
-        margin-top: 2.5%;
+        margin-top: 5%;
     
       }
  }
