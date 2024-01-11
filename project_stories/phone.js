@@ -79,7 +79,6 @@ function draw() {
     let weight = map(roundedX, 0, 80, 0, 100);
     let aero = map(roundedY, -30, 30, 0, 100);
 
-
     variable.style('font-weight', weight);
     variable.style('font-variation-settings', "'opsz' " + aero);
 
