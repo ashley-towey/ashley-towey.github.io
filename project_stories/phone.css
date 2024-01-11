@@ -23,7 +23,14 @@
   }
 
   small {
-    font-size: 150%;
+    font-size: 300%;
+  }
+
+  /* styling for the main hero text */ 
+  .variable {
+    text-align: center;
+    margin-top: 15vh;
+
   }
 
   /* button styling */ 
