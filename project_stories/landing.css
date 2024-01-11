@@ -8,6 +8,7 @@
 body {
     /* font styling */ 
     font-family: 'Aero-Dynamic', sans-serif;
+    font-variation-settings: 'opsz' 100;
     margin: 0px;
   }
 
