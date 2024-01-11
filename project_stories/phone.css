@@ -136,6 +136,9 @@ a:link {
     small {
         font-size: 350%;
       }
+      .instructions {
+        bottom: 5%;
+      }
  }
  
  /* Medium devices (landscape tablets, 768px and up) */
@@ -144,7 +147,7 @@ a:link {
         font-size: 380%;
       }
       .variable {
-        margin-top: 5%;
+        margin-top: 2.5%;
     
       }
  }
