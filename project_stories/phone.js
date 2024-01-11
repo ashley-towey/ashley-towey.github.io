@@ -84,10 +84,36 @@ function draw() {
 
     if (!permissionGranted) return;
 
-    // // testing text below
+    // // testing text below /////
     // textSize(30);
     // text("Rotation X: " + roundedX, 100, 100);
     text("Rotation Y: " + roundedY, 100, 200);
     text("weight: " + weight, 100, 300);
     text("CDA: "+ aero, 100, 400);
 }
+
+// functions from the google sheets API to process and write the data
+function processData(rows) {
+    let headers = rows[0];
+    let content = document.getElementById('content');
+    rows.shift();
+  
+    rowCounter = round(random(0, rows.length - 1)); // finds a random number that is relevant and displays that information. 
+    console.log(headers);
+  
+    let inputData = rowCounter;
+    let outputData = rows[inputData];
+    
+      // write the information from the google sheet to the html page
+      content.innerHTML += "<h3>" + outputData[14] + "</h3>";
+      content.innerHTML += "<small>" +outputData[15]+"</small>";
+      // content.innerHTML += "<h3><a href=https://what3words.com/" + outputData[16] + ">" + outputData[16] + "</a></h3>";
+      document.getElementById('location-information').innerHTML += "<h3><a href=https://what3words.com/" + outputData[16] + ">" + outputData[16] + "</a></h3>";
+      // background image auto fetches based on the what3words
+      document.body.style.backgroundImage = "url('../project_stories/img/" + outputData[16] + ".png')"; 
+  }
+  
+  //this gets the data from the google sheet
+  fetch(url)
+    .then(response => response.json())
+    .then(data => processData(data.values));
