@@ -86,10 +86,10 @@ function draw() {
 portrait.addEventListener("change", function(e) {
     if(e.matches) {
         // Portrait mode
-        console.log("portrait mode");
+        text("portrait mode");
     } else {
         // Landscape
-        console.log("landscape mode");
+        text("landscape mode");
     }
 })
 
