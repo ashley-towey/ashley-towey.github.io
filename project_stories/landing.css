@@ -172,6 +172,9 @@ a:link {
 
  /* Small devices (portrait tablets and large phones, 600px and up) */
  @media only screen and (min-width: 600px) {
+  h1 {
+    font-size: 300%
+  }
   .column {
     flex: 1
   }
@@ -192,8 +195,24 @@ a:link {
  
  /* Medium devices (landscape tablets, 768px and up) */
  @media only screen and (min-width: 768px) {
+  h1 {
+    font-size: 350%;
+  }
   .column {
     flex: 1
+  }
+  .hero-section {
+    /* background image settings */
+    background-size: 100vw;
+    background-position-y: 100%; /* this is more of a hack than an actual solution */ 
+
+    padding-left: 15vw;
+    padding-right: 15vw;
+    padding-bottom: 5vh;
+    padding-top: 15vh;
+  }
+  .button-area {
+    padding-top: 20vh;
   }
  }
  
