@@ -34,3 +34,17 @@ html, body {
     margin-left: 10%;
     margin-right: 10%;
   }
+
+  /* H3 and SMALL will change the main hero section text */ 
+  h3 {
+    font-size: 10%;
+  }
+
+  small {
+    font-size: 40%;
+    line-height: 5%;
+  }
+
+  a {
+    font-size: 40%;
+  }
