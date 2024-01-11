@@ -214,10 +214,44 @@ a:link {
   .button-area {
     padding-top: 20vh;
   }
+  a.button {
+    font-size: 1.5em;
+  }
  }
  
  /* Large devices (laptops/desktops, 992px and up) */
  @media only screen and (min-width: 992px) {
+  h1 {
+    font-size: 400%;
+  }
+
+  .hero-section {
+    /* background image settings */
+    background-size: 100vw;
+    background-position-y: 100%; /* this is more of a hack than an actual solution */ 
+
+    padding-left: 25vw;
+    padding-right: 25vw;
+    padding-bottom: 5vh;
+    padding-top: 15vh;
+  }
+
+  a.button {
+    font-size: 1.8em;
+  }
+  .button {
+    font-size: 5em;
+    text-decoration: none;
+
+    border-radius: 1.3em;
+    padding: 1.3em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+  }
+  .button-area {
+    padding-top: 25vh;
+    padding-bottom: 10vh;
+  }
 
  }
  
