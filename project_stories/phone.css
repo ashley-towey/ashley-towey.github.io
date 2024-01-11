@@ -141,13 +141,13 @@ a:link {
  /* Medium devices (landscape tablets, 768px and up) */
  @media only screen and (min-width: 768px) {
     small {
-        font-size: 400%;
+        font-size: 380%;
       }
  }
  
  /* Large devices (laptops/desktops, 992px and up) */
  @media only screen and (min-width: 992px) {
     small {
-        font-size: 500%;
+        font-size: 400%;
       }
  }
