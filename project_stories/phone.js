@@ -80,19 +80,6 @@ function draw() {
     let aero = map(roundedY, -30, 30, 0, 100);
 
 
-    // CHANGE the values based on whether the device is in portrait or landscape
-    let portrait = window.matchMedia("(orientation: portrait)");
-
-    portrait.addEventListener("change", function(e) {
-        if(e.matches) {
-            // Portrait mode
-            text("portrait mode", 100, 500);
-        } else {
-            // Landscape
-            text("landscape mode", 100, 550);
-        }
-})
-
     variable.style('font-weight', weight);
     variable.style('font-variation-settings', "'opsz' " + aero);
 
