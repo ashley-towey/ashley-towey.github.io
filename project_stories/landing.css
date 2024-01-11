@@ -79,10 +79,15 @@ hr {
   /* link styling, resetting to remain white */ 
 a {
   font-variation-settings: 'opsz' 100;
-  font-weight: 100;
-  font-size: 120%;
+  font-weight: 60;
+  font-size: 100%;
 
   text-decoration: none;
+}
+
+a.button {
+  font-weight: 100;
+  font-size: 140%;
 }
    /* unvisited link */
 a:link {
@@ -155,8 +160,13 @@ a:link {
   }
 
   .directory-section {
-    margin-left: 15%;
-    margin-right: 15%;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-bottom: 4vh;
+    padding-top: 4vh;
+
+
+    color: black;
   }
   
 
