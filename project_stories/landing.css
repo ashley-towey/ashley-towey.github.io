@@ -8,25 +8,23 @@
 body {
     /* font styling */ 
     font-family: 'Aero-Dynamic', sans-serif;
-    /* font-variation-settings: 'wght' 100; */ 
-    font-variation-settings: 'opsz' 100;
-    color: #0A0A0A;
-
-    margin: 0%;
+    margin: 0px;
   }
 
   .hero-section{
     /* background image settings */
     background-image: url("../project_stories/img/road.jpeg");
-    background-size: 100%;
+    background-size: 100vh;
     background-repeat: no-repeat;
-    background-position: 0px; /* this is more of a hack than an actual solution */ 
+    /* background-position: 0px; /* this is more of a hack than an actual solution */ 
     background-blend-mode: multiply;
     background-color: #494949;
 
-    padding-left: 20vw;
-    padding-right: 20vw;
-    padding-bottom: 20vh;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-bottom: 4vh;
+    padding-top: 4vh;
+
 
     color: white;
   }
@@ -35,10 +33,9 @@ body {
     font-variation-settings: 'opsz' 100;
     font-weight: 100;
     text-align: center;
-    font-size: 4.5em;
+    font-size: 4.5rem;
 
     margin: 0%;
-    padding-top: 20vh;
   }
 
   h2 {
@@ -71,7 +68,7 @@ body {
     font-variation-settings: 'opsz' 100;
     font-weight: 40;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.4em;
 
   }
 
@@ -158,92 +155,34 @@ a:link {
     margin-right: 15%;
   }
   
+
+  
 /* MEDIA Query to change the layout based on which device is being used */ 
 
-  @media only screen and (max-width: 1000px) {
-    body {
-        padding-left: 8vw;
-        padding-right: 8vw;
-
-        /* background image settings */
-        background-image: url("../project_stories/img/road.jpeg");
-        background-size: 110vh;
-        background-repeat: no-repeat;
-        background-position: 40%; /* this is more of a hack than an actual solution */ 
-    }
-    h1 {
-        font-variation-settings: 'opsz' 100;
-        font-weight: 100;
-
-        padding-top: 12vh; 
-        padding-left: 8vw;
-        padding-right: 8vw;
-    }
-    p {
-        font-variation-settings: 'opsz' 100;
-        font-weight: 10;
-    }
-    a {
-        font-size: 1.8em;
-    }
-    .row {
-        padding-top: 5%;
-    }
-    .item {
-        margin: 5%;
-    }
-    .text-content-area {
-        width: 97%;
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+    .column {
+        flex: 1
       }
 
-  }
-  
-  @media screen and (min-width: 1000px) {
-    .column {
-      flex: 1
-    }
-  }
+ }
 
-  /* Phone Media query */
+ /* Small devices (portrait tablets and large phones, 600px and up) */
+ @media only screen and (min-width: 600px) {
 
-  @media only screen and (max-width: 768px) {
-  /* For mobile phones: */
-  body {
-    padding-left: 5vw;
-    padding-right: 5vw;
+ }
+ 
+ /* Medium devices (landscape tablets, 768px and up) */
+ @media only screen and (min-width: 768px) {
 
-    /* background image settings */
-    background-image: url("../project_stories/img/road.jpeg");
-    background-size: 110vh;
-    background-repeat: no-repeat;
-    background-position: 30%; /* this is more of a hack than an actual solution */ 
-}
-h1 {
-    font-variation-settings: 'opsz' 100;
-    font-weight: 100;
-    font-size: 3.5em;
+ }
+ 
+ /* Large devices (laptops/desktops, 992px and up) */
+ @media only screen and (min-width: 992px) {
 
-    padding-top: 8vh; 
-    padding-left: 0vw;
-    padding-right: 0vw;
-}
-p {
-    font-variation-settings: 'opsz' 100;
-    font-weight: 10;
-    font-size: 1em;
-}
-a {
-    font-size: 1.2em;
-}
-.button {
-    padding: 1.5rem;
-    padding-top: .7rem;
-    padding-bottom: .7rem;
-}
-.row {
-    padding-top: 5%;
-}
-.item {
-    margin: 5%;
-}
-}
+ }
+ 
+ /* Extra large devices (large laptops and desktops, 1200px and up) */
+ @media only screen and (min-width: 1200px) {
+
+ } 
