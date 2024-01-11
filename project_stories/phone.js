@@ -75,9 +75,9 @@ function draw() {
     let roundedX = round(rotationX);
     let roundedY = round(rotationY);
 
-    // adding the sliders for the variable font
-    let weight = map(roundedX, -40, 40, 0, 100);
-    let aero = map(roundedY, -80, 0, 0, 100);
+    // mapping the variability from the orientation to the typeface values
+    let weight = map(roundedX, 0, 80, 0, 100);
+    let aero = map(roundedY, -30, 30, 0, 100);
 
 
     // CHANGE the values based on whether the device is in portrait or landscape
