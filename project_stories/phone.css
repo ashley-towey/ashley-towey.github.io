@@ -24,13 +24,13 @@
   }
 
   small {
-    font-size: 280%;
+    font-size: 260%;
   }
 
   /* styling for the main hero text */ 
   .variable {
     text-align: center;
-    margin-top: 10vh;
+    margin-top: 10%;
 
   }
 
@@ -90,7 +90,7 @@
     width: 90%;
     position: absolute;
     left: 5%;
-    bottom: 1%;
+    bottom: 0%;
   }
 
   /* positioning and styling for the location data */ 
