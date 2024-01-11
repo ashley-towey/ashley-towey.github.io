@@ -130,3 +130,24 @@ a:link {
     color: white;
   } 
 
+
+ /* Small devices (portrait tablets and large phones, 600px and up) */
+ @media only screen and (min-width: 600px) {
+    small {
+        font-size: 350%;
+      }
+ }
+ 
+ /* Medium devices (landscape tablets, 768px and up) */
+ @media only screen and (min-width: 768px) {
+    small {
+        font-size: 400%;
+      }
+ }
+ 
+ /* Large devices (laptops/desktops, 992px and up) */
+ @media only screen and (min-width: 992px) {
+    small {
+        font-size: 500%;
+      }
+ }
