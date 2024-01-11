@@ -11,7 +11,7 @@ body {
     margin: 0px;
   }
 
-  .hero-section{
+  .hero-section {
     /* background image settings */
     background-image: url("../project_stories/img/road.jpeg");
     background-size: 100vh;
@@ -33,7 +33,7 @@ body {
     font-variation-settings: 'opsz' 100;
     font-weight: 100;
     text-align: center;
-    font-size: 4.5rem;
+    font-size: 260%;
 
     margin: 0%;
   }
@@ -66,9 +66,9 @@ body {
 
   p {
     font-variation-settings: 'opsz' 100;
-    font-weight: 40;
+    font-weight: 60;
     text-align: center;
-    font-size: 1.4em;
+    font-size: 120%;
 
   }
 
@@ -159,13 +159,6 @@ a:link {
   
 /* MEDIA Query to change the layout based on which device is being used */ 
 
- /* Extra small devices (phones, 600px and down) */
- @media only screen and (max-width: 600px) {
-    .column {
-        flex: 1
-      }
-
- }
 
  /* Small devices (portrait tablets and large phones, 600px and up) */
  @media only screen and (min-width: 600px) {
@@ -174,7 +167,9 @@ a:link {
  
  /* Medium devices (landscape tablets, 768px and up) */
  @media only screen and (min-width: 768px) {
-
+  .column {
+    flex: 1
+  }
  }
  
  /* Large devices (laptops/desktops, 992px and up) */
