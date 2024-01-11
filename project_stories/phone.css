@@ -3,6 +3,16 @@
     src: url(../data/AeroDynamicWeightSlantVF.ttf);
   }
 
+  body {
+    margin: 0px;
+    padding: 5%;
+
+    /* Add the custom font */
+    font-family: 'Aero-Dynamic', Helvetica, sans-serif;
+    font-variation-settings: 'opsz' 100;
+    font-weight: 60;
+  }
+  /*
 html, body {
     margin: auto;
     width: 95%;
@@ -34,9 +44,10 @@ html, body {
     margin-left: 10%;
     margin-right: 10%;
   }
+  */
 
   /* H3 and SMALL will change the main hero section text */ 
-  h3 {
+  /* h3 {
     font-size: 10%;
   }
 
@@ -48,3 +59,4 @@ html, body {
   a {
     font-size: 40%;
   }
+  */
