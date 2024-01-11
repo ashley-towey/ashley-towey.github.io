@@ -31,7 +31,6 @@ body {
   }
 
   h1 {
-    font-variation-settings: 'opsz' 100;
     font-weight: 100;
     text-align: center;
     font-size: 260%;
@@ -40,21 +39,18 @@ body {
   }
 
   h2 {
-    font-variation-settings: 'opsz' 100;
     font-weight: 100;
     text-align: center;
     font-size: 3em;
   }
 
   h3 {
-    font-variation-settings: 'opsz' 100;
     font-weight: 100;
     text-align: center;
     font-size: 2em;
   }
 
   h4 {
-    font-variation-settings: 'opsz' 100;
     font-weight: 60;
     text-align: center;
     font-size: 2em;
@@ -66,7 +62,6 @@ body {
   }
 
   p {
-    font-variation-settings: 'opsz' 100;
     font-weight: 60;
     text-align: center;
     font-size: 120%;
@@ -191,7 +186,7 @@ a:link {
     padding-top: 10vh;
   }
   .button-area {
-    padding-top: 40vh;
+    padding-top: 45vh;
   }
  }
  
