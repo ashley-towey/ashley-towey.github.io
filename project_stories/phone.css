@@ -1,0 +1,36 @@
+@font-face {
+    font-family: Aero-Dynamic;
+    src: url(../data/AeroDynamicWeightSlantVF.ttf);
+  }
+
+html, body {
+    margin: auto;
+    width: 95%;
+    padding: 10px;
+
+    font-family: 'Aero-Dynamic', sans-serif;
+    font-size:100px;
+  }
+  canvas {
+    display: block;
+  }
+  
+  input {
+    display: block;
+  }
+
+  .variable {
+    margin-top: 15%;
+    font-weight: 300;
+    text-align: center;
+    font-size: 160%;
+  }
+
+  p {
+    font-family: Aero-Dynamic, Arial, Helvetica, sans-serif;
+    font-size: large;
+    text-align: center;
+    margin-top: 8%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
