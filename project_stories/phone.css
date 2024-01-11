@@ -137,7 +137,7 @@ a:link {
         font-size: 400%;
       }
       .instructions {
-        bottom: 5%;
+        bottom: 2%;
       }
  }
  
@@ -148,7 +148,9 @@ a:link {
       }
       .variable {
         margin-top: 5%;
-    
+      }
+      .instructions {
+        bottom: 0%;
       }
  }
  
