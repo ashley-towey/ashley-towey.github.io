@@ -111,8 +111,9 @@ function processData(rows) {
       document.getElementById('location-information').innerHTML += "<h3><a href=https://what3words.com/" + outputData[16] + ">" + outputData[16] + "</a></h3>";
       // background image auto fetches based on the what3words
       // below will bring back the background image
-      document.body.style.backgroundImage = "url('../project_stories/img/" + outputData[16] + "jpg')"; 
-  }
+      console.log(outputData[16]);
+      document.body.style.backgroundImage = "url('../project_stories/img/" + outputData[16] + ".jpg')"; 
+    }
   
   //this gets the data from the google sheet
   fetch(url)
