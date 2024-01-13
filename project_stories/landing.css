@@ -165,7 +165,9 @@ a:link {
     color: black;
   }
   
-
+  img {
+    width: 100%;
+  }
   
 /* MEDIA Query to change the layout based on which device is being used */ 
 
