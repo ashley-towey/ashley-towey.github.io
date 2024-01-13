@@ -12,7 +12,7 @@ body {
     font-size:100px;
 
     /* background image styling, not sure it's working */
-    background-size: 190vh;
+    background-size: 200vh;
     background-repeat: no-repeat;
     /* background-position: 0%; /* this is more of a hack than an actual solution */ 
     background-blend-mode: multiply;
@@ -22,18 +22,18 @@ body {
   .variable {
     /* margin-top: 15%;*/
     text-align: center;
-    font-size: 100%;
+    font-size: 7.5vw;
     color: white;
 
     margin-top: 5vw;
-    margin-left: 10vw;
-    margin-right: 10vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
   }
 
   h2 {
     font-variation-settings: 'opsz' 100;
     font-weight: 60;
-    font-size: 30%;
+    font-size: 20%;
     color: white;
     text-align: center;
   }
@@ -55,12 +55,12 @@ body {
     font-weight: 60;
 
     color: white;
-    font-size: 30%;
+    font-size: 20%;
   }
 
   /* This is being used to write the main message */ 
   small {
-    font-size: 90%;
+    font-size: 100%;
     line-height: 6rem;
     /*color: white; */
     margin: 0px;
@@ -118,11 +118,11 @@ a:link {
     width: 30%;
     position: absolute;
     left: 35%;
-    bottom: 20%;
+    bottom: 14%;
   }
 
   .button {
-    font-size: 30%;
+    font-size: 20%;
     font-variation-settings: 'opsz' 100;
     font-weight: 60;
 
@@ -130,14 +130,14 @@ a:link {
     border-color: white;
 
     border-radius: 1.5em;
-    padding: 1rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding: .2rem;
+    padding-top: .7rem;
+    padding-bottom: .7rem;
 
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 70%;
+    width: 50%;
   }
 
   .button:hover {
@@ -152,7 +152,7 @@ a:link {
     width: 30%;
     position: absolute;
     left: 35%;
-    bottom: 12%;
+    bottom: 8%;
   }
 
 
