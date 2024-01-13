@@ -52,9 +52,10 @@ function processData(rows) {
     content.innerHTML += "<p>"+ row[14] +"<p>";
     content.innerHTML += "<h4>"+ row[15] +"</h4>";
     content.innerHTML += "<p><a href=https://what3words.com/" + row[16] + ">" + row[16] + "</a></h3>";
+    content.innerHTML += "<img src='../project_stories/img/"+ row[16] + ".jpg' alt=' " + row[16] + "'>";
     content.innerHTML += "<hr>";
     // TRYING TO ADD AN IMAGE FOR EACH HERE, TRY AGAIN LATER
-    // content.innerHTML.src += "'../project_stories/img/_road.jpeg'";
+    // content.innerHTML.src += "'../project_stories/img/road.jpeg'";
     // document.body.style.backgroundImage = "url('../project_stories/img/" + row[16] + ".png')"; 
     // document.getElementById("landscape").src = "../project_stories/img/_road.jpeg"; 
     
