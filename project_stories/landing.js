@@ -6,7 +6,7 @@
 
 // variables for the google sheets API
 var idNum = '1j8z_HROnw6KDso52nrUP63gJ5D3AJbhbRy9y-MGxVqU';
-var sheet_name = 'Responses_Duplicate';
+var sheet_name = 'Responses';
 var key = "AIzaSyB5b_wv4yQMDoHTCDDZydcbYxLZ5ISrGbQ"
 var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + idNum + '/values/' + sheet_name + '?alt=json&key=' + key;
 
@@ -42,23 +42,32 @@ function draw() {
 // functions from the google sheets API to process and write the data
 function processData(rows) {
   let headers = rows[0];
-  let content = document.getElementById('recommendation');
+  let content = 
 
   rows.shift();
   
   rows.forEach(row => {
 
-    // write the content to the page
-    content.innerHTML += "<p>"+ row[14] +"<p>";
-    content.innerHTML += "<h4>"+ row[15] +"</h4>";
-    content.innerHTML += "<p><a href=https://what3words.com/" + row[16] + ">" + row[16] + "</a></h3>";
-    content.innerHTML += "<img src='../project_stories/img/"+ row[16] + ".jpg' alt=' " + row[16] + "'>";
-    content.innerHTML += "<hr>";
-    // TRYING TO ADD AN IMAGE FOR EACH HERE, TRY AGAIN LATER
-    // content.innerHTML.src += "'../project_stories/img/road.jpeg'";
-    // document.body.style.backgroundImage = "url('../project_stories/img/" + row[16] + ".png')"; 
-    // document.getElementById("landscape").src = "../project_stories/img/_road.jpeg"; 
+    // recommendations
+    document.getElementById('recommendation').innerHTML += "<p>Recommendation<p>";
+    document.getElementById('recommendation').innerHTML += "<h4>"+ row[1] +"</h4>";
+    document.getElementById('recommendation').innerHTML += "<img src='../project_stories/img/"+ row[2] + ".jpg' alt=' " + row[2] + "'>";
+    document.getElementById('recommendation').innerHTML += "<p><a href=https://what3words.com/" + row[2] + ">" + row[2] + "</a></h3>";
+    document.getElementById('recommendation').innerHTML += "<hr>";
+
+    // encouragements
+    document.getElementById('encouragement').innerHTML += "<p>Encouragement<p>";
+    document.getElementById('encouragement').innerHTML += "<h4>"+ row[3] +"</h4>";
+    document.getElementById('encouragement').innerHTML += "<img src='../project_stories/img/"+ row[4] + ".jpg' alt=' " + row[4] + "'>";
+    document.getElementById('encouragement').innerHTML += "<p><a href=https://what3words.com/" + row[4] + ">" + row[4] + "</a></h3>";
+    document.getElementById('encouragement').innerHTML += "<hr>";
     
+    // story 
+    document.getElementById('story').innerHTML += "<p>Story<p>";
+    document.getElementById('story').innerHTML += "<h4>"+ row[5] +"</h4>";
+    document.getElementById('story').innerHTML += "<img src='../project_stories/img/"+ row[6] + ".jpg' alt=' " + row[6] + "'>";
+    document.getElementById('story').innerHTML += "<p><a href=https://what3words.com/" + row[6] + ">" + row[6] + "</a></h3>";
+    document.getElementById('story').innerHTML += "<hr>";
   });
 }
 

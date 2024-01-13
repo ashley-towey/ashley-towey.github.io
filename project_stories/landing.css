@@ -26,7 +26,6 @@ body {
     padding-bottom: 4vh;
     padding-top: 4vh;
 
-
     color: white;
   }
 
@@ -139,7 +138,7 @@ a:link {
     flex-wrap: wrap;
     width: 100%;
 
-    padding-top: 12%;
+    /* padding-top: 12%; */
     padding-bottom: 12%;
   }
   
@@ -192,8 +191,9 @@ a:link {
     padding-top: 10vh;
   }
   .button-area {
-    padding-top: 40vh;
+    padding-top: 50vh;
   }
+
  }
  
  /* Medium devices (landscape tablets, 768px and up) */
@@ -215,7 +215,7 @@ a:link {
     padding-top: 15vh;
   }
   .button-area {
-    padding-top: 20vh;
+    padding-top: 35vh;
   }
   a.button {
     font-size: 1.5em;
@@ -252,7 +252,7 @@ a:link {
     padding-bottom: .5em;
   }
   .button-area {
-    padding-top: 25vh;
+    padding-top: 35vh;
     padding-bottom: 10vh;
   }
 
