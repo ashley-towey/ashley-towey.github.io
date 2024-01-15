@@ -48,6 +48,10 @@ function processData(rows) {
   
   rows.forEach(row => {
 
+    if (!row[1] || !row[2] || !row[3] || !row[4] || !row[5] || !row[6]) {
+      return;
+    }
+
     // recommendations
     document.getElementById('recommendation').innerHTML += "<p>Recommendation<p>";
     document.getElementById('recommendation').innerHTML += "<h4>"+ row[1] +"</h4>";
