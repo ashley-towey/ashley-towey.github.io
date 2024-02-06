@@ -1,0 +1,39 @@
+@font-face {
+    font-family: team;
+    src: url(../data/2-5DVF.ttf);
+  }
+
+body {
+
+    margin-top: 5%;
+
+    font-family:'Courier New', Courier, monospace;
+    background-color:#414b9a;
+    font-family: team, 'Courier New', Courier, monospace;
+
+}
+
+.variable {
+    color: #e7411c;
+
+    font-size: 25em;
+    margin: auto;
+    width: 80%;
+    padding: 2%;
+    text-align: center;
+
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.center{
+    margin: auto;
+    width: 80%;
+    text-align: center;
+}
+
+h1 {
+    font-family: "Spline Sans Mono", sans-serif;
+    color:white;
+    font-size: 4em;
+}
