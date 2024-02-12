@@ -49,6 +49,37 @@ div.hover-item span.description {
   }
 
 
+/* SLIDESHOW Code below */ 
+.slideshow-container {
+    position: relative;
+    width: auto;
+    height: 100vh;
+  }.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }.slide:first-child {
+    display: block;
+  }.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    cursor: pointer;
+  }.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+
 /* Flexbox styling test */
 .image-wrapper {
     margin: 0vw;
@@ -83,3 +114,4 @@ div.hover-item span.description {
       flex: 1
     }
   }
+
