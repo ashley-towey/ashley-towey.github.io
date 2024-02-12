@@ -26,6 +26,15 @@ img {
     width: 100%;
 }
 
+/* 
+p {
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+}
+*/
+
 /* code that makes the hover turn into a short description */ 
 div.hover-item span.description {
     display: none;
