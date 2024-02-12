@@ -23,9 +23,8 @@ body {
 }
 
 img {
-    max-width: 100%;
-    height: auto;
-  }
+    width: 100%;
+}
 
 /* code that makes the hover turn into a short description */ 
 div.hover-item span.description {
