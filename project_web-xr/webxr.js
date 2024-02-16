@@ -1,24 +1,35 @@
-// code that runs the SLIDESHOW back and forth functionality
-let slideIndex = 1;
-showSlides(slideIndex);function plusSlide(n) {
-  showSlides(slideIndex += n);
-}
+var imgs = document.querySelectorAll('.slider img');
+var dots = document.querySelectorAll('.dot');
+var currentImg = 0; // index of the first image 
+const interval = 6000; // duration(speed) of the slide
 
-function showSlides(n) {
-  let i;
-  const slides = document.getElementsByClassName("slide");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
+function changeSlide(n) {
+  for (var i = 0; i < imgs.length; i++) { // reset
+    imgs[i].style.opacity = 0;
+    dots[i].className = dots[i].className.replace(' active', '');
   }
-  slides[slideIndex-1].style.display = "block";
+
+  if (n!= undefined) {
+    currentImg = n;
+  }
+  else {
+    currentImg = (currentImg + 1 > imgs.length-1) ? 0 : currentImg + 1;
+
+  }
+
+  console.log(n);
+
+  imgs[currentImg].style.opacity = 1;
+  dots[currentImg].className += ' active';
 }
 
-function prevSlide() {
-  plusSlide(-1);
-}
+var timer = setInterval(changeSlide, interval);
 
-function nextSlide() {
-  plusSlide(1);
+// currentImg = (currentImg + 1) % imgs.length; // update the index number
+
+
+if (n != undefined) {
+    clearInterval(timer);
+    timer = setInterval(changeSlide, interval);
+    currentImg = n;
 }

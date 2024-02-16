@@ -29,21 +29,19 @@
     </div>
 -->
 
-
-<!-- Adding a SLIDESHOW -->
-<div class="slideshow-container">
-    <div class="slide">
-      <img src="../img/velocafe/velocafe-3.jpg" alt="Image 1">
-    </div>
-    <div class="slide">
-      <img src="../img/stories/homepage-2.jpg" alt="Image 2">
-    </div>
-    <div class="slide">
-      <img src="../img/SLATE/slate-3.jpg" alt="Image 3">
-    </div>
-    <a class="prev" onclick="prevSlide()">&#10094;</a>
-    <a class="next" onclick="nextSlide()">&#10095;</a>
-  </div>
+<!-- Slideshow Code -->
+<div class="slider">
+  <img id="img-1" src="../img/velocafe/velocafe-3.jpg" alt="Image 1"/>
+  <img id="img-2" src="../img/networked-beings/networked-show-2.jpg" alt="Image 2"/>
+  <img id="img-3" src="../img/tragic-everyday/tragic-everyday-2.jpg" alt="Image 3"/>
+</div>
+<div class="navigation-button">
+  <p onclick="changeSlide(moveLeft)">LEFT</p>
+  <span class="dot active" onclick="changeSlide(0)"></span>
+  <span class="dot" onclick="changeSlide(1)"></span>
+  <span class="dot" onclick="changeSlide(2)"></span>
+  <p onclick="changeSlide(n+1)">RIGHT</p>
+</div>
 
 
     <!-- #1 #1 #1 First row of images -->
