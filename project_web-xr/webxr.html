@@ -12,22 +12,19 @@
 </head>
 <body>
 
-<!--
-    <div class="header">
-        <h1>AR Experiencez</h1>
-        <a href="https://www.w3schools.com/" target="_blank">My favourite website</a>
-        
-        
-        <div id="line1">
-                  <span id="a">this is sick</span><span id="b">this is awesome</span>
-          </div>
+      <!-- Navigation bar -->
+      <div class="title-area">
+        <a href="..." class="page-title">Ashley Towey</a>
+      </div>
 
-        <div id="line2">
-            <span id="a">this is fun</span><span id="b">this is boring</span>
-        </div>
+      <nav class="nav-bar">
+        <ul>        
+          <li class="nav-item"><a href="pages/playground.html" class="link-item">Portfolio</a></li>
+          <li class="nav-item"><a href="pages/contact.html" class="link-item">Contact</a></li>
+        </ul>
+      </nav>
+       <!-- divide before the body section of the website -->
 
-    </div>
--->
 
 <!-- Slideshow Code -->
 <!-- Slideshow container -->
@@ -53,10 +50,12 @@
   </div>
 
   <!-- Next and previous buttons -->
-  <a class="prev" onclick="plusSlides(-1)">[←]LEFT</a>
-  <a class="next" onclick="plusSlides(1)">RIGHT[→]</a>
+  <div>
+    <a class="prev" onclick="plusSlides(-1)">[←]LEFT</a>
+    <a class="next" onclick="plusSlides(1)">RIGHT[→]</a>
+  </div>    
 </div>
-<br>
+
 
 <!-- The dots/circles -->
 <!-- <div style="text-align:center">
@@ -75,7 +74,7 @@
 
                 <div class="hover-item">
                     <img class="img-border" src="../img/velocafe/velocafe-3.jpg" alt="early typography designs writing the word peach twice">
-                    <span class="title">Velocafe</span>
+                    <span class="title">Velocafe<br><br></span>
                     <span class="description">
                         Reimagining our interaction with the cycling cafe across computational visuals and designed ephemera. 
                     </span>
@@ -88,9 +87,9 @@
 
                 <div class="hover-item">
                     <img class="img-border" src="../img/stories/homepage-2.jpg" alt="early typography designs writing the word peach twice">
-                    <span class="title">Stories for the Road</span>
+                    <span class="title">Stories for the Road<br><br></span>
                     <span class="description">
-                        A digital service which explores the possible ways in which we could use technology to foster community within cycling. 
+                      A digital service exploring the possible ways to use technology to foster community in cycling. 
                     </span>
                 </div>
 
@@ -101,7 +100,7 @@
 
                 <div class="hover-item">
                     <img class="img-border" src="../img/SLATE/slate-box-1.jpg" alt="early typography designs writing the word peach twice">
-                    <span class="title">SLATE</span>
+                    <span class="title">SLATE<br><br></span>
                     <span class="description">
                         A set of accessible products for children and young adults with learning disabilities
                     </span>
@@ -110,7 +109,6 @@
             </div>
           </div>
         </div>
-      </div>
 
     <!-- #2 #2 #2 Second row of images -->
     <div class='second-row'> 
@@ -120,7 +118,7 @@
 
                 <div class="hover-item ">
                     <img class="img-border" src="../img/velocafe/velocafe-3.jpg" alt="early typography designs writing the word peach twice">
-                    <span class="title">Velocafe <br></span>
+                    <span class="title">Velocafe<br><br></span>
                     <span class="description">
                         Reimagining our interaction with the cycling cafe across computational visuals and designed ephemera. 
                     </span>
@@ -133,9 +131,9 @@
 
                 <div class="hover-item">
                     <img class="img-border" src="../img/stories/homepage-2.jpg" alt="early typography designs writing the word peach twice">
-                    <span class="title">Stories for the Road</span>
+                    <span class="title">Stories for the Road<br><br></span>
                     <span class="description">
-                        A digital service which explores the possible ways in which we could use technology to foster community within cycling. 
+                        A digital service exploring the possible ways to use technology to foster community in cycling. 
                     </span>
                 </div>
 
@@ -146,7 +144,7 @@
 
                 <div class="hover-item">
                     <img class="img-border" src="../img/SLATE/slate-box-1.jpg" alt="early typography designs writing the word peach twice">
-                    <span class="title">SLATE</span>
+                    <span class="title">SLATE<br><br></span>
                     <span class="description">
                         A set of accessible products for children and young adults with learning disabilities
                     </span>
@@ -156,6 +154,47 @@
           </div>
         </div>
       </div>
+
+    </div><!-- Image Wrapper DIV ***molto importante*** -->
+
+  <!-- Footer Section -->
+  <footer>
+    <!-- Footer 3 column flexbox layout -->
+    <div class='image-wrapper'>
+      <div class='row'>
+        <div class='column'>
+          <div class='item'>
+
+            <h2><a href="pages/contact.html" class="footer-title">Get in touch</a></h2>
+            <a href="mailto:toweyashley@yahoo.co.uk" target="_blank" class="footer-item">Email [→]</a>
+            <br>
+            <a href="https://www.instagram.com/echelon__design/" target="_blank" class="footer-item">Instagram [→]</a>
+            <br>
+            <a href="https://www.linkedin.com/in/ashley-towey/" target="_blank" class="footer-item">Linkedin [→]</a>
+
+          </div>
+        </div>
+        <div class='column'>
+          <div class='item'>
+
+            <!-- BLANK Middle Section -->
+
+          </div>
+        </div>
+        <div class='column'>
+          <div class='item footer-right'>
+
+            <h2><a href="pages/playground.html" class="footer-title">Navigation</a></h2>
+            <li><a href="pages/creative-computing.html" class="footer-item">Portfolio</a></li>
+            <li><a href="pages/renders.html" class="footer-item">Contact</a></li>  
+            <li><a href="pages/renders.html" class="footer-item">[↑] Back to top</a></li>  
+
+          </div>
+        </div>
+      </div>
+
+      
+  </footer>
 
 
 </body>
