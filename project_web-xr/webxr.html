@@ -18,9 +18,18 @@
       </div>
 
       <nav class="nav-bar">
-        <ul>        
-          <li class="nav-item"><a href="pages/playground.html" class="link-item">Portfolio</a></li>
-          <li class="nav-item"><a href="pages/contact.html" class="link-item">Contact</a></li>
+        <ul>  
+          <div class="hover-link">
+            <li class="nav-portfolio"><a href="pages/playground.html" class="link-item display">Portfolio</a></li>
+            <li class="nav-portfolio"><a href="pages/playground.html" class="link-item on-hover">[Portfolio]</a></li>
+          </div> 
+          
+          <div class="hover-link">
+            <li class="nav-contact"><a href="pages/contact.html" class="link-item display">Contact</a></li>
+            <li class="nav-contact"><a href="pages/contact.html" class="link-item on-hover">[Contact]</a></li>
+
+          </div>
+
         </ul>
       </nav>
        <!-- divide before the body section of the website -->
@@ -50,10 +59,15 @@
   </div>
 
   <!-- Next and previous buttons -->
-  <div>
-    <a class="prev" onclick="plusSlides(-1)">[←]LEFT</a>
-    <a class="next" onclick="plusSlides(1)">RIGHT[→]</a>
+  <div class="hover-link">
+    <a class="prev display" onclick="plusSlides(-1)">[←]LEFT</a>
+    <a class="prev on-hover" onclick="plusSlides(-1)">[↙︎]LEFT</a>
   </div>    
+  <div class="hover-link">
+    <a class="next display" onclick="plusSlides(1)">RIGHT[→]</a>
+    <a class="next on-hover" onclick="plusSlides(1)">RIGHT[↗︎]</a>
+  </div>
+
 </div>
 
 
@@ -166,11 +180,24 @@
           <div class='item'>
 
             <h2><a href="pages/contact.html" class="footer-title">Get in touch</a></h2>
-            <a href="mailto:toweyashley@yahoo.co.uk" target="_blank" class="footer-item">Email [→]</a>
-            <br>
-            <a href="https://www.instagram.com/echelon__design/" target="_blank" class="footer-item">Instagram [→]</a>
-            <br>
-            <a href="https://www.linkedin.com/in/ashley-towey/" target="_blank" class="footer-item">Linkedin [→]</a>
+
+              <div class="hover-link">
+                <a href="mailto:toweyashley@yahoo.co.uk" target="_blank" class="footer-item display">Email [→]</a>
+                <a href="mailto:toweyashley@yahoo.co.uk" target="_blank" class="footer-item on-hover">Email [↗︎]</a>
+                <br>
+              </div>
+
+              <div class="hover-link">
+                <a href="https://www.instagram.com/echelon__design/" target="_blank" class="footer-item display">Instagram [→]</a>
+                <a href="https://www.instagram.com/echelon__design/" target="_blank" class="footer-item on-hover">Instagram [↗︎]</a>
+                <br>
+              </div>
+
+              <div class="hover-link">
+                <a href="https://www.linkedin.com/in/ashley-towey/" target="_blank" class="footer-item display">Linkedin [→]</a>
+                <a href="https://www.linkedin.com/in/ashley-towey/" target="_blank" class="footer-item on-hover">Linkedin [↗︎]</a>
+
+              </div>
 
           </div>
         </div>
@@ -185,9 +212,15 @@
           <div class='item footer-right'>
 
             <h2><a href="pages/playground.html" class="footer-title">Navigation</a></h2>
-            <li><a href="pages/creative-computing.html" class="footer-item">Portfolio</a></li>
-            <li><a href="pages/renders.html" class="footer-item">Contact</a></li>  
-            <li><a href="pages/renders.html" class="footer-item">[↑] Back to top</a></li>  
+            <a href="pages/creative-computing.html" class="footer-item">Portfolio</a>
+            <br>
+            <a href="pages/renders.html" class="footer-item">Contact</a>
+            <br>
+
+            <div class="hover-link">
+              <a href="pages/renders.html" class="footer-item display">[↖︎] Back to top</a> 
+              <a href="pages/renders.html" class="footer-item on-hover">[↑] Back to top</a>
+            </div>
 
           </div>
         </div>

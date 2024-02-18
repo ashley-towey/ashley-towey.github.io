@@ -32,11 +32,19 @@ ul {
   font-size: 16px;
 }
 
-li.nav-item{
+li.nav-portfolio{
   padding-left: 3vw;
   display: inline;
   color: #f2f2f2;
-  
+  top: 16px;
+}
+
+li.nav-contact{
+  padding-left: 3vw;
+  display: inline;
+  color: #f2f2f2;
+  top: 16px;
+  right: 500px;
 }
 
 a.link-item {
@@ -61,31 +69,6 @@ li {
   list-style-type: none;
 }
 
-/* code that makes the hover turn into a short description */ 
-div.hover-item span.description {
-  display: none;
-}
-
-div.hover-item:hover span.title {
-  display: none;
-}
-
-div.hover-item:hover span.description {
-  display: inline;
-}
-
-/* On hover change buttons arrow direction */ 
-div.hover-items span.description {
-  display: none;
-}
-
-div.hover-item:hover span.title {
-  display: none;
-}
-
-div.hover-item:hover span.description {
-  display: inline;
-}
 
 /* Slideshow CODE */
 .slideshow-container {
@@ -132,9 +115,9 @@ div.hover-item:hover span.description {
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
+/* .prev:hover, .next:hover {
   background-color: rgba(0,0,0,0.8);
-}
+} */
 
 /* Caption text */
 .text {
@@ -202,7 +185,7 @@ a.footer-item {
   text-transform:uppercase;
   color: black;
   text-decoration: none;
-  line-height: 1.5em;
+  line-height: 1.8em;
   font-weight: 500;
 }
 
@@ -264,3 +247,46 @@ a.footer-item {
   }
 }
 
+
+
+/*** VERY UNTIDY WAY OF DOING BUTTONS THAT CHANGE BASED ON HOVER ***/
+/*** DON'T PLACE ANYTHING ELSE BELOW THIS POINT ***/
+
+/* code that makes the hover turn into a short description */ 
+div.hover-item span.description {
+  display: none;
+}
+
+div.hover-item:hover span.title {
+  display: none;
+}
+
+div.hover-item:hover span.description {
+  display: inline;
+}
+
+/* LEFT On hover change buttons arrow direction */ 
+div.hover-link a.on-hover {
+  display: none;
+  }
+
+  div.hover-link:hover a.display {
+    display: none;
+  }
+
+  div.hover-link:hover a.on-hover {
+    display: inline;
+  }
+
+  /* Nav-bar hover */ 
+div.hover-link li.nav-item a.on-hover {
+  display: none;
+  }
+
+  div.hover-link:hover li.nav-item a.display {
+    display: none;
+  }
+
+  div.hover-link:hover li.nav-item a.on-hover {
+    display: inline;
+  }
