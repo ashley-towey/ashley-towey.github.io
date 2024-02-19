@@ -64,6 +64,10 @@ a.link-item {
 
 /* */
 
+a {
+  text-decoration: none;
+  color: black;
+}
 
 /* Slideshow CODE */
 .slideshow-container {
