@@ -4,13 +4,13 @@
   </head>
   <body>
     <a-scene>
-        <a-entity rotation="0 0 0">
-            <a-box position="-2 .5 -3" rotation="0 45 0" color="#4f2776"></a-box>
+        <a-entity>
+            <!-- <a-box position="-2 .5 -3" rotation="0 45 0" color="#4f2776"></a-box> -->
             <a-sphere position="0 1.25 -5" radius="1.25" color="#dc4476"></a-sphere>
-            <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#f5b5d0"></a-cylinder>
+            <a-cylinder animation="property:rotation; to: 0 0 360; loop: true; duration: 5000;" position="1 0.75 -3" radius="0.5" height="1.5" color="#f5b5d0"></a-cylinder>
             <a-plane position="0 0 -4" rotation="-90 0 0" width="8" height="8" color="#f08237"></a-plane>
             <a-entity light="color: #fff; intensity: 1.5" position="-1 2 2"></a-entity>
-            <!-- <a-ring color="#4f2776" radius-inner="1" radius-outer="2"></a-ring> -->
+            <a-torus animation="property:rotation; to: 0 360 0; loop: true; duration: 5000;" color="#43A367" position="-2 1.5 -2" arc="360" radius="1" radius-tubular="0.15"></a-torus>
         </a-entity>
       <!-- CAMERA -->
       <a-camera fov="80" position="0 4 5" rotation="0 0 100"></a-camera>
