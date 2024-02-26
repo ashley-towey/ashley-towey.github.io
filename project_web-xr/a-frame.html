@@ -35,7 +35,7 @@
              position="0.5 1.5 -0.5"
              
              animation__mouseenter="property: position; to: 0 1.5 0; startEvents: mouseenter; dur: 500";
-             animation__mouseleave="property: position; to: 0 1.5 0; startEvents: mouseleave; dur: 500";>
+             animation__mouseleave="property: position; to: 0.5 1.5 -0.5; startEvents: mouseleave; dur: 500";>
           </a-entity>
 
           <a-entity
@@ -44,17 +44,22 @@
             position="0 2.5 -1"
           
             animation__mouseenter="property: position; to: 0 2.5 0; startEvents: mouseenter; dur: 500";
-            animation__mouseleave="property: position; to: 0 2.5 0; startEvents: mouseleave; dur: 500";>
+            animation__mouseleave="property: position; to: 0 2.5 -1; startEvents: mouseleave; dur: 500";>
           </a-entity>
   
       <!-- Scene Settings -->
+      <!-- Spotlight -->
       <a-entity position="-2.2 5 4">
-        <a-light color="#fff" type="spot" intensity=".7" target="#light-target" angle="30" penumbra="0.6" castShadow="true"        ></a-light>
+        <a-light color="#fff" type="spot" intensity=".9" target="#light-target" angle="30" penumbra="1" castShadow="true"        ></a-light>
       </a-entity>
+      <!-- Ambient Lighting -->
+      <a-entity light="type: directional; color: #c19abc; intensity: .5" position="-0.5 1 1"></a-entity>
 
-      <a-camera position="0 4 10">
-        <a-cursor></a-cursor>
-      </a-camera>
+      <a-entity position="0 3 8" rotation="-30 0 0">
+        <a-camera fov="50">
+          <a-cursor></a-cursor>
+        </a-camera>
+      </a-entity>
 
     </a-scene>
 
