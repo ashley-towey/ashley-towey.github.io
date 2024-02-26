@@ -35,14 +35,14 @@
               >
             </a-sphere>
 
-            <a-cylinder animation="property:rotation; to: 0 0 360; loop: true; duration: 5000;" position="2 1.5 -3" radius="1" height="1.5"
+            <a-box animation="property:rotation; to: 0 0 360; loop: true; duration: 20000;" position="2 1.5 -3" radius="1" height="1.5"
             material="
             src:#clay-col;
             normalMap:#clay-nrm;
             "
-            ></a-cylinder>
+            ></a-box>
+
             <a-plane position="0 0 -4" rotation="-90 0 0" width="8" height="8" color="#f08237"></a-plane>
-            <a-entity light="color: #fff; intensity: 1.5" position="-1 2 2"></a-entity>
             <a-torus 
             animation="property:rotation; to: 0 360 0; loop: true; duration: 5000;" 
             position="-2 1.5 -2" 
@@ -58,9 +58,15 @@
             ">
           </a-torus>
         </a-entity>
-      <!-- CAMERA -->
+      <!-- Scene Settings -->
+      <a-light
+      type="";
+      >  
+      </a-light>
+
       <a-camera fov="80" position="0 4 5" rotation="0 0 100"></a-camera>
       <a-sky color="#ECECEC"></a-sky>
+
     </a-scene>
   </body>
 </html>
