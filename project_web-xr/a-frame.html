@@ -3,14 +3,60 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   </head>
   <body>
-    <a-scene>
+
+    <a-scene fog="type: linear; color: #000">
+      <!-- Asset Management -->
+      <a-assets>
+        <img id="copper-texture" src="../img/web-xr/Copper_Color.png">
+        <img id="copper-normals" src="../img/web-xr/Copper_Normals.png">
+
+        <!-- tarp texture -->
+        <img id="tarp-col" src="../img/web-xr/Tarp_Col.jpg">
+        <img id="tarp-nrm" src="../img/web-xr/Tarp_Nrm.jpg">
+
+        <!-- clay textures -->
+        <img id="clay-col" src="../img/web-xr/Clay-col Large.jpeg">
+        <img id="clay-nrm" src="../img/web-xr/Clay_nrm Large.jpeg">
+
+
+      </a-assets>
+
         <a-entity>
             <!-- <a-box position="-2 .5 -3" rotation="0 45 0" color="#4f2776"></a-box> -->
-            <a-sphere position="0 1.25 -5" radius="1.25" color="#dc4476"></a-sphere>
-            <a-cylinder animation="property:rotation; to: 0 0 360; loop: true; duration: 5000;" position="1 0.75 -3" radius="0.5" height="1.5" color="#f5b5d0"></a-cylinder>
+            <a-sphere 
+              position="0 1.25 -5" 
+              radius="1.25" 
+              material="
+              repeat: .5 .5;
+              src:#copper-texture;
+              normalMap:#copper-normals;
+              fog: true;
+              "
+              >
+            </a-sphere>
+
+            <a-cylinder animation="property:rotation; to: 0 0 360; loop: true; duration: 5000;" position="2 1.5 -3" radius="1" height="1.5"
+            material="
+            src:#clay-col;
+            normalMap:#clay-nrm;
+            "
+            ></a-cylinder>
             <a-plane position="0 0 -4" rotation="-90 0 0" width="8" height="8" color="#f08237"></a-plane>
             <a-entity light="color: #fff; intensity: 1.5" position="-1 2 2"></a-entity>
-            <a-torus animation="property:rotation; to: 0 360 0; loop: true; duration: 5000;" color="#43A367" position="-2 1.5 -2" arc="360" radius="1" radius-tubular="0.15"></a-torus>
+            <a-torus 
+            animation="property:rotation; to: 0 360 0; loop: true; duration: 5000;" 
+            position="-2 1.5 -2" 
+            arc="360" 
+            radius="1" 
+            radius-tubular="0.25"
+            material=
+            "
+            repeat: 1 1;
+            src:#tarp-col;
+            normalMap:#tarp-nrm;
+            fog: true;
+            ">
+          </a-torus>
         </a-entity>
       <!-- CAMERA -->
       <a-camera fov="80" position="0 4 5" rotation="0 0 100"></a-camera>
