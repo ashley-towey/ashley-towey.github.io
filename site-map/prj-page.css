@@ -1,0 +1,111 @@
+/* Place in your CSS file at the top of the document */
+
+@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Spline Sans Mono', monospace;
+  background-color: #f2f2f2;
+  color: #1c1c1c;
+  margin: 0%;
+  font-size: 15px;
+}
+
+/* Nav-bar styling */
+.title-area {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 9999;
+    padding: 16px;
+  }
+  
+  .nav-area {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 9999;
+    padding: 16px;
+  }
+  
+  .portfolio-area{
+    position: absolute;
+    right: 130px;
+  }
+  
+  .contact-area {
+    position: absolute;
+    right: 16px;
+  }
+  
+  .page-title {
+    color: #ffffff;
+    font-weight: 900;
+    text-decoration: none;
+    font-size: 23px;
+  }
+  
+  .page-title:hover {
+    color: #f2f2f2;
+  }
+  
+  a.link-item {
+    color: white;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 18px;
+    text-transform: uppercase;
+  
+  }
+  /* */
+
+  /* Hero image section styling */
+  .mySlides img {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+/*** VERY UNTIDY WAY OF DOING BUTTONS THAT CHANGE BASED ON HOVER ***/
+/*** DON'T PLACE ANYTHING ELSE BELOW THIS POINT ***/
+
+/* code that makes the hover turn into a short description */ 
+div.hover-item span.description {
+  display: none;
+}
+
+div.hover-item:hover span.title {
+  display: none;
+}
+
+div.hover-item:hover span.description {
+  display: inline;
+}
+
+/* LEFT On hover change buttons arrow direction */ 
+div.hover-link a.on-hover {
+  display: none;
+  }
+
+  div.hover-link:hover a.display {
+    display: none;
+  }
+
+  div.hover-link:hover a.on-hover {
+    display: inline;
+  }
+
+  /* Nav-bar hover */ 
+div.hover-link li.nav-item a.on-hover {
+  display: none;
+  }
+
+  div.hover-link:hover li.nav-item a.display {
+    display: none;
+  }
+
+  div.hover-link:hover li.nav-item a.on-hover {
+    display: inline;
+  }
