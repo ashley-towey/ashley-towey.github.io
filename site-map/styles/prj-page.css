@@ -1,0 +1,230 @@
+/* Place in your CSS file at the top of the document */
+
+@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Spline Sans Mono', monospace;
+  background-color: #f2f2f2;
+  color: #1c1c1c;
+  margin: 0%;
+  font-size: 15px;
+}
+/* h2 is the main size for titles and headers */
+h2 {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 26px;
+}
+
+/* h4 is the small title which appears above text */ 
+h4 {
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+/* adding padding around the hero quote */
+.hero-quote {
+  padding-right: 15vw;
+  padding-left: 15vw;
+  margin-top: 0px;
+}
+/* gif description spacing */ 
+.gif-description {
+  padding-top: 0px;
+  margin-top: 10px;
+}
+/* to be included in divs to send the 2nd element right */ 
+.send-right {
+  text-align: right;
+}
+
+/* constrain full width image */ 
+.fullwidth-image {
+  height: 70vh;
+  object-fit: cover;
+}
+.lethaby-img {
+  object-position: top 75% right 50%;
+}
+/* add some padding above the video */ 
+.video-margin {
+  margin-top: 16px;
+}
+
+ul.big-text {
+  list-style-type: none; /* Remove bullets */
+  text-transform: uppercase;
+
+  font-weight: 900; /* Heavier Weight */ 
+  font-size: 26px; /* Bigger text */ 
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+/* Nav-bar styling */
+.title-area {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 9999;
+    padding: 16px;
+  }
+  
+  .nav-area {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 9999;
+    padding: 16px;
+  }
+  
+  .portfolio-area{
+    position: absolute;
+    right: 130px;
+  }
+  
+  .contact-area {
+    position: absolute;
+    right: 16px;
+  }
+  
+  .page-title {
+    color: #ffffff;
+    font-weight: 900;
+    text-decoration: none;
+    font-size: 23px;
+  }
+  
+  .page-title:hover {
+    color: #f2f2f2;
+  }
+  
+  a.link-item {
+    color: white;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 18px;
+    text-transform: uppercase;
+  
+  }
+  /* */
+
+  /* Hero image section styling */
+  .mySlides img {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+/* Footer Styling */ 
+footer {
+  background-color: #dfdfdf;
+}
+
+.footer-right {
+  text-align: right;
+}
+
+a.footer-item {
+  text-transform:uppercase;
+  color: black;
+  text-decoration: none;
+  line-height: 1.8em;
+  font-weight: 500;
+}
+
+.footer-title {
+  color: black;
+  font-weight: 300;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* This just contains the main hero image of the page */
+.slideshow-container {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+/* Flexbox styling test */
+.image-wrapper {
+  margin: 0vw;
+  padding-right: 8px;
+  padding-left: 8px;
+  padding-bottom: 16px;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.item {
+  padding-top: 0px;
+
+}
+
+img {
+  width: 100%;
+}
+
+video {
+  width: 100%;
+}
+
+@media only screen and (max-width: 1000px) {
+  .text-content-area {
+    width: 97%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .column {
+    flex: 1
+  }
+}
+
+/*** VERY UNTIDY WAY OF DOING BUTTONS THAT CHANGE BASED ON HOVER ***/
+/*** DON'T PLACE ANYTHING ELSE BELOW THIS POINT ***/
+
+/* LEFT On hover change buttons arrow direction */ 
+div.hover-link a.on-hover {
+  display: none;
+  }
+
+  div.hover-link:hover a.display {
+    display: none;
+  }
+
+  div.hover-link:hover a.on-hover {
+    display: inline;
+  }
+
+  /* Nav-bar hover */ 
+div.hover-link li.nav-item a.on-hover {
+  display: none;
+  }
+
+  div.hover-link:hover li.nav-item a.display {
+    display: none;
+  }
+
+  div.hover-link:hover li.nav-item a.on-hover {
+    display: inline;
+  }
