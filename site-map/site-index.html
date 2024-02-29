@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 10 | GCD Practices | Web XR</title>
+    <title>Ashley Towey Design</title>
     <!-- link the pages stylesheet -->
     <link rel="stylesheet" href="styles/site-style.css">
 
@@ -17,21 +17,21 @@
 <body>
 
       <!-- Navigation bar -->
-        <div class="title-area">
-          <a href="..." class="page-title">Ashley Towey</a>
+        <div class="title-area" id="navigation-area">
+          <a href="#" class="page-title">Ashley Towey</a>
         </div>
 
       <div class="nav-area">
 
           <div class="nav-link-area">
             <div class="hover-link portfolio-area">
-              <a href="pages/playground.html" class="link-item display"><span style="opacity: 0">[</span>Portfolio<span style="opacity: 0;">]</span></a>
-              <a href="pages/playground.html" class="link-item on-hover">[Portfolio]</a>
+              <a href="#portfolio-section" class="link-item display"><span style="opacity: 0">[</span>Portfolio<span style="opacity: 0;">]</span></a>
+              <a href="#portfolio-section" class="link-item on-hover">[Portfolio]</a>
             </div> 
             
             <div class="hover-link contact-area">
-              <a href="pages/contact.html" class="link-item display"><span style="opacity: 0;">[</span>Contact<span style="opacity: 0;">]</span></a>
-              <a href="pages/contact.html" class="link-item on-hover">[Contact]</a>
+              <a href="#" class="link-item display"><span style="opacity: 0;">[</span>Contact<span style="opacity: 0;">]</span></a>
+              <a href="#" class="link-item on-hover">[Contact]</a>
             </div>
           </div>
 
@@ -94,19 +94,17 @@
 
 
     <!-- #1 #1 #1 First row of images -->
-      <div class='image-wrapper'> 
+      <div class='image-wrapper' id="portfolio-section"> 
         <div class='row'>
           <div class='column'>
             <div class='item'>
 
-                <div class="hover-item">
-                    <a href="prj-pages/csm-show.html">
-                        <img id="myImg" src="../img/csm-shows/focus-hero_1.jpg" />
-                    </a>
-                    <span class="title">CSM Showcase Identity<br><br></span>
-                    <a href="prj-pages/csm-show.html"><span class="description">
-                        Creating a comprehensive brand identity for the 2024 Central Saint Martins Showcase
-                    </span></a>
+                <div class="hover-item ">
+                    <img class="img-border" src="../img/velocafe/velocafe-3.jpg" alt="early typography designs writing the word peach twice">
+                    <span class="title">Velocafe<br><br></span>
+                    <span class="description">
+                        Reimagining our interaction with the cycling cafe across computational visuals and designed ephemera. 
+                    </span>
                 </div>
 
             </div>
@@ -115,7 +113,7 @@
             <div class='item'>
 
                 <div class="hover-item">
-                    <img class="img-border" src="../img/stories/homepage-2.jpg" alt="early typography designs writing the word peach twice">
+                    <img class="img-border" src="../img/stories/stories-cover_1.jpg" alt="sunset over boulevard with writing on top">
                     <span class="title">Stories for the Road<br><br></span>
                     <span class="description">
                       A digital service exploring the possible ways to use technology to foster community in cycling. 
@@ -146,10 +144,10 @@
             <div class='item'>
 
                 <div class="hover-item ">
-                    <img class="img-border" src="../img/velocafe/velocafe-3.jpg" alt="early typography designs writing the word peach twice">
-                    <span class="title">Velocafe<br><br></span>
+                    <img class="img-border" src="../img/jupiter-heating/jupiter-cover_1.jpg" alt="underfloor heating render">
+                    <span class="title">Jupiter Heating Solutions<br><br></span>
                     <span class="description">
-                        Reimagining our interaction with the cycling cafe across computational visuals and designed ephemera. 
+                        A collection of 3D rendered underfloor heating images created as part of a website rebrand
                     </span>
                 </div>
 
@@ -159,8 +157,8 @@
             <div class='item'>
 
                 <div class="hover-item">
-                    <img class="img-border" src="../img/stories/homepage-2.jpg" alt="early typography designs writing the word peach twice">
-                    <span class="title">Stories for the Road<br><br></span>
+                    <img class="img-border" src="../img/networked-beings/networked-beings-cover_2.jpg" alt="objects in space">
+                    <span class="title">SLATE<br><br></span>
                     <span class="description">
                         A digital service exploring the possible ways to use technology to foster community in cycling. 
                     </span>
@@ -172,13 +170,13 @@
             <div class='item'>
 
                 <div class="hover-item">
-                  <a href="../project_web-xr/a-frame.html">
-                    <img class="img-border" src="../img/web-xr/a-frame_1.jpg" alt="early typography designs writing the word peach twice">
-                    <span class="title">A-Frame<br><br></span>
-                    <span class="description">
-                      Initial experiments with web 3D objects built in A-Frame. 
-                    </span>
-                  </a>
+                    <a href="prj-pages/csm-show.html">
+                        <img id="myImg" src="../img/csm-shows/focus-hero_1.jpg" />
+                    </a>
+                    <span class="title">CSM Showcase Identity<br><br></span>
+                    <a href="prj-pages/csm-show.html"><span class="description">
+                        Creating a comprehensive brand identity for the 2024 Central Saint Martins Showcase
+                    </span></a>
                 </div>
 
             </div>
@@ -197,7 +195,7 @@
         <div class='column'>
           <div class='item'>
 
-            <h2><a href="pages/contact.html" class="footer-title">Get in touch</a></h2>
+            <h2><a href="mailto:toweyashley@yahoo.co.uk" target="_blank" class="footer-title">Get in touch</a></h2>
 
               <div class="hover-link">
                 <a href="mailto:toweyashley@yahoo.co.uk" target="_blank" class="footer-item display">Email [→]</a>
@@ -224,23 +222,36 @@
 
             <!-- BLANK Middle Section -->
 
+            <!-- 
+              <div class="hover-link contact-area">
+              <a href="#" class="link-item display"><span style="opacity: 0;">[</span>Contact<span style="opacity: 0;">]</span></a>
+              <a href="#" class="link-item on-hover">[Contact]</a>
+            </div>
+            -->
+
           </div>
         </div>
         <div class='column'>
+
           <div class='item footer-right'>
 
-            <h2><a href="pages/playground.html" class="footer-title">Navigation</a></h2>
-            <a href="pages/creative-computing.html" class="footer-item">Portfolio</a>
-            <br>
-            <a href="pages/renders.html" class="footer-item">Contact</a>
-            <br>
-
+            <h2><a href="#" class="footer-title">Navigation</a></h2>
+            
             <div class="hover-link">
-              <a href="pages/renders.html" class="footer-item display">[↖︎] Back to top</a> 
-              <a href="pages/renders.html" class="footer-item on-hover">[↑] Back to top</a>
+                <a href="#portfolio-section" class="footer-item footer-link-item display"><span style="opacity: 0;">[</span>Portfolio<span style="opacity: 0;">]</span></a>
+                <a href="#portfolio-section" class="footer-item footer-link-item on-hover">[Portfolio]</a>
+            </div>
+            <div class="hover-link">
+                <a href="#portfolio-section" class="footer-item footer-link-item display"><span style="opacity: 0;">[</span>Contact<span style="opacity: 0;">]</span></a>
+                <a href="#portfolio-section" class="footer-item footer-link-item on-hover">[Contact]</a>
             </div>
 
-          </div>
+            <div class="hover-link">
+              <a href="#navigation-area" class="footer-item footer-link-item display">[↖︎] Back to top</a> 
+              <a href="#navigation-area" class="footer-item footer-link-item on-hover">[↑] Back to top</a>
+            </div>
+
+            </div>
         </div>
       </div>
 

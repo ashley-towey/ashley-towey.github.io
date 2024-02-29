@@ -59,7 +59,6 @@ a.link-item {
   font-weight: 900;
   font-size: 18px;
   text-transform: uppercase;
-
 }
 /* */
 
@@ -165,11 +164,11 @@ a {
 /* Fading animation */
 .fade {
   animation-name: fade;
-  animation-duration: 1.5s;
+  animation-duration: 1s;
 }
 
 @keyframes fade {
-  from {opacity: 0.8}
+  from {opacity: 0.9}
   to {opacity: 1}
 }
 
@@ -181,6 +180,13 @@ footer {
 
 .footer-right {
   text-align: right;
+
+  padding: 16px;
+}
+
+.footer-left {
+    padding: 16px;
+    padding-top: 1px;
 }
 
 a.footer-item {
@@ -197,6 +203,12 @@ a.footer-item {
   text-transform: uppercase;
   text-decoration: none;
 }
+
+a.footer-link-item {
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
 
 /* .link-hover {
   opacity: 0;
@@ -248,17 +260,6 @@ a.footer-item {
     flex: 1
   }
 }
-
-
-/* Linking up the hover image for files that I wanna use an image and then GIF on hover */ 
-.static {
-
-    background: white;
-  }
-  
-  .static:hover {
-    opacity:0;
-  }
 
 /*** VERY UNTIDY WAY OF DOING BUTTONS THAT CHANGE BASED ON HOVER ***/
 /*** DON'T PLACE ANYTHING ELSE BELOW THIS POINT ***/
