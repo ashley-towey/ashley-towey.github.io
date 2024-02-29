@@ -169,7 +169,7 @@ a {
 }
 
 @keyframes fade {
-  from {opacity: .4}
+  from {opacity: 0.8}
   to {opacity: 1}
 }
 
@@ -250,6 +250,15 @@ a.footer-item {
 }
 
 
+/* Linking up the hover image for files that I wanna use an image and then GIF on hover */ 
+.static {
+
+    background: white;
+  }
+  
+  .static:hover {
+    opacity:0;
+  }
 
 /*** VERY UNTIDY WAY OF DOING BUTTONS THAT CHANGE BASED ON HOVER ***/
 /*** DON'T PLACE ANYTHING ELSE BELOW THIS POINT ***/

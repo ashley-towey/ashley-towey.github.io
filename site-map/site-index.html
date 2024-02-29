@@ -6,8 +6,12 @@
     <title>Unit 10 | GCD Practices | Web XR</title>
     <!-- link the pages stylesheet -->
     <link rel="stylesheet" href="styles/site-style.css">
+
+    <!-- import the jQuery library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    
       <!-- import the webpage's javascript file -->
-    <script src="../project_web-xr/webxr.js" defer></script>
+    <script src="js-files/main.js" defer></script>
 
 </head>
 <body>
@@ -96,8 +100,10 @@
             <div class='item'>
 
                 <div class="hover-item">
-                    <a href="prj-pages/csm-show.html"><img id="myImg" src="../img/csm-shows/csm-shows_1.jpg"></a>
-                    <span class="title">CSM Shows Identity<br><br></span>
+                    <a href="prj-pages/csm-show.html">
+                        <img id="myImg" src="../img/csm-shows/focus-hero_1.jpg" />
+                    </a>
+                    <span class="title">CSM Showcase Identity<br><br></span>
                     <a href="prj-pages/csm-show.html"><span class="description">
                         Creating a comprehensive brand identity for the 2024 Central Saint Martins Showcase
                     </span></a>
@@ -182,6 +188,7 @@
 
     </div><!-- Image Wrapper DIV ***molto importante*** -->
 
+
   <!-- Footer Section -->
   <footer>
     <!-- Footer 3 column flexbox layout -->
@@ -240,6 +247,19 @@
       
   </footer>
 
+  <!-- jQuery function to animate on hover of images --> 
+  <script>
+      $(function() {
+          $("#myImg").hover(
+              function() {
+                  $(this).attr("src", "../img/csm-shows/focus-hero_1.gif");
+              },
+              function() {
+                  $(this).attr("src", "../img/csm-shows/focus-hero_1.jpg");
+              }                         
+          );                  
+      });
+  </script>
 
 </body>
 </html>
