@@ -1,70 +1,199 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web XR</title>
-</head>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+  </head>
+  <body>
+    <a-scene
+      shadow="autoUpdate: true"
+      light="defaultLightsEnabled: false;"
+       physics="debug: false"
+    >
+      <a-assets>
+        <img
+          id="copper-col"
+          src="../img/web-xr/Copper_Color.png"
+        />
+        <img
+          id="copper-nrm"
+          src="../img/web-xr/Copper_Normals.png"
+        />
+        <img
+          id="tarp-col"
+          src="../img/web-xr/Tarp_Col.jpg"
+        />
+        <img
+          id="tarp-nrm"
+          src="../img/web-xr/Tarp_Nrm.jpg"
+        />
+        <img
+          id="metal-col"
+          src="../img/web-xr/metal-col.png"
+        />
+        <img
+        id="metal-nrm"
+        src="../img/web-xr/metal-nrm.png"
+      />
+      <img
+      id="clay-nrm"
+      src="../img/web-xr/Clay_nrm.jpeg"
+    />
+    <img
+    id="fabric-col"
+    src="../img/web-xr/fabric-col.png"
+  />
+    <img
+    id="fabric-nrm"
+    scale=".5 .5 0"
+    src="../img/web-xr/fabric-nrm.png"
+  />
+        <!-- <video
+          id="video"
+          src="https://cdn.glitch.global/eb10e6c1-a87f-4d9e-9eec-e7d85d50bbea/abstract_-_27726%20(540p).mp4"
+          autoplay
+          loop="true"
+        ></video> -->
+      </a-assets>
+      <!--     
+     animation="property:rotation; to: 0 0 360; loop:true; duration:3000;"
+     animation__2="property:object3D.position.x;from:-20; to:20; loop:true; dur:3000; dir:linear;"
+     -->
+      <a-entity light="type: ambient; color:#80B0C1;intensity:0.1;"></a-entity>
+      <a-light
+        type="spot"
+        light="castShadow:true; angle:15;penumbra:1;"
+        position="0 50 -5"
+        rotation="-90 0 0"
+        intensity="0.5"
+      ></a-light>
+      <a-light type="directional" castShadow="true" position="-43 43 32" intensity=".9" target="#directionaltarget">
+      </a-light>
 
-<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-<script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+      <!-- Box that sits at the bottom -->
+      <!-- 
+      <a-box
+        dynamic-body
+        position="0 5 -5"
+        width="3"
+        height="3"
+        depth="3"
+        material="color:yellow; src:#checkerbox; repeat:0.5 0.5;roughness:0.286;metalness:0.146;"
+      ></a-box>
+      -->
+      <!-- Weird cyclinder -->
+      <!--
+      <a-cylinder
+         dynamic-body="shape:box"
+       
+        position="0 10 -5"
+        height="5"
+        radius=".5"
+        color="yellow"
+        material="color:blue; emissive:blue;roughness:0.286;metalness:0.146;"
+      ></a-cylinder>
+    -->
+      <!-- sphere that starts at the top-->
+      <!--
+        <a-dodecahedron color="#FF926B" radius="5"></a-dodecahedron>
+      -->
+      <!-- Craft & Skill -->
+      <a-dodecahedron
+        dynamic-body="shape:sphere;sphereRadius:3;" shadow="case: true" mass="4" position="0 25 -5" radius="3.2" material="src:#copper-col; normalMap:#copper-nrm; normalScale:1 1;"
+      ></a-dodecahedron>
+      <!-- Iteration & Reflection-->
+      <a-torus
+        dynamic-body="shape:sphere;sphereRadius:3;" shadow="case: true" position="3 32 -1.5" radius="2" radius-tubular=".5" material="src:#tarp-col; normalMap:#tarp-nrm;"
+      ></a-torus>
+      <!-- Experimentation & Chaos -->
+      <a-sphere
+        dynamic-body="shape:sphere;sphereRadius:2;" shadow="case: true" position="-3 27 1.5" radius="2.1" material="color:red; roughness:0.1;"
+      ></a-sphere>
+      <!-- Research -->
+      <a-cylinder 
+      dynamic-body="shape:auto;" shadow="case: true" position="1.5 42 2" rotation="45 0 0" color="green" height="1.7" radius="2.2"
+      ></a-cylinder> 
+      <!-- Idea Generation -->
+      <a-box
+        dynamic-body="shape:box;" shadow="case: true" position="-1.5 35 -3" depth="3.5" height="3.5" width="3.5" material="src:#metal-col; normalMap:#metal-nrm; roughness: .1;"
+      ></a-box>
+      <!-- Indepedence -->
+      <a-tetrahedron 
+        dynamic-body="shape:box;" shadow="case: true" position="-1.5 45 -3" rotation="45 0 10" color="#FF926B" radius="3" material="color: yellow; normalMap:#clay-nrm; normalScale: .7 .9"
+      ></a-tetrahedron>
+      <!-- Collaboration -->
+      <a-box
+        dynamic-body="shape:box;" shadow="case: true" position="5 40 -3" depth="3.5" height="3.5" width="3.5" material="src:#fabric-col; normalMap:#fabric-nrm;normalScale:3 3"
+      ></a-box>
+      
+      <a-plane
+        id="spotTarget"
+        id="directionaltarget"
+        position="0 0 -5"
+        height="80"
+        width="80"
+        rotation="-90 0 0"
+        material="color: #80B0C1;"
+        shadow="receive: true"
+        event-set__down="_event: mousedown; material.wireframe: true"
+        event-set__up="_event: mouseup; material.wireframe: false"
+        event-set__leave="_event: moulseleave; material.wireframe: false"
+      >
+        <a-plane id="circle_collider"   visible="false" width="40" height="40" rotation="0 0 0" position="0 0 0" static-body="shape:hull;"></a-plane>
 
-<body>
-  
+      </a-plane>
 
-    <a-scene>
+              <!-- Walls to create collision-->
+              <!-- RIGHT -->
+              <a-box
+              static-body
+              shape="hull"
+              visible="false"
+              position="7.5 7.5 -5"
+              width="1"
+              height="20"
+              depth="20"
+              material="color:white;"
+            ></a-box>
+            <!-- back -->
+            <a-box
+            static-body
+            shape="hull"
+            visible="false"
+            position="0 7.5 -10"
+            width="20"
+            height="20"
+            depth="1"
+            material="color:white;"
+          ></a-box>
+          <!-- LEFT --> 
+          <a-box
+          static-body
+          shape="hull"
+          visible="false"
+          position="-7.5 7.5 -5"
+          width="1"
+          height="20"
+          depth="20"
+          material="color:white;"
+        ></a-box>
+        <!-- FRONT -->
+        <a-box
+        static-body
+        shape="hull"
+        visible="false"
+        position="0 7.5 5"
+        width="20"
+        height="20"
+        depth="1"
+        material="color:white;"
+      ></a-box>
 
-      <!-- ground -->
-      <a-plane height="150" width="150" rotation="-90 0 0" position="0 0 0" color="#c19abc"></a-plane>
-      <!-- background -->
-      <a-plane height="150" width="150" rotation="0 0 0" position="0 0 -5" color="#c19abc"></a-plane>
-
-              <a-entity
-                geometry="primitive: box"
-                material="color: #3b95d2"
-                position="0 .5 0"
-                id="light-target"
-
-                animation__mouseenter="property: position; to: 0 .5 0; startEvents: mouseenter; dur: 500";
-                animation__mouseleave="property: position; to: 0 .5 0; startEvents: mouseleave; dur: 500";>
-             </a-entity>
-
-          <a-entity
-             geometry="primitive: box"
-             material="color: #dd1c22"
-             position="0.5 1.5 -0.5"
-             
-             animation__mouseenter="property: position; to: 0 1.5 0; startEvents: mouseenter; dur: 500";
-             animation__mouseleave="property: position; to: 0.5 1.5 -0.5; startEvents: mouseleave; dur: 500";>
-          </a-entity>
-
-          <a-entity
-            geometry="primitive: box"
-            material="color: #ffd402"
-            position="0 2.5 -1"
-          
-            animation__mouseenter="property: position; to: 0 2.5 0; startEvents: mouseenter; dur: 500";
-            animation__mouseleave="property: position; to: 0 2.5 -1; startEvents: mouseleave; dur: 500";>
-          </a-entity>
-  
-      <!-- Scene Settings -->
-      <!-- Spotlight -->
-      <a-entity position="-2.2 5 4">
-        <a-light color="#fff" type="spot" intensity=".9" target="#light-target" angle="30" penumbra="1" castShadow="true"        ></a-light>
-      </a-entity>
-      <!-- Ambient Lighting -->
-      <a-entity light="type: directional; color: #c19abc; intensity: .5" position="-0.5 1 1"></a-entity>
-
-      <a-entity position="0 3 8" rotation="-30 0 0">
-        <a-camera fov="50">
-          <a-cursor></a-cursor>
-        </a-camera>
-      </a-entity>
-
+      <!-- <a-videosphere src="#video"></a-videosphere> -->
+      <a-sky color="#80B0C1"></a-sky>
+      <a-camera fov="60" position="0 7 20">
+        <!--<a-cursor></a-cursor>-->
+      </a-camera>
     </a-scene>
-
-
-
-
-</body>
+  </body>
 </html>
