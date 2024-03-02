@@ -19,6 +19,9 @@ let Start;
 let time=0;
 let dt=0.1;
 
+let lapButton; // button to add a lap
+let laps; // variable to store the variable for number of laps
+
 let button;
 let buttonLabel;
 
@@ -29,25 +32,33 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(500, 300);
+  createCanvas(windowWidth, 600);
   frameRate(10);
   textFont(font);
 
   Start=0;
-  buttonLabel = "Start"
+  buttonLabel = "Start";
+
+  laps = 0;
 
   // Create a start button on the right side of the screen
   button = createButton(buttonLabel);
   button.style('font-family', 'PPSupplySans-Regular');
   button.style('font-size', '25px');
-  button.position(width - 160, height - 60);
+  button.position(width/25, height - 60);
   button.mousePressed(startTimer);
+
+  // create a lap button to add 1 to the lap value
+   lapButton = createButton("+1 Lap");
+   lapButton.style('font-family', 'PPSupplySans-Regular');
+   lapButton.style('font-size', '25px');
+   lapButton.position(width/5, height - 60); 
+   lapButton.mousePressed(addLap);
 }
 
 function draw() {
   // Draw the timer background
-  background(230);
-  rect(50, 90, width-100, 100);
+  background(0, 0, 0);
 
 //   text(time, 50, 100, width-100, 100);
   
@@ -59,11 +70,17 @@ function draw() {
     time=time+dt;
     }
 
-      
   // Draw the timer
-  textSize(50);
+  fill(255, 255, 255);
+  textSize(120);
   textAlign(LEFT);
-  text(round(time, 1),windowWidth/2.2,50);
+  text(round(time, 1),width/2.2,120);
+
+    // Draw the lap counter
+    fill(255, 255, 255);
+    textSize(120);
+    textAlign(LEFT);
+    text(round(laps, 1),width/2.2,220);
 }
 
 function startTimer() {
@@ -76,4 +93,8 @@ function startTimer() {
     buttonLabel = "Start";
     button.html(buttonLabel);
     }
+}
+
+function addLap() {
+    laps += 1;
 }
