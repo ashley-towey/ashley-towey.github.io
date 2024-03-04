@@ -1,0 +1,37 @@
+@font-face {
+    font-family: Supply;
+    src: url(../data/PPSupplySans-Regular.otf);
+  }
+
+  @font-face {
+    font-family: Supply-Light;
+    src: url(../data/PPSupplySans-Ultralight.otf);
+  }
+
+html, body {
+    font-family: Supply;
+    margin: 0;
+    padding: 0;
+    background-color: #90ee90;
+
+}
+  
+canvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+    padding: 20px;
+    text-align: center;
+  }
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    font-family: Supply-Light;
+    text-align: center;
+}

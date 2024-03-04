@@ -1,0 +1,63 @@
+<head>
+
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+<script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+
+<script>
+  AFRAME.registerComponent('change-state', {
+    schema: {
+      color: {default: 'red'}
+    },
+// el.setAttribute('body', {type: "dynamic"})
+    init: function () {
+      var data = this.data;
+      var el = this.el;  // <a-box>
+      var defaultColor = el.getAttribute('material').color;
+       this.el.state="still";
+      el.addEventListener('mouseenter', function (e) {
+        //el.setAttribute('body', {type: "dynamic"})
+        el.body.mass=1;
+        console.log("mouseEntered",el.body.mass);
+        this.el.state="gravity";
+    });
+
+      el.addEventListener('mouseleave', function () {
+        el.setAttribute('body', {type: "dynamic"})
+      });
+    }, update: function(){
+        console.log("state changed",this.el.state);
+    }
+
+  });
+</script>
+
+</head>
+
+<body>
+  <a-scene>
+    <a-box static-body="shape:box;" color="#EF2D5E" position="0 10 0" width="5" height="5" depth="5" change-state="shape:box"></a-box>
+
+    <a-plane
+    id="spotTarget"
+    id="directionaltarget"
+    position="0 0 -5"
+    height="80"
+    width="80"
+    rotation="-90 0 0"
+    material="color: #80B0C1;"
+    shadow="receive: true"
+  >
+    <!-- bottom plane that acts as the collider -->
+    <a-plane id="circle_collider"   visible="false" width="40" height="40" rotation="0 0 0" position="0 0 0" static-body="shape:hull;"></a-plane>
+
+  </a-plane>
+  
+    <!-- SCENE -->
+    <a-sky color="#80B0C1"></a-sky>
+    <a-camera fov="60" position="0 7 20">
+      <a-cursor></a-cursor>
+    </a-camera>
+
+</a-scene>
+</body>

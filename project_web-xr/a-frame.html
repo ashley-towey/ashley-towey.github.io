@@ -2,10 +2,8 @@
   <head>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
 
-     <!-- link the files javascript file -->
-     <script src="a-frame.js"></script>
   </head>
   <body>
     <a-scene
@@ -13,6 +11,7 @@
       light="defaultLightsEnabled: false;"
       physics="debug: true"
     >
+    
       <a-assets>
         <img
           id="copper-col"
@@ -42,15 +41,15 @@
       id="clay-nrm"
       src="../img/web-xr/Clay_nrm.jpeg"
     />
-    <img
-    id="fabric-col"
+    <img 
+    id="fabric-col" 
     src="../img/web-xr/fabric-col.png"
-  />
+    />
     <img
-    id="fabric-nrm"
-    scale=".5 .5 0"
-    src="../img/web-xr/fabric-nrm.png"
-  />
+      id="fabric-nrm"
+      scale=".5 .5 0"
+      src="../img/web-xr/fabric-nrm.png"
+    />
 
       </a-assets>
       <a-entity light="type: ambient; color:#80B0C1;intensity:0.1;"></a-entity>
@@ -63,7 +62,7 @@
       ></a-light>
       <a-light type="directional" castShadow="true" position="-43 43 32" intensity=".9" target="#directionaltarget">
       </a-light>
-
+      
       <!-- Craft & Skill -->
       <a-dodecahedron
         static-body="shape:sphere;sphereRadius:3;" shadow="case: true" mass="4" position="0 25 -5" radius="3.2" material="src:#copper-col; normalMap:#copper-nrm; normalScale:1 1;"
@@ -161,7 +160,7 @@
             material="color:white;"
             ></a-box>
             <!-- RELEASE THE BEASTS -->
-            <a-box
+            <!-- <a-box
               static-body
               shape="hull"
               visible="false"
@@ -171,11 +170,11 @@
               height="20"
               depth="1"
               material="color:white;"
-            ></a-box>
+            ></a-box> -->
 
       <!-- <a-videosphere src="#video"></a-videosphere> -->
       <a-sky color="#80B0C1"></a-sky>
-      <a-camera fov="60" position="0 7 70">
+      <a-camera fov="60" position="0 7 20">
         <a-cursor></a-cursor>
       </a-camera>
     </a-scene>
