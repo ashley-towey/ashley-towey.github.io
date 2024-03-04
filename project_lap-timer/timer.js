@@ -18,6 +18,7 @@
 let Start;
 let time=0;
 let dt=0.1;
+let Minute;
 
 let lapButton; // button to add a lap
 let laps; // variable to store the variable for number of laps
@@ -38,6 +39,8 @@ function setup() {
 
   Start=0;
   buttonLabel = "Start";
+
+  Minute=0;
 
   laps = 0;
 
@@ -65,22 +68,28 @@ function draw() {
 //   if (timerIsRunning) {
 //     // Do something? 
 //   }
+  if (time > 2) {
+    time = 0;
+    Minute += 1;
+  }
 
   if (Start===1){
     time=time+dt;
     }
 
-  // Draw the timer
+  // Draw the seconds part of the timer
   fill(255, 255, 255);
   textSize(120);
   textAlign(LEFT);
-  text(round(time, 1),width/2.2,120);
+  text(round(time, 1),width/1.87,200);
+  // draw the seperater
+  text(':', width/2, 185);
+  // draw the minutes part of the timer
+  textAlign(RIGHT);
+  text(round(Minute, 1),width/2.05,200);
 
-    // Draw the lap counter
-    fill(255, 255, 255);
-    textSize(120);
-    textAlign(LEFT);
-    text(round(laps, 1),width/2.2,220);
+  // Draw the lap counter
+  text(round(laps, 1),width/2.2,400);
 }
 
 function startTimer() {
