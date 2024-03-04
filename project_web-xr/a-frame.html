@@ -9,7 +9,7 @@
     <a-scene
       shadow="autoUpdate: true"
       light="defaultLightsEnabled: false;"
-      physics="debug: true"
+      physics="debug: false"
     >
     
       <a-assets>
@@ -65,35 +65,35 @@
       
       <!-- Craft & Skill -->
       <a-dodecahedron
-        static-body="shape:sphere;sphereRadius:3;" shadow="case: true" mass="4" position="0 25 -5" radius="3.2" material="src:#copper-col; normalMap:#copper-nrm; normalScale:1 1;"
+        dynamic-body="shape:sphere;sphereRadius:3;" shadow="case: true" mass="4" position="0 25 -5" radius="3.2" material="src:#copper-col; normalMap:#copper-nrm; normalScale:1 1;"
       ></a-dodecahedron>
       <!-- Iteration & Reflection-->
       <a-torus
-        static-body="shape:sphere;sphereRadius:3;" shadow="case: true" position="3 32 -1.5" radius="2" radius-tubular=".5" material="src:#tarp-col; normalMap:#tarp-nrm;"
+        dynamic-body="shape:sphere;sphereRadius:3;" shadow="case: true" position="3 32 -1.5" radius="2" radius-tubular=".5" material="src:#tarp-col; normalMap:#tarp-nrm;"
       ></a-torus>
       <!-- Experimentation & Chaos -->
       <a-sphere
-        static-body="shape:sphere;sphereRadius:2;" shadow="case: true" position="-3 27 1.5" radius="2.1" material="color:red; roughness:0.1;"
+        dynamic-body="shape:sphere;sphereRadius:2;" shadow="case: true" position="-3 27 1.5" radius="2.1" material="color:red; roughness:0.1;"
       ></a-sphere>
       <!-- Research -->
       <a-cylinder 
-      static-body="shape:auto;" shadow="case: true" position="1.5 42 2" rotation="45 0 0" color="green" height="1.7" radius="2.2"
+      dynamic-body="shape:auto;" shadow="case: true" position="1.5 42 2" rotation="45 0 0" color="green" height="1.7" radius="2.2"
       ></a-cylinder> 
       <!-- Idea Generation 
       src:#metal-col; normalMap:#metal-nrm; roughness: .1;
     -->
       <a-box
-        static-body="shape:box;" shadow="case: true" position="-1.5 35 -3" depth="3.5" height="3.5" width="3.5" material="color:yellow;"
+        dynamic-body="shape:box;" shadow="case: true" position="-1.5 35 -3" depth="3.5" height="3.5" width="3.5" material="color:white; roughness: 0.2; metalness: .3;"
         ></a-box>
 
 
       <!-- Indepedence -->
       <a-tetrahedron 
-        static-body="shape:box;" shadow="case: true" position="-1.5 45 -3" rotation="45 0 10" color="#FF926B" radius="3" material="color: yellow; normalMap:#clay-nrm; normalScale: .7 .9"
+        dynamic-body="shape:box;" shadow="case: true" position="-1.5 45 -3" rotation="45 0 10" color="#FF926B" radius="3" material="color: yellow; normalMap:#clay-nrm; normalScale: .7 .9"
       ></a-tetrahedron>
       <!-- Collaboration -->
       <a-box
-        static-body="shape:box;" shadow="case: true" position="5 40 -3" depth="3.5" height="3.5" width="3.5" material="src:#fabric-col; normalMap:#fabric-nrm;normalScale:3 3"
+        dynamic-body="shape:box;" shadow="case: true" position="5 40 -3" depth="3.5" height="3.5" width="3.5" material="src:#fabric-col; normalMap:#fabric-nrm;normalScale:3 3"
       ></a-box>
       
       <a-plane

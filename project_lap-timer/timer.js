@@ -68,7 +68,7 @@ function draw() {
 //   if (timerIsRunning) {
 //     // Do something? 
 //   }
-  if (time > 2) {
+  if (time > 60) {
     time = 0;
     Minute += 1;
   }
