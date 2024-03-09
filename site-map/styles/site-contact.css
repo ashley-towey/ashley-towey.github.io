@@ -10,10 +10,55 @@ body {
   font-size: 15px;
 }
 
-img {
-  width: 100%;
+.big-text {
+    font-weight: 900; /* Heavier Weight */ 
+    font-size: 26px; /* Bigger text */ 
+    text-transform: uppercase;
+  }
+
+.contact-hero {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
 }
 
+#image-contact-section {
+    height: 100vh;
+}
+
+#design-portrait {
+    position: absolute; 
+    width: 35vh;
+    left: 20%;
+    top: 20%;
+    rotate: -10deg;
+}
+#design-portrait:hover {
+    rotate: -8deg;
+}
+#cycling-portrait {
+    position: absolute; 
+    width: 55vh;
+    left: 30%;
+    top: 20%;
+    rotate: 5deg;
+}
+#cycling-portrait:hover {
+    rotate: 3deg;
+}
+#computing-portrait {
+    position: absolute; 
+    width: 35vh;
+    left: 55%;
+    top: 20%;
+    rotate: 5deg;
+}
+#computing-portrait:hover {
+    rotate: 3deg;
+}
+/* img {
+    width: 100%;
+  } */
 /* Nav-bar styling */
 .title-area {
   position: absolute;
@@ -267,13 +312,29 @@ a.footer-link-item {
   .numbertext {
     bottom: 50px;
   }
+
+  /* image resizing for phone */ 
+  #design-portrait {
+    left: 20%;
+    top: 17%;
+}
+#cycling-portrait {
+    width: 43vh;
+    left: 10%;
+    top: 27%;
+}
+#computing-portrait {
+    width: 35vh;
+    left: 20%;
+    top: 22%;
+}
+
 }
 
 @media screen and (min-width: 1000px) {
   .column {
     flex: 1
   }
-
 
 }
 
