@@ -248,9 +248,24 @@ a.footer-link-item {
 
 }
 
+/* Phone width */
 @media only screen and (max-width: 1000px) {
   .text-content-area {
     width: 97%;
+  }
+  .portfolio-area{
+    right: 16px;
+    top: 50px;
+  }
+  .contact-area {
+    right: 16px;
+    top: 20px;
+  }
+  .prev, .next {
+    bottom: 100px;
+  }
+  .numbertext {
+    bottom: 50px;
   }
 }
 
@@ -258,6 +273,8 @@ a.footer-link-item {
   .column {
     flex: 1
   }
+
+
 }
 
 /*** VERY UNTIDY WAY OF DOING BUTTONS THAT CHANGE BASED ON HOVER ***/
