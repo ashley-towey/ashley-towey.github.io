@@ -1,0 +1,320 @@
+/* Place in your CSS file at the top of the document */
+
+@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Spline Sans Mono', monospace;
+  background-color: #f2f2f2;
+  color: #1c1c1c;
+  margin: 0%;
+  font-size: 15px;
+}
+
+img {
+  width: 100%;
+}
+
+/* Nav-bar styling */
+.title-area {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 9999;
+  padding: 16px;
+}
+
+.nav-area {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 9999;
+  padding: 16px;
+}
+
+.portfolio-area{
+  position: absolute;
+  right: 130px;
+}
+
+.contact-area {
+  position: absolute;
+  right: 16px;
+}
+
+.page-title {
+  color: #000000;
+  font-weight: 900;
+  text-decoration: none;
+  font-size: 23px;
+}
+
+.page-title:hover {
+  color: #323232;
+}
+
+a.link-item {
+  color: black;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+/* */
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/* Slideshow CODE */
+.slideshow-container {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.mySlides img {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0px;
+  width: auto;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  transition: 0.5s ease;
+  /* border-radius: 0 3px 3px 0; */
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  /* right: 0; */
+  /* border-radius: 3px 0 0 3px; */
+  left: 100px;
+  /* top: 60%; */
+}
+
+/* On hover, add a black background color with a little bit see-through */
+/* .prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+} */
+
+/* Caption text */
+.text {
+  color: white;
+  font-size: 16px;
+  padding: 16px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  /* width: 100%; */
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: white;
+  font-size: 12px;
+  padding: 16px;
+  position: absolute;
+  bottom: 0px;
+  left: 25%;
+  width: 50%;
+  align-items: center;
+  text-align: center;
+  font-weight: 300;
+}
+
+/* The dots/bullets/indicators */
+/* .dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+} */
+
+/* .active, .dot:hover {
+  background-color: #717171;
+} */
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1s;
+}
+
+@keyframes fade {
+  from {opacity: 0.9}
+  to {opacity: 1}
+}
+
+
+/* Footer Styling */ 
+footer {
+  background-color: #dfdfdf;
+}
+
+.footer-right {
+  text-align: right;
+
+  padding: 16px;
+}
+
+.footer-left {
+    padding: 16px;
+    padding-top: 1px;
+}
+
+a.footer-item {
+  text-transform:uppercase;
+  color: black;
+  text-decoration: none;
+  line-height: 1.8em;
+  font-weight: 500;
+}
+
+.footer-title {
+  color: black;
+  font-weight: 300;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+a.footer-link-item {
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+/* .link-hover {
+  opacity: 0;
+}
+
+.link-hover:hover {
+  opacity: 100;
+} */
+
+
+/* Flexbox styling test */
+.image-wrapper {
+  margin: 0vw;
+  padding-right: 8px;
+  padding-left: 8px;
+  padding-bottom: 16px;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.item {
+  padding-top: 16px;
+
+}
+
+/* Phone width */
+@media only screen and (max-width: 1000px) {
+  .text-content-area {
+    width: 97%;
+  }
+  .portfolio-area{
+    right: 16px;
+    top: 50px;
+  }
+  .contact-area {
+    right: 16px;
+    top: 20px;
+  }
+  .prev, .next {
+    bottom: 100px;
+  }
+  .numbertext {
+    bottom: 50px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .column {
+    flex: 1
+  }
+
+
+}
+
+/*** VERY UNTIDY WAY OF DOING BUTTONS THAT CHANGE BASED ON HOVER ***/
+/*** DON'T PLACE ANYTHING ELSE BELOW THIS POINT ***/
+
+/* code that makes the hover turn into a short description */ 
+div.hover-item span.description {
+  display: none;
+}
+
+div.hover-item:hover span.title {
+  display: none;
+}
+
+div.hover-item:hover span.description {
+  display: inline;
+}
+
+/* LEFT On hover change buttons arrow direction */ 
+div.hover-link a.on-hover {
+  display: none;
+  }
+
+  div.hover-link:hover a.display {
+    display: none;
+  }
+
+  div.hover-link:hover a.on-hover {
+    display: inline;
+  }
+
+  /* Nav-bar hover */ 
+div.hover-link li.nav-item a.on-hover {
+  display: none;
+  }
+
+  div.hover-link:hover li.nav-item a.display {
+    display: none;
+  }
+
+  div.hover-link:hover li.nav-item a.on-hover {
+    display: inline;
+  }
