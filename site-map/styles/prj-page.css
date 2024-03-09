@@ -192,6 +192,22 @@ video {
   .text-content-area {
     width: 97%;
   }
+  .portfolio-area{
+    right: 16px;
+    top: 50px;
+  }
+  .contact-area {
+    right: 16px;
+    top: 20px;
+  }
+  .hero-quote {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .fullwidth-image {
+    height: 50vh;
+    object-fit: contain;
+  }
 }
 
 @media screen and (min-width: 1000px) {
