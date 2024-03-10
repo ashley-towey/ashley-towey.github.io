@@ -1,363 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashley Towey Design</title>
+    <!-- link the pages stylesheet -->
+    <link rel="stylesheet" href="/site-map/styles/site-style.css">
 
-  <!-- <script src="/scripts/p5.js"></script> -->
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Ashley Towey Design</title>
-  <!-- <link rel="shortcut icon" type="image/png" href="">-->
-  <link rel="icon" type="image/x-icon" href="/img/icons/a.t.favicon.jpg">
-
-  <!-- import the webpage's stylesheet -->
-  <link rel="stylesheet" href="/styles/style.css">
-
-  <!-- import the webpage's javascript file -->
-  <script src="/scripts/button-script.js" defer></script>
+    <!-- import the jQuery library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    
+      <!-- import the webpage's javascript file -->
+    <script src="/site-map/js-files/main.js" defer></script>
 
 </head>
-
 <body>
-  
-  <!-- Beginning of content-area -->
-  <div class="content-area"> 
 
-    <!-- Navigation bar -->
-      <nav>
-        <ul>
-          <li class="nav-bar"><strong>Portfolio</strong></li>
-          <li class="nav-bar"><a href="pages/playground.html">Playground</a></li>
-          <li class="nav-bar"><a href="pages/contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <hr> <!-- divide before the body section of the website -->
+      <!-- Navigation bar -->
+    <div id="navigation-area">
+      <!-- this includes the slight darkening of the background to make the text more visible -->
+    </div>
 
-
-        <!-- Velocafe Clock -->
-        <section id="velocafe">
-          <div class="text-content-area">
-            <h1>
-              The Velocafé
-            </h1>
-            <small>Tags: [Creative Technology]</small>
-            <!-- Description and button ready when you are, just move the comment section -->
-            <div> 
-              <p>
-                The Velocafé aims to reimagine our interaction with the cycling cafe through a consistent design approach. Across computational visuals and designed ephemera, the velocafé (read: cycling café) becomes part of the visual language associated with communal coffee and cake.
-                Inspired by the winged wheel symbol of the Cycling Touring Club the velocafé ‘clock’ uses mechanical sound and proximity detection
-                  <span id="dots">...</span><span id="more">
-                    to visually display the sense of community and belonging that is felt when visiting a cycling café. Through an array of lights that only trigger when there are sounds and people around, it shows through a modern visual language that there are cyclists in the café. Like a Michelin star for cycling cafes the velocafé ‘clock’ denotes a good cycling café, not simply through arbitrary testing, but through live data that is being collected within the café and displayed to “tempt the [passing] rider to early tea”.                 </span></p>
-              <button onclick="myFunction(this)" id="slateBtn" class="read-more-button">Read more</button>
-            </div>
-          </div>
-          <!-- Velocafe product gallery -->
-          <div class='image-wrapper'>
-            <div class='row'>
-              <div class='column'>
-                <div class='item'>
-                  <img src="img/velocafe/velocafe-2.jpg" alt="velocafe ratings cards on a cycling jersey">
-                </div>
-              </div>
-              <div class='column'>
-                <div class='item'>
-                  <img src="img/velocafe/velocafe-1.jpg" alt="two men interacting with the velocafe clock on the wall">
-                </div>
-              </div>
-              <div class='column'>
-                <div class='item'>
-
-                  <div style="padding:100% 0 0 0;position:relative;">
-                    <iframe src="https://player.vimeo.com/video/911530741?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Velocafe Clock">
-                  </iframe>
-                  </div>
-                  <script src="https://player.vimeo.com/api/player.js"></script>
-
-                </div>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        </section>
-
-
-                  <!-- Stories for the Road project -->
-    <section id="stories-area">
-      <div class="text-content-area">
-        <h1>
-          Stories for the Road
-        </h1>
-        <small>Tags: [Type Design] [Digital Service]</small>
-        <!-- This div seems to be making the read more section function.... Not sure why??? -->
-        <div> 
-          <p>
-            The project serves as a provocation for the possible ways in which we could use technology to foster community within cycling by taking back ownership of the roads. Explore the directory, read other messages, and then contribute your own recommendation, encouragement, and story for the road.             </p>
-            <button class="read-more-button"><a href="../project_stories/landing.html" target="blank">Visit the Website!</a></button>
-
+        <div class="title-area">
+          <a href="#" class="page-title">Ashley Towey</a>
         </div>
-      </div>
-      <!-- Stories Flexbox product gallery -->
-      <div class='image-wrapper'> 
-        <div class='row'>
-          <div class='column'>
-            <div class='item'>
-              <img class="img-border" src="../img/stories/sketch-1.jpg" alt="early typography designs writing the word peach twice">
-            </div>
-          </div>
-          <div class='column'>
-            <div class='item'>
-              <img class="img-border" src="../img/stories/variable-1.jpg" alt="Glyphs screenshot adding two levels of variability">
-            </div>
-          </div>
-          <div class='column'>
-            <div class='item'>
-              <img src="../img/stories/projector-1.jpg" alt="Testing the variable typeface projected on the ground">
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- EXTRA!!! Stories Flexbox product gallery -->
-      <div class='image-wrapper'> 
-        <div class='row'>
-          
-          <div class='column'>
-            <div class='item'>
-              <img class="img-border rounded-corners" src="../img/stories/directory-1.jpg" alt="a website screenshot of the directory of responses">
-            </div>
-          </div>
 
-          <div class='column'>
-            <div class='item'>
+        <div class="nav-area">
 
-              <img class="rounded-corners" src="../img/stories/homepage-1.jpg" alt="a website screenshot of an image of a pier with words written on top">
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr>
-    </section>
-
-    
-    <!-- Networked Beings Project -->
-    <section id="networked-beings">
-      <div class="text-content-area">
-        <h1>
-          Networked Beings
-        </h1>
-        <small>Tags: [3D Modelling] [Physical Computing] [Product]</small>
-        <!-- This div seems to be making the read more section function.... Not sure why??? -->
-        <div> 
-          <p>Three networked objects; Bool, Boid, and Buzz explore how our interaction with objects alters our desire to interact with them. Through micro-interactions of turning each others light on they create a connection. Each object is created in a different form which relates directly to it’s output device. Bool is sharp outputting 1 or 0, and turning the affected device 
-              <span id="dots">...</span><span id="more">on or off. Boid is square, and has four outputs, each relating to a different colour state on the affected device. Buzz is circular and infinite, outputting an ever-changing random array of colours.
-            </span></p>
-          <button onclick="myFunction(this)" id="slateBtn" class="read-more-button">Read more</button>
-        </div>
-      </div>
-      
-      <!-- Networked Beings Flexbox product gallery -->
-      <div class='image-wrapper'> 
-        <div class='row'>
-          <div class='column'>
-            <div class='item'>
-              <div style="padding:100% 0 0 0;position:relative;">
-                <iframe src="https://player.vimeo.com/video/853721330?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&loop=1&autopause=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" 
-                title="NB_1x1_Animation_3"></iframe></div>
-              <script src="https://player.vimeo.com/api/player.js">
-              </script>
+          <div class="nav-link-area">
+            <div class="hover-link portfolio-area">
+              <a href="#portfolio-section" class="link-item display"><span style="opacity: 0">[</span>Portfolio<span style="opacity: 0;">]</span></a>
+              <a href="#portfolio-section" class="link-item on-hover">[Portfolio]</a>
             </div> 
-          </div>
-          <div class='column'>
-            <div class='item'>
-              <img src="../img/networked-beings/networked-1.jpg" alt="Slate Tiles">
+            
+            <div class="hover-link contact-area">
+              <a href="#" class="link-item display"><span style="opacity: 0;">[</span>Contact<span style="opacity: 0;">]</span></a>
+              <a href="site-contact.html" class="link-item on-hover">[Contact]</a>
             </div>
           </div>
-          <div class='column'>
-            <div class='item'>
-              <img src="../img/networked-beings/networked-show-3.jpg" alt="Slate Tile Box">
-            </div>
-          </div>
+
         </div>
+
+        <div id="lower-navigation-area">
+          <!-- this includes the slight darkening of the background to make the text more visible -->
+        </div>
+       <!-- divide before the body section of the website -->
+
+
+<!-- Slideshow Code -->
+<!-- Slideshow container -->
+<div class="slideshow-container">
+
+  <!-- Full-width images with number and caption text -->
+  <div class="mySlides fade">
+    <img src="img/networked-beings/networked-show-2.jpg">
+    <div class="numbertext">1 / 4</div>
+      <div class="hover-link">
+        <a href="#" class="text display">Networked Beings - Case Study<span style="opacity: 0;">]</span></a>
+        <a href="#" class="text on-hover">[Networked Beings - Case Study]</a>
       </div>
-    
-      <!-- EXTRA!!! Networked Beings Flexbox product gallery -->
-      <div class='image-wrapper'> 
+  </div>
+
+  <div class="mySlides fade">
+    <img src="img/velocafe/velocafe-3.jpg">
+    <div class="numbertext">2 / 4</div>
+        <div class="hover-link">
+          <a href="#" class="text display">Velocafe - Case Study<span style="opacity: 0;">]</span></a>
+          <a href="#" class="text on-hover">[Velocafe - Case Study]</a>
+        </div>
+    </div>
+
+    <div class="mySlides fade">
+      <img src="img/SLATE/slate-box-1.jpg">
+      <div class="numbertext">3 / 4</div>
+        <div class="hover-link">
+          <a href="#" class="text display">Slate - Case Study<span style="opacity: 0;">]</span></a>
+          <a href="#" class="text on-hover">[Slate - Case Study]</a>
+        </div>
+    </div>
+
+    <div class="mySlides fade">
+      <img src="img/csm-shows/lethaby-window_1.jpg">
+      <div class="numbertext">4 / 4</div>
+          <div class="hover-link">
+            <a href="../site-map/prj-pages/csm-show.html" class="text display">CSM Shows - Case Study<span style="opacity: 0;">]</span></a>
+            <a href="../site-map/prj-pages/csm-show.html" class="text on-hover">[CSM Shows - Case Study]</a>
+          </div>
+      </div>
+
+  <!-- Next and previous buttons -->
+  <div class="hover-link">
+    <a class="prev display" onclick="plusSlides(-1)">[←]LEFT</a>
+    <a class="prev on-hover" onclick="plusSlides(-1)">[↙︎]LEFT</a>
+  </div>    
+  <div class="hover-link">
+    <a class="next display" onclick="plusSlides(1)">RIGHT[→]</a>
+    <a class="next on-hover" onclick="plusSlides(1)">RIGHT[↗︎]</a>
+  </div>
+
+</div>
+
+
+<!-- The dots/circles -->
+<!-- <div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+</div> -->
+
+
+    <!-- #1 #1 #1 First row of images -->
+      <div class='image-wrapper' id="portfolio-section"> 
         <div class='row'>
-          
-          <div class='column'>
-            <div class='item'>
-              <!-- vimeo video -->
-              <div style="padding:56.25% 0 0 0;position:relative;">
-                <iframe src="https://player.vimeo.com/video/911242799?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Networked Beings">
-                </iframe>
-              </div>
-              <script src="https://player.vimeo.com/api/player.js">
-
-              </script>         
-            </div>
-          </div>
-
-          <div class='column'>
-            <div class='item'>
-              <img src="../img/networked-beings/networked-show-1.jpg" alt="Slate Tiles">
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr>
-    </section>
-
-
-    <!-- SLATE Project -->
-    <section id="slate-area">
-      <div class="text-content-area">
-        <h1>
-          SLATE
-        </h1>
-        <small>Tags: [Branding] [Product]</small>
-        <!-- This div seems to be making the read more section function.... Not sure why??? -->
-        <div> 
-          <p>This project is a collection of tools created for people with varying levels of additional needs to be able communicate more easily with their family, friends and guardians. The name SLATE is symbolic of taking each day as it comes, and offers the user a clean slate from which to communicate. A core aim is to produce tactile kinaesthetic experiences that are engaging and tactile. 
-            <span id="dots">...</span><span id="more"><br>The SLATE Daily Routine card deck is an initial exploration into the field of accessible design. It is the formalisation of a semiotic language that can be used to communicate routine by arranging activities in the order of your morning or evening routine. The SLATE Emotion Communication Cube further expands the scope for learning through the addition of physical computing elements. It is a visually engaging tool that, through the use of tactile touch sensitive buttons, gives the user the ability to communicate their emotions. The project at large continues to explore the many ways in which physical computing can be used to enable children and young adults with learning disabilities to be able to engage with the people around them, their learning and the world at large.
-            </span></p>
-          <button onclick="myFunction(this)" id="slateBtn" class="read-more-button">Read more</button>
-        </div>
-      </div>
-      <!-- SLATE Flexbox product gallery -->
-      <div class='image-wrapper'> 
-        <div class='row'>
-          <div class='column'>
-            <div class='item'>
-              <img src="../img/SLATE/slate-box-1.jpg" alt="Slate Braille Box">
-            </div>
-          </div>
-          <div class='column'>
-            <div class='item'>
-              <img src="../img/SLATE/slate-2.jpg" alt="Slate Tiles">
-            </div>
-          </div>
-          <div class='column'>
-            <div class='item'>
-              <img src="../img/SLATE/slate-3.jpg" alt="Slate Tile Box">
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- EXTRA!!! SLATE Flexbox product gallery -->
-      <div class='image-wrapper'> 
-        <div class='row'>
-          
-          <div class='column'>
-            <div class='item'>
-              <img src="../img/SLATE/slate-ecc-1.jpg" alt="Slate Tiles">
-            </div>
-          </div>
-
           <div class='column'>
             <div class='item'>
 
-                <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/797679118?h=4ea83248d4&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="SLATE - Emotion Communication Cube"> 
-                </iframe>
+                <div class="hover-item ">
+                  <a href="prj-pages/velocafe.html">
+                    <img class="img-border" src="../img/velocafe/velocafe-3.jpg" alt="early typography designs writing the word peach twice">
+                    <span class="title">Velocafe<br><br></span>
+                    <span class="description">
+                        Reimagining our interaction with the cycling cafe across computational visuals and designed ephemera. 
+                    </span>
+                  </a>
                 </div>
-                <script src="https://player.vimeo.com/api/player.js"></script>
+
+            </div>
+          </div>
+          <div class='column'>
+            <div class='item'>
+
+                <div class="hover-item">
+                  <a href="../project_stories/landing.html" target="_blank">
+                    <img class="img-border" src="../img/stories/stories-cover_1.jpg" alt="sunset over boulevard with writing on top">
+                    <span class="title">Stories for the Road<br><br></span>
+                    <span class="description">
+                      A digital service exploring the possible ways to use technology to foster community in cycling. 
+                    </span>
+                  </a>
+                </div>
+
+            </div>
+          </div>
+          <div class='column'>
+            <div class='item'>
+
+                <div class="hover-item">
+                  <a href="prj-pages/slate.html">
+                    <img class="img-border" src="../img/SLATE/slate-box-1.jpg" alt="early typography designs writing the word peach twice">
+                    <span class="title">SLATE<br><br></span>
+                    <span class="description">
+                        A set of accessible products for children and young adults with learning disabilities
+                    </span>
+                  </a>
+                </div>
 
             </div>
           </div>
         </div>
-      </div>
-      <hr>
-    </section>
 
-    <!-- London to Paris -->
-    <section id="l2p-jersey">
-      <div class="text-content-area">
-        <h1>
-          London to Paris
-        </h1>
-        <small>Tags: [Sportswear]</small>
-        <!-- Description and button ready when you are, just move the comment section -->
-        <div>
-          <p>
-            A set of 4 jerseys designed for each day of the Cure Leukemia charity bike ride from London to Paris. The design takes inspiration from the finish town for each day, subtly guiding the riders towards their destination and acting as a piece of memorabilia. Created in collaboration with Kalas Sportswear, the jersey also denotes the day of the trip through the classic 6-day inspired numbers on the riders shoulders. 
-          </p>
-            <a href="https://www.youtube.com/watch?v=IZ6yPEvWJWs" target="_blank"><button id="tragicBtn" class="read-more-button">2019 Event Video</button></a>
-        </div>
-      </div>
-      <!-- London to Paris image gallery -->
-      <div class='image-wrapper'>
+    <!-- #2 #2 #2 Second row of images -->
+    <div class='second-row'> 
         <div class='row'>
           <div class='column'>
             <div class='item'>
-              <img class='img-border' src="img/l2p/l2p-design.jpg" alt="The design process">
+
+                <div class="hover-item ">
+                  <a href="https://jupiterunderfloorheating.com/technical/floor-construction/floor-and-wall-build-ups/" target="_blank">
+                    <img class="img-border" src="../img/jupiter-heating/jupiter-cover_1.jpg" alt="underfloor heating render">
+                    <span class="title">Jupiter Heating Solutions<br><br></span>
+                    <span class="description">
+                        A collection of 3D rendered underfloor heating images created as part of a website rebrand
+                    </span>
+                  </a>
+                </div>
+
             </div>
           </div>
           <div class='column'>
             <div class='item'>
-              <!-- File is too big to add it like this <img class='img-border' src="" alt="GIF rotating 3D rendered cycling jersey"> -->
-              <div style="padding:100% 0 0 0;position:relative;">
-                <iframe src="https://player.vimeo.com/video/803998934?h=6c2ffbb08e&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&loop=1&autopause=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="L2P_Day1_render1.mp4">
-              </iframe>
-            </div>
-              <script src="https://player.vimeo.com/api/player.js">
-              </script>
+
+                <div class="hover-item">
+                  <a href="prj-pages/networked-beings.html">
+                    <img class="img-border" src="../img/networked-beings/networked-beings-cover_2.jpg" alt="objects in space">
+                    <span class="title">Networked Beings<br><br></span>
+                    <span class="description">
+                        A collection of objects exploring how our interaction is influenced by object's form
+                    </span>
+                  </a>
+                </div>
+
             </div>
           </div>
           <div class='column'>
             <div class='item'>
-              <img class='img-border' src="img/l2p/l2p-event.png" alt="The Team riding">
+
+                <div class="hover-item">
+                    <a href="prj-pages/csm-show.html">
+                        <img src="../img/csm-shows/csm-shows_1.jpg" />
+                    </a>
+                    <span class="title">CSM Showcase Identity<br><br></span>
+                    <a href="prj-pages/csm-show.html"><span class="description">
+                        Creating a comprehensive brand identity for the 2024 Central Saint Martins Showcase
+                    </span></a>
+                </div>
+
             </div>
           </div>
         </div>
       </div>
-      <hr>
-    </section>
 
-    <!-- Leanne Prosvic -->
-    <section id="leanne-prosvic">
-      <div class="text-content-area">
-        <h1>
-          Leanne Prosvic Counselling & Psychotherapy
-        </h1>
-        <!-- categories to be made into links to seperate pages later on -->
-        <small>Tags: [Branding] [Web Design]</small>
-        <!-- Description and button ready when you are, just move the comment section -->
-        <div>
-          <p>
-            Leanne is an accredited existential psychotherapist practicing in Oxford and Henley-on-Thames. Our aim with the design approach was to provide a nurturing environment to facilitate growth, through a welcoming, caring and empathic brand voice. 
-          </p>
-          <button class="read-more-button"><a href="https://www.leanneprosvic.co.uk/" target="blank">Website</a></button>
-        </div>
-      </div>
-      <!-- Leanne Prosvic image gallery -->
-      <div class='image-wrapper'>
-        <div class='row'>
-          <div class='column'>
-            <div class='item'>
-              <img src="../img/leanne-prosvic/leanne-prosvic-1.jpeg" alt="Leanne Prosvic Website Mockup">
-            </div>
-          </div>
-          <div class='column'>
-            <div class='item'>
-              <img src="../img/leanne-prosvic/leanne-prosvic-2.jpeg" alt="Leanne Prosvic business cards">
-            </div>
-          </div>
-          <div class='column'>
-            <div class='item'>
-              <img src="../img/leanne-prosvic/leanne-prosvic-3.jpg" alt="Leanne Prosvic invoice">
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- <hr> --> 
-    </section>
+    </div><!-- Image Wrapper DIV ***molto importante*** -->
 
-
-  <!-- Footer line -->
-  <hr class="footer-line">
 
   <!-- Footer Section -->
   <footer>
@@ -366,41 +220,69 @@
       <div class='row'>
         <div class='column'>
           <div class='item'>
-            <h2><a href="index.html">Portfolio</a></h2>
-              <li><a href="#slate-area">SLATE - Daily Routine</a></li>
-              <li><a href="#tragic-everyday-area">The Tragic Everyday</a></li>
-              <li><a href="#leanne-prosvic">Leanne Prosvic Counselling</a></li>
-              <li><a href="/projects/project-WOOP.html">WOOP</a></li>
+
+            <h2><a href="mailto:toweyashley@yahoo.co.uk" target="_blank" class="footer-title">Get in touch</a></h2>
+
+              <div class="hover-link">
+                <a href="mailto:toweyashley@yahoo.co.uk" target="_blank" class="footer-item display">Email [→]</a>
+                <a href="mailto:toweyashley@yahoo.co.uk" target="_blank" class="footer-item on-hover">Email [↗︎]</a>
+                <br>
+              </div>
+
+              <div class="hover-link">
+                <a href="https://www.instagram.com/echelon__design/" target="_blank" class="footer-item display">Instagram [→]</a>
+                <a href="https://www.instagram.com/echelon__design/" target="_blank" class="footer-item on-hover">Instagram [↗︎]</a>
+                <br>
+              </div>
+
+              <div class="hover-link">
+                <a href="https://www.linkedin.com/in/ashley-towey/" target="_blank" class="footer-item display">Linkedin [→]</a>
+                <a href="https://www.linkedin.com/in/ashley-towey/" target="_blank" class="footer-item on-hover">Linkedin [↗︎]</a>
+
+              </div>
+
           </div>
         </div>
         <div class='column'>
           <div class='item'>
-            <h2><a href="pages/playground.html">Playground</a></h2>
-            <li><a href="pages/creative-computing.html">Creative Computing</a></li>
-            <li><a href="pages/renders.html">3D Animation</a></li>   
-            <li><a href="site-map/site-index.html">Updated Site - Coming soon!</a></li>       
+
+            <!-- BLANK Middle Section -->
+
+            <!-- 
+              <div class="hover-link contact-area">
+              <a href="#" class="link-item display"><span style="opacity: 0;">[</span>Contact<span style="opacity: 0;">]</span></a>
+              <a href="#" class="link-item on-hover">[Contact]</a>
+            </div>
+            -->
+
           </div>
         </div>
         <div class='column'>
-          <div class='item'>
-            <h2><a href="pages/contact.html">Contact</a></h2>
-            <a href="mailto:toweyashley@yahoo.co.uk" target="_blank">Email</a>
-            <br>
-            <a href="https://www.instagram.com/echelon__design/" target="_blank">Instagram</a>
-            <br>
-            <a href="https://www.linkedin.com/in/ashley-towey/" target="_blank">LinkedIn</a>
-          </div>
+
+          <div class='item footer-right'>
+
+            <h2><a href="#" class="footer-title">Navigation</a></h2>
+            
+            <div class="hover-link">
+                <a href="#portfolio-section" class="footer-item footer-link-item display"><span style="opacity: 0;">[</span>Portfolio<span style="opacity: 0;">]</span></a>
+                <a href="#portfolio-section" class="footer-item footer-link-item on-hover">[Portfolio]</a>
+            </div>
+            <div class="hover-link">
+                <a href="#portfolio-section" class="footer-item footer-link-item display"><span style="opacity: 0;">[</span>Contact<span style="opacity: 0;">]</span></a>
+                <a href="#portfolio-section" class="footer-item footer-link-item on-hover">[Contact]</a>
+            </div>
+
+            <div class="hover-link">
+              <a href="#navigation-area" class="footer-item footer-link-item display">[↖︎] Back to top</a> 
+              <a href="#navigation-area" class="footer-item footer-link-item on-hover">[↑] Back to top</a>
+            </div>
+
+            </div>
         </div>
       </div>
 
-      <br>
-      <h3 class="my-tag">A.T.</h3>
+      
   </footer>
 
-  <!-- Leave this div, it styles the outer margins -->
-  <!-- End of main "content-area" -->
-  </div>
-
 </body>
-
 </html>
