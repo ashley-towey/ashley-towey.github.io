@@ -313,8 +313,7 @@ a.footer-link-item {
     bottom: 50px;
   }
   #lower-navigation-area {
-    height: 400px;
-
+  display: none;
   }
 }
 
