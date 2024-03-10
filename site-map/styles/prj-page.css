@@ -107,6 +107,43 @@ ul.big-text {
     text-transform: uppercase;
   
   }
+
+  #navigation-area {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 80px;
+    z-index: 9998;
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.15) 65%,
+      rgba(0, 0, 0, 0.075) 75.5%,
+      rgba(0, 0, 0, 0.037) 82.85%,
+      rgba(0, 0, 0, 0.019) 88%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+  
+  #lower-navigation-area {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 70px;
+    z-index: 9998;
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.15) 65%,
+      rgba(0, 0, 0, 0.075) 75.5%,
+      rgba(0, 0, 0, 0.037) 82.85%,
+      rgba(0, 0, 0, 0.019) 88%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    rotate: 180deg;
+  }
   /* */
 
   /* Hero image section styling */
