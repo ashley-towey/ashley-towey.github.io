@@ -146,6 +146,11 @@ ul.big-text {
   }
   /* */
 
+  #networked-video {
+    margin: auto;
+    width: 80%;
+  }
+
   /* Hero image section styling */
   .mySlides img {
   height: 100%;
@@ -244,6 +249,9 @@ video {
   .fullwidth-image {
     height: 50vh;
     object-fit: contain;
+  }
+  #networked-video {
+    width: 100%;
   }
 }
 
