@@ -67,6 +67,12 @@ h4 {
 #computing-portrait:hover {
     rotate: 3deg;
 }
+
+/* this section is here to add spacing only on the computing */
+#first-computing-section {
+  margin-top: 3%;
+}
+
 img {
     width: 100%;
   }
@@ -89,6 +95,11 @@ img {
 
 .portfolio-area{
   position: absolute;
+  right: 240px;
+}
+
+.coding-area {
+  position: absolute; 
   right: 130px;
 }
 
@@ -325,6 +336,10 @@ a.footer-link-item {
     right: 16px;
     top: 20px;
   }
+  .coding-area {
+    right: 16px;
+    top: 80px;
+  }
   .prev, .next {
     bottom: 100px;
   }
@@ -346,6 +361,11 @@ a.footer-link-item {
     width: 35vh;
     left: 20%;
     top: 22%;
+}
+
+/* padding for computing section */ 
+#first-computing-section {
+  margin-top: 110px;
 }
 
 }

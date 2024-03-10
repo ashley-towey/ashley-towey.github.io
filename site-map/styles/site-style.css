@@ -70,6 +70,11 @@ img {
 
 .portfolio-area{
   position: absolute;
+  right: 240px;
+}
+
+.coding-area {
+  position: absolute; 
   right: 130px;
 }
 
@@ -305,6 +310,10 @@ a.footer-link-item {
   .contact-area {
     right: 16px;
     top: 20px;
+  }
+  .coding-area {
+    right: 16px;
+    top: 80px;
   }
   .prev, .next {
     bottom: 100px;
