@@ -299,6 +299,14 @@ a.footer-link-item {
   padding-right: 8px;
 }
 
+.brands-column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
 .item {
   padding-top: 16px;
 
@@ -344,6 +352,9 @@ a.footer-link-item {
 
 @media screen and (min-width: 1000px) {
   .column {
+    flex: 1
+  }
+  .brands-column {
     flex: 1
   }
 
