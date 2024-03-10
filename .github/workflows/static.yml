@@ -38,7 +38,7 @@ jobs:
         with:
           # Upload entire repository
           # Link to specific page within sub-directory
-          path: '.'
+          path: './site-map'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
