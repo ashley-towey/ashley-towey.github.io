@@ -166,6 +166,10 @@ ul.big-text {
   object-fit: cover;
 }
 
+#centered-video {
+  padding:40% 0 0 0;
+}
+
 /* Footer Styling */ 
 footer {
   background-color: #dfdfdf;
@@ -261,6 +265,9 @@ video {
   }
   #networked-video {
     width: 100%;
+  }
+  #centered-video {
+    padding:60% 0 0 0;
   }
 }
 
