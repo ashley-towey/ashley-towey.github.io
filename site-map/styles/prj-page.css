@@ -269,6 +269,9 @@ video {
   #centered-video {
     padding:60% 0 0 0;
   }
+  .item {
+    padding-top: 16px;
+  }
 }
 
 @media screen and (min-width: 1000px) {
