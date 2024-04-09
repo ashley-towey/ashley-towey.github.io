@@ -9,13 +9,8 @@ window.addEventListener("load", function() {
         body: data,
       })
       .then(() => {
-        alert("Success!");
+        window.location.href="../index.html";
       })
     });
   });
 
-  console.log("Hello World");
-
-//   function formSubmitted() {
-//     window.location.href="../index.html";
-//   }
