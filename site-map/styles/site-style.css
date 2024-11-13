@@ -3,11 +3,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300;400;500;600;700&display=swap');
 
 body {
-  font-family: 'Spline Sans Mono', monospace;
+  font-family: "halyard-text", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+
   background-color: #f2f2f2;
   color: #1c1c1c;
   margin: 0%;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 img {
@@ -70,12 +73,12 @@ img {
 
 .portfolio-area{
   position: absolute;
-  right: 240px;
+  right: 275px;
 }
 
 .coding-area {
   position: absolute; 
-  right: 130px;
+  right: 150px;
 }
 
 .contact-area {
@@ -84,21 +87,22 @@ img {
 }
 
 .page-title {
+  font-family: 'halyard-display', sans-serif;
   color: #ffffff;
   font-weight: 900;
   text-decoration: none;
-  font-size: 23px;
+  font-size: 32px;
 }
 
 .page-title:hover {
-  color: #f2f2f2;
+  color: #c0c0c0;
 }
 
 a.link-item {
   color: white;
   text-decoration: none;
   font-weight: 900;
-  font-size: 18px;
+  font-size: 22px;
   text-transform: uppercase;
 }
 /* */
@@ -137,8 +141,8 @@ a {
   width: auto;
   padding: 16px;
   color: white;
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: 300;
+  font-size: 18px;
   transition: 0.5s ease;
   /* border-radius: 0 3px 3px 0; */
   user-select: none;
@@ -162,7 +166,7 @@ a {
 /* Caption text */
 .text {
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   padding: 16px;
   position: absolute;
   bottom: 0px;
@@ -170,7 +174,7 @@ a {
   /* width: 100%; */
   text-align: center;
   text-transform: uppercase;
-  font-weight: 900;
+  font-weight: 300;
   text-decoration: none;
 
   z-index: 9999;
@@ -180,7 +184,7 @@ a {
 /* Number text (1/3 etc) */
 .numbertext {
   color: white;
-  font-size: 12px;
+  font-size: 16px;
   padding: 16px;
   position: absolute;
   bottom: 0px;
@@ -213,11 +217,11 @@ a {
 /* Fading animation */
 .fade {
   animation-name: fade;
-  animation-duration: 1s;
+  animation-duration: 0s;
 }
 
 @keyframes fade {
-  from {opacity: 0.9}
+  from {opacity: 0.5}
   to {opacity: 1}
 }
 
