@@ -1,13 +1,16 @@
 /* Place in your CSS file at the top of the document */
 
-@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300;400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300;400;500;600;700&display=swap'); */
 
 body {
-  font-family: 'Spline Sans Mono', monospace;
+  font-family: "halyard-text", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+
   background-color: #f2f2f2;
   color: #1c1c1c;
   margin: 0%;
-  font-size: 15px;
+  font-size: 20px;
 }
 /* h2 is the main size for titles and headers */
 h2 {
@@ -80,12 +83,12 @@ ul.big-text {
   
   .portfolio-area{
     position: absolute;
-    right: 240px;
+    right: 275px;
   }
   
   .coding-area {
     position: absolute; 
-    right: 130px;
+    right: 150px;
   }
   
   .contact-area {
@@ -97,18 +100,18 @@ ul.big-text {
     color: #ffffff;
     font-weight: 900;
     text-decoration: none;
-    font-size: 23px;
+    font-size: 32px;
   }
   
   .page-title:hover {
-    color: #f2f2f2;
+    color: #c0c0c0;
   }
   
   a.link-item {
     color: white;
     text-decoration: none;
     font-weight: 900;
-    font-size: 18px;
+    font-size: 22px;
     text-transform: uppercase;
   
   }
