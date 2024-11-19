@@ -1,21 +1,34 @@
 /* Place in your CSS file at the top of the document */
 
-@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300;400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300;400;500;600;700&display=swap'); */
 
 body {
-  font-family: 'Spline Sans Mono', monospace;
+  font-family: "halyard-text", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+
   background-color: #f2f2f2;
   color: #1c1c1c;
   margin: 0%;
-  font-size: 15px;
+  font-size: 20px;
+}
+
+/* h2 is the main size for titles and headers */
+h2 {
+  font-family: "halyard-text", sans-serif;
+
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 26px;
 }
 
 h4 {
     color: black;
-    font-weight: 300;
-    font-size: 16px;
+    font-weight: 100;
+    /* font-size: 16px; */
     text-transform: uppercase;
   }
+
 .contact-description {
     margin-bottom: 0px;
     padding-bottom: 0px;
@@ -95,12 +108,12 @@ img {
 
 .portfolio-area{
   position: absolute;
-  right: 240px;
+  right: 275px;
 }
 
 .coding-area {
   position: absolute; 
-  right: 130px;
+  right: 150px;
 }
 
 .contact-area {
@@ -109,26 +122,34 @@ img {
 }
 
 .page-title {
-  color: #000000;
+  font-family: 'halyard-display', sans-serif;
+
+  color: black;
   font-weight: 900;
   text-decoration: none;
-  font-size: 23px;
+  font-size: 32px;
 }
 
 .page-title:hover {
-  color: #323232;
+  color: #c0c0c0;
 }
 
 a.link-item {
+  font-family: 'halyard-display', sans-serif;
+
   color: black;
   text-decoration: none;
   font-weight: 900;
-  font-size: 18px;
+  letter-spacing: 1px;
+  font-size: 22px;
   text-transform: uppercase;
 }
 /* */
 
 a {
+  font-family: 'halyard-display', sans-serif;
+  font-weight: 300;
+
   text-decoration: none;
   color: black;
 }
@@ -256,24 +277,31 @@ footer {
 }
 
 a.footer-item {
+  font-family: "halyard-display", sans-serif;
   text-transform:uppercase;
   color: black;
   text-decoration: none;
   line-height: 1.8em;
   font-weight: 500;
+  letter-spacing: 1px;
 }
 
 .footer-title {
+  font-family: "halyard-display", sans-serif;
   color: black;
-  font-weight: 300;
+  font-weight: 100;
+  letter-spacing: 2px;
   text-transform: uppercase;
   text-decoration: none;
 }
 
 a.footer-link-item {
+    font-family: "halyard-display", sans-serif;
     color: black;
     text-decoration: none;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
   }
 
 /* .link-hover {
