@@ -2,6 +2,10 @@
 
 /* @import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300;400;500;600;700&display=swap'); */
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
   font-family: "halyard-text", sans-serif;
   font-weight: 300;
@@ -21,8 +25,24 @@ h2 {
 
 /* h4 is the small title which appears above text */ 
 h4 {
-  font-weight: 300;
+  font-weight: 100;
   text-transform: uppercase;
+  padding-top: 10px;
+}
+
+.center-icon {
+  color: white;
+  font-size: 16px;
+  padding: 16px;
+  position: absolute;
+  bottom: 0px;
+  left: 25%;
+  width: 50%;
+  align-items: center;
+  text-align: center;
+  font-weight: 300;
+
+  z-index: 9999;
 }
 
 /* adding padding around the hero quote */
@@ -114,6 +134,12 @@ ul.big-text {
     font-size: 22px;
     text-transform: uppercase;
   
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+    /* scroll-behavior: smooth; */
   }
 
   #navigation-area {
