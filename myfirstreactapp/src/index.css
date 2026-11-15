@@ -1,13 +1,47 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  color-scheme: light;
+  --paper: #CFCBC0;
+  --surface: #d6d9dd;
+  --ink: #101112;
+  --muted: #53565b;
+  --line-strong: rgba(35, 39, 43, .48);
+  --orange: #ed5a08;
+  --registration-mark-image: url('./assets/plus-icon.svg');
+  --registration-line-overlap: 14px;
+  --section-inset: 24px;
+  --registration-mark-size: 18px;
+  --registration-mark-offset: 9px;
+  --registration-mark-clearance: 24px;
+  background: var(--paper);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #302F2B;
+  --surface: #3B3933;
+  --ink: #F0EEE8;
+  --muted: #B9B6AE;
+  --line-strong: rgba(235, 232, 222, .42);
+  --orange: #ff7830;
 }
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color .25s ease, color .25s ease;
+}
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+img { max-width: 100%; }
+
+::selection { background: var(--orange); color: white; }
