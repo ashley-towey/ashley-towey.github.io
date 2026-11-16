@@ -12,8 +12,10 @@ npm start
 
 Then open [http://localhost:3000](http://localhost:3000). The page refreshes as you edit the React source. Project pages use hash routes such as `/#/project/slate`, and the about/contact page is at `/#/about`.
 
-## Prepare the live preview
+## Deploy the live preview
 
-Run `npm run build:preview` from this folder. It writes a static build to the repository-level `preview/` directory. The existing GitHub Pages workflow publishes that directory with the rest of the site, and the React app uses hash routes so project pages also work when opened or refreshed on GitHub Pages.
+The GitHub Pages workflow builds this app from source and writes the static output to the repository-level `preview/` directory before publishing the site. You only need to commit changes to this app's source; the generated bundles are created during deployment. The app uses hash routes so project pages work when opened or refreshed on GitHub Pages.
+
+To generate the production output locally, run `npm run build:preview` from this folder.
 
 The app uses the existing Create React App dependencies in this folder. No additional installation is needed on this machine.

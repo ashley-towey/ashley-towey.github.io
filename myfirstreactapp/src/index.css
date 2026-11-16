@@ -1,3 +1,39 @@
+@property --paper {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #CFCBC0;
+}
+
+@property --surface {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #d6d9dd;
+}
+
+@property --ink {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #101112;
+}
+
+@property --muted {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #53565b;
+}
+
+@property --line-strong {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(35, 39, 43, .48);
+}
+
+@property --orange {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ed5a08;
+}
+
 :root {
   color-scheme: light;
   --paper: #CFCBC0;
@@ -6,6 +42,13 @@
   --muted: #53565b;
   --line-strong: rgba(35, 39, 43, .48);
   --orange: #ed5a08;
+  --button-font-weight: 500;
+  transition: --paper .3s cubic-bezier(.65, 0, .35, 1),
+    --surface .3s cubic-bezier(.65, 0, .35, 1),
+    --ink .3s cubic-bezier(.65, 0, .35, 1),
+    --muted .3s cubic-bezier(.65, 0, .35, 1),
+    --line-strong .3s cubic-bezier(.65, 0, .35, 1),
+    --orange .3s cubic-bezier(.65, 0, .35, 1);
   --registration-mark-image: url('./assets/plus-icon.svg');
   --registration-line-overlap: 14px;
   --section-inset: 24px;
@@ -37,7 +80,6 @@ body {
   font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  transition: background-color .25s ease, color .25s ease;
 }
 
 button, a { -webkit-tap-highlight-color: transparent; }
