@@ -4,14 +4,12 @@
 }
 
 .site-header {
+  position: relative;
   height: 88px;
   padding-inline: var(--section-inset);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 20;
   background:
     linear-gradient(to bottom, var(--line-strong) calc(100% - var(--registration-mark-clearance)), transparent calc(100% - var(--registration-mark-clearance))) left top / 1px 100% no-repeat,
     linear-gradient(to bottom, var(--line-strong) calc(100% - var(--registration-mark-clearance)), transparent calc(100% - var(--registration-mark-clearance))) right top / 1px 100% no-repeat,
@@ -49,49 +47,6 @@
   align-items: center;
   gap: 20px;
 }
-
-.name-pill,
-.nav-pill,
-.theme-toggle {
-  border: 1px solid var(--line-strong);
-  color: var(--ink);
-  background: transparent;
-  text-transform: uppercase;
-  text-decoration: none;
-  letter-spacing: .02em;
-}
-
-.name-pill,
-.nav-pill {
-  display: inline-flex;
-  min-height: 40px;
-  align-items: center;
-  padding: 0 18px;
-  border-radius: 99px;
-}
-
-.name-pill { font-size: 14px; }
-.nav-pill { font-size: 13px; }
-
-.name-pill:hover,
-.nav-pill:hover,
-.theme-toggle:hover {
-  color: var(--orange);
-  border-color: var(--orange);
-}
-
-.theme-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  font: inherit;
-  font-size: 21px;
-  display: grid;
-  place-items: center;
-}
-
-.theme-toggle span { color: var(--orange); line-height: 1; }
 
 .frame-sides {
   background:
@@ -256,13 +211,7 @@
 .project-card:focus-visible .project-card__description { max-height: 90px; opacity: 1; transform: translateY(0); }
 .project-card:hover .project-card__open,
 .project-card:focus-visible .project-card__open { max-height: 24px; opacity: 1; }
-.project-card__open span { color: #ffb078; padding-left: 4px; }
-
 .project-card:focus-visible,
-.text-link:focus-visible,
-.name-pill:focus-visible,
-.nav-pill:focus-visible,
-.theme-toggle:focus-visible,
 .next-project__link:focus-visible {
   outline: 2px solid var(--orange);
   outline-offset: 4px;
@@ -285,19 +234,6 @@
   font-weight: 500;
   margin: 16px 0 24px;
 }
-
-.text-link {
-  color: var(--ink);
-  width: fit-content;
-  font-size: 13px;
-  text-decoration: none;
-  border-bottom: 1px solid var(--line-strong);
-  padding-bottom: 5px;
-  transition: color .2s ease, border-color .2s ease;
-}
-
-.text-link:hover { color: var(--orange); border-color: var(--orange); }
-.text-link span { color: var(--orange); padding-left: 5px; }
 
 .project-intro {
   min-height: 390px;
@@ -388,8 +324,6 @@
   cursor: pointer;
 }
 
-.next-project__link span:last-child { color: var(--orange); font-size: .65em; }
-
 .about-intro {
   min-height: 330px;
   padding: 42px 24px;
@@ -435,8 +369,6 @@
 .about-skills p { font-size: 18px; line-height: 1.75; }
 
 .about-closer { min-height: 185px; display: flex; justify-content: space-between; align-items: center; padding: 30px var(--section-inset); gap: 20px; }
-.text-link--large { font-size: clamp(22px, 3.4vw, 42px); border-bottom: 0; letter-spacing: -.05em; }
-
 .not-found { min-height: 60vh; padding: 50px 24px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
 .not-found h1 { max-width: 650px; font-size: clamp(40px, 6vw, 76px); letter-spacing: -.07em; line-height: 1; font-weight: 500; }
 
@@ -465,15 +397,11 @@
 .site-footer::before { left: 0; transform: translateX(-50%); }
 .site-footer::after { right: 0; transform: translateX(50%); }
 
-.footer-name { color: var(--ink); text-decoration: none; font-size: 12px; }
-
 @media (max-width: 780px) {
   :root { --section-inset: 16px; }
   .site-shell { width: calc(100% - 36px); }
   .site-header { height: 70px; }
   .site-header nav { gap: 10px; }
-  .name-pill, .nav-pill { min-height: 36px; padding-inline: 13px; font-size: 11px; }
-  .theme-toggle { width: 36px; height: 36px; }
   .home-intro { min-height: 360px; padding: 34px var(--section-inset) 26px; }
   .home-intro h1 { font-size: clamp(36px, 8vw, 58px); }
   .registration-line { padding-inline: var(--section-inset); font-size: 12px; }
@@ -511,9 +439,7 @@
 
 @media (max-width: 500px) {
   .site-shell { width: calc(100% - 28px); }
-  .name-pill { padding-inline: 10px; font-size: 10px; }
   .site-header nav { gap: 7px; }
-  .nav-pill { font-size: 10px; padding-inline: 10px; }
   .home-intro { min-height: 340px; }
   .project-grid { grid-template-columns: 1fr; gap: 16px; }
   .project-card__image { aspect-ratio: 1.18 / 1; }

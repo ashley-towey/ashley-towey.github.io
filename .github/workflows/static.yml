@@ -33,6 +33,18 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: myfirstreactapp/package-lock.json
+      - name: Install React app dependencies
+        run: npm ci
+        working-directory: myfirstreactapp
+      - name: Build React preview
+        run: npm run build:preview
+        working-directory: myfirstreactapp
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

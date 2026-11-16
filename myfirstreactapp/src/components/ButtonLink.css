@@ -1,0 +1,114 @@
+@property --slider-x {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0px;
+}
+
+@property --slider-width {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 40px;
+}
+
+.button-link {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: var(--button-font-weight);
+  letter-spacing: .02em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.button-link--primary {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: max-content max-content;
+  grid-template-rows: 1fr;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 0;
+  --slider-x: 0px;
+  --slider-width: var(--segment-start, 40px);
+  transition: --slider-x .38s cubic-bezier(.65, 0, .35, 1), --slider-width .38s cubic-bezier(.65, 0, .35, 1);
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.button-link__slider {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 0;
+  width: var(--slider-width);
+  border-radius: inherit;
+  background: var(--paper);
+  pointer-events: none;
+  transform: translateX(var(--slider-x));
+}
+
+.button-link__segment {
+  grid-row: 1;
+  position: relative;
+  z-index: 1;
+  padding: 8px 13px;
+  color: var(--paper);
+  text-align: center;
+}
+
+.button-link__segment::after {
+  content: attr(data-label);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.button-link__segment--first::after {
+  clip-path: inset(0 max(0px, calc(var(--segment-start) - var(--slider-x) - var(--slider-width))) 0 var(--slider-x));
+}
+
+.button-link__segment--last::after {
+  clip-path: inset(0 max(0px, calc(var(--segment-start) + var(--segment-end) - var(--slider-x) - var(--slider-width))) 0 max(0px, calc(var(--slider-x) - var(--segment-start))));
+}
+
+.button-link__segment--first { grid-column: 1; }
+.button-link__segment--last { grid-column: 2; }
+
+.button-link--primary:focus-visible {
+  --slider-x: var(--segment-start, 40px);
+  --slider-width: var(--segment-end, 40px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button-link--primary:hover {
+    --slider-x: var(--segment-start, 40px);
+    --slider-width: var(--segment-end, 40px);
+  }
+}
+
+.button-link--secondary {
+  padding: 8px 13px;
+  background: var(--paper);
+}
+
+.button-link:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+}
+
+@media (max-width: 780px) {
+  .button-link { min-height: 36px; font-size: 11px; }
+  .button-link--primary .button-link__segment { padding-inline: 10px; }
+}
+
+@media (max-width: 500px) {
+  .button-link { font-size: 10px; }
+}

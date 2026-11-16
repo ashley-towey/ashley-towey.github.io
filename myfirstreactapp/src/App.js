@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import ButtonLink from './components/ButtonLink';
+import ThemeToggle from './components/ThemeToggle';
 import './App.css';
 
 const projects = [
@@ -117,18 +119,10 @@ function useRoute() {
 function Header({ linkProps, darkMode, setDarkMode }) {
   return (
     <header className="site-header">
-      <a className="name-pill" {...linkProps('/')}>Ashley Towey</a>
+      <ButtonLink first="Ashley" second="Towey" {...linkProps('/')} />
       <nav aria-label="Main navigation">
-        <a className="nav-pill" {...linkProps('/about')}>Contact</a>
-        <button
-          className="theme-toggle"
-          type="button"
-          onClick={() => setDarkMode(!darkMode)}
-          aria-label={`Switch to ${darkMode ? 'light' : 'dark'} theme`}
-          title={`Switch to ${darkMode ? 'light' : 'dark'} theme`}
-        >
-          <span aria-hidden="true">{darkMode ? '☾' : '☼'}</span>
-        </button>
+        <ButtonLink first="Contact" second="me" {...linkProps('/about')} />
+        <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
       </nav>
     </header>
   );
@@ -146,7 +140,7 @@ function ProjectCard({ project, index, linkProps }) {
         <span className="project-card__caption">
           <span className="project-card__title">{project.title}</span>
           <span className="project-card__description">{project.description}</span>
-          <span className="project-card__open">View project <span aria-hidden="true">↗</span></span>
+          <span className="project-card__open">View project</span>
         </span>
       </div>
     </a>
@@ -166,7 +160,7 @@ function Home({ linkProps }) {
       <section className="home-closer frame-sides">
         <p className="eyebrow">Have something in mind?</p>
         <h2>Let’s make it<br />mean something.</h2>
-        <a className="text-link" {...linkProps('/about')}>Get in touch <span aria-hidden="true">↗</span></a>
+        <ButtonLink variant="secondary" {...linkProps('/about')}>Get in touch</ButtonLink>
       </section>
     </main>
   );
@@ -202,9 +196,9 @@ function ProjectPage({ project, linkProps, onNavigate }) {
       <section className="next-project frame-sides">
         <span className="eyebrow">Next project</span>
         <button className="next-project__link" type="button" onClick={() => onNavigate(`/project/${nextProject.slug}`)}>
-          <span>{nextProject.title}</span><span aria-hidden="true">↗</span>
+          <span>{nextProject.title}</span>
         </button>
-        <a className="text-link" {...linkProps('/')}>All projects <span aria-hidden="true">↗</span></a>
+        <ButtonLink variant="secondary" {...linkProps('/')}>All projects</ButtonLink>
       </section>
     </main>
   );
@@ -232,9 +226,9 @@ function About({ linkProps }) {
           <p>I’m currently studying Graphic Communication Design at Central Saint Martins and have completed a Diploma in Creative Computing. I explore how design and technology can give people more agency, especially when experiences connect the screen with the world around us.</p>
           <p>Cycling is the lens through which I see much of the world: a way to travel, notice, and make connections. It often finds its way into the projects I make.</p>
           <div className="about-links">
-            <a className="text-link" href="mailto:toweyashley@yahoo.co.uk">Email me <span aria-hidden="true">↗</span></a>
-            <a className="text-link" href="https://www.instagram.com/echelon__design/" target="_blank" rel="noreferrer">Instagram <span aria-hidden="true">↗</span></a>
-            <a className="text-link" href="https://www.linkedin.com/in/ashley-towey/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+            <ButtonLink variant="secondary" href="mailto:toweyashley@yahoo.co.uk">Email me</ButtonLink>
+            <ButtonLink variant="secondary" href="https://www.instagram.com/echelon__design/" target="_blank" rel="noreferrer">Instagram</ButtonLink>
+            <ButtonLink variant="secondary" href="https://www.linkedin.com/in/ashley-towey/" target="_blank" rel="noreferrer">LinkedIn</ButtonLink>
           </div>
         </div>
       </section>
@@ -247,8 +241,8 @@ function About({ linkProps }) {
       <RegistrationLine>Contact</RegistrationLine>
       <section className="about-closer frame-sides">
         <p className="eyebrow">Have a project in mind?</p>
-        <a className="text-link text-link--large" href="mailto:toweyashley@yahoo.co.uk">Start a conversation <span aria-hidden="true">↗</span></a>
-        <a className="text-link" {...linkProps('/')}>← Back to the work</a>
+        <ButtonLink variant="secondary" href="mailto:toweyashley@yahoo.co.uk">Start a conversation</ButtonLink>
+        <ButtonLink variant="secondary" {...linkProps('/')}>← Back to the work</ButtonLink>
       </section>
     </main>
   );
@@ -257,9 +251,9 @@ function About({ linkProps }) {
 function Footer({ linkProps }) {
   return (
     <footer className="site-footer">
-      <a className="footer-name" {...linkProps('/')}>Ashley Towey</a>
+      <ButtonLink variant="secondary" {...linkProps('/')}>Ashley Towey</ButtonLink>
       <span>Design · Computing · Creativity</span>
-      <a className="text-link" href="mailto:toweyashley@yahoo.co.uk">Say hello ↗</a>
+      <ButtonLink variant="secondary" href="mailto:toweyashley@yahoo.co.uk">Say hello</ButtonLink>
       <span>© {new Date().getFullYear()}</span>
     </footer>
   );
@@ -285,7 +279,7 @@ function App() {
   let page;
   if (route.startsWith('/about')) page = <About linkProps={linkProps} />;
   else if (project) page = <ProjectPage project={project} linkProps={linkProps} onNavigate={navigate} />;
-  else if (projectMatch) page = <main className="not-found frame-sides"><p className="eyebrow">Project not found</p><h1>Let’s get you back to the work.</h1><a className="text-link" {...linkProps('/')}>View all projects <span aria-hidden="true">↗</span></a></main>;
+  else if (projectMatch) page = <main className="not-found frame-sides"><p className="eyebrow">Project not found</p><h1>Let’s get you back to the work.</h1><ButtonLink variant="secondary" {...linkProps('/')}>View all projects</ButtonLink></main>;
   else page = <Home linkProps={linkProps} />;
 
   return (
