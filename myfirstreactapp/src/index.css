@@ -34,7 +34,44 @@
   initial-value: #ed5a08;
 }
 
+@font-face {
+  font-family: 'Neue Regrade';
+  src: url('./assets/fonts/neue-regrade-variable.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Domestique';
+  src: url('./assets/fonts/domestique-regular.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
+  /* Typography tokens shared by the app. Keep roles here so each page and
+     component uses the same family, scale, and weights. */
+  --font-family-sans: 'Neue Regrade', Arial, sans-serif;
+  --font-family-numerical: 'Domestique', var(--font-family-sans);
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --type-h1-size: clamp(38px, 3.6vw, 62px);
+  --type-h1-weight: var(--font-weight-bold);
+  --type-h2-size: clamp(32px, 3vw, 50px);
+  --type-h2-weight: var(--font-weight-medium);
+  --type-h3-size: clamp(24px, 2.5vw, 36px);
+  --type-h3-weight: var(--font-weight-medium);
+  --type-h3-line-height: 1.15;
+  --type-h3-letter-spacing: -.02em;
+  --type-body-size: 16px;
+  --type-body-weight: var(--font-weight-regular);
+  --type-body-line-height: 1.5;
+  --type-caption-1-size: 13px;
+  --type-caption-1-weight: var(--font-weight-semibold);
   color-scheme: light;
   --paper: #CFCBC0;
   --surface: #d6d9dd;
@@ -42,7 +79,6 @@
   --muted: #53565b;
   --line-strong: rgba(35, 39, 43, .48);
   --orange: #ed5a08;
-  --button-font-weight: 500;
   transition: --paper .3s cubic-bezier(.65, 0, .35, 1),
     --surface .3s cubic-bezier(.65, 0, .35, 1),
     --ink .3s cubic-bezier(.65, 0, .35, 1),
@@ -77,9 +113,43 @@ body {
   min-width: 320px;
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-family: var(--font-family-sans);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-family-sans); }
+h2 {
+  font-size: var(--type-h2-size);
+  font-weight: var(--type-h2-weight);
+  letter-spacing: -.02em;
+}
+h3 {
+  margin: 0;
+  font-size: var(--type-h3-size);
+  font-weight: var(--type-h3-weight);
+  line-height: var(--type-h3-line-height);
+  letter-spacing: var(--type-h3-letter-spacing);
+}
+.type-numerical { font-family: var(--font-family-numerical); font-weight: var(--font-weight-regular); }
+.type-body {
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-line-height);
+}
+.caption-2 {
+  font-size: 13px;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.caption-1 {
+  font-size: var(--type-caption-1-size);
+  font-weight: var(--type-caption-1-weight);
+  letter-spacing: .04em;
+  text-transform: uppercase;
 }
 
 button, a { -webkit-tap-highlight-color: transparent; }
