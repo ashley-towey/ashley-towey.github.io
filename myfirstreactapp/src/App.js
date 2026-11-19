@@ -129,7 +129,7 @@ function Header({ linkProps, darkMode, setDarkMode }) {
 }
 
 function RegistrationLine({ children, id }) {
-  return <div className="registration-line" id={id}><span>{children}</span></div>;
+  return <div className="registration-line caption-2" id={id}><span>{children}</span></div>;
 }
 
 function ProjectCard({ project, index, linkProps }) {
@@ -137,11 +137,11 @@ function ProjectCard({ project, index, linkProps }) {
     <a className="project-card" {...linkProps(`/project/${project.slug}`)}>
       <div className="project-card__image">
         <img src={imageUrl(project.cover)} alt={project.alt} loading={index < 3 ? 'eager' : 'lazy'} />
-        <span className="project-card__caption">
-          <span className="project-card__title">{project.title}</span>
-          <span className="project-card__description">{project.description}</span>
-          <span className="project-card__open">View project</span>
-        </span>
+        <div className="project-card__caption">
+          <h3>{project.title}</h3>
+          <p className="type-body">{project.description}</p>
+          <span className="project-card__open caption-2">View project</span>
+        </div>
       </div>
     </a>
   );
@@ -158,7 +158,7 @@ function Home({ linkProps }) {
         {projects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} linkProps={linkProps} />)}
       </section>
       <section className="home-closer frame-sides">
-        <p className="eyebrow">Have something in mind?</p>
+        <p className="eyebrow caption-2">Have something in mind?</p>
         <h2>Let’s make it<br />mean something.</h2>
         <ButtonLink variant="secondary" {...linkProps('/about')}>Get in touch</ButtonLink>
       </section>
@@ -174,15 +174,15 @@ function ProjectPage({ project, linkProps, onNavigate }) {
     <main className="project-page">
       <section className="project-intro frame-sides">
         <div className="project-intro__title">
-          <p className="eyebrow">Project {String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</p>
+          <p className="eyebrow caption-2">Project {String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</p>
           <h1>{project.title}</h1>
-          <div className="client-block"><span className="eyebrow">Client</span><strong>{project.client}</strong></div>
+          <div className="client-block"><span className="eyebrow caption-2">Client</span><h2>{project.client}</h2></div>
         </div>
-        <p className="project-intro__description">{project.description}</p>
+        <p className="type-body">{project.description}</p>
         <div className="project-intro__meta">
-          <span className="eyebrow">Disciplines</span>
-          <ul>{project.disciplines.map((discipline) => <li key={discipline}>{discipline}</li>)}</ul>
-          {project.year && <span className="project-year">{project.year}</span>}
+          <span className="eyebrow caption-2">Disciplines</span>
+          <ul>{project.disciplines.map((discipline) => <li className="caption-2" key={discipline}>{discipline}</li>)}</ul>
+          {project.year && <span className="project-year caption-2">{project.year}</span>}
         </div>
       </section>
       <RegistrationLine>Project imagery</RegistrationLine>
@@ -194,10 +194,12 @@ function ProjectPage({ project, linkProps, onNavigate }) {
         ))}
       </section>
       <section className="next-project frame-sides">
-        <span className="eyebrow">Next project</span>
-        <button className="next-project__link" type="button" onClick={() => onNavigate(`/project/${nextProject.slug}`)}>
-          <span>{nextProject.title}</span>
-        </button>
+        <span className="eyebrow caption-2">Next project</span>
+        <h3>
+          <button type="button" onClick={() => onNavigate(`/project/${nextProject.slug}`)}>
+            <span>{nextProject.title}</span>
+          </button>
+        </h3>
         <ButtonLink variant="secondary" {...linkProps('/')}>All projects</ButtonLink>
       </section>
     </main>
@@ -209,22 +211,22 @@ function About({ linkProps }) {
     <main className="about-page">
       <section className="about-intro frame-sides">
         <div>
-          <p className="eyebrow">About Ashley</p>
+          <p className="eyebrow caption-2">About Ashley</p>
           <h1>Designer, programmer and cyclist.</h1>
         </div>
-        <p className="about-lede">I’m a designer working between the digital and physical. My practice uses interaction, identity and technology to make useful, thoughtful experiences.</p>
+        <p className="type-body">I’m a designer working between the digital and physical. My practice uses interaction, identity and technology to make useful, thoughtful experiences.</p>
       </section>
       <RegistrationLine>About</RegistrationLine>
       <section className="about-details frame-sides">
         <div className="about-photo">
           <img src={imageUrl('about-profile.jpeg')} alt="Portrait of Ashley Towey" />
-          <span className="eyebrow">London, UK · Available for select projects</span>
+          <span className="eyebrow caption-2">London, UK · Available for select projects</span>
         </div>
         <div className="about-copy">
-          <p className="eyebrow">A little more</p>
+          <p className="eyebrow caption-2">A little more</p>
           <h2>Curiosity in motion.</h2>
-          <p>I’m currently studying Graphic Communication Design at Central Saint Martins and have completed a Diploma in Creative Computing. I explore how design and technology can give people more agency, especially when experiences connect the screen with the world around us.</p>
-          <p>Cycling is the lens through which I see much of the world: a way to travel, notice, and make connections. It often finds its way into the projects I make.</p>
+          <p className="type-body">I’m currently studying Graphic Communication Design at Central Saint Martins and have completed a Diploma in Creative Computing. I explore how design and technology can give people more agency, especially when experiences connect the screen with the world around us.</p>
+          <p className="type-body">Cycling is the lens through which I see much of the world: a way to travel, notice, and make connections. It often finds its way into the projects I make.</p>
           <div className="about-links">
             <ButtonLink variant="secondary" href="mailto:toweyashley@yahoo.co.uk">Email me</ButtonLink>
             <ButtonLink variant="secondary" href="https://www.instagram.com/echelon__design/" target="_blank" rel="noreferrer">Instagram</ButtonLink>
@@ -234,13 +236,13 @@ function About({ linkProps }) {
       </section>
       <RegistrationLine>Experience &amp; interests</RegistrationLine>
       <section className="about-skills frame-sides">
-        <div><span className="eyebrow">01 / Practice</span><p>Interaction design<br />Creative technology<br />Identity &amp; art direction<br />Physical computing</p></div>
-        <div><span className="eyebrow">02 / In the toolkit</span><p>Prototyping<br />Web design<br />3D design<br />Type &amp; print</p></div>
-        <div><span className="eyebrow">03 / Outside the studio</span><p>Cycling<br />Coffee<br />Good conversations<br />Getting lost on purpose</p></div>
+        <div><span className="eyebrow caption-2">01 / Practice</span><p className="type-body">Interaction design<br />Creative technology<br />Identity &amp; art direction<br />Physical computing</p></div>
+        <div><span className="eyebrow caption-2">02 / In the toolkit</span><p className="type-body">Prototyping<br />Web design<br />3D design<br />Type &amp; print</p></div>
+        <div><span className="eyebrow caption-2">03 / Outside the studio</span><p className="type-body">Cycling<br />Coffee<br />Good conversations<br />Getting lost on purpose</p></div>
       </section>
       <RegistrationLine>Contact</RegistrationLine>
       <section className="about-closer frame-sides">
-        <p className="eyebrow">Have a project in mind?</p>
+        <p className="eyebrow caption-2">Have a project in mind?</p>
         <ButtonLink variant="secondary" href="mailto:toweyashley@yahoo.co.uk">Start a conversation</ButtonLink>
         <ButtonLink variant="secondary" {...linkProps('/')}>← Back to the work</ButtonLink>
       </section>
@@ -250,7 +252,7 @@ function About({ linkProps }) {
 
 function Footer({ linkProps }) {
   return (
-    <footer className="site-footer">
+    <footer className="site-footer caption-2">
       <ButtonLink variant="secondary" {...linkProps('/')}>Ashley Towey</ButtonLink>
       <span>Design · Computing · Creativity</span>
       <ButtonLink variant="secondary" href="mailto:toweyashley@yahoo.co.uk">Say hello</ButtonLink>
@@ -279,7 +281,7 @@ function App() {
   let page;
   if (route.startsWith('/about')) page = <About linkProps={linkProps} />;
   else if (project) page = <ProjectPage project={project} linkProps={linkProps} onNavigate={navigate} />;
-  else if (projectMatch) page = <main className="not-found frame-sides"><p className="eyebrow">Project not found</p><h1>Let’s get you back to the work.</h1><ButtonLink variant="secondary" {...linkProps('/')}>View all projects</ButtonLink></main>;
+  else if (projectMatch) page = <main className="not-found frame-sides"><p className="eyebrow caption-2">Project not found</p><h1>Let’s get you back to the work.</h1><ButtonLink variant="secondary" {...linkProps('/')}>View all projects</ButtonLink></main>;
   else page = <Home linkProps={linkProps} />;
 
   return (

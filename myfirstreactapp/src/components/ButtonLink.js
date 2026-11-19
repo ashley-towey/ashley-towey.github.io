@@ -19,7 +19,7 @@ export default function ButtonLink({ variant = 'primary', first, second, classNa
     return () => observer.disconnect();
   }, [first, second, variant]);
 
-  const classes = `button-link button-link--${variant} ${className}`.trim();
+  const classes = `button-link button-link--${variant} caption-1 ${className}`.trim();
 
   if (variant === 'secondary') {
     return <a className={classes} {...linkProps}>{children}</a>;
