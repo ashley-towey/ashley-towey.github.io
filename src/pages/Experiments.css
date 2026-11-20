@@ -21,12 +21,35 @@
   padding-block: 6px;
 }
 
+/* Row states:
+   default  number and title in --ink-soft
+   hover    number and title in --ink
+   active   (clicked, its images showing) number in --orange, title in --ink */
 .experiment-row__main {
   display: flex;
   align-items: baseline;
   gap: clamp(24px, 4vw, 64px);
-  color: var(--ink);
-  text-decoration: none;
+  padding: 0;
+  border: 0;
+  color: var(--ink-soft);
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: color .15s ease;
+}
+
+@media (hover: hover) {
+  .experiment-row__main:hover { color: var(--ink); }
+}
+
+.experiment-row__main[aria-pressed='true'] { color: var(--ink); }
+.experiment-row__main[aria-pressed='true'] .experiment-row__number { color: var(--orange); }
+
+.experiment-row__main:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .experiment-row__number {
@@ -34,7 +57,6 @@
   font-family: var(--font-family-numerical);
   font-size: var(--type-numerical-lg);
   line-height: 1;
-  transition: color .15s ease;
 }
 
 .experiment-row__title {
@@ -44,9 +66,7 @@
   letter-spacing: -.02em;
 }
 
-.experiment-row[data-active] .experiment-row__number { color: var(--orange); }
-
-/* Hovered experiment's images, scattered by Experiments.jsx. */
+/* The active experiment's images, scattered by Experiments.jsx. */
 .experiments__panel {
   position: absolute;
   top: 24px;

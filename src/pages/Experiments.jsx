@@ -9,8 +9,9 @@ import './Home.css';
 import './Experiments.css';
 
 // The /experiments/ page: a numbered list of everything in data/experiments.js.
-// Hovering a row scatters a few of its images on the right; TRY IT opens a
-// code experiment in a modal. Rows don't link anywhere.
+// Clicking a row makes it active and scatters a few of its images on the
+// right (they stay until another row is clicked); TRY IT opens a code
+// experiment in a modal. Rows don't link anywhere.
 
 const IMAGES_ON_HOVER = 3;
 const random = (min, max) => min + Math.random() * (max - min);
@@ -36,22 +37,17 @@ function scatter(images, width, height, count = IMAGES_ON_HOVER) {
 
 export default function Experiments() {
   const panel = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(null); // the hovered row
+  const [activeIndex, setActiveIndex] = useState(null); // the clicked row
   const [placed, setPlaced] = useState([]); // its scattered images
   const [trying, setTrying] = useState(null); // the experiment open in the modal
   const closeModal = useCallback(() => setTrying(null), []);
 
-  function show(index) {
-    if (index === activeIndex) return;
+  // Clicking the active row again reshuffles its images.
+  function activate(index) {
     setActiveIndex(index);
     const images = EXPERIMENTS[index].images ?? [];
     const box = panel.current?.getBoundingClientRect();
     setPlaced(images.length && box ? scatter(images, box.width, box.height) : []);
-  }
-
-  function clear() {
-    setActiveIndex(null);
-    setPlaced([]);
   }
 
   return (
@@ -66,20 +62,19 @@ export default function Experiments() {
         </p>
       </section>
       <RegistrationLine as="h2"><span className="visually-hidden">All experiments</span></RegistrationLine>
-      <section className="experiments frame-sides" aria-label="Experiments" onMouseLeave={clear}>
+      <section className="experiments frame-sides" aria-label="Experiments">
         <ol className="experiments__list">
           {EXPERIMENTS.map((experiment, index) => (
-            <li
-              key={experiment.title}
-              className="experiment-row"
-              data-active={index === activeIndex || undefined}
-              onMouseEnter={() => show(index)}
-              onFocus={() => show(index)}
-            >
-              <span className="experiment-row__main">
+            <li key={experiment.title} className="experiment-row">
+              <button
+                type="button"
+                className="experiment-row__main"
+                aria-pressed={index === activeIndex}
+                onClick={() => activate(index)}
+              >
                 <span className="experiment-row__number">{numberOf(index)}</span>
                 <span className="experiment-row__title">{experiment.title}</span>
-              </span>
+              </button>
               {experiment.tryIt && (
                 <button type="button" className="bracket-button caption-2" onClick={() => setTrying(experiment)} aria-label={`Try ${experiment.title}`}>
                   Try it<BracketBox />

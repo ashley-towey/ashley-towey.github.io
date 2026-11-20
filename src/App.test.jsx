@@ -201,9 +201,19 @@ describe('experiments', () => {
     expect(list.getAllByRole('listitem')).toHaveLength(EXPERIMENTS.length);
     expect(list.getByText('001')).toBeInTheDocument();
     expect(list.getByText(EXPERIMENTS[0].title)).toBeInTheDocument();
-    // Rows don't navigate anywhere; only TRY IT buttons do something.
+    // Rows don't navigate anywhere; only TRY IT buttons open something.
     expect(list.queryAllByRole('link')).toHaveLength(0);
-    expect(list.getAllByRole('button').map((b) => b.getAttribute('aria-label'))).toEqual(EXPERIMENTS.filter((e) => e.tryIt).map((e) => `Try ${e.title}`));
+    expect(list.queryAllByRole('button', { name: /^Try / }).map((b) => b.getAttribute('aria-label'))).toEqual(EXPERIMENTS.filter((e) => e.tryIt).map((e) => `Try ${e.title}`));
+  });
+
+  test('clicking a row makes it the active experiment', () => {
+    renderAt('/experiments/');
+    const [first, second] = screen.getAllByRole('button', { pressed: false }).filter((b) => b.classList.contains('experiment-row__main'));
+    fireEvent.click(first);
+    expect(first).toHaveAttribute('aria-pressed', 'true');
+    fireEvent.click(second);
+    expect(first).toHaveAttribute('aria-pressed', 'false');
+    expect(second).toHaveAttribute('aria-pressed', 'true');
   });
 
   test('experiment titles are unique (they key the list)', () => {
