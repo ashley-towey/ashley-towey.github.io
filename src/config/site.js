@@ -3,7 +3,6 @@ export const site = {
   name: 'Ashley Towey',
   url: 'https://ashleytowey.com',
   description: 'Selected portfolio projects by Ashley Towey across design, computing and creativity.',
-  tagline: 'Design · Computing · Creativity',
   email: 'ashleytowey.design@gmail.com',
   location: 'London, UK',
   socials: [
