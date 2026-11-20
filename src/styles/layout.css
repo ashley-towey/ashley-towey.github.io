@@ -191,6 +191,8 @@
   width: 100%;
   height: auto;
   display: block;
+  /* The lower dots sit outside the viewBox; .site-footer__art crops them. */
+  overflow: visible;
 }
 
 .dot-wordmark__dot {

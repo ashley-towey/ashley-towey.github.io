@@ -264,7 +264,7 @@ test('CSM page renders its clips as muted, looping, inline videos with labels', 
 test('clicking a dot in the footer wordmark turns it orange, and clicking again turns it back', () => {
   renderAt('/');
   const dots = document.querySelectorAll('.dot-wordmark__dot');
-  expect(dots.length).toBeGreaterThan(40);
+  expect(dots).toHaveLength(76);
   fireEvent.click(dots[10]);
   expect(dots[10]).toHaveClass('dot-wordmark__dot--lit');
   expect(dots[11]).not.toHaveClass('dot-wordmark__dot--lit');

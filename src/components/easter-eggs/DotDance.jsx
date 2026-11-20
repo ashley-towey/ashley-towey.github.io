@@ -78,10 +78,6 @@ export function dance(root) {
 
   const name = pickDance();
   lastDance = name;
-  // SVGs clip at their edges; let the dots fly up into the footer's space.
-  // (The footer still crops them at the bottom of the page.)
-  const svg = dots[0].ownerSVGElement;
-  if (svg) svg.style.overflow = 'visible';
 
   dots.forEach((dot) => {
     dot.getAnimations?.().forEach((animation) => animation.cancel());
