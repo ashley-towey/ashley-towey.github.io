@@ -11,6 +11,7 @@ import manifest from './data/image-manifest.json';
 import videoManifest from './data/video-manifest.json';
 import { HEADLINE, getProject, projectClips, projectHero, projectImages, projects, projectsIn } from './data/projects';
 import { VIEW_KEY } from './pages/Home';
+import { EXPERIMENTS } from './data/experiments';
 import { projectPath } from './lib/paths';
 import { prerenderRoutes, routeMeta } from './routes';
 
@@ -45,7 +46,7 @@ describe('home', () => {
     }
     const etc = within(heading).getByRole('link', { name: 'Experiments' });
     expect(etc).toHaveAttribute('href', '/experiments/');
-    expect(etc).toHaveTextContent(`[${projectsIn('experiments').length}]`);
+    expect(etc).toHaveTextContent(`[${EXPERIMENTS.length}]`);
   });
 
   test('grid and list views switch and remember the choice', () => {
@@ -195,17 +196,34 @@ test('every referenced image has generated variants in public/portfolio', () => 
 });
 
 describe('experiments', () => {
-  test('lists exactly the experiment projects, and they are not on the home page', () => {
+  test('lists every experiment, numbered, linking those with pages, and none are on the home page', () => {
     const experiments = projectsIn('experiments');
     expect(experiments.map((p) => p.slug)).toEqual(['velocafe', 'networked-beings', 'think-twice', 'stories-for-the-road']);
     renderAt('/experiments/');
-    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
-    const links = within(screen.getByRole('region', { name: 'Experiments' })).getAllByRole('link');
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/^Experiments;/);
+    const list = within(screen.getByRole('region', { name: 'Experiments' }));
+    expect(list.getAllByRole('listitem')).toHaveLength(EXPERIMENTS.length);
+    expect(list.getByText('001')).toBeInTheDocument();
+    const links = list.getAllByRole('link');
     expect(links.map((a) => a.getAttribute('href'))).toEqual(experiments.map(projectPath));
     cleanup();
     renderAt('/');
     const home = within(screen.getByRole('region', { name: 'Selected projects' }));
     experiments.forEach((p) => expect(home.queryByRole('link', { name: new RegExp(p.title) })).not.toBeInTheDocument());
+  });
+
+  test('a TRY IT button opens the code experiment in a modal, and Escape closes it', () => {
+    EXPERIMENTS.push({ title: 'Test sketch', tryIt: 'https://example.com/sketch' });
+    try {
+      renderAt('/experiments/');
+      fireEvent.click(screen.getByRole('button', { name: 'Try Test sketch' }));
+      const dialog = screen.getByRole('dialog', { name: 'Test sketch' });
+      expect(within(dialog).getByTitle('Test sketch')).toHaveAttribute('src', 'https://example.com/sketch');
+      fireEvent.keyDown(document, { key: 'Escape' });
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    } finally {
+      EXPERIMENTS.pop();
+    }
   });
 
   test('experiment pages are labelled as experiments', () => {

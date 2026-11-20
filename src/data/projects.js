@@ -534,15 +534,15 @@ export const projectsIn = (section) => projects.filter((project) => sectionOf(pr
 
 // The home heading: "I design; websites,[5] products,[2] …". Each word's
 // bracketed number links to one project (`project`, a slug) and shows that
-// project's position in the portfolio, like a footnote; or links to a page
-// (`to`) and shows a count (`count`).
+// project's position in the portfolio, like a footnote; or links to the
+// experiments page (`to`) and shows how many experiments are listed.
 export const HEADLINE = [
   { label: 'websites', project: 'leanne-prosvic' },
   { label: 'products', project: 'slate' },
   { label: 'brands', project: 'csm-showcase' },
   { label: 'campaigns', project: 'london-to-paris' },
   { label: 'billboards', project: 'domestique-display' },
-  { label: 'etc', to: '/experiments/', count: () => projectsIn('experiments').length, linkLabel: 'Experiments' },
+  { label: 'etc', to: '/experiments/', linkLabel: 'Experiments' },
 ];
 
 // Find a project by slug, optionally only within one section.

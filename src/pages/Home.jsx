@@ -5,6 +5,7 @@ import Page from '../components/Page';
 import ProjectCard from '../components/ProjectCard';
 import ProjectRow from '../components/ProjectRow';
 import RegistrationLine from '../components/RegistrationLine';
+import { EXPERIMENTS } from '../data/experiments';
 import { HEADLINE, getProject, projectsIn } from '../data/projects';
 import { projectPath } from '../lib/paths';
 import { readStored, writeStored } from '../lib/storage';
@@ -58,12 +59,12 @@ export default function Home() {
 }
 
 // One word of the heading. Its bracketed number links to a project (showing
-// the project's position in the portfolio) or to a page (showing a count),
-// with a tooltip naming it.
+// the project's position in the portfolio) or to the experiments page
+// (showing how many are listed), with a tooltip naming it.
 function HeadlineWord({ word, work, last }) {
   const project = word.project && getProject(word.project, 'work');
   const to = project ? projectPath(project) : word.to;
-  const number = project ? work.indexOf(project) + 1 : word.count();
+  const number = project ? work.indexOf(project) + 1 : EXPERIMENTS.length;
   const title = project ? project.title : word.linkLabel;
 
   return (

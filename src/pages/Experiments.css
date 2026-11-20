@@ -1,0 +1,93 @@
+/* ---- Experiments list: numbered rows on the left, hover images on the right ---- */
+
+.experiments {
+  position: relative;
+  padding: 24px var(--section-inset) 48px;
+}
+
+.experiments__list {
+  position: relative;
+  z-index: 1;
+  width: 55%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.experiment-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 48px);
+  padding-block: 6px;
+}
+
+.experiment-row__main {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(24px, 4vw, 64px);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.experiment-row__number {
+  min-width: 3.2ch;
+  font-family: var(--font-family-numerical);
+  font-size: var(--type-numerical-lg);
+  line-height: 1;
+  transition: color .15s ease;
+}
+
+.experiment-row__title {
+  font-size: var(--type-h2-size);
+  font-weight: var(--type-h2-weight);
+  line-height: 1.25;
+  letter-spacing: -.02em;
+}
+
+.experiment-row[data-active] .experiment-row__number,
+.experiment-row__main:focus-visible .experiment-row__number { color: var(--orange); }
+
+.experiment-row__main:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Rows without a page yet aren't links. */
+span.experiment-row__main { cursor: default; }
+
+/* Hovered experiment's images, scattered by Experiments.jsx. */
+.experiments__panel {
+  position: absolute;
+  top: 24px;
+  bottom: 48px;
+  left: 57%;
+  right: var(--section-inset);
+  pointer-events: none;
+}
+
+.experiments__image {
+  position: absolute;
+  overflow: hidden;
+  border-radius: var(--radius-media);
+  background: var(--surface);
+  animation: experiment-image-in .25s ease both;
+}
+
+.experiments__image img { width: 100%; height: 100%; display: block; object-fit: cover; }
+
+@keyframes experiment-image-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* No hover on touch screens or narrow windows: just the list. */
+@media (hover: none), (max-width: 780px) {
+  .experiments__list { width: 100%; }
+  .experiments__panel { display: none; }
+}
+
+@media (max-width: 780px) {
+  .experiment-row__main { gap: 20px; }
+  .experiment-row__title { font-size: var(--type-h3-size); }
+}
