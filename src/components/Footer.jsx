@@ -1,5 +1,6 @@
 import ButtonLink from './ButtonLink';
 import DotWordmark from './DotWordmark';
+import DotDance from './easter-eggs/DotDance'; // easter egg: remove with the line below
 import { mailto, site } from '../config/site';
 
 export default function Footer() {
@@ -21,6 +22,8 @@ export default function Footer() {
       <div className="site-footer__art">
         <DotWordmark />
       </div>
+      {/* Easter egg: double-tap the footer to make the dots dance. */}
+      <DotDance />
     </footer>
   );
 }
