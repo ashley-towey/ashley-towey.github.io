@@ -75,7 +75,7 @@
   z-index: 5;
   left: 50%;
   bottom: calc(100% + 12px);
-  padding: 8px 12px;
+  padding: 6px 10px;
   border: 1px solid var(--ink);
   border-radius: 6px;
   color: var(--ink);
