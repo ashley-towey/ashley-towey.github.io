@@ -1,4 +1,15 @@
+# Dependencies
+/node_modules
+
+# Build output (CI builds and deploys this)
+/dist
+/dist-ssr
+/coverage
+
+# Original, full-size images — kept locally, not in git (see README)
+/assets-src
+
+# Misc
 .DS_Store
-node_modules/
-# Built by CI from myfirstreactapp
-/preview/
+.env*.local
+npm-debug.log*

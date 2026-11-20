@@ -1,0 +1,14 @@
+import '@testing-library/jest-dom/vitest';
+
+// jsdom lacks these browser APIs used by ButtonLink and smooth scrolling.
+globalThis.ResizeObserver ??= class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+window.scrollTo = () => {};
+globalThis.requestAnimationFrame ??= (cb) => setTimeout(cb, 0);
+
+// jsdom can't play media.
+window.HTMLMediaElement.prototype.play = () => Promise.resolve();
+window.HTMLMediaElement.prototype.pause = () => {};
