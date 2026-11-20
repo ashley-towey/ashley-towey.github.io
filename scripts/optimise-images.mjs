@@ -62,12 +62,19 @@ for (const file of files) {
   console.log(`✓ ${rel}`);
 }
 
-// Favicon and app icons.
-const favicon = path.join(srcDir, FAVICON);
+// Favicon and app icons. public/icons/favicon.svg wins if it exists (it's
+// committed, and also served directly as the browser-tab icon); delete it to
+// go back to assets-src/portfolio/favicon.jpg.
 const iconDir = path.join(root, 'public/icons');
+const svgFavicon = path.join(iconDir, 'favicon.svg');
+const useSvg = await fs.access(svgFavicon).then(() => true, () => false);
+const favicon = useSvg ? svgFavicon : path.join(srcDir, FAVICON);
+const PAPER = '#CFCBC0'; // iOS shows transparent home-screen icons on black
 await fs.mkdir(iconDir, { recursive: true });
 for (const [name, size] of [['icon-32.png', 32], ['apple-touch-icon.png', 180], ['icon-192.png', 192], ['icon-512.png', 512]]) {
-  await sharp(favicon).resize(size, size, { fit: 'cover' }).png().toFile(path.join(iconDir, name));
+  let image = sharp(favicon, { density: 72 * Math.ceil(size / 64) }).resize(size, size, { fit: 'cover' });
+  if (useSvg && name === 'apple-touch-icon.png') image = image.flatten({ background: PAPER });
+  await image.png().toFile(path.join(iconDir, name));
 }
 
 const sorted = Object.fromEntries(Object.entries(next).sort(([a], [b]) => a.localeCompare(b)));
