@@ -68,7 +68,7 @@ function HeadlineWord({ word, last }) {
 
   return (
     <span className="headline-word">
-      {last ? word.label : `${word.label},`}
+      {last ? `${word.label}.` : `${word.label},`}
       <sup className="headline-word__number caption-2">
         <Link to={to} aria-label={title}>
           [{number}]
