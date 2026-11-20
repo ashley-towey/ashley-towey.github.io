@@ -232,7 +232,7 @@ describe('experiments', () => {
     renderAt('/experiments/');
     fireEvent.click(screen.getByRole('button', { name: 'Try Generative Identity' }));
     expect(within(screen.getByRole('dialog', { name: 'Generative Identity' })).getByTitle('Generative Identity'))
-      .toHaveAttribute('src', '/sketches/generative-identity/');
+      .toHaveAttribute('src', '/sketches/generative-identity/index.html');
     fireEvent.keyDown(document, { key: 'Escape' });
     cleanup();
     renderAt('/experiments/generative-identity/');

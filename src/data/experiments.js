@@ -9,6 +9,8 @@ import { getProject, projectImages } from './projects';
 //   tryIt    (optional) URL of a live code experiment (e.g. a p5.js sketch's
 //            full-screen link); adds a TRY IT [ ] button that opens it
 //            embedded in a modal. The site must allow being shown in an iframe.
+//            For a sketch in public/, link to its index.html file itself:
+//            the dev server shows the app's 404 for a bare folder URL.
 //
 // Entries without a project are listed but not clickable yet.
 export const EXPERIMENTS = [
@@ -18,7 +20,7 @@ export const EXPERIMENTS = [
   { title: 'Networked Beings', project: 'networked-beings' },
   { title: 'Think Twice', project: 'think-twice' }, // note: communicate the aim more clearly
   { title: 'Stories for the Road', project: 'stories-for-the-road' },
-  { title: 'Generative Identity', project: 'generative-identity', tryIt: '/sketches/generative-identity/' },
+  { title: 'Generative Identity', project: 'generative-identity', tryIt: '/sketches/generative-identity/index.html' },
   { title: 'CSM identity experiment' },
   { title: 'The Tragic Everyday' }, // note: fun and quirky video
   { title: 'SLATE online version' },
