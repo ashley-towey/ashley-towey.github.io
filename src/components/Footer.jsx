@@ -1,8 +1,6 @@
 import ButtonLink from './ButtonLink';
 import DotWordmark from './DotWordmark';
-import { site } from '../config/site';
-
-const linkedIn = site.socials.find((social) => social.label === 'LinkedIn');
+import { mailto, site } from '../config/site';
 
 export default function Footer() {
   return (
@@ -13,7 +11,10 @@ export default function Footer() {
         <ButtonLink variant="secondary" to="/about/">Contact me</ButtonLink>
       </nav>
       <div className="site-footer__aside">
-        {linkedIn && <ButtonLink variant="secondary" href={linkedIn.href} target="_blank" rel="noreferrer">LinkedIn</ButtonLink>}
+        <ButtonLink variant="secondary" href={mailto}>Email</ButtonLink>
+        {site.socials.map((social) => (
+          <ButtonLink key={social.label} variant="secondary" href={social.href} target="_blank" rel="noreferrer">{social.label}</ButtonLink>
+        ))}
         <span className="caption-2">© {new Date().getFullYear()}</span>
       </div>
       {/* A huge, faint dot-matrix wordmark, cropped by the bottom of the page. */}

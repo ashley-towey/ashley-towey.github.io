@@ -221,6 +221,8 @@ describe('experiments', () => {
     expect(within(footer).getByRole('link', { name: 'Portfolio' })).not.toHaveAttribute('aria-current');
     expect(within(footer).getByRole('link', { name: 'Experiments' })).toHaveAttribute('aria-current', 'page');
     expect(within(footer).getByRole('link', { name: 'Contact me' })).toHaveAttribute('href', '/about/');
+    expect(within(footer).getByRole('link', { name: 'Email' })).toHaveAttribute('href', `mailto:${site.email}`);
+    expect(within(footer).getByRole('link', { name: 'Instagram' })).toHaveAttribute('href', site.socials.find((s) => s.label === 'Instagram').href);
     expect(within(footer).getByRole('link', { name: 'LinkedIn' })).toHaveAttribute('href', site.socials.find((s) => s.label === 'LinkedIn').href);
   });
 
