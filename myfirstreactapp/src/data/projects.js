@@ -53,7 +53,7 @@ export const projects = [
     slug: 'slate',
     title: 'SLATE',
     client: 'SLATE',
-    year: '',
+    year: '2022', // PLACEHOLDER year — confirm
     disciplines: ['Accessible design', 'Creative computing', 'Branding'],
     summary: 'A collection of tools designed to help people with additional needs communicate with family, friends and guardians. SLATE explores how tactile objects and a shared visual language can make everyday communication more accessible.',
     description: [
@@ -108,10 +108,10 @@ export const projects = [
   {
     slug: 'csm-showcase',
     title: 'CSM Showcase Identity',
-    client: 'Central Saint Martins',
+    client: 'Central Saint Martins (finalist proposal)',
     year: '2024',
     disciplines: ['Identity', 'Art direction', 'Digital design'],
-    summary: 'A comprehensive identity for the 2024 Central Saint Martins Showcase. The visual system brings together the energy, independence and craft of the graduating community across digital and physical spaces.',
+    summary: 'Our finalist proposal for the 2024 Central Saint Martins Showcase identity: a visual system bringing together the energy, independence and craft of the graduating community across digital and physical spaces.',
     description: [
       'A group project in which we were the finalists for the Central Saint Martins Showcase Identity for 2024. Through our collective time at the Creative Computing Institute we honed our skills in bridging the gap between the digital and physical in order to bring the audience into the design, allowing us to create a cohesive identity from web, to print, to physical space.',
     ],
@@ -121,9 +121,9 @@ export const projects = [
     blocks: [
       {
         type: 'images',
-        label: 'In the building',
+        label: 'Proposal',
         images: [
-          { src: 'csm-shows/granary-window-1.jpg', alt: 'The Central Saint Martins Shows 2024 identity in a window of the Granary Building', wide: true },
+          { src: 'csm-shows/granary-window-1.jpg', alt: 'Mockup of the proposed CSM Shows 2024 identity in a window of the Granary Building', wide: true },
         ],
       },
       {
@@ -135,8 +135,8 @@ export const projects = [
         type: 'images',
         label: 'Identity',
         images: [
-          { src: 'csm-shows/shows-posters-1.jpg', alt: 'Three posters for the Foundation, 2024 and Postgraduate Art shows' },
-          { src: 'csm-shows/lethaby-window_1.jpg', alt: 'The identity applied to the glass doors of the Lethaby Building' },
+          { src: 'csm-shows/shows-posters-1.jpg', alt: 'Proposed posters for the Foundation, 2024 and Postgraduate Art shows' },
+          { src: 'csm-shows/lethaby-window_1.jpg', alt: 'Mockup of the proposed identity on the glass doors of the Lethaby Building' },
         ],
       },
       {
@@ -150,7 +150,7 @@ export const projects = [
     slug: 'velocafe',
     title: 'The Velocafé',
     client: 'Independent project',
-    year: '',
+    year: '2023', // PLACEHOLDER year — confirm
     disciplines: ['Creative technology', 'Print design', 'Branding'],
     summary: 'Reimagining the cycling café through a connected design system. Computational visuals and designed ephemera make the sense of community around coffee, cake and cycling visible.',
     description: [
@@ -207,7 +207,7 @@ export const projects = [
     slug: 'networked-beings',
     title: 'Networked Beings',
     client: 'Independent project',
-    year: '',
+    year: '2023', // PLACEHOLDER year — confirm
     disciplines: ['Physical computing', 'Product design', '3D modelling'],
     summary: 'Three networked objects explore how form changes our desire to interact. Small gestures connect the objects, turning light into a quiet language between people and things.',
     description: [
@@ -291,7 +291,7 @@ export const projects = [
     slug: 'leanne-prosvic',
     title: 'Leanne Prosvic',
     client: 'Leanne Prosvic',
-    year: '',
+    year: '2022', // PLACEHOLDER year — confirm
     disciplines: ['Brand identity', 'Print design', 'Art direction'],
     summary: 'A warm and considered identity for Leanne Prosvic’s counselling and psychotherapy practice, based in Oxford and Henley-on-Thames.',
     description: [
@@ -341,7 +341,7 @@ export const projects = [
     slug: 'think-twice',
     title: 'Think Twice',
     client: 'BBC UX&D',
-    year: '',
+    year: '2024', // PLACEHOLDER year — confirm
     disciplines: ['Digital service', 'Research', 'Interaction design'],
     summary: 'A mobile experience that encourages young adults to make more conscious shopping decisions by showing the human and environmental stories behind everyday products.',
     description: [
@@ -409,7 +409,7 @@ export const projects = [
     slug: 'jupiter-heating',
     title: 'Jupiter Heating Solutions',
     client: 'Jupiter Heating Solutions',
-    year: '',
+    year: '2024', // PLACEHOLDER year — confirm
     disciplines: ['3D visualisation', 'Product communication', 'Art direction'],
     summary: 'Over 80 refreshed 3D constructions and an animation for Jupiter Heating Solutions’ website redesign. The imagery explains the configurable underfloor heating system across the website and technical materials.',
     description: [
@@ -465,7 +465,7 @@ export const projects = [
     slug: 'stories-for-the-road',
     title: 'Stories for the Road',
     client: 'Independent project',
-    year: '',
+    year: '2023', // PLACEHOLDER year — confirm
     disciplines: ['Digital service', 'Type design', 'Community'],
     summary: 'A digital service exploring how technology can help cyclists build community and take back ownership of the roads through shared recommendations, encouragement and stories.',
     description: [
