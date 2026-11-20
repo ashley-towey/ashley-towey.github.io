@@ -8,3 +8,7 @@ globalThis.ResizeObserver ??= class {
 };
 window.scrollTo = () => {};
 globalThis.requestAnimationFrame ??= (cb) => setTimeout(cb, 0);
+
+// jsdom can't play media.
+window.HTMLMediaElement.prototype.play = () => Promise.resolve();
+window.HTMLMediaElement.prototype.pause = () => {};

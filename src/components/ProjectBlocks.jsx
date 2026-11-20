@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import Clip, { clipRatio } from './Clip';
 import Picture, { imageRatio } from './Picture';
 import RegistrationLine from './RegistrationLine';
 
@@ -30,14 +31,21 @@ function ImagesBlock({ block, project, frame, eager }) {
       aria-label={`${project.title}: ${block.label}`}
     >
       {block.images.map((image, i) => (
-        <figure className={image.wide ? 'gallery-image gallery-image--wide' : 'gallery-image'} key={image.src}>
-          <div className="gallery-image__frame" style={image.wide ? { '--ratio': imageRatio(image.src) } : undefined}>
-            <Picture
-              src={image.src}
-              alt={image.alt}
-              loading={eager && i < 2 ? 'eager' : 'lazy'}
-              sizes={image.wide ? '92vw' : largeSizes}
-            />
+        <figure className={image.wide ? 'gallery-image gallery-image--wide' : 'gallery-image'} key={image.src ?? image.clip}>
+          <div
+            className="gallery-image__frame"
+            style={image.wide ? { '--ratio': image.clip ? clipRatio(image.clip) : imageRatio(image.src) } : undefined}
+          >
+            {image.clip ? (
+              <Clip src={image.clip} alt={image.alt} />
+            ) : (
+              <Picture
+                src={image.src}
+                alt={image.alt}
+                loading={eager && i < 2 ? 'eager' : 'lazy'}
+                sizes={image.wide ? '92vw' : largeSizes}
+              />
+            )}
           </div>
           {image.caption && <figcaption className="caption-2">{image.caption}</figcaption>}
         </figure>

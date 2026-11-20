@@ -5,6 +5,8 @@
 //   - an intro from title, client, year, disciplines, description, credits, links
 //   - then `blocks`, in order:
 //       { type: 'images', label, images: [{ src, alt, caption?, wide? }], columns?, square? }
+//         (an item can use `clip: 'folder/file.gif'` instead of `src` for a looping
+//          silent video made by `npm run videos`)
 //       { type: 'text', label?, heading, body: [paragraphs], list?: [items] }
 //       { type: 'quote', label?, quote: [paragraphs], cite }
 //       { type: 'video', label, videos: [{ vimeo, title, ratio }], columns? }
@@ -129,9 +131,32 @@ export const projects = [
         ],
       },
       {
+        type: 'images',
+        label: 'Building blocks',
+        columns: 4,
+        square: true,
+        images: [
+          { clip: 'csm-shows/idea-generation_1.gif', alt: 'A mirrored cube tumbles across a pale grey surface', caption: 'Idea generation' },
+          { clip: 'csm-shows/research_1.gif', alt: 'A translucent green and yellow segmented disc rolls across a pale grey surface', caption: 'Research' },
+          { clip: 'csm-shows/iteration_1.gif', alt: 'A glossy pink ring rolls across a pale grey surface', caption: 'Iteration & reflection' },
+          { clip: 'csm-shows/independence_1.gif', alt: 'A yellow pyramid drops into a pale grey space', caption: 'Independence' },
+        ],
+      },
+      {
         type: 'text',
         heading: 'Concept',
         body: ['Our proposal brings together the building blocks of each individual’s creative processes to create a moment of focus and tactile interaction that is the final show.'],
+      },
+      {
+        type: 'images',
+        label: 'The final show',
+        columns: 3,
+        square: true,
+        images: [
+          { clip: 'csm-shows/craft_1.gif', alt: 'A crumpled gold star bounces across a pale grey surface', caption: 'Craft & skill' },
+          { clip: 'csm-shows/experimentation_1.gif', alt: 'A glossy red blob wobbles across a pale grey surface', caption: 'Experimentation & chaos' },
+          { clip: 'csm-shows/Collaboration_video_2.gif', alt: 'Two fuzzy blue shapes bounce together on a pale grey surface', caption: 'Sharing & collaboration' },
+        ],
       },
       {
         type: 'images',
@@ -145,6 +170,14 @@ export const projects = [
         type: 'text',
         heading: 'Multiple shows',
         body: ['The showcase needed three separate identities for the different shows. To differentiate them we used scale, supported by colour. The gradual zooming in from Foundation, through Undergraduate, to Postgraduate shows the level of detail increasing as you move through your studies.'],
+      },
+      {
+        type: 'images',
+        label: 'In use',
+        images: [
+          { clip: 'csm-shows/ar-example_1.mp4', alt: 'A phone held up to a CSM Shows 2024 poster reveals the 3D shapes in augmented reality', caption: 'Augmented reality poster', wide: true },
+          { clip: 'csm-shows/instagram-mockup_2.mp4', alt: 'Three phones cycle through CSM Shows 2024 Instagram posts and stories', caption: 'Instagram', wide: true },
+        ],
       },
     ],
   },
@@ -503,5 +536,9 @@ export const getProject = (slug, section) =>
 // Every image a project uses (cover first), for tests and tooling.
 export const projectImages = (project) => [
   project.cover,
-  ...project.blocks.filter((block) => block.type === 'images').flatMap((block) => block.images.map((image) => image.src)),
+  ...project.blocks.filter((block) => block.type === 'images').flatMap((block) => block.images.filter((image) => image.src).map((image) => image.src)),
 ];
+
+// Every looping clip a project uses.
+export const projectClips = (project) =>
+  project.blocks.filter((block) => block.type === 'images').flatMap((block) => block.images.filter((image) => image.clip).map((image) => image.clip));

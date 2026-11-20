@@ -15,6 +15,7 @@ npm test            # Vitest suite
 npm run build       # production build + prerender → dist/
 npm run preview     # serve dist/ locally → http://localhost:4173/
 npm run images      # regenerate web images from assets-src/ (see below)
+npm run videos      # turn GIFs/videos in assets-src/ into small looping MP4s
 ```
 
 Pushing to `main` runs `.github/workflows/static.yml`: install, test, build, and
@@ -57,3 +58,13 @@ To add a project: drop its originals into `assets-src/portfolio/<folder>/`, run
 
 `assets-src/portfolio/favicon.jpg` is the source for the favicon and app icons
 in `public/icons/`.
+
+## GIFs and videos
+
+Put GIFs or videos in `assets-src/portfolio/<folder>/` and run `npm run videos`.
+Each becomes a small, silent H.264 MP4 plus a poster frame in `public/portfolio/`
+(GIFs typically shrink by ~95%), with sizes recorded in
+`src/data/video-manifest.json`. Use one in a project's images block with
+`{ clip: 'folder/file.gif', alt, caption }`. Clips loop silently while on screen
+and show the poster with play controls for visitors who prefer reduced motion.
+ffmpeg comes from the `ffmpeg-static` dev dependency, so there's nothing extra to install.

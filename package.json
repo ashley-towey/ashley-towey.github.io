@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "images": "node scripts/optimise-images.mjs"
+    "images": "node scripts/optimise-images.mjs",
+    "videos": "node scripts/optimise-videos.mjs"
   },
   "dependencies": {
     "react": "18.3.1",
@@ -21,6 +22,7 @@
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "14.3.1",
     "@vitejs/plugin-react": "4.4.1",
+    "ffmpeg-static": "5.2.0",
     "jsdom": "26.1.0",
     "sharp": "0.34.5",
     "vite": "6.3.5",

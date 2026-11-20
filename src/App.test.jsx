@@ -8,7 +8,8 @@ import App from './App';
 import { legacyRedirects } from '../scripts/legacy-redirects.mjs';
 import { site } from './config/site';
 import manifest from './data/image-manifest.json';
-import { projectImages, projects, projectsIn } from './data/projects';
+import videoManifest from './data/video-manifest.json';
+import { projectClips, projectImages, projects, projectsIn } from './data/projects';
 import { projectPath } from './lib/paths';
 import { prerenderRoutes, routeMeta } from './routes';
 
@@ -89,7 +90,7 @@ describe('project content', () => {
     expect(project.alt).toBeTruthy();
     for (const block of project.blocks) {
       expect(['images', 'text', 'quote', 'video']).toContain(block.type);
-      if (block.type === 'images') block.images.forEach((image) => expect(image.alt, image.src).toMatch(/\w{3,}/));
+      if (block.type === 'images') block.images.forEach((image) => expect(image.alt, image.src ?? image.clip).toMatch(/\w{3,}/));
       if (block.type === 'text') expect(block.heading).toBeTruthy();
     }
   });
@@ -185,4 +186,26 @@ test('every legacy redirect points at a prerendered page', () => {
   const broken = Object.entries(legacyRedirects)
     .filter(([, to]) => !routes.has(to));
   expect(broken).toEqual([]);
+});
+
+test('every clip has a generated video and poster', () => {
+  const dir = path.resolve(__dirname, '../public/portfolio');
+  const clips = projects.flatMap(projectClips);
+  expect(clips.length).toBeGreaterThan(0);
+  const missing = clips.filter((clip) => {
+    const stem = clip.replace(/\.[^.]+$/, '');
+    return !videoManifest[clip] || !fs.existsSync(path.join(dir, `${stem}.mp4`)) || !fs.existsSync(path.join(dir, `${stem}-poster.jpg`));
+  });
+  expect(missing).toEqual([]);
+});
+
+test('CSM page renders its clips as muted, looping, inline videos with labels', () => {
+  renderAt('/work/csm-showcase/');
+  const video = screen.getByLabelText(/mirrored cube/);
+  expect(video.tagName).toBe('VIDEO');
+  expect(video.muted).toBe(true);
+  expect(video).toHaveAttribute('loop');
+  expect(video).toHaveAttribute('playsinline');
+  expect(video).toHaveAttribute('poster', expect.stringContaining('idea-generation_1-poster.jpg'));
+  expect(screen.getByText('Sharing & collaboration')).toBeInTheDocument();
 });
