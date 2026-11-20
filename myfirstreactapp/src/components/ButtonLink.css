@@ -104,6 +104,3 @@
   .button-link { min-height: 36px; }
   .button-link--primary .button-link__segment { padding-inline: 10px; }
 }
-
-@media (max-width: 500px) {
-}

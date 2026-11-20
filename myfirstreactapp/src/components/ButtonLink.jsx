@@ -1,10 +1,15 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import './ButtonLink.css';
 
-export default function ButtonLink({ variant = 'primary', first, second, className = '', children, ...linkProps }) {
+// useLayoutEffect warns during server prerendering; it only matters in the browser.
+const useBrowserLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
+
+// `to` renders an internal router link; `href` renders a plain anchor.
+export default function ButtonLink({ variant = 'primary', first, second, className = '', children, to, ...rest }) {
   const ref = useRef(null);
 
-  useLayoutEffect(() => {
+  useBrowserLayoutEffect(() => {
     if (variant !== 'primary') return undefined;
     const link = ref.current;
     const updateWidths = () => {
@@ -19,17 +24,19 @@ export default function ButtonLink({ variant = 'primary', first, second, classNa
     return () => observer.disconnect();
   }, [first, second, variant]);
 
+  const Anchor = to ? Link : 'a';
+  const linkProps = to ? { to, ...rest } : rest;
   const classes = `button-link button-link--${variant} caption-1 ${className}`.trim();
 
   if (variant === 'secondary') {
-    return <a className={classes} {...linkProps}>{children}</a>;
+    return <Anchor className={classes} {...linkProps}>{children}</Anchor>;
   }
 
   return (
-    <a ref={ref} className={classes} aria-label={`${first} ${second}`} {...linkProps}>
+    <Anchor ref={ref} className={classes} aria-label={`${first} ${second}`} {...linkProps}>
       <span className="button-link__slider" aria-hidden="true" />
       <span className="button-link__segment button-link__segment--first" data-segment data-label={first}>{first}</span>
       <span className="button-link__segment button-link__segment--last" data-segment data-label={second}>{second}</span>
-    </a>
+    </Anchor>
   );
 }

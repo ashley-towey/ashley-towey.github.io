@@ -1,21 +1,35 @@
-# Ashley Towey Portfolio Preview
+# Ashley Towey — portfolio
 
-This React app is a review version of the portfolio. It runs separately from the existing static website, which remains unchanged. The production preview lives at `/preview/` when the build output is deployed with the rest of the repository.
+The React + Vite source for the redesigned portfolio. Until it replaces the
+legacy site, it is deployed to `/preview/` (see `base` in `vite.config.js`).
 
-## Run locally
-
-From this folder, run:
+## Commands
 
 ```sh
-npm run dev
+npm install         # once
+npm run dev         # local dev server → http://localhost:5173/preview/
+npm test            # Vitest suite
+npm run build       # production build + prerender → dist/
+npm run preview     # serve dist/ locally
 ```
 
-Then open [http://localhost:5173/preview/](http://localhost:5173/preview/). The page refreshes as you edit the React source. Project pages use hash routes such as `/#/project/slate`, and the about/contact page is at `/#/about`.
+CI (`.github/workflows/static.yml`) runs `npm run build:preview`, which builds and
+copies `dist/` to the repository-level `preview/` folder. That folder is not
+committed.
 
-## Deploy the live preview
+## How it fits together
 
-The GitHub Pages workflow builds this app from source and writes the static output to the repository-level `preview/` directory before publishing the site. You only need to commit changes to this app's source; the generated bundles are created during deployment. The app uses hash routes so project pages work when opened or refreshed on GitHub Pages.
+- `src/data/projects.js` — every project, in display order. Add a project here
+  and put its images in `public/portfolio/<folder>/`.
+- `src/config/site.js` — name, email and social links (single source).
+- `src/routes.js` — page titles/descriptions and the list of routes to prerender.
+- `src/pages/` — Home, Project (`/work/:slug/`), About, NotFound.
+- `src/components/` — shared UI (ButtonLink, ThemeToggle, Header, Footer, …).
+- `src/styles/` — design tokens, base typography, and the layout/framing system.
+- `scripts/prerender.mjs` — after the build, renders every route to its own
+  `index.html` with per-page `<title>`, description, canonical and Open Graph tags.
 
-To generate the production output locally, run `npm run build:preview` from this folder.
+Old hash links such as `/#/project/slate` redirect to `/work/slate/`.
 
-The app is built with Vite. Run `npm install` once, then `npm test` to run the Vitest suite.
+The theme is chosen before first paint by an inline script in `index.html`:
+a saved choice wins, otherwise the visitor's OS light/dark preference.

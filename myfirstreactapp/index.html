@@ -3,16 +3,28 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/portfolio/favicon.jpg" />
     <meta name="theme-color" content="#CFCBC0" />
-    <meta name="description" content="Selected portfolio projects by Ashley Towey across design, computing and creativity." />
     <meta name="color-scheme" content="light dark" />
-    <link rel="manifest" href="/manifest.json" />
+    <script>
+      // Apply the saved theme (or the OS preference) before first paint.
+      (function () {
+        var theme;
+        try { theme = localStorage.getItem('portfolio-theme'); } catch (e) {}
+        if (theme !== 'dark' && theme !== 'light') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = theme;
+        if (theme === 'dark') document.querySelector('meta[name="theme-color"]').content = '#302F2B';
+      })();
+    </script>
     <title>Ashley Towey — Selected work</title>
+    <meta name="description" content="Selected portfolio projects by Ashley Towey across design, computing and creativity." />
+    <!--app-head-->
+    <link rel="icon" href="/portfolio/favicon.jpg" />
+    <link rel="manifest" href="/manifest.json" />
   </head>
   <body>
-    <noscript>This portfolio needs JavaScript to run. Please enable JavaScript to explore the projects.</noscript>
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

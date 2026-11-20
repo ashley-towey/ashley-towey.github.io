@@ -19,7 +19,7 @@
 }
 
 .theme-toggle:focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--orange);
   outline-offset: 4px;
 }
 
@@ -32,6 +32,10 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+.theme-toggle__icon--moon,
+:root[data-theme='dark'] .theme-toggle__icon--sun { display: none; }
+:root[data-theme='dark'] .theme-toggle__icon--moon { display: block; }
 
 @media (max-width: 780px) {
   .theme-toggle { width: 36px; height: 36px; }
