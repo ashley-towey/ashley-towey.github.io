@@ -272,7 +272,7 @@ export const projects = [
     slug: 'london-to-paris',
     title: 'London to Paris',
     client: 'Kalas / Cure Leukaemia',
-    year: '2019–20',
+    year: '2019',
     disciplines: ['Sportswear', 'Art direction', 'Print design'],
     summary: 'A series of cycling jerseys created for Cure Leukaemia’s London to Paris event. The designs bring riders together around a shared journey and a shared cause.',
     description: [
