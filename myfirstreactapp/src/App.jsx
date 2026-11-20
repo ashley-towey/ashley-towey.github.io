@@ -76,7 +76,7 @@ const projects = [
   },
 ];
 
-const publicUrl = process.env.PUBLIC_URL || '';
+const publicUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 const imageUrl = (path) => `${publicUrl}/portfolio/${path}`;
 
 function currentRoute() {

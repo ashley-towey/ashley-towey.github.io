@@ -7,10 +7,10 @@ This React app is a review version of the portfolio. It runs separately from the
 From this folder, run:
 
 ```sh
-npm start
+npm run dev
 ```
 
-Then open [http://localhost:3000](http://localhost:3000). The page refreshes as you edit the React source. Project pages use hash routes such as `/#/project/slate`, and the about/contact page is at `/#/about`.
+Then open [http://localhost:5173/preview/](http://localhost:5173/preview/). The page refreshes as you edit the React source. Project pages use hash routes such as `/#/project/slate`, and the about/contact page is at `/#/about`.
 
 ## Deploy the live preview
 
@@ -18,4 +18,4 @@ The GitHub Pages workflow builds this app from source and writes the static outp
 
 To generate the production output locally, run `npm run build:preview` from this folder.
 
-The app uses the existing Create React App dependencies in this folder. No additional installation is needed on this machine.
+The app is built with Vite. Run `npm install` once, then `npm test` to run the Vitest suite.
