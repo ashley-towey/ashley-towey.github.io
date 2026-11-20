@@ -123,21 +123,19 @@
 
 /* ---- Footer ---- */
 
+/* Top rule with registration marks; side rules run to the bottom of the
+   page, where the wordmark is cropped. */
 .site-footer {
   position: relative;
-  min-height: 90px;
-  border: 0;
-  border-bottom: 1px solid var(--line-strong);
-  margin-top: 0;
-  padding: 0 var(--section-inset);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  color: var(--muted);
+  min-height: clamp(360px, 34vw, 600px);
+  padding: 28px var(--section-inset) 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  color: var(--ink);
   background:
-    linear-gradient(to bottom, transparent var(--registration-mark-clearance), var(--line-strong) var(--registration-mark-clearance), var(--line-strong) 100%) left top / 1px 100% no-repeat,
-    linear-gradient(to bottom, transparent var(--registration-mark-clearance), var(--line-strong) var(--registration-mark-clearance), var(--line-strong) 100%) right top / 1px 100% no-repeat,
+    linear-gradient(to bottom, transparent var(--registration-mark-clearance), var(--line-strong) var(--registration-mark-clearance)) left top / 1px 100% no-repeat,
+    linear-gradient(to bottom, transparent var(--registration-mark-clearance), var(--line-strong) var(--registration-mark-clearance)) right top / 1px 100% no-repeat,
     var(--frame-hrule) center top / var(--frame-hrule-width) 1px no-repeat;
 }
 
@@ -145,6 +143,44 @@
 .site-footer::after { top: calc(0px - var(--registration-mark-offset)); }
 .site-footer::before { left: 0; transform: translateX(-50%); }
 .site-footer::after { right: 0; transform: translateX(50%); }
+
+.site-footer__links {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 14px;
+}
+
+.site-footer__copyright {
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 2;
+  align-self: center;
+  font-size: 18px;
+}
+
+.site-footer__art {
+  position: absolute;
+  inset: 0 1px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.site-footer__wordmark {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 28%);
+  color: color-mix(in srgb, var(--ink) 9%, var(--paper));
+  font-family: var(--font-family-numerical);
+  font-size: 30vw;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+}
 
 /* ---- Not found ---- */
 
@@ -157,11 +193,11 @@
   .site-header { height: 70px; }
   .site-header nav { gap: 10px; }
   .registration-line { padding-inline: var(--section-inset); }
-  .site-footer { flex-wrap: wrap; justify-content: space-between; padding-block: 20px; }
+  .site-footer { min-height: 300px; padding-top: 22px; }
+  .site-footer__copyright { font-size: 15px; }
 }
 
 @media (max-width: 500px) {
   .site-shell { width: calc(100% - 28px); }
   .site-header nav { gap: 7px; }
-  .site-footer > span:nth-of-type(1) { display: none; }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './ButtonLink.css';
 
 // useLayoutEffect warns during server prerendering; it only matters in the browser.
@@ -35,10 +35,12 @@ export default function ButtonLink({ variant = 'primary', first, second, classNa
   const Anchor = to ? Link : 'a';
   const linkProps = to ? { to, ...rest } : rest;
   if (variant === 'secondary') {
+    // NavLink marks the current page with aria-current, which fills the dot.
+    const Bracket = to ? NavLink : 'a';
     return (
-      <Anchor className={`bracket-button caption-2 ${className}`.trim()} data-active={active || undefined} {...linkProps}>
+      <Bracket end={to ? true : undefined} className={`bracket-button caption-2 ${className}`.trim()} data-active={active || undefined} {...linkProps}>
         {children}<BracketBox />
-      </Anchor>
+      </Bracket>
     );
   }
 
