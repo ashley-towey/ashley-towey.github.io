@@ -19,13 +19,16 @@
   letter-spacing: -.02em;
 }
 
-/* Home: heading on the left, bio on the right, both sitting on the rule. */
+/* Home: the same 3-column grid as the projects below. The heading spans
+   two columns and the bio fills the third, both sitting on the rule. */
 .home-intro--split {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 28rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: end;
-  column-gap: clamp(30px, 4vw, 70px);
+  column-gap: var(--grid-gap);
 }
+
+.home-intro--split h1 { grid-column: span 2; max-width: none; }
 
 /* "I design;" sits on its own line at the same size, in the h2 weight. */
 .home-intro__lead {
@@ -34,7 +37,6 @@
 }
 
 .home-intro__bio {
-  max-width: 28rem;
   margin: 0;
   font-size: 15px;
 }
@@ -144,7 +146,7 @@
 .home-projects--grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 2.8vw, 46px);
+  gap: var(--grid-gap);
   padding-bottom: 24px;
 }
 
@@ -289,7 +291,8 @@
 @media (max-width: 780px) {
   .home-intro { min-height: 360px; padding: 34px var(--section-inset) 26px; }
   .home-intro--split { grid-template-columns: 1fr; row-gap: 26px; }
-  .home-projects--grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .home-intro--split h1 { grid-column: auto; }
+  .home-projects--grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .media-tint { border-radius: 7px; }
   .project-card__image { aspect-ratio: 1.15 / 1; }
   .project-card__caption { padding: 12px; }
