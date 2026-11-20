@@ -15,8 +15,8 @@ export default function Footer() {
         {site.socials.map((social) => (
           <ButtonLink key={social.label} variant="secondary" href={social.href} target="_blank" rel="noreferrer">{social.label}</ButtonLink>
         ))}
-        <span className="caption-2">© {new Date().getFullYear()}</span>
       </div>
+      <span className="site-footer__copyright caption-2">© {new Date().getFullYear()}</span>
       {/* A huge, faint dot-matrix wordmark, cropped by the bottom of the page. */}
       <div className="site-footer__art">
         <DotWordmark />
