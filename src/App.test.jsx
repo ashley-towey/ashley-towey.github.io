@@ -9,7 +9,7 @@ import { legacyRedirects } from '../scripts/legacy-redirects.mjs';
 import { site } from './config/site';
 import manifest from './data/image-manifest.json';
 import videoManifest from './data/video-manifest.json';
-import { CATEGORIES, getProject, projectClips, projectHero, projectImages, projects, projectsIn, projectsInCategory } from './data/projects';
+import { HEADLINE, getProject, projectClips, projectHero, projectImages, projects, projectsIn } from './data/projects';
 import { VIEW_KEY } from './pages/Home';
 import { projectPath } from './lib/paths';
 import { prerenderRoutes, routeMeta } from './routes';
@@ -20,7 +20,7 @@ describe('home', () => {
   test('lists every project as a link to its page', () => {
     renderAt('/');
     const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading).toHaveTextContent(/^I design; websites,\[\d+\] products,\[\d+\] brands,\[\d+\] campaigns,\[\d+\] billboards,\[\d+\] etc\[0\]$/);
+    expect(heading).toHaveTextContent(/^I design; websites,\[\d+\] products,\[\d+\] brands,\[\d+\] campaigns,\[\d+\] billboards,\[\d+\] etc\[\d+\]$/);
     const grid = screen.getByRole('region', { name: 'Selected projects' });
     const links = within(grid).getAllByRole('link');
     const work = projectsIn('work');
@@ -33,19 +33,19 @@ describe('home', () => {
     expect(screen.getByRole('heading', { level: 2, name: 'All projects' })).toBeInTheDocument();
   });
 
-  test('heading counts match the projects in each category, and each opens a list of links', () => {
+  test('each heading number links to its project, showing its place in the portfolio', () => {
     renderAt('/');
-    for (const { key, label } of CATEGORIES) {
-      const inCategory = projectsInCategory(key);
-      const button = screen.getByRole('button', { name: `${label}, [${inCategory.length}]` });
-      expect(button).toHaveAttribute('aria-expanded', 'false');
-      fireEvent.click(button);
-      expect(button).toHaveAttribute('aria-expanded', 'true');
-      inCategory.forEach((project) => expect(screen.getByRole('link', { name: project.title })).toHaveAttribute('href', projectPath(project)));
-      fireEvent.keyDown(document, { key: 'Escape' });
-      expect(button).toHaveAttribute('aria-expanded', 'false');
+    const heading = screen.getByRole('heading', { level: 1 });
+    const work = projectsIn('work');
+    for (const word of HEADLINE.filter((w) => w.project)) {
+      const project = getProject(word.project, 'work');
+      const link = within(heading).getByRole('link', { name: project.title });
+      expect(link).toHaveAttribute('href', projectPath(project));
+      expect(link).toHaveTextContent(`[${work.indexOf(project) + 1}]`);
     }
-    expect(projects.every((project) => CATEGORIES.some((c) => c.key === project.category))).toBe(true);
+    const etc = within(heading).getByRole('link', { name: 'Experiments' });
+    expect(etc).toHaveAttribute('href', '/experiments/');
+    expect(etc).toHaveTextContent(`[${projectsIn('experiments').length}]`);
   });
 
   test('grid and list views switch and remember the choice', () => {
