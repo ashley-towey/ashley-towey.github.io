@@ -21,9 +21,11 @@ committed.
 ## How it fits together
 
 - `src/data/projects.js` — every project, in display order.
+- `src/data/lab.js` — curated coding experiments for `/lab/`. Empty for now; the
+  Lab page and nav link appear once it has entries (demos go in `public/lab/<slug>/`).
 - `src/config/site.js` — name, email and social links (single source).
 - `src/routes.js` — page titles/descriptions and the list of routes to prerender.
-- `src/pages/` — Home, Project (`/work/:slug/`), About, NotFound.
+- `src/pages/` — Home, Project (`/work/:slug/`), About, Lab, NotFound.
 - `src/components/` — shared UI (ButtonLink, ThemeToggle, Header, Footer, …).
 - `src/styles/` — design tokens, base typography, and the layout/framing system.
 - `scripts/prerender.mjs` — after the build, renders every route to its own

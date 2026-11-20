@@ -6,6 +6,8 @@
   padding: 42px var(--section-inset) 32px;
 }
 
+.home-intro .eyebrow { margin-bottom: 14px; }
+
 .home-intro h1 {
   max-width: 1020px;
   margin: 0;

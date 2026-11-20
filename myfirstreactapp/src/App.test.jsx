@@ -5,6 +5,8 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 import App from './App';
+import Lab, { labDemoUrl } from './pages/Lab';
+import { lab } from './data/lab';
 import { site } from './config/site';
 import manifest from './data/image-manifest.json';
 import { projectImages, projects } from './data/projects';
@@ -138,4 +140,24 @@ test('every referenced image has generated variants in public/portfolio', () => 
     return files.filter((file) => !fs.existsSync(path.join(dir, file)));
   });
   expect(missingFiles).toEqual([]);
+});
+
+describe('lab', () => {
+  test('is hidden from the nav and routes while it has no entries', () => {
+    if (lab.length > 0) return;
+    renderAt('/');
+    expect(screen.queryByRole('link', { name: 'The lab' })).not.toBeInTheDocument();
+    cleanup();
+    renderAt('/lab/');
+    expect(screen.getByText('Page not found')).toBeInTheDocument();
+    expect(prerenderRoutes()).not.toContain('/lab/');
+  });
+
+  test('renders each entry as a plain link to its static demo', () => {
+    const entries = [{ slug: 'demo', title: 'Demo', year: '2024', description: 'A demo.', thumbnail: projects[0].cover, alt: 'Demo thumbnail' }];
+    render(<MemoryRouter><Lab entries={entries} /></MemoryRouter>);
+    const link = screen.getByRole('link', { name: /Demo/ });
+    expect(link).toHaveAttribute('href', labDemoUrl('demo'));
+    expect(screen.getByText(/Open experiment · 2024/)).toBeInTheDocument();
+  });
 });
