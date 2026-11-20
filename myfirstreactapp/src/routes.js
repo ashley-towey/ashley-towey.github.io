@@ -1,6 +1,7 @@
 import { site } from './config/site';
 import { projects, getProject } from './data/projects';
-import { imageUrl, projectPath } from './lib/paths';
+import { shareImage } from './components/Picture';
+import { projectPath } from './lib/paths';
 
 const suffix = ` — ${site.name}`;
 
@@ -16,7 +17,7 @@ export function routeMeta(pathname) {
   const match = path.match(/^\/work\/([^/]+)$/);
   const project = match && getProject(match[1]);
   if (project) {
-    return { title: `${project.title}${suffix}`, description: project.description, image: imageUrl(project.cover) };
+    return { title: `${project.title}${suffix}`, description: project.description, image: shareImage(project.cover) };
   }
   return { title: `Page not found${suffix}`, description: site.description, notFound: true };
 }

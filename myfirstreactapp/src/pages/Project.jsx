@@ -3,7 +3,8 @@ import ButtonLink from '../components/ButtonLink';
 import Page from '../components/Page';
 import RegistrationLine from '../components/RegistrationLine';
 import { getProject, projects } from '../data/projects';
-import { imageUrl, projectPath } from '../lib/paths';
+import Picture from '../components/Picture';
+import { projectPath } from '../lib/paths';
 import NotFound from './NotFound';
 import './Project.css';
 
@@ -36,7 +37,7 @@ export default function Project() {
       <section className="project-gallery frame-box" aria-label={`${project.title} project images`}>
         {[project.cover, ...project.gallery].map((image, i) => (
           <figure className={i === 0 ? 'gallery-image gallery-image--hero' : 'gallery-image'} key={image}>
-            <img src={imageUrl(image)} alt={`${project.title} project view ${i + 1}`} loading={i < 2 ? 'eager' : 'lazy'} />
+            <Picture src={image} alt={`${project.title} project view ${i + 1}`} loading={i < 2 ? 'eager' : 'lazy'} sizes="(max-width: 500px) 92vw, 46vw" />
           </figure>
         ))}
       </section>

@@ -7,3 +7,4 @@ globalThis.ResizeObserver ??= class {
   disconnect() {}
 };
 window.scrollTo = () => {};
+globalThis.requestAnimationFrame ??= (cb) => setTimeout(cb, 0);

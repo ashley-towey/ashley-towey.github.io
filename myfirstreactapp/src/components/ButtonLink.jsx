@@ -19,9 +19,15 @@ export default function ButtonLink({ variant = 'primary', first, second, classNa
     };
 
     updateWidths();
+    // Enable the slide animation only after the first measurement, so the
+    // prerendered pill doesn't animate from its fallback width on load.
+    const frame = requestAnimationFrame(() => link.setAttribute('data-ready', ''));
     const observer = new ResizeObserver(updateWidths);
     link.querySelectorAll('[data-segment]').forEach((segment) => observer.observe(segment));
-    return () => observer.disconnect();
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
   }, [first, second, variant]);
 
   const Anchor = to ? Link : 'a';

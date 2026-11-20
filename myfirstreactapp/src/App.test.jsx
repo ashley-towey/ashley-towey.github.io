@@ -6,6 +6,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 import App from './App';
 import { site } from './config/site';
+import manifest from './data/image-manifest.json';
 import { projects } from './data/projects';
 import { projectPath } from './lib/paths';
 import { prerenderRoutes, routeMeta } from './routes';
@@ -88,7 +89,8 @@ describe('routes and metadata', () => {
     const meta = routeMeta(projectPath(projects[0].slug));
     expect(meta.title).toBe(`${projects[0].title} — Ashley Towey`);
     expect(meta.description).toBe(projects[0].description);
-    expect(meta.image).toMatch(projects[0].cover);
+    expect(meta.image).toContain(projects[0].cover.replace(/\.[^.]+$/, '-'));
+    expect(meta.image).toMatch(/\.jpg$/);
   });
 
   test('each route renders on the server without errors', () => {
@@ -99,9 +101,16 @@ describe('routes and metadata', () => {
   });
 });
 
-test('every referenced image exists in public/portfolio', () => {
+test('every referenced image has generated variants in public/portfolio', () => {
   const dir = path.resolve(__dirname, '../public/portfolio');
   const images = projects.flatMap((p) => [p.cover, ...p.gallery]).concat('about-profile.jpeg');
-  const missing = images.filter((image) => !fs.existsSync(path.join(dir, image)));
-  expect(missing).toEqual([]);
+  const notInManifest = images.filter((image) => !manifest[image]);
+  expect(notInManifest).toEqual([]);
+  const missingFiles = images.flatMap((image) => {
+    const stem = image.replace(/\.[^.]+$/, '');
+    const { widths } = manifest[image];
+    const files = widths.flatMap((w) => [`${stem}-${w}.avif`, `${stem}-${w}.webp`]).concat(`${stem}-${widths.at(-1)}.jpg`);
+    return files.filter((file) => !fs.existsSync(path.join(dir, file)));
+  });
+  expect(missingFiles).toEqual([]);
 });

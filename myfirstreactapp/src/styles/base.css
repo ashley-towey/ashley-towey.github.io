@@ -48,7 +48,10 @@ h3 {
 
 button, a { -webkit-tap-highlight-color: transparent; }
 
-img { max-width: 100%; }
+img { max-width: 100%; height: auto; }
+
+/* <Picture> wrappers shouldn't affect layout; style the <img> inside. */
+picture { display: contents; }
 
 ::selection { background: var(--orange); color: white; }
 

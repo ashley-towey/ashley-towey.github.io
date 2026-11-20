@@ -2,7 +2,7 @@ import ButtonLink from '../components/ButtonLink';
 import Page from '../components/Page';
 import RegistrationLine from '../components/RegistrationLine';
 import { mailto, site } from '../config/site';
-import { imageUrl } from '../lib/paths';
+import Picture from '../components/Picture';
 import './About.css';
 
 export default function About() {
@@ -18,7 +18,7 @@ export default function About() {
       <RegistrationLine>About</RegistrationLine>
       <section className="about-details frame-sides">
         <div className="about-photo">
-          <img src={imageUrl('about-profile.jpeg')} alt="Portrait of Ashley Towey" />
+          <Picture src="about-profile.jpeg" alt="Portrait of Ashley Towey" sizes="(max-width: 780px) 92vw, 40vw" />
           <span className="eyebrow caption-2">{site.location} · Available for select projects</span>
         </div>
         <div className="about-copy">
