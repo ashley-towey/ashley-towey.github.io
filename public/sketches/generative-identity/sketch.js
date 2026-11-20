@@ -78,13 +78,14 @@ function draw() {
   // height/hex quantity
   let heightValue = heightInput.value() / 10;
   // NEW: cap at the number of shapes made in setup, so large values can't crash it.
-    for (let h = 0; h < min(heightValue, hex.length); h++) {
+  // (Math.min, not p5's min(): draw() declares its own `min` for the minute below.)
+    for (let h = 0; h < Math.min(heightValue, hex.length); h++) {
     hex[h].show();
   }
     
   // age/circles quantity
   let ageValue = ageInput.value();
-  for (let i = 0; i < min(ageValue, bubbles.length); i++) {
+  for (let i = 0; i < Math.min(ageValue, bubbles.length); i++) {
     bubbles[i].show();
   }
   
