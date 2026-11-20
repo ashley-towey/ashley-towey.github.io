@@ -10,6 +10,8 @@
 //       { type: 'text', label?, heading, body: [paragraphs], list?: [items] }
 //       { type: 'quote', label?, quote: [paragraphs], cite }
 //       { type: 'video', label, videos: [{ vimeo, title, ratio }], columns? }
+// `hero` (optional) is the image beside the title on the project page; it
+// defaults to `cover`. If it also appears in a block, it's left out there.
 // `category` is one of the CATEGORIES keys below; the home heading counts them.
 // `summary` is the short text used on the home page card and in search/share previews.
 // `section: 'experiments'` lists a project on /experiments/ (at /experiments/<slug>/)
@@ -59,6 +61,7 @@ export const projects = [
     slug: 'slate',
     title: 'SLATE',
     category: 'product',
+    hero: 'SLATE/slate-2.jpg',
     client: 'SLATE',
     year: '2022', // PLACEHOLDER year — confirm
     disciplines: ['Accessible design', 'Creative computing', 'Branding'],
@@ -554,6 +557,13 @@ export const projectsInCategory = (key) => projects.filter((project) => project.
 // Find a project by slug, optionally only within one section.
 export const getProject = (slug, section) =>
   projects.find((project) => project.slug === slug && (!section || sectionOf(project) === section));
+
+// The project page's hero image, with alt text from wherever it's used in blocks.
+export const projectHero = (project) => {
+  const src = project.hero ?? project.cover;
+  const inBlocks = project.blocks.filter((block) => block.type === 'images').flatMap((block) => block.images).find((image) => image.src === src);
+  return { src, alt: inBlocks?.alt ?? project.alt };
+};
 
 // Every image a project uses (cover first), for tests and tooling.
 export const projectImages = (project) => [

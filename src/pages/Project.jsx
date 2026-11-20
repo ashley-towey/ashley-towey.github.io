@@ -2,12 +2,11 @@ import { Link, useParams } from 'react-router-dom';
 import ButtonLink from '../components/ButtonLink';
 import Page from '../components/Page';
 import ProjectBlocks from '../components/ProjectBlocks';
-import { getProject, projectsIn } from '../data/projects';
+import Picture from '../components/Picture';
+import { getProject, projectHero, projectsIn } from '../data/projects';
 import { projectPath, sectionPath } from '../lib/paths';
 import NotFound from './NotFound';
 import './Project.css';
-
-const pad = (n) => String(n).padStart(2, '0');
 
 const LABELS = {
   work: { item: 'Project', next: 'Next project', all: 'All projects' },
@@ -23,32 +22,30 @@ export default function Project({ section = 'work' }) {
   const list = projectsIn(section);
   const index = list.indexOf(project);
   const nextProject = list[(index + 1) % list.length];
+  const hero = projectHero(project);
 
   return (
     <Page className="project-page">
       <section className="project-intro frame-sides">
-        <div className="project-intro__title">
-          <p className="eyebrow caption-2">{labels.item} {pad(index + 1)} / {pad(list.length)}</p>
-          <h1>{project.title}</h1>
-          <div className="client-block"><span className="eyebrow caption-2">Client</span><h2>{project.client}</h2></div>
+        <div className="project-intro__text">
+          {project.year && <span className="project-intro__year type-numerical-lg">{project.year}</span>}
+          <h1 className="type-h1">{project.title}</h1>
+          <div className="project-intro__description type-body">
+            {project.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            {project.credits && (
+              <p className="project-credits"><span className="eyebrow caption-2">In collaboration with</span>{project.credits}</p>
+            )}
+            {project.links?.length > 0 && (
+              <div className="project-links">
+                {project.links.map((link) => (
+                  <ButtonLink key={link.href} variant="secondary" href={link.href} target="_blank" rel="noreferrer">{link.label} ↗</ButtonLink>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-        <div className="project-intro__description type-body">
-          {project.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-          {project.credits && (
-            <p className="project-credits"><span className="eyebrow caption-2">In collaboration with</span>{project.credits}</p>
-          )}
-          {project.links?.length > 0 && (
-            <div className="project-links">
-              {project.links.map((link) => (
-                <ButtonLink key={link.href} variant="secondary" href={link.href} target="_blank" rel="noreferrer">{link.label} ↗</ButtonLink>
-              ))}
-            </div>
-          )}
-        </div>
-        <div className="project-intro__meta">
-          <span className="eyebrow caption-2">Disciplines</span>
-          <ul>{project.disciplines.map((discipline) => <li className="caption-2" key={discipline}>{discipline}</li>)}</ul>
-          {project.year && <span className="project-year caption-2">{project.year}</span>}
+        <div className="project-intro__hero">
+          <Picture src={hero.src} alt={hero.alt} loading="eager" sizes="(max-width: 780px) 92vw, 60vw" />
         </div>
       </section>
       <ProjectBlocks project={project} />

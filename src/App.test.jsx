@@ -9,7 +9,7 @@ import { legacyRedirects } from '../scripts/legacy-redirects.mjs';
 import { site } from './config/site';
 import manifest from './data/image-manifest.json';
 import videoManifest from './data/video-manifest.json';
-import { CATEGORIES, projectClips, projectImages, projects, projectsIn, projectsInCategory } from './data/projects';
+import { CATEGORIES, getProject, projectClips, projectHero, projectImages, projects, projectsIn, projectsInCategory } from './data/projects';
 import { VIEW_KEY } from './pages/Home';
 import { projectPath } from './lib/paths';
 import { prerenderRoutes, routeMeta } from './routes';
@@ -81,6 +81,17 @@ describe('project pages', () => {
     cleanup();
     renderAt(projectPath(list.at(-1)));
     expect(screen.getByRole('link', { name: list[0].title })).toHaveAttribute('href', projectPath(list[0]));
+  });
+
+  test('the intro shows the year and hero image, and no client or disciplines', () => {
+    const slate = getProject('slate');
+    renderAt(projectPath(slate));
+    expect(screen.getByText(slate.year)).toHaveClass('project-intro__year');
+    const hero = projectHero(slate);
+    expect(hero.src).toBe('SLATE/slate-2.jpg');
+    expect(screen.getAllByAltText(hero.alt)).toHaveLength(1);
+    expect(screen.queryByText('Client')).not.toBeInTheDocument();
+    expect(screen.queryByText('Disciplines')).not.toBeInTheDocument();
   });
 
   test('a project is only reachable under its own section', () => {
@@ -199,16 +210,16 @@ describe('experiments', () => {
 
   test('experiment pages are labelled as experiments', () => {
     renderAt('/experiments/think-twice/');
-    expect(screen.getByText(/^Experiment \d+ \/ \d+$/)).toBeInTheDocument();
+    expect(screen.getByText('Next experiment')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'All experiments' })).toHaveAttribute('href', '/experiments/');
   });
 
-  test('the footer has no email button on any page', () => {
-    for (const path of ['/', '/about/', '/experiments/']) {
-      renderAt(path);
-      expect(within(screen.getByRole('contentinfo')).queryByRole('link', { name: 'Say hello' })).not.toBeInTheDocument();
-      cleanup();
-    }
+  test('the footer links to experiments, contact and LinkedIn, and marks the current page', () => {
+    renderAt('/experiments/');
+    const footer = screen.getByRole('contentinfo');
+    expect(within(footer).getByRole('link', { name: 'Experiments' })).toHaveAttribute('aria-current', 'page');
+    expect(within(footer).getByRole('link', { name: 'Contact me' })).toHaveAttribute('href', '/about/');
+    expect(within(footer).getByRole('link', { name: 'LinkedIn' })).toHaveAttribute('href', site.socials.find((s) => s.label === 'LinkedIn').href);
   });
 
   test('the footer links to experiments', () => {
