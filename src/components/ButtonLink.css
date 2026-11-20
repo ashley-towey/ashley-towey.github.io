@@ -18,7 +18,7 @@
   border-radius: 99px;
   color: var(--ink);
   font-size: 17px;
-  font-weight: var(--font-weight-medium);
+  font-weight: 550; /* between medium and semibold; the variable font allows any weight */
   letter-spacing: .01em;
   text-transform: uppercase;
   text-decoration: none;
