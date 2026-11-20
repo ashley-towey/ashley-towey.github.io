@@ -167,16 +167,20 @@
   inset: 0 1px;
   overflow: hidden;
   pointer-events: none;
+  /* The wordmark is sized from the frame's width, not the viewport's. */
+  container-type: inline-size;
 }
 
+/* Fits between the side rules with a small gap at each end; the bottom
+   rule's worth of dots (the "y" descender) is cut off by the page. */
 .site-footer__wordmark {
   position: absolute;
   left: 50%;
   bottom: 0;
-  transform: translate(-50%, 28%);
+  transform: translate(-50%, 22%);
   color: color-mix(in srgb, var(--ink) 9%, var(--paper));
   font-family: var(--font-family-numerical);
-  font-size: 30vw;
+  font-size: 29.4cqw;
   line-height: 1;
   white-space: nowrap;
   user-select: none;
