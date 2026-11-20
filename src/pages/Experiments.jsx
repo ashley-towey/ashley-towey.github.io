@@ -1,12 +1,10 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { BracketBox } from '../components/ButtonLink';
 import ExperimentModal from '../components/ExperimentModal';
 import Page from '../components/Page';
 import Picture, { imageRatio } from '../components/Picture';
 import RegistrationLine from '../components/RegistrationLine';
 import { experimentEntries } from '../data/experiments';
-import { projectPath } from '../lib/paths';
 import './Home.css';
 import './Experiments.css';
 
@@ -81,9 +79,9 @@ export default function Experiments() {
                 onMouseEnter={() => show(entry)}
                 onFocus={() => show(entry)}
               >
-                {entry.project
-                  ? <Link className="experiment-row__main" to={projectPath(entry.project)}>{label}</Link>
-                  : <span className="experiment-row__main">{label}</span>}
+                {/* Rows don't link anywhere: visitors stay on this page, and only
+                    TRY IT opens something (a code experiment, in a modal). */}
+                <span className="experiment-row__main">{label}</span>
                 {entry.tryIt && (
                   <button type="button" className="bracket-button caption-2" onClick={() => setTrying(entry)} aria-label={`Try ${entry.title}`}>
                     Try it<BracketBox />

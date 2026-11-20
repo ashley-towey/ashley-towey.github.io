@@ -196,7 +196,7 @@ test('every referenced image has generated variants in public/portfolio', () => 
 });
 
 describe('experiments', () => {
-  test('lists every experiment, numbered, linking those with pages, and none are on the home page', () => {
+  test('lists every experiment, numbered, with no links away, and none are on the home page', () => {
     const experiments = projectsIn('experiments');
     expect(experiments.map((p) => p.slug)).toEqual(['velocafe', 'networked-beings', 'think-twice', 'stories-for-the-road', 'generative-identity']);
     renderAt('/experiments/');
@@ -204,9 +204,10 @@ describe('experiments', () => {
     const list = within(screen.getByRole('region', { name: 'Experiments' }));
     expect(list.getAllByRole('listitem')).toHaveLength(EXPERIMENTS.length);
     expect(list.getByText('001')).toBeInTheDocument();
-    const links = list.getAllByRole('link');
+    // Rows don't navigate anywhere; only TRY IT buttons do something.
+    expect(list.queryAllByRole('link')).toHaveLength(0);
+    expect(list.getAllByRole('button').map((b) => b.getAttribute('aria-label'))).toEqual(EXPERIMENTS.filter((e) => e.tryIt).map((e) => `Try ${e.title}`));
     const listed = EXPERIMENTS.filter((e) => e.project).map((e) => getProject(e.project, 'experiments'));
-    expect(links.map((a) => a.getAttribute('href'))).toEqual(listed.map(projectPath));
     expect(listed.map((p) => p.slug).sort()).toEqual(experiments.map((p) => p.slug).sort());
     cleanup();
     renderAt('/');

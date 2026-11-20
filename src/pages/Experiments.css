@@ -44,17 +44,7 @@
   letter-spacing: -.02em;
 }
 
-.experiment-row[data-active] .experiment-row__number,
-.experiment-row__main:focus-visible .experiment-row__number { color: var(--orange); }
-
-.experiment-row__main:focus-visible {
-  outline: 2px solid var(--orange);
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-
-/* Rows without a page yet aren't links. */
-span.experiment-row__main { cursor: default; }
+.experiment-row[data-active] .experiment-row__number { color: var(--orange); }
 
 /* Hovered experiment's images, scattered by Experiments.jsx. */
 .experiments__panel {

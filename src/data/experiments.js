@@ -5,14 +5,14 @@ import { getProject, projectImages } from './projects';
 // Each entry:
 //   title    shown in the list
 //   project  (optional) slug of an experiment in projects.js; the row then
-//            links to its page and shows its images on hover
+//            shows its images on hover (rows don't link to pages)
 //   tryIt    (optional) URL of a live code experiment (e.g. a p5.js sketch's
 //            full-screen link); adds a TRY IT [ ] button that opens it
 //            embedded in a modal. The site must allow being shown in an iframe.
 //            For a sketch in public/, link to its index.html file itself:
 //            the dev server shows the app's 404 for a bare folder URL.
 //
-// Entries without a project are listed but not clickable yet.
+// Entries without a project are listed with no hover images yet.
 export const EXPERIMENTS = [
   { title: 'Navigation tutorial' }, // note: product
   { title: 'LH Interactive experiment' }, // note: but on the web
