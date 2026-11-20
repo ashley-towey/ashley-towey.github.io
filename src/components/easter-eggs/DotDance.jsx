@@ -68,9 +68,10 @@ const DANCES = {
     options: { duration: 1300, delay: random(0, 700), easing: 'ease-in-out' },
   }),
 
-  // Random dots flash orange. Also the stand-in when motion is reduced.
-  sparkle: ({ orange }) => ({
-    keyframes: [{ fill: orange, offset: 0.2 }, { fill: orange, offset: 0.6 }],
+  // Random dots flash the site's orange (the --orange variable, so it follows
+  // any change to it). Also the stand-in when motion is reduced.
+  sparkle: () => ({
+    keyframes: [{ fill: 'var(--orange)', offset: 0.2 }, { fill: 'var(--orange)', offset: 0.6 }],
     options: { duration: 700, delay: random(0, 1200), iterations: Math.random() < 0.3 ? 2 : 1 },
   }),
 };
@@ -93,7 +94,6 @@ export function dance(root) {
   // (The footer still crops them at the bottom of the page.)
   const svg = dots[0].ownerSVGElement;
   if (svg) svg.style.overflow = 'visible';
-  const orange = getComputedStyle(document.documentElement).getPropertyValue('--orange').trim() || '#ed5a08';
 
   dots.forEach((dot) => {
     dot.getAnimations?.().forEach((animation) => animation.cancel());
@@ -103,7 +103,6 @@ export function dance(root) {
     const { keyframes, options } = DANCES[name]({
       x: Number(dot.getAttribute('cx')),
       y: Number(dot.getAttribute('cy')),
-      orange,
     });
     dot.animate(keyframes, options);
   });
