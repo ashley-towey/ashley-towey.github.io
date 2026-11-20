@@ -10,7 +10,7 @@ import { WORDMARK_ADVANCE, WORDMARK_DOT_RADIUS, WORDMARK_DOTS } from '../data/fo
 // drawn; the ones below the line hang out of the SVG and are cropped by the
 // footer, so they're there for animations but not visible at rest.
 const TOP = -700;
-const CROP = -115;
+const CROP = -95;
 
 export default function DotWordmark() {
   const [lit, setLit] = useState(() => new Set());
