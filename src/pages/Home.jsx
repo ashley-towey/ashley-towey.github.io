@@ -74,7 +74,9 @@ function HeadlineWord({ word, work, last }) {
           [{number}]
           {/* Empty on purpose: CSS draws the title from data-title, so it stays
               out of the heading's text. The link's aria-label names it. */}
-          <span className="headline-word__tip" data-title={title} aria-hidden="true" />
+          <span className="headline-word__tip" data-title={title} aria-hidden="true">
+            <span className="headline-word__arrow" />
+          </span>
         </Link>
       </sup>
     </span>

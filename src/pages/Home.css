@@ -92,18 +92,30 @@
 
 .headline-word__tip::before { content: attr(data-title); }
 
-/* The arrow: a small rotated square showing only its bottom-right borders. */
-.headline-word__tip::after {
+/* The arrow: an ink triangle with a paper triangle over it, nudged up so
+   only a 1px ink edge shows. The paper triangle also covers the box's
+   bottom border where the arrow joins, so the outline runs unbroken. */
+.headline-word__tip::after,
+.headline-word__arrow {
   content: "";
   position: absolute;
   left: 50%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 7px 0;
+  transform: translateX(-50%);
+}
+
+.headline-word__tip::after {
   top: 100%;
-  width: 8px;
-  height: 8px;
-  border-right: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-  background: var(--paper);
-  transform: translate(-50%, -50%) rotate(45deg);
+  border-color: var(--ink) transparent transparent;
+}
+
+.headline-word__arrow {
+  z-index: 1; /* above the ink triangle, which comes later in the box */
+  top: calc(100% - 1.5px);
+  border-color: var(--paper) transparent transparent;
 }
 
 .headline-word__number a:hover .headline-word__tip,
