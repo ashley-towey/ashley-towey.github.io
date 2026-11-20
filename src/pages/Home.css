@@ -70,7 +70,7 @@
    underneath, in paper with an ink border. The arrow sits towards the
    box's left; the box is shifted so the arrow still points at the number. */
 .headline-word__tip {
-  --tip-arrow-x: 20px;
+  --tip-arrow-x: 15px;
   position: absolute;
   z-index: 5;
   left: 50%;
