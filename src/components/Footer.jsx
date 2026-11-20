@@ -8,6 +8,7 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <nav className="site-footer__links" aria-label="Footer">
+        <ButtonLink variant="secondary" to="/">Portfolio</ButtonLink>
         <ButtonLink variant="secondary" to="/experiments/">Experiments</ButtonLink>
         <ButtonLink variant="secondary" to="/about/">Contact me</ButtonLink>
         {linkedIn && <ButtonLink variant="secondary" href={linkedIn.href} target="_blank" rel="noreferrer">LinkedIn</ButtonLink>}

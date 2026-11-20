@@ -217,6 +217,8 @@ describe('experiments', () => {
   test('the footer links to experiments, contact and LinkedIn, and marks the current page', () => {
     renderAt('/experiments/');
     const footer = screen.getByRole('contentinfo');
+    expect(within(footer).getByRole('link', { name: 'Portfolio' })).toHaveAttribute('href', '/');
+    expect(within(footer).getByRole('link', { name: 'Portfolio' })).not.toHaveAttribute('aria-current');
     expect(within(footer).getByRole('link', { name: 'Experiments' })).toHaveAttribute('aria-current', 'page');
     expect(within(footer).getByRole('link', { name: 'Contact me' })).toHaveAttribute('href', '/about/');
     expect(within(footer).getByRole('link', { name: 'LinkedIn' })).toHaveAttribute('href', site.socials.find((s) => s.label === 'LinkedIn').href);
