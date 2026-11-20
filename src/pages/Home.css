@@ -66,9 +66,11 @@
   border-radius: 2px;
 }
 
-/* Standard tooltip: a rounded box centred above the number with a small
-   arrow underneath, in paper with an ink border. */
+/* Standard tooltip: a rounded box above the number with a small arrow
+   underneath, in paper with an ink border. The arrow sits towards the
+   box's left; the box is shifted so the arrow still points at the number. */
 .headline-word__tip {
+  --tip-arrow-x: 20px;
   position: absolute;
   z-index: 5;
   left: 50%;
@@ -86,7 +88,7 @@
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  transform: translate(-50%, 4px);
+  transform: translate(calc(0px - var(--tip-arrow-x)), 4px);
   transition: opacity .15s ease, transform .15s ease;
 }
 
@@ -99,7 +101,7 @@
 .headline-word__arrow {
   content: "";
   position: absolute;
-  left: 50%;
+  left: var(--tip-arrow-x);
   width: 0;
   height: 0;
   border-style: solid;
@@ -121,7 +123,7 @@
 .headline-word__number a:hover .headline-word__tip,
 .headline-word__number a:focus-visible .headline-word__tip {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translate(calc(0px - var(--tip-arrow-x)), 0);
 }
 
 /* ---- GRID / LIST toggle in the registration line ---- */
