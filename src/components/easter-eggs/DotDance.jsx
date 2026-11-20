@@ -21,16 +21,6 @@ const random = (min, max) => min + Math.random() * (max - min);
 // Each dance returns the keyframes and timing for one dot. Lengths are in
 // the SVG's units: dots sit 100 units apart.
 const DANCES = {
-  // A ripple running left to right, twice.
-  wave: ({ x }) => ({
-    keyframes: [
-      { transform: 'translate(0, 0)' },
-      { transform: 'translate(0, -140px)' },
-      { transform: 'translate(0, 0)' },
-    ],
-    options: { duration: 620, delay: x * 0.35, iterations: 2, easing: 'ease-in-out' },
-  }),
-
   // Every dot flies off somewhere random, then comes home.
   scatter: () => {
     const to = `translate(${random(-450, 450)}px, ${random(-450, 150)}px) scale(${random(0.4, 1.4)})`;
