@@ -31,20 +31,6 @@ const DANCES = {
     options: { duration: 620, delay: x * 0.35, iterations: 2, easing: 'ease-in-out' },
   }),
 
-  // Every dot flies off somewhere random, then comes home.
-  scatter: () => {
-    const to = `translate(${random(-450, 450)}px, ${random(-450, 150)}px) scale(${random(0.4, 1.4)})`;
-    return {
-      keyframes: [
-        { transform: 'translate(0, 0) scale(1)' },
-        { transform: to, offset: 0.45 },
-        { transform: to, offset: 0.55 },
-        { transform: 'translate(0, 0) scale(1)' },
-      ],
-      options: { duration: 1500, delay: random(0, 160), easing: 'cubic-bezier(.65, 0, .35, 1)' },
-    };
-  },
-
   // The letters jump one after another, landing with a bounce.
   hop: ({ x }) => ({
     keyframes: [
