@@ -1,13 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 import App from './App';
 import { site } from './config/site';
 import manifest from './data/image-manifest.json';
-import { projects } from './data/projects';
+import { projectImages, projects } from './data/projects';
 import { projectPath } from './lib/paths';
 import { prerenderRoutes, routeMeta } from './routes';
 
@@ -76,6 +76,31 @@ test('theme toggle flips the document theme and remembers it', () => {
   expect(document.documentElement.dataset.theme).toBe('light');
 });
 
+describe('project content', () => {
+  test.each(projects.map((p) => [p.slug, p]))('%s has complete content', (slug, project) => {
+    expect(project.summary.length).toBeGreaterThan(40);
+    expect(Array.isArray(project.description)).toBe(true);
+    expect(project.alt).toBeTruthy();
+    for (const block of project.blocks) {
+      expect(['images', 'text', 'quote', 'video']).toContain(block.type);
+      if (block.type === 'images') block.images.forEach((image) => expect(image.alt, image.src).toMatch(/\w{3,}/));
+      if (block.type === 'text') expect(block.heading).toBeTruthy();
+    }
+  });
+
+  test('project pages render text, quotes, captions and videos from blocks', () => {
+    renderAt('/work/jupiter-heating/');
+    expect(screen.getByText(/Chris Kollmer, Jupiter Heating Solutions/)).toBeInTheDocument();
+    expect(screen.getByText('Pre-existing imagery')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Live website/ })).toHaveAttribute('target', '_blank');
+    cleanup();
+    renderAt('/work/think-twice/');
+    expect(screen.getByRole('heading', { level: 2, name: 'User research' })).toBeInTheDocument();
+    expect(screen.getByTitle('Paper prototyping')).toHaveAttribute('src', expect.stringContaining('player.vimeo.com/video/930220535'));
+    expect(screen.getByText(/In collaboration with/)).toBeInTheDocument();
+  });
+});
+
 describe('routes and metadata', () => {
   test('every project has a unique slug', () => {
     expect(new Set(projects.map((p) => p.slug)).size).toBe(projects.length);
@@ -88,7 +113,7 @@ describe('routes and metadata', () => {
   test('project pages get their own title, description and share image', () => {
     const meta = routeMeta(projectPath(projects[0].slug));
     expect(meta.title).toBe(`${projects[0].title} — Ashley Towey`);
-    expect(meta.description).toBe(projects[0].description);
+    expect(meta.description).toBe(projects[0].summary);
     expect(meta.image).toContain(projects[0].cover.replace(/\.[^.]+$/, '-'));
     expect(meta.image).toMatch(/\.jpg$/);
   });
@@ -103,7 +128,7 @@ describe('routes and metadata', () => {
 
 test('every referenced image has generated variants in public/portfolio', () => {
   const dir = path.resolve(__dirname, '../public/portfolio');
-  const images = projects.flatMap((p) => [p.cover, ...p.gallery]).concat('about-profile.jpeg');
+  const images = projects.flatMap(projectImages).concat('about/headshot_1.jpg');
   const notInManifest = images.filter((image) => !manifest[image]);
   expect(notInManifest).toEqual([]);
   const missingFiles = images.flatMap((image) => {

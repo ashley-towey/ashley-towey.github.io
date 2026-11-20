@@ -56,7 +56,7 @@ for (const file of files) {
     const base = path.join(outDir, `${stem(rel)}-${w}`);
     await resized.clone().avif({ quality: 50, effort: 4 }).toFile(`${base}.avif`);
     await resized.clone().webp({ quality: 76 }).toFile(`${base}.webp`);
-    if (w === widths.at(-1)) await resized.clone().jpeg({ quality: 78, mozjpeg: true }).toFile(`${base}.jpg`);
+    if (w === widths.at(-1)) await resized.clone().flatten({ background: '#ffffff' }).jpeg({ quality: 78, mozjpeg: true }).toFile(`${base}.jpg`);
   }
   processed += 1;
   console.log(`✓ ${rel}`);

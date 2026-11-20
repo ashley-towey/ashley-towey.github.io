@@ -17,7 +17,7 @@ export function routeMeta(pathname) {
   const match = path.match(/^\/work\/([^/]+)$/);
   const project = match && getProject(match[1]);
   if (project) {
-    return { title: `${project.title}${suffix}`, description: project.description, image: shareImage(project.cover) };
+    return { title: `${project.title}${suffix}`, description: project.summary, image: shareImage(project.cover) };
   }
   return { title: `Page not found${suffix}`, description: site.description, notFound: true };
 }

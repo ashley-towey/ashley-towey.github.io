@@ -18,7 +18,7 @@ export default function About() {
       <RegistrationLine>About</RegistrationLine>
       <section className="about-details frame-sides">
         <div className="about-photo">
-          <Picture src="about-profile.jpeg" alt="Portrait of Ashley Towey" sizes="(max-width: 780px) 92vw, 40vw" />
+          <Picture src="about/headshot_1.jpg" alt="Portrait of Ashley Towey" sizes="(max-width: 780px) 92vw, 40vw" />
           <span className="eyebrow caption-2">{site.location} · Available for select projects</span>
         </div>
         <div className="about-copy">

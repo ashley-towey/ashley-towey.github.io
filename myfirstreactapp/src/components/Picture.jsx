@@ -33,3 +33,8 @@ export const shareImage = (src) => {
   const info = manifest[src];
   return info ? imageVariant(src, info.widths.at(-1), 'jpg') : undefined;
 };
+
+export const imageRatio = (src) => {
+  const info = manifest[src];
+  return info ? info.width / info.height : 1;
+};

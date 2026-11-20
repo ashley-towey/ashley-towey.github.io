@@ -1,9 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
 import ButtonLink from '../components/ButtonLink';
 import Page from '../components/Page';
-import RegistrationLine from '../components/RegistrationLine';
+import ProjectBlocks from '../components/ProjectBlocks';
 import { getProject, projects } from '../data/projects';
-import Picture from '../components/Picture';
 import { projectPath } from '../lib/paths';
 import NotFound from './NotFound';
 import './Project.css';
@@ -26,21 +25,26 @@ export default function Project() {
           <h1>{project.title}</h1>
           <div className="client-block"><span className="eyebrow caption-2">Client</span><h2>{project.client}</h2></div>
         </div>
-        <p className="type-body">{project.description}</p>
+        <div className="project-intro__description type-body">
+          {project.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          {project.credits && (
+            <p className="project-credits"><span className="eyebrow caption-2">In collaboration with</span>{project.credits}</p>
+          )}
+          {project.links?.length > 0 && (
+            <div className="project-links">
+              {project.links.map((link) => (
+                <ButtonLink key={link.href} variant="secondary" href={link.href} target="_blank" rel="noreferrer">{link.label} ↗</ButtonLink>
+              ))}
+            </div>
+          )}
+        </div>
         <div className="project-intro__meta">
           <span className="eyebrow caption-2">Disciplines</span>
           <ul>{project.disciplines.map((discipline) => <li className="caption-2" key={discipline}>{discipline}</li>)}</ul>
           {project.year && <span className="project-year caption-2">{project.year}</span>}
         </div>
       </section>
-      <RegistrationLine>Project imagery</RegistrationLine>
-      <section className="project-gallery frame-box" aria-label={`${project.title} project images`}>
-        {[project.cover, ...project.gallery].map((image, i) => (
-          <figure className={i === 0 ? 'gallery-image gallery-image--hero' : 'gallery-image'} key={image}>
-            <Picture src={image} alt={`${project.title} project view ${i + 1}`} loading={i < 2 ? 'eager' : 'lazy'} sizes="(max-width: 500px) 92vw, 46vw" />
-          </figure>
-        ))}
-      </section>
+      <ProjectBlocks project={project} />
       <section className="next-project frame-sides">
         <span className="eyebrow caption-2">Next project</span>
         <h2 className="next-project__title">

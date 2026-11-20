@@ -9,7 +9,7 @@ export default function ProjectCard({ project, index }) {
         <Picture src={project.cover} alt={project.alt} loading={index < 3 ? 'eager' : 'lazy'} sizes="(max-width: 500px) 92vw, (max-width: 780px) 46vw, 30vw" />
         <div className="project-card__caption">
           <h3>{project.title}</h3>
-          <p className="type-body">{project.description}</p>
+          <p className="type-body">{project.summary}</p>
           <span className="project-card__open caption-2">View project</span>
         </div>
       </div>
