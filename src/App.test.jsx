@@ -182,7 +182,7 @@ describe('routes and metadata', () => {
 
 test('every referenced image has generated variants in public/portfolio', () => {
   const dir = path.resolve(__dirname, '../public/portfolio');
-  const images = projects.flatMap(projectImages).concat('about/headshot_1.jpg');
+  const images = projects.flatMap(projectImages).concat('about/headshot_2.jpg');
   const notInManifest = images.filter((image) => !manifest[image]);
   expect(notInManifest).toEqual([]);
   const missingFiles = images.flatMap((image) => {
