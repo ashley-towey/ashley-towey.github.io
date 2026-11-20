@@ -153,13 +153,14 @@
   gap: 14px;
 }
 
-/* Email and social links above the copyright, on the right. */
+/* Email and social links above the copyright, on the right, starting level
+   with the left-hand links so both stay clear of the wordmark. */
 .site-footer__aside {
   position: relative;
   z-index: 1;
   grid-column: 2;
-  grid-row: 2;
-  align-self: center;
+  grid-row: 1;
+  align-self: start;
   display: grid;
   justify-items: end;
   gap: 14px;
