@@ -1,26 +1,69 @@
-import { getProject, projectImages } from './projects';
-
-// The /experiments/ list, in display order (numbered 001, 002, …).
+// Everything on the /experiments/ page, in display order (numbered 001, 002, …).
+// Experiments don't have pages of their own: visitors stay on /experiments/.
 //
 // Each entry:
-//   title    shown in the list
-//   project  (optional) slug of an experiment in projects.js; the row then
-//            shows its images on hover (rows don't link to pages)
-//   tryIt    (optional) URL of a live code experiment (e.g. a p5.js sketch's
-//            full-screen link); adds a TRY IT [ ] button that opens it
-//            embedded in a modal. The site must allow being shown in an iframe.
-//            For a sketch in public/, link to its index.html file itself:
-//            the dev server shows the app's 404 for a bare folder URL.
+//   title   shown in the list
+//   images  (optional) shown, a few at random, beside the list when the row
+//           is hovered. Paths are relative to assets-src/portfolio/; add the
+//           originals there and run `npm run images`.
+//   tryIt   (optional) a live code experiment, opened in a modal by a
+//           TRY IT [ ] button. Put the sketch in public/sketches/<name>/ and
+//           link to its index.html itself ('/sketches/<name>/index.html'):
+//           the dev server shows the app's 404 for a bare folder URL.
+//           An outside URL works too if that site allows being embedded.
 //
-// Entries without a project are listed with no hover images yet.
+// Notes in comments are reminders, not shown on the site.
 export const EXPERIMENTS = [
   { title: 'Navigation tutorial' }, // note: product
   { title: 'LH Interactive experiment' }, // note: but on the web
-  { title: 'The Velocafé', project: 'velocafe' },
-  { title: 'Networked Beings', project: 'networked-beings' },
-  { title: 'Think Twice', project: 'think-twice' }, // note: communicate the aim more clearly
-  { title: 'Stories for the Road', project: 'stories-for-the-road' },
-  { title: 'Generative Identity', project: 'generative-identity', tryIt: '/sketches/generative-identity/index.html' },
+  {
+    title: 'The Velocafé',
+    images: [
+      'velocafe/velocafe-3.jpg',
+      'velocafe/velocafe-1.jpg',
+      'velocafe/velocafe-2.jpg',
+      'velocafe/cards-1.jpg',
+      'velocafe/cards-2.jpg',
+      'velocafe/computing-1.jpg',
+      'velocafe/computing-2.jpg',
+    ],
+  },
+  {
+    title: 'Networked Beings',
+    images: [
+      'networked-beings/networked-beings-cover_2.jpg',
+      'networked-beings/networked-show-1.jpg',
+      'networked-beings/networked-1.jpg',
+      'networked-beings/networked-show-3.jpg',
+    ],
+  },
+  {
+    title: 'Think Twice', // note: communicate the aim more clearly
+    images: [
+      'think-twice/think-cover-2.jpg',
+      'think-twice/think_mockup_1.jpg',
+      'think-twice/think_ideas_1.jpg',
+      'think-twice/think_user-personas_1.jpg',
+    ],
+  },
+  {
+    title: 'Stories for the Road',
+    images: [
+      'stories/stories-cover_1.jpg',
+      'stories/homepage-1.jpg',
+      'stories/directory-1.jpg',
+    ],
+  },
+  {
+    title: 'Generative Identity',
+    images: [
+      'generative-identity/generative-identity-4.jpg',
+      'generative-identity/generative-identity-1.jpg',
+      'generative-identity/generative-identity-3.png',
+      'generative-identity/generative-identity-2.jpg',
+    ],
+    tryIt: '/sketches/generative-identity/index.html',
+  },
   { title: 'CSM identity experiment' },
   { title: 'The Tragic Everyday' }, // note: fun and quirky video
   { title: 'SLATE online version' },
@@ -29,13 +72,5 @@ export const EXPERIMENTS = [
   { title: 'Echelon cycling apparel' }, // note: as a throwback
 ];
 
-// Each entry with its number, project (if any) and hover images (if any).
-export const experimentEntries = () => EXPERIMENTS.map((entry, index) => {
-  const project = entry.project ? getProject(entry.project, 'experiments') : undefined;
-  return {
-    ...entry,
-    number: String(index + 1).padStart(3, '0'),
-    project,
-    images: project ? [...new Set(projectImages(project))] : [],
-  };
-});
+// Every image the experiments use, for tests and tooling.
+export const experimentImages = () => EXPERIMENTS.flatMap((entry) => entry.images ?? []);

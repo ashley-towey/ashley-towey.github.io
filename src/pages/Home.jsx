@@ -6,7 +6,7 @@ import ProjectCard from '../components/ProjectCard';
 import ProjectRow from '../components/ProjectRow';
 import RegistrationLine from '../components/RegistrationLine';
 import { EXPERIMENTS } from '../data/experiments';
-import { HEADLINE, getProject, projectsIn } from '../data/projects';
+import { HEADLINE, getProject, projects } from '../data/projects';
 import { projectPath } from '../lib/paths';
 import { readStored, writeStored } from '../lib/storage';
 import './Home.css';
@@ -16,7 +16,6 @@ export const VIEW_KEY = 'portfolio-view';
 export default function Home() {
   // Prerendered HTML is always the grid; a saved choice of list applies after hydration.
   const [view, setView] = useState('grid');
-  const work = projectsIn('work');
 
   useEffect(() => {
     if (readStored(VIEW_KEY) === 'list') setView('list');
@@ -34,7 +33,7 @@ export default function Home() {
           <span className="home-intro__lead">I design;</span>{' '}
           {HEADLINE.map((word, index) => (
             <Fragment key={word.label}>
-              <HeadlineWord word={word} work={work} last={index === HEADLINE.length - 1} />
+              <HeadlineWord word={word} last={index === HEADLINE.length - 1} />
               {index < HEADLINE.length - 1 && ' '}
             </Fragment>
           ))}
@@ -50,8 +49,8 @@ export default function Home() {
       </RegistrationLine>
       <section className={`home-projects home-projects--${view} frame-sides`} aria-label="Selected projects">
         {view === 'grid'
-          ? work.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)
-          : work.map((project, index) => <ProjectRow key={project.slug} project={project} index={index} />)}
+          ? projects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)
+          : projects.map((project, index) => <ProjectRow key={project.slug} project={project} index={index} />)}
         {view === 'list' && <span className="home-projects__end caption-2" aria-hidden="true">All projects</span>}
       </section>
     </Page>
@@ -61,10 +60,10 @@ export default function Home() {
 // One word of the heading. Its bracketed number links to a project (showing
 // the project's position in the portfolio) or to the experiments page
 // (showing how many are listed), with a tooltip naming it.
-function HeadlineWord({ word, work, last }) {
-  const project = word.project && getProject(word.project, 'work');
+function HeadlineWord({ word, last }) {
+  const project = word.project && getProject(word.project);
   const to = project ? projectPath(project) : word.to;
-  const number = project ? work.indexOf(project) + 1 : EXPERIMENTS.length;
+  const number = project ? projects.indexOf(project) + 1 : EXPERIMENTS.length;
   const title = project ? project.title : word.linkLabel;
 
   return (

@@ -5,13 +5,13 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 import App from './App';
-import { legacyRedirects } from '../scripts/legacy-redirects.mjs';
+import { FORMER_EXPERIMENT_PAGES, legacyRedirects } from '../scripts/legacy-redirects.mjs';
 import { site } from './config/site';
 import manifest from './data/image-manifest.json';
 import videoManifest from './data/video-manifest.json';
-import { HEADLINE, getProject, projectClips, projectHero, projectImages, projects, projectsIn } from './data/projects';
+import { HEADLINE, getProject, projectClips, projectHero, projectImages, projects } from './data/projects';
 import { VIEW_KEY } from './pages/Home';
-import { EXPERIMENTS } from './data/experiments';
+import { EXPERIMENTS, experimentImages } from './data/experiments';
 import { projectPath } from './lib/paths';
 import { prerenderRoutes, routeMeta } from './routes';
 
@@ -24,7 +24,7 @@ describe('home', () => {
     expect(heading).toHaveTextContent(/^I design; websites,\[\d+\] products,\[\d+\] brands,\[\d+\] campaigns,\[\d+\] billboards,\[\d+\] etc\[\d+\]$/);
     const grid = screen.getByRole('region', { name: 'Selected projects' });
     const links = within(grid).getAllByRole('link');
-    const work = projectsIn('work');
+    const work = projects;
     expect(links).toHaveLength(work.length);
     expect(links[0]).toHaveAttribute('href', projectPath(work[0]));
   });
@@ -37,9 +37,9 @@ describe('home', () => {
   test('each heading number links to its project, showing its place in the portfolio', () => {
     renderAt('/');
     const heading = screen.getByRole('heading', { level: 1 });
-    const work = projectsIn('work');
+    const work = projects;
     for (const word of HEADLINE.filter((w) => w.project)) {
-      const project = getProject(word.project, 'work');
+      const project = getProject(word.project);
       const link = within(heading).getByRole('link', { name: project.title });
       expect(link).toHaveAttribute('href', projectPath(project));
       expect(link).toHaveTextContent(`[${work.indexOf(project) + 1}]`);
@@ -60,7 +60,7 @@ describe('home', () => {
     expect(grid).toHaveAttribute('aria-pressed', 'false');
     expect(window.localStorage.getItem(VIEW_KEY)).toBe('list');
     const region = screen.getByRole('region', { name: 'Selected projects' });
-    expect(within(region).getAllByRole('link')).toHaveLength(projectsIn('work').length);
+    expect(within(region).getAllByRole('link')).toHaveLength(projects.length);
     expect(region).toHaveClass('home-projects--list');
     cleanup();
     renderAt('/');
@@ -75,8 +75,8 @@ describe('project pages', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(project.title);
   });
 
-  test.each(['work', 'experiments'])('next link stays within %s and wraps round', (section) => {
-    const list = projectsIn(section);
+  test('the next-project link wraps round', () => {
+    const list = projects;
     renderAt(projectPath(list[0]));
     expect(screen.getByRole('link', { name: list[1].title })).toHaveAttribute('href', projectPath(list[1]));
     cleanup();
@@ -95,10 +95,9 @@ describe('project pages', () => {
     expect(screen.queryByText('Disciplines')).not.toBeInTheDocument();
   });
 
-  test('a project is only reachable under its own section', () => {
-    const experiment = projectsIn('experiments')[0];
-    renderAt(`/work/${experiment.slug}/`);
-    expect(screen.getByText('Project not found')).toBeInTheDocument();
+  test('experiments no longer have pages of their own', () => {
+    renderAt('/experiments/velocafe/');
+    expect(screen.getByText('Page not found')).toBeInTheDocument();
   });
 
   test('an unknown slug shows the not-found page', () => {
@@ -143,15 +142,14 @@ describe('project content', () => {
     }
   });
 
-  test('project pages render text, quotes, captions and videos from blocks', () => {
+  test('project pages render text, quotes, captions and credits from blocks', () => {
     renderAt('/work/jupiter-heating/');
     expect(screen.getByText(/Chris Kollmer, Jupiter Heating Solutions/)).toBeInTheDocument();
     expect(screen.getByText('Pre-existing imagery')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Live website/ })).toHaveAttribute('target', '_blank');
     cleanup();
-    renderAt('/experiments/think-twice/');
-    expect(screen.getByRole('heading', { level: 2, name: 'User research' })).toBeInTheDocument();
-    expect(screen.getByTitle('Paper prototyping')).toHaveAttribute('src', expect.stringContaining('player.vimeo.com/video/930220535'));
+    renderAt('/work/csm-showcase/');
+    expect(screen.getByRole('heading', { level: 2, name: 'Concept' })).toBeInTheDocument();
     expect(screen.getByText(/In collaboration with/)).toBeInTheDocument();
   });
 });
@@ -183,7 +181,7 @@ describe('routes and metadata', () => {
 
 test('every referenced image has generated variants in public/portfolio', () => {
   const dir = path.resolve(__dirname, '../public/portfolio');
-  const images = projects.flatMap(projectImages).concat('about/headshot_2.jpg');
+  const images = projects.flatMap(projectImages).concat(experimentImages(), 'about/headshot_2.jpg');
   const notInManifest = images.filter((image) => !manifest[image]);
   expect(notInManifest).toEqual([]);
   const missingFiles = images.flatMap((image) => {
@@ -196,23 +194,20 @@ test('every referenced image has generated variants in public/portfolio', () => 
 });
 
 describe('experiments', () => {
-  test('lists every experiment, numbered, with no links away, and none are on the home page', () => {
-    const experiments = projectsIn('experiments');
-    expect(experiments.map((p) => p.slug)).toEqual(['velocafe', 'networked-beings', 'think-twice', 'stories-for-the-road', 'generative-identity']);
+  test('lists every experiment, numbered, with no links away', () => {
     renderAt('/experiments/');
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/^Experiments;/);
     const list = within(screen.getByRole('region', { name: 'Experiments' }));
     expect(list.getAllByRole('listitem')).toHaveLength(EXPERIMENTS.length);
     expect(list.getByText('001')).toBeInTheDocument();
+    expect(list.getByText(EXPERIMENTS[0].title)).toBeInTheDocument();
     // Rows don't navigate anywhere; only TRY IT buttons do something.
     expect(list.queryAllByRole('link')).toHaveLength(0);
     expect(list.getAllByRole('button').map((b) => b.getAttribute('aria-label'))).toEqual(EXPERIMENTS.filter((e) => e.tryIt).map((e) => `Try ${e.title}`));
-    const listed = EXPERIMENTS.filter((e) => e.project).map((e) => getProject(e.project, 'experiments'));
-    expect(listed.map((p) => p.slug).sort()).toEqual(experiments.map((p) => p.slug).sort());
-    cleanup();
-    renderAt('/');
-    const home = within(screen.getByRole('region', { name: 'Selected projects' }));
-    experiments.forEach((p) => expect(home.queryByRole('link', { name: new RegExp(p.title) })).not.toBeInTheDocument());
+  });
+
+  test('experiment titles are unique (they key the list)', () => {
+    expect(new Set(EXPERIMENTS.map((e) => e.title)).size).toBe(EXPERIMENTS.length);
   });
 
   test('a TRY IT button opens the code experiment in a modal, and Escape closes it', () => {
@@ -229,22 +224,16 @@ describe('experiments', () => {
     }
   });
 
-  test('Generative Identity can be tried in a modal from the list and from its page', () => {
+  test('Generative Identity can be tried in a modal', () => {
     renderAt('/experiments/');
     fireEvent.click(screen.getByRole('button', { name: 'Try Generative Identity' }));
     expect(within(screen.getByRole('dialog', { name: 'Generative Identity' })).getByTitle('Generative Identity'))
       .toHaveAttribute('src', '/sketches/generative-identity/index.html');
-    fireEvent.keyDown(document, { key: 'Escape' });
-    cleanup();
-    renderAt('/experiments/generative-identity/');
-    fireEvent.click(screen.getByRole('button', { name: 'Try Generative Identity' }));
-    expect(screen.getByRole('dialog', { name: 'Generative Identity' })).toBeInTheDocument();
   });
 
-  test('experiment pages are labelled as experiments', () => {
-    renderAt('/experiments/think-twice/');
-    expect(screen.getByText('Next experiment')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'All experiments' })).toHaveAttribute('href', '/experiments/');
+  test('every TRY IT sketch in public/ exists', () => {
+    const local = EXPERIMENTS.filter((e) => e.tryIt?.startsWith('/'));
+    local.forEach((e) => expect(fs.existsSync(path.resolve(__dirname, '../public', `.${e.tryIt}`)), e.tryIt).toBe(true));
   });
 
   test('the footer links to experiments, contact and LinkedIn, and marks the current page', () => {
@@ -263,6 +252,11 @@ describe('experiments', () => {
     renderAt('/');
     expect(within(screen.getByRole('contentinfo')).getByRole('link', { name: 'Experiments' })).toHaveAttribute('href', '/experiments/');
   });
+});
+
+test('old experiment pages are redirected to the experiments page', () => {
+  expect(FORMER_EXPERIMENT_PAGES.length).toBeGreaterThan(0);
+  expect(prerenderRoutes()).toContain('/experiments/');
 });
 
 test('every legacy redirect points at a prerendered page', () => {

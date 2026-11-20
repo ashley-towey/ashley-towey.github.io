@@ -17,8 +17,8 @@ export function routeMeta(pathname) {
   if (path === '/experiments') {
     return { title: `Experiments${suffix}`, description: `Experiments, prototypes and self-initiated projects by ${site.name}.` };
   }
-  const match = path.match(/^\/(work|experiments)\/([^/]+)$/);
-  const project = match && getProject(match[2], match[1]);
+  const match = path.match(/^\/work\/([^/]+)$/);
+  const project = match && getProject(match[1]);
   if (project) {
     return { title: `${project.title}${suffix}`, description: project.summary, image: shareImage(project.cover) };
   }

@@ -4,6 +4,10 @@
 
 const EXPERIMENTS = '/experiments/';
 
+// Experiments that had pages at /experiments/<slug>/ before they moved onto
+// the single /experiments/ page. prerender.mjs redirects those old URLs.
+export const FORMER_EXPERIMENT_PAGES = ['velocafe', 'networked-beings', 'think-twice', 'stories-for-the-road'];
+
 export const legacyRedirects = {
   // Case studies
   'site-map/prj-pages/csm-show.html': '/work/csm-showcase/',
@@ -11,15 +15,15 @@ export const legacyRedirects = {
   'site-map/prj-pages/jupiter.html': '/work/jupiter-heating/',
   'site-map/prj-pages/kalas-l2p.html': '/work/london-to-paris/',
   'site-map/prj-pages/leanne-prosvic.html': '/work/leanne-prosvic/',
-  'site-map/prj-pages/networked-beings.html': '/experiments/networked-beings/',
+  'site-map/prj-pages/networked-beings.html': EXPERIMENTS,
   'site-map/prj-pages/slate.html': '/work/slate/',
-  'site-map/prj-pages/think-twice.html': '/experiments/think-twice/',
-  'site-map/prj-pages/velocafe.html': '/experiments/velocafe/',
-  'velocafe/velocafe.html': '/experiments/velocafe/',
-  'projects/velocafe.html': '/experiments/velocafe/',
-  'project_stories/landing.html': '/experiments/stories-for-the-road/',
-  'project_stories/computer.html': '/experiments/stories-for-the-road/',
-  'project_stories/phone.html': '/experiments/stories-for-the-road/',
+  'site-map/prj-pages/think-twice.html': EXPERIMENTS,
+  'site-map/prj-pages/velocafe.html': EXPERIMENTS,
+  'velocafe/velocafe.html': EXPERIMENTS,
+  'projects/velocafe.html': EXPERIMENTS,
+  'project_stories/landing.html': EXPERIMENTS,
+  'project_stories/computer.html': EXPERIMENTS,
+  'project_stories/phone.html': EXPERIMENTS,
 
   // Pages
   'site-map/site-contact.html': '/about/',

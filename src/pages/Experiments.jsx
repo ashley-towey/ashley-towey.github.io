@@ -1,15 +1,20 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { BracketBox } from '../components/ButtonLink';
 import ExperimentModal from '../components/ExperimentModal';
 import Page from '../components/Page';
 import Picture, { imageRatio } from '../components/Picture';
 import RegistrationLine from '../components/RegistrationLine';
-import { experimentEntries } from '../data/experiments';
+import { EXPERIMENTS } from '../data/experiments';
 import './Home.css';
 import './Experiments.css';
 
+// The /experiments/ page: a numbered list of everything in data/experiments.js.
+// Hovering a row scatters a few of its images on the right; TRY IT opens a
+// code experiment in a modal. Rows don't link anywhere.
+
 const IMAGES_ON_HOVER = 3;
 const random = (min, max) => min + Math.random() * (max - min);
+const numberOf = (index) => String(index + 1).padStart(3, '0');
 
 // Pick up to `count` images at random and place them in the panel: one per
 // horizontal band, at a random size and position within it, so they never
@@ -30,23 +35,22 @@ function scatter(images, width, height, count = IMAGES_ON_HOVER) {
 }
 
 export default function Experiments() {
-  // Built once per visit, so the hovered entry keeps its identity between renders.
-  const entries = useMemo(experimentEntries, []);
   const panel = useRef(null);
-  const [active, setActive] = useState(null);
-  const [placed, setPlaced] = useState([]);
-  const [trying, setTrying] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null); // the hovered row
+  const [placed, setPlaced] = useState([]); // its scattered images
+  const [trying, setTrying] = useState(null); // the experiment open in the modal
   const closeModal = useCallback(() => setTrying(null), []);
 
-  function show(entry) {
-    if (entry === active) return;
-    setActive(entry);
+  function show(index) {
+    if (index === activeIndex) return;
+    setActiveIndex(index);
+    const images = EXPERIMENTS[index].images ?? [];
     const box = panel.current?.getBoundingClientRect();
-    setPlaced(entry.images.length && box ? scatter(entry.images, box.width, box.height) : []);
+    setPlaced(images.length && box ? scatter(images, box.width, box.height) : []);
   }
 
   function clear() {
-    setActive(null);
+    setActiveIndex(null);
     setPlaced([]);
   }
 
@@ -64,37 +68,30 @@ export default function Experiments() {
       <RegistrationLine as="h2"><span className="visually-hidden">All experiments</span></RegistrationLine>
       <section className="experiments frame-sides" aria-label="Experiments" onMouseLeave={clear}>
         <ol className="experiments__list">
-          {entries.map((entry) => {
-            const label = (
-              <>
-                <span className="experiment-row__number">{entry.number}</span>
-                <span className="experiment-row__title">{entry.title}</span>
-              </>
-            );
-            return (
-              <li
-                key={entry.number}
-                className="experiment-row"
-                data-active={entry === active || undefined}
-                onMouseEnter={() => show(entry)}
-                onFocus={() => show(entry)}
-              >
-                {/* Rows don't link anywhere: visitors stay on this page, and only
-                    TRY IT opens something (a code experiment, in a modal). */}
-                <span className="experiment-row__main">{label}</span>
-                {entry.tryIt && (
-                  <button type="button" className="bracket-button caption-2" onClick={() => setTrying(entry)} aria-label={`Try ${entry.title}`}>
-                    Try it<BracketBox />
-                  </button>
-                )}
-              </li>
-            );
-          })}
+          {EXPERIMENTS.map((experiment, index) => (
+            <li
+              key={experiment.title}
+              className="experiment-row"
+              data-active={index === activeIndex || undefined}
+              onMouseEnter={() => show(index)}
+              onFocus={() => show(index)}
+            >
+              <span className="experiment-row__main">
+                <span className="experiment-row__number">{numberOf(index)}</span>
+                <span className="experiment-row__title">{experiment.title}</span>
+              </span>
+              {experiment.tryIt && (
+                <button type="button" className="bracket-button caption-2" onClick={() => setTrying(experiment)} aria-label={`Try ${experiment.title}`}>
+                  Try it<BracketBox />
+                </button>
+              )}
+            </li>
+          ))}
         </ol>
         <div className="experiments__panel" ref={panel} aria-hidden="true">
           {placed.map((image) => (
             <div
-              key={`${active?.number}-${image.src}`}
+              key={`${activeIndex}-${image.src}`}
               className="experiments__image"
               style={{ left: image.left, top: image.top, width: image.width, height: image.height }}
             >

@@ -13,8 +13,8 @@
 // `hero` (optional) is the image beside the title on the project page; it
 // defaults to `cover`. If it also appears in a block, it's left out there.
 // `summary` is the short text used on the home page card and in search/share previews.
-// `section: 'experiments'` lists a project on /experiments/ (at /experiments/<slug>/)
-// instead of the home page (at /work/<slug>/).
+// Every project is portfolio work, at /work/<slug>/. Experiments live in
+// data/experiments.js instead and have no pages of their own.
 
 export const projects = [
   {
@@ -185,90 +185,6 @@ export const projects = [
     ],
   },
   {
-    slug: 'velocafe',
-    section: 'experiments',
-    title: 'The Velocafé',
-    client: 'Independent project',
-    year: '2023', // PLACEHOLDER year — confirm
-    disciplines: ['Creative technology', 'Print design', 'Branding'],
-    summary: 'Reimagining the cycling café through a connected design system. Computational visuals and designed ephemera make the sense of community around coffee, cake and cycling visible.',
-    description: [
-      'The Velocafé aims to reimagine our interaction with the cycling café through a consistent design approach. Across computational visuals and designed ephemera, the velocafé (read: cycling café) becomes part of the visual language associated with communal coffee and cake.',
-    ],
-    cover: 'velocafe/velocafe-3.jpg',
-    alt: 'Velocafé cards for Fortitude Bakehouse and Via laid on a cycling jersey',
-    blocks: [
-      {
-        type: 'images',
-        label: 'The velocafé clock',
-        images: [
-          { src: 'velocafe/velocafe-1.jpg', alt: 'A visitor smiling as he raises a hand to the velocafé clock’s glowing light display', wide: true },
-        ],
-      },
-      {
-        type: 'text',
-        heading: 'A Michelin star for cycling cafés',
-        body: [
-          'Inspired by the winged wheel symbol of the Cycling Touring Club, the velocafé ‘clock’ uses mechanical sound and proximity detection to visually display the sense of community and belonging that is felt when visiting a cycling café. Through an array of lights that only trigger when there are sounds and people around, it shows through a modern visual language that there are cyclists in the café.',
-          'Like a Michelin star for cycling cafés, the velocafé ‘clock’ denotes a good cycling café, not simply through arbitrary testing, but through live data that is being collected within the café and displayed to “tempt the [passing] rider to early tea”.',
-        ],
-      },
-      {
-        type: 'images',
-        label: 'Ephemera',
-        columns: 3,
-        square: true,
-        images: [
-          { src: 'velocafe/velocafe-2.jpg', alt: 'Velocafé cards for Fortitude, Rapha and Via laid on a colourful cycling jersey' },
-          { src: 'velocafe/cards-1.jpg', alt: 'Three Velocafé cards with a glowing gradient badge' },
-          { src: 'velocafe/cards-2.jpg', alt: 'Backs of the cards listing details for Fortitude, Rapha Soho and Via Atelier' },
-        ],
-      },
-      {
-        type: 'text',
-        heading: 'Physical computing',
-        body: [
-          'To locate the compute elements I created a clock-like enclosure, using laser cutting to create a diffused layer with elements of the Winged Wheel symbol engraved.',
-          'To house the Arduino devices and their wires I built a box with a door on the exterior that positioned the sound and ultrasonic sensors. Placing these correctly was important for collecting the sound and proximity data: the sound sensor sits close to head height, and the ultrasonic sensor lower down to reflect off the body of a passing person.',
-        ],
-      },
-      {
-        type: 'images',
-        label: 'Process',
-        images: [
-          { src: 'velocafe/computing-1.jpg', alt: 'A laser cutter engraving the clock’s diffuser panel' },
-          { src: 'velocafe/computing-2.jpg', alt: 'An Arduino, breadboard and sensors wired up on a desk' },
-        ],
-      },
-    ],
-  },
-  {
-    slug: 'networked-beings',
-    section: 'experiments',
-    title: 'Networked Beings',
-    client: 'Independent project',
-    year: '2023', // PLACEHOLDER year — confirm
-    disciplines: ['Physical computing', 'Product design', '3D modelling'],
-    summary: 'Three networked objects explore how form changes our desire to interact. Small gestures connect the objects, turning light into a quiet language between people and things.',
-    description: [
-      'Three networked objects, Bool, Boid and Buzz, explore how our interaction with objects alters our desire to interact with them. Through micro-interactions of turning each other’s light on, they create a connection.',
-      'Each object is created in a different form which relates directly to its output device. Bool is sharp, outputting 1 or 0 and turning the affected device on or off. Boid is square and has four outputs, each relating to a different colour state on the affected device. Buzz is circular and infinite, outputting an ever-changing random array of colours.',
-    ],
-    cover: 'networked-beings/networked-beings-cover_2.jpg',
-    alt: 'The white, round Buzz object glowing orange, with Bool and Boid behind it',
-    blocks: [
-      {
-        type: 'images',
-        label: 'Exhibition',
-        images: [
-          { src: 'networked-beings/networked-show-1.jpg', alt: 'Visitors trying the Networked Beings objects at an exhibition', wide: true },
-          { src: 'networked-beings/networked-1.jpg', alt: 'Hands pressing Bool (black, faceted), Boid (orange, square) and Buzz (white, round)' },
-          { src: 'networked-beings/networked-show-3.jpg', alt: 'Two visitors smiling as they press the objects' },
-        ],
-      },
-    ],
-  },
-  {
     slug: 'london-to-paris',
     title: 'London to Paris',
     client: 'Kalas / Cure Leukaemia',
@@ -378,75 +294,6 @@ export const projects = [
     ],
   },
   {
-    slug: 'think-twice',
-    section: 'experiments',
-    title: 'Think Twice',
-    client: 'BBC UX&D',
-    year: '2024', // PLACEHOLDER year — confirm
-    disciplines: ['Digital service', 'Research', 'Interaction design'],
-    summary: 'A mobile experience that encourages young adults to make more conscious shopping decisions by showing the human and environmental stories behind everyday products.',
-    description: [
-      'A group project in collaboration with the BBC UX&D team, during which we created a mobile application to encourage young adults (18–24 year olds) to make more conscious shopping decisions by including real-time guidance and incentives.',
-    ],
-    credits: 'Nataliya Belova, See Wing Chun, Insiyah Haji and Bo Kang',
-    cover: 'think-twice/think-cover-2.jpg',
-    alt: 'Think Twice logo, in partnership with BBC UX&D',
-    blocks: [
-      {
-        type: 'images',
-        label: 'The app',
-        images: [
-          { src: 'think-twice/think_mockup_1.jpg', alt: 'Think Twice app screens shown on several phones', wide: true },
-        ],
-      },
-      {
-        type: 'video',
-        label: 'Overview',
-        videos: [{ vimeo: '930209800', title: 'Think Twice', ratio: 16 / 9 }],
-      },
-      {
-        type: 'text',
-        heading: 'User research',
-        body: ['By talking with our student peers we identified a common need to become more conscious shoppers. Research shows that 41% of Generation Z consumers are impulse buyers, followed by Millennials at 34% and Generation X at 32%.'],
-      },
-      {
-        type: 'images',
-        label: 'Research',
-        images: [
-          { src: 'think-twice/think_ideas_1.jpg', alt: 'Sticky notes from an ideas session' },
-          { src: 'think-twice/think_user-personas_1.jpg', alt: 'Three user personas: a student with no job, a student with a part-time job, and a recent graduate' },
-        ],
-      },
-      {
-        type: 'text',
-        heading: 'Personas',
-        body: ['To guide our design decisions we developed three user personas, with the aim of helping young adults aged 18–24 with financial planning and saving.'],
-      },
-      {
-        type: 'text',
-        heading: 'Paper prototyping',
-        body: ['Key insights:'],
-        list: [
-          'Incorporate a goal-setting feature at the beginning of the app to increase audience retention.',
-          'Use live reactions rather than full text responses.',
-        ],
-      },
-      {
-        type: 'video',
-        label: 'Paper prototyping',
-        videos: [{ vimeo: '930220535', title: 'Paper prototyping', ratio: 1 / 0.6081 }],
-      },
-      {
-        type: 'video',
-        label: 'User flows',
-        videos: [
-          { vimeo: '930211778', title: 'Primary user flow', ratio: 1.6 },
-          { vimeo: '930212196', title: 'Friend’s user flow', ratio: 1.6 },
-        ],
-      },
-    ],
-  },
-  {
     slug: 'jupiter-heating',
     title: 'Jupiter Heating Solutions',
     client: 'Jupiter Heating Solutions',
@@ -502,61 +349,7 @@ export const projects = [
       },
     ],
   },
-  {
-    slug: 'stories-for-the-road',
-    section: 'experiments',
-    title: 'Stories for the Road',
-    client: 'Independent project',
-    year: '2023', // PLACEHOLDER year — confirm
-    disciplines: ['Digital service', 'Type design', 'Community'],
-    summary: 'A digital service exploring how technology can help cyclists build community and take back ownership of the roads through shared recommendations, encouragement and stories.',
-    description: [
-      'A digital service exploring how technology can help cyclists build community and take back ownership of the roads through shared recommendations, encouragement and stories.',
-    ],
-    cover: 'stories/stories-cover_1.jpg',
-    alt: 'Stories for the Road homepage with a recommendation for Mountbatten break water',
-    blocks: [
-      {
-        type: 'images',
-        label: 'The service',
-        images: [
-          { src: 'stories/homepage-1.jpg', alt: 'Homepage showing a recommendation for Mountbatten break water over a dusk photo' },
-          { src: 'stories/directory-1.jpg', alt: 'Directory of recommendations and encouragements with photos of cafés and roads' },
-        ],
-      },
-    ],
-  },
-  {
-    slug: 'generative-identity',
-    section: 'experiments',
-    title: 'Generative Identity',
-    client: 'Independent project',
-    year: '2021',
-    disciplines: ['Creative computing', 'Generative art', 'p5.js'],
-    summary: 'A generative artwork that turns your name, age, height and mood into a visual representation of your emotional identity, exploring how we represent ourselves in our largely online lives.',
-    description: [
-      'This project aims to explore how we represent ourselves in our largely online lives. Through the medium of generative art the participant is able to produce a visual representation of their emotional identity over time. Each outcome is different, reflecting our ever changing sense of self.',
-      '‘Generative identity’ explores questions of identity as it relates to mental health and how we represent ourselves in a digital world. Try it for yourself, and ask yourself: how do you want to be represented?',
-    ],
-    cover: 'generative-identity/generative-identity-4.jpg',
-    alt: 'A generated identity for Ashley Towey: pale circles and teal hexagons on navy, with the name and time in yellow',
-    blocks: [
-      {
-        type: 'images',
-        label: 'Outcomes',
-        images: [
-          { src: 'generative-identity/generative-identity-1.jpg', alt: 'A grid of nine generated identities, each in a different colour scheme for a different mood', wide: true },
-          { src: 'generative-identity/generative-identity-3.png', alt: 'The text receipt saved alongside each identity, listing the name, age, height and mood entered' },
-          { src: 'generative-identity/generative-identity-2.jpg', alt: 'A blue bike multi-tool photographed beside a generated pattern of circles and hexagons in matching colours' },
-        ],
-      },
-    ],
-  },
 ];
-
-export const SECTIONS = ['work', 'experiments'];
-export const sectionOf = (project) => project.section ?? 'work';
-export const projectsIn = (section) => projects.filter((project) => sectionOf(project) === section);
 
 // The home heading: "I design; websites,[5] products,[2] …". Each word's
 // bracketed number links to one project (`project`, a slug) and shows that
@@ -571,9 +364,8 @@ export const HEADLINE = [
   { label: 'etc', to: '/experiments/', linkLabel: 'Experiments' },
 ];
 
-// Find a project by slug, optionally only within one section.
-export const getProject = (slug, section) =>
-  projects.find((project) => project.slug === slug && (!section || sectionOf(project) === section));
+// Find a project by slug.
+export const getProject = (slug) => projects.find((project) => project.slug === slug);
 
 // The project page's hero image, with alt text from wherever it's used in blocks.
 export const projectHero = (project) => {
