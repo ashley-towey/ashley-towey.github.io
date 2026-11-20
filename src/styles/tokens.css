@@ -77,7 +77,7 @@
   --type-caption-letter-spacing: .04em;
   /* Domestique (dot-matrix) for years and counts. */
   --type-numerical-lg: clamp(28px, 2.6vw, 40px);
-  --type-numerical-sup: 13px;
+  --type-numerical-sup: clamp(13px, 1.1vw, 18px);
   /* Shared corner radius for every image: cards, rows, heroes, galleries. */
   --radius-media: 10px;
   color-scheme: light;

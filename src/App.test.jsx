@@ -9,7 +9,8 @@ import { legacyRedirects } from '../scripts/legacy-redirects.mjs';
 import { site } from './config/site';
 import manifest from './data/image-manifest.json';
 import videoManifest from './data/video-manifest.json';
-import { projectClips, projectImages, projects, projectsIn } from './data/projects';
+import { CATEGORIES, projectClips, projectImages, projects, projectsIn, projectsInCategory } from './data/projects';
+import { VIEW_KEY } from './pages/Home';
 import { projectPath } from './lib/paths';
 import { prerenderRoutes, routeMeta } from './routes';
 
@@ -18,7 +19,8 @@ const renderAt = (path) => render(<MemoryRouter initialEntries={[path]}><App /><
 describe('home', () => {
   test('lists every project as a link to its page', () => {
     renderAt('/');
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent("I design: websites, products, brands, campaigns, billboards, etc");
+    const heading = screen.getByRole('heading', { level: 1 });
+    expect(heading).toHaveTextContent(/^I design; websites,\[\d+\] products,\[\d+\] brands,\[\d+\] campaigns,\[\d+\] billboards,\[\d+\] etc\[0\]$/);
     const grid = screen.getByRole('region', { name: 'Selected projects' });
     const links = within(grid).getAllByRole('link');
     const work = projectsIn('work');
@@ -29,6 +31,40 @@ describe('home', () => {
   test('has an h2 between the h1 and the project card h3s', () => {
     renderAt('/');
     expect(screen.getByRole('heading', { level: 2, name: 'All projects' })).toBeInTheDocument();
+  });
+
+  test('heading counts match the projects in each category, and each opens a list of links', () => {
+    renderAt('/');
+    for (const { key, label } of CATEGORIES) {
+      const inCategory = projectsInCategory(key);
+      const button = screen.getByRole('button', { name: `${label}, [${inCategory.length}]` });
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+      fireEvent.click(button);
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+      inCategory.forEach((project) => expect(screen.getByRole('link', { name: project.title })).toHaveAttribute('href', projectPath(project)));
+      fireEvent.keyDown(document, { key: 'Escape' });
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+    }
+    expect(projects.every((project) => CATEGORIES.some((c) => c.key === project.category))).toBe(true);
+  });
+
+  test('grid and list views switch and remember the choice', () => {
+    window.localStorage.removeItem(VIEW_KEY);
+    renderAt('/');
+    const grid = screen.getByRole('button', { name: 'Grid' });
+    const list = screen.getByRole('button', { name: 'List' });
+    expect(grid).toHaveAttribute('aria-pressed', 'true');
+    fireEvent.click(list);
+    expect(list).toHaveAttribute('aria-pressed', 'true');
+    expect(grid).toHaveAttribute('aria-pressed', 'false');
+    expect(window.localStorage.getItem(VIEW_KEY)).toBe('list');
+    const region = screen.getByRole('region', { name: 'Selected projects' });
+    expect(within(region).getAllByRole('link')).toHaveLength(projectsIn('work').length);
+    expect(region).toHaveClass('home-projects--list');
+    cleanup();
+    renderAt('/');
+    expect(screen.getByRole('button', { name: 'List' })).toHaveAttribute('aria-pressed', 'true');
+    window.localStorage.removeItem(VIEW_KEY);
   });
 });
 

@@ -10,6 +10,7 @@
 //       { type: 'text', label?, heading, body: [paragraphs], list?: [items] }
 //       { type: 'quote', label?, quote: [paragraphs], cite }
 //       { type: 'video', label, videos: [{ vimeo, title, ratio }], columns? }
+// `category` is one of the CATEGORIES keys below; the home heading counts them.
 // `summary` is the short text used on the home page card and in search/share previews.
 // `section: 'experiments'` lists a project on /experiments/ (at /experiments/<slug>/)
 // instead of the home page (at /work/<slug>/).
@@ -18,6 +19,7 @@ export const projects = [
   {
     slug: 'domestique-display',
     title: 'The Domestique Display',
+    category: 'billboard',
     client: 'Central Saint Martins Shows',
     year: '2024',
     disciplines: ['Creative technology', 'Data visualisation', 'Physical computing'],
@@ -56,6 +58,7 @@ export const projects = [
   {
     slug: 'slate',
     title: 'SLATE',
+    category: 'product',
     client: 'SLATE',
     year: '2022', // PLACEHOLDER year — confirm
     disciplines: ['Accessible design', 'Creative computing', 'Branding'],
@@ -112,6 +115,7 @@ export const projects = [
   {
     slug: 'csm-showcase',
     title: 'CSM Showcase Identity',
+    category: 'campaign',
     client: 'Central Saint Martins (finalist proposal)',
     year: '2024',
     disciplines: ['Identity', 'Art direction', 'Digital design'],
@@ -185,6 +189,7 @@ export const projects = [
     slug: 'velocafe',
     section: 'experiments',
     title: 'The Velocafé',
+    category: 'brand',
     client: 'Independent project',
     year: '2023', // PLACEHOLDER year — confirm
     disciplines: ['Creative technology', 'Print design', 'Branding'],
@@ -243,6 +248,7 @@ export const projects = [
     slug: 'networked-beings',
     section: 'experiments',
     title: 'Networked Beings',
+    category: 'product',
     client: 'Independent project',
     year: '2023', // PLACEHOLDER year — confirm
     disciplines: ['Physical computing', 'Product design', '3D modelling'],
@@ -268,6 +274,7 @@ export const projects = [
   {
     slug: 'london-to-paris',
     title: 'London to Paris',
+    category: 'brand',
     client: 'Kalas / Cure Leukaemia',
     year: '2019–20',
     disciplines: ['Sportswear', 'Art direction', 'Print design'],
@@ -327,6 +334,7 @@ export const projects = [
   {
     slug: 'leanne-prosvic',
     title: 'Leanne Prosvic',
+    category: 'brand',
     client: 'Leanne Prosvic',
     year: '2022', // PLACEHOLDER year — confirm
     disciplines: ['Brand identity', 'Print design', 'Art direction'],
@@ -378,6 +386,7 @@ export const projects = [
     slug: 'think-twice',
     section: 'experiments',
     title: 'Think Twice',
+    category: 'website',
     client: 'BBC UX&D',
     year: '2024', // PLACEHOLDER year — confirm
     disciplines: ['Digital service', 'Research', 'Interaction design'],
@@ -446,6 +455,7 @@ export const projects = [
   {
     slug: 'jupiter-heating',
     title: 'Jupiter Heating Solutions',
+    category: 'website',
     client: 'Jupiter Heating Solutions',
     year: '2024', // PLACEHOLDER year — confirm
     disciplines: ['3D visualisation', 'Product communication', 'Art direction'],
@@ -503,6 +513,7 @@ export const projects = [
     slug: 'stories-for-the-road',
     section: 'experiments',
     title: 'Stories for the Road',
+    category: 'website',
     client: 'Independent project',
     year: '2023', // PLACEHOLDER year — confirm
     disciplines: ['Digital service', 'Type design', 'Community'],
@@ -528,6 +539,17 @@ export const projects = [
 export const SECTIONS = ['work', 'experiments'];
 export const sectionOf = (project) => project.section ?? 'work';
 export const projectsIn = (section) => projects.filter((project) => sectionOf(project) === section);
+
+// The kinds of work named in the home heading, in heading order. Each project
+// has one `category`; the heading shows how many projects are in each.
+export const CATEGORIES = [
+  { key: 'website', label: 'websites' },
+  { key: 'product', label: 'products' },
+  { key: 'brand', label: 'brands' },
+  { key: 'campaign', label: 'campaigns' },
+  { key: 'billboard', label: 'billboards' },
+];
+export const projectsInCategory = (key) => projects.filter((project) => project.category === key);
 
 // Find a project by slug, optionally only within one section.
 export const getProject = (slug, section) =>
