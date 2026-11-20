@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <Page>
       <section className="home-intro frame-sides" aria-labelledby="home-heading">
-        <h1 id="home-heading">I design;<br />websites, products, brands, campaigns, billboards, etc</h1>
+        <h1 id="home-heading"><span className="home-intro__lead">I design:</span> websites, products, brands, campaigns, billboards, etc</h1>
       </section>
       <RegistrationLine as="h2">All projects</RegistrationLine>
       <section className="project-grid frame-box" aria-label="Selected projects">

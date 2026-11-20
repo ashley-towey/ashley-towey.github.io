@@ -17,7 +17,7 @@ const renderAt = (path) => render(<MemoryRouter initialEntries={[path]}><App /><
 describe('home', () => {
   test('lists every project as a link to its page', () => {
     renderAt('/');
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent("I design;websites, products, brands, campaigns, billboards, etc");
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent("I design: websites, products, brands, campaigns, billboards, etc");
     const grid = screen.getByRole('region', { name: 'Selected projects' });
     const links = within(grid).getAllByRole('link');
     const work = projectsIn('work');
