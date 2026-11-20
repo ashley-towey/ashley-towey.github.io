@@ -167,24 +167,33 @@
   inset: 0 1px;
   overflow: hidden;
   pointer-events: none;
-  /* The wordmark is sized from the frame's width, not the viewport's. */
-  container-type: inline-size;
 }
 
-/* Fits between the side rules with a small gap at each end; the bottom
-   rule's worth of dots (the "y" descender) is cut off by the page. */
-.site-footer__wordmark {
+/* "ashley" spans the frame's width, with a small gap at each end, and sits
+   on the bottom of the page, which cuts through the lower part of the
+   letters. Only the dots themselves catch clicks. */
+.dot-wordmark {
   position: absolute;
-  left: 50%;
+  left: 0;
   bottom: 0;
-  transform: translate(-50%, 22%);
-  color: color-mix(in srgb, var(--ink) 9%, var(--paper));
-  font-family: var(--font-family-numerical);
-  font-size: 29.4cqw;
-  line-height: 1;
-  white-space: nowrap;
-  user-select: none;
+  width: 100%;
+  height: auto;
+  display: block;
 }
+
+.dot-wordmark__dot {
+  fill: color-mix(in srgb, var(--ink) 9%, var(--paper));
+  cursor: pointer;
+  pointer-events: auto;
+  transition: fill .2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dot-wordmark__dot:hover { fill: color-mix(in srgb, var(--orange) 35%, var(--paper)); }
+}
+
+.dot-wordmark__dot--lit,
+.dot-wordmark__dot--lit:hover { fill: var(--orange); }
 
 /* ---- Not found ---- */
 

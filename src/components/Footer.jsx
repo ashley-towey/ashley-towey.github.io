@@ -1,4 +1,5 @@
 import ButtonLink from './ButtonLink';
+import DotWordmark from './DotWordmark';
 import { site } from '../config/site';
 
 const linkedIn = site.socials.find((social) => social.label === 'LinkedIn');
@@ -13,8 +14,8 @@ export default function Footer() {
       </nav>
       <span className="site-footer__copyright type-numerical">© {new Date().getFullYear()}</span>
       {/* A huge, faint dot-matrix wordmark, cropped by the bottom of the page. */}
-      <div className="site-footer__art" aria-hidden="true">
-        <span className="site-footer__wordmark">ashley</span>
+      <div className="site-footer__art">
+        <DotWordmark />
       </div>
     </footer>
   );

@@ -256,3 +256,14 @@ test('CSM page renders its clips as muted, looping, inline videos with labels', 
   expect(video).toHaveAttribute('poster', expect.stringContaining('idea-generation_1-poster.jpg'));
   expect(screen.getByText('Sharing & collaboration')).toBeInTheDocument();
 });
+
+test('clicking a dot in the footer wordmark turns it orange, and clicking again turns it back', () => {
+  renderAt('/');
+  const dots = document.querySelectorAll('.dot-wordmark__dot');
+  expect(dots.length).toBeGreaterThan(40);
+  fireEvent.click(dots[10]);
+  expect(dots[10]).toHaveClass('dot-wordmark__dot--lit');
+  expect(dots[11]).not.toHaveClass('dot-wordmark__dot--lit');
+  fireEvent.click(dots[10]);
+  expect(dots[10]).not.toHaveClass('dot-wordmark__dot--lit');
+});
