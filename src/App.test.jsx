@@ -5,12 +5,10 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 import App from './App';
-import Lab, { labDemoUrl } from './pages/Lab';
-import { lab } from './data/lab';
-import { LAB, legacyRedirects } from '../scripts/legacy-redirects.mjs';
+import { legacyRedirects } from '../scripts/legacy-redirects.mjs';
 import { site } from './config/site';
 import manifest from './data/image-manifest.json';
-import { projectImages, projects } from './data/projects';
+import { projectImages, projects, projectsIn } from './data/projects';
 import { projectPath } from './lib/paths';
 import { prerenderRoutes, routeMeta } from './routes';
 
@@ -22,8 +20,9 @@ describe('home', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/projects by Ashley Towey/i);
     const grid = screen.getByRole('region', { name: 'Selected projects' });
     const links = within(grid).getAllByRole('link');
-    expect(links).toHaveLength(projects.length);
-    expect(links[0]).toHaveAttribute('href', projectPath(projects[0].slug));
+    const work = projectsIn('work');
+    expect(links).toHaveLength(work.length);
+    expect(links[0]).toHaveAttribute('href', projectPath(work[0]));
   });
 
   test('has an h2 between the h1 and the project card h3s', () => {
@@ -33,20 +32,24 @@ describe('home', () => {
 });
 
 describe('project pages', () => {
-  test.each(projects.map((p) => [p.slug, p]))('/work/%s renders its project', (slug, project) => {
-    renderAt(projectPath(slug));
+  test.each(projects.map((p) => [projectPath(p), p]))('%s renders its project', (path, project) => {
+    renderAt(path);
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(project.title);
   });
 
-  test('next project is a real link to the following project', () => {
-    renderAt(projectPath(projects[0].slug));
-    const next = screen.getByRole('link', { name: projects[1].title });
-    expect(next).toHaveAttribute('href', projectPath(projects[1].slug));
+  test.each(['work', 'experiments'])('next link stays within %s and wraps round', (section) => {
+    const list = projectsIn(section);
+    renderAt(projectPath(list[0]));
+    expect(screen.getByRole('link', { name: list[1].title })).toHaveAttribute('href', projectPath(list[1]));
+    cleanup();
+    renderAt(projectPath(list.at(-1)));
+    expect(screen.getByRole('link', { name: list[0].title })).toHaveAttribute('href', projectPath(list[0]));
   });
 
-  test('the last project links back round to the first', () => {
-    renderAt(projectPath(projects.at(-1).slug));
-    expect(screen.getByRole('link', { name: projects[0].title })).toBeInTheDocument();
+  test('a project is only reachable under its own section', () => {
+    const experiment = projectsIn('experiments')[0];
+    renderAt(`/work/${experiment.slug}/`);
+    expect(screen.getByText('Project not found')).toBeInTheDocument();
   });
 
   test('an unknown slug shows the not-found page', () => {
@@ -97,7 +100,7 @@ describe('project content', () => {
     expect(screen.getByText('Pre-existing imagery')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Live website/ })).toHaveAttribute('target', '_blank');
     cleanup();
-    renderAt('/work/think-twice/');
+    renderAt('/experiments/think-twice/');
     expect(screen.getByRole('heading', { level: 2, name: 'User research' })).toBeInTheDocument();
     expect(screen.getByTitle('Paper prototyping')).toHaveAttribute('src', expect.stringContaining('player.vimeo.com/video/930220535'));
     expect(screen.getByText(/In collaboration with/)).toBeInTheDocument();
@@ -110,11 +113,11 @@ describe('routes and metadata', () => {
   });
 
   test('prerender list covers home, about and every project', () => {
-    expect(prerenderRoutes()).toEqual(['/', '/about/', ...projects.map((p) => projectPath(p.slug))]);
+    expect(prerenderRoutes()).toEqual(['/', '/about/', '/experiments/', ...projects.map(projectPath)]);
   });
 
   test('project pages get their own title, description and share image', () => {
-    const meta = routeMeta(projectPath(projects[0].slug));
+    const meta = routeMeta(projectPath(projects[0]));
     expect(meta.title).toBe(`${projects[0].title} — Ashley Towey`);
     expect(meta.description).toBe(projects[0].summary);
     expect(meta.image).toContain(projects[0].cover.replace(/\.[^.]+$/, '-'));
@@ -143,30 +146,35 @@ test('every referenced image has generated variants in public/portfolio', () => 
   expect(missingFiles).toEqual([]);
 });
 
-describe('lab', () => {
-  test('is hidden from the nav and routes while it has no entries', () => {
-    if (lab.length > 0) return;
-    renderAt('/');
-    expect(screen.queryByRole('link', { name: 'The lab' })).not.toBeInTheDocument();
+describe('experiments', () => {
+  test('lists exactly the experiment projects, and they are not on the home page', () => {
+    const experiments = projectsIn('experiments');
+    expect(experiments.map((p) => p.slug)).toEqual(['velocafe', 'networked-beings', 'think-twice', 'stories-for-the-road']);
+    renderAt('/experiments/');
+    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
+    const links = within(screen.getByRole('region', { name: 'Experiments' })).getAllByRole('link');
+    expect(links.map((a) => a.getAttribute('href'))).toEqual(experiments.map(projectPath));
     cleanup();
-    renderAt('/lab/');
-    expect(screen.getByText('Page not found')).toBeInTheDocument();
-    expect(prerenderRoutes()).not.toContain('/lab/');
+    renderAt('/');
+    const home = within(screen.getByRole('region', { name: 'Selected projects' }));
+    experiments.forEach((p) => expect(home.queryByRole('link', { name: new RegExp(p.title) })).not.toBeInTheDocument());
   });
 
-  test('renders each entry as a plain link to its static demo', () => {
-    const entries = [{ slug: 'demo', title: 'Demo', year: '2024', description: 'A demo.', thumbnail: projects[0].cover, alt: 'Demo thumbnail' }];
-    render(<MemoryRouter><Lab entries={entries} /></MemoryRouter>);
-    const link = screen.getByRole('link', { name: /Demo/ });
-    expect(link).toHaveAttribute('href', labDemoUrl('demo'));
-    expect(screen.getByText(/Open experiment · 2024/)).toBeInTheDocument();
+  test('experiment pages are labelled as experiments', () => {
+    renderAt('/experiments/think-twice/');
+    expect(screen.getByText(/^Experiment \d+ \/ \d+$/)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'All experiments' })).toHaveAttribute('href', '/experiments/');
+  });
+
+  test('the footer links to experiments', () => {
+    renderAt('/');
+    expect(within(screen.getByRole('contentinfo')).getByRole('link', { name: 'Experiments' })).toHaveAttribute('href', '/experiments/');
   });
 });
 
 test('every legacy redirect points at a prerendered page', () => {
   const routes = new Set(prerenderRoutes());
   const broken = Object.entries(legacyRedirects)
-    .map(([from, to]) => [from, to === LAB ? (lab.length > 0 ? '/lab/' : '/') : to])
     .filter(([, to]) => !routes.has(to));
   expect(broken).toEqual([]);
 });

@@ -1,6 +1,5 @@
 import { site } from './config/site';
-import { lab } from './data/lab';
-import { projects, getProject } from './data/projects';
+import { getProject, projects } from './data/projects';
 import { shareImage } from './components/Picture';
 import { projectPath } from './lib/paths';
 
@@ -15,11 +14,11 @@ export function routeMeta(pathname) {
   if (path === '/about') {
     return { title: `About${suffix}`, description: `About ${site.name}: designer, programmer and cyclist based in ${site.location}.` };
   }
-  if (path === '/lab' && lab.length > 0) {
-    return { title: `Lab${suffix}`, description: `Coding experiments, sketches and prototypes by ${site.name}.` };
+  if (path === '/experiments') {
+    return { title: `Experiments${suffix}`, description: `Experiments, prototypes and self-initiated projects by ${site.name}.` };
   }
-  const match = path.match(/^\/work\/([^/]+)$/);
-  const project = match && getProject(match[1]);
+  const match = path.match(/^\/(work|experiments)\/([^/]+)$/);
+  const project = match && getProject(match[2], match[1]);
   if (project) {
     return { title: `${project.title}${suffix}`, description: project.summary, image: shareImage(project.cover) };
   }
@@ -27,5 +26,5 @@ export function routeMeta(pathname) {
 }
 
 export function prerenderRoutes() {
-  return ['/', '/about/', ...(lab.length > 0 ? ['/lab/'] : []), ...projects.map((project) => projectPath(project.slug))];
+  return ['/', '/about/', '/experiments/', ...projects.map(projectPath)];
 }

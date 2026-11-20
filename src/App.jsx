@@ -6,10 +6,9 @@ import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import RouteEffects from './components/RouteEffects';
-import { lab } from './data/lab';
 import About from './pages/About';
 import Home from './pages/Home';
-import Lab from './pages/Lab';
+import Experiments from './pages/Experiments';
 import NotFound from './pages/NotFound';
 import Project from './pages/Project';
 
@@ -23,9 +22,10 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/work/:slug" element={<Project />} />
+        <Route path="/work/:slug" element={<Project section="work" />} />
+        <Route path="/experiments" element={<Experiments />} />
+        <Route path="/experiments/:slug" element={<Project section="experiments" />} />
         <Route path="/about" element={<About />} />
-        {lab.length > 0 && <Route path="/lab" element={<Lab />} />}
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

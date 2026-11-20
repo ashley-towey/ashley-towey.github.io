@@ -2,13 +2,15 @@ import React from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import { getProject } from './data/projects';
 import { basename, projectPath } from './lib/paths';
 
 // Old preview links used hash routes (#/project/slug, #/about). Send them to
 // the matching clean URL before React starts.
 const legacy = window.location.hash.match(/^#\/(?:project\/([^/?#]+)|(about))/);
 if (legacy) {
-  const path = legacy[1] ? projectPath(legacy[1]) : '/about/';
+  const project = legacy[1] && getProject(legacy[1]);
+  const path = legacy[1] ? (project ? projectPath(project) : '/') : '/about/';
   window.history.replaceState(null, '', basename + path);
 }
 

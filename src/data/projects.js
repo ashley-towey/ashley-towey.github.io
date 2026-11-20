@@ -9,6 +9,8 @@
 //       { type: 'quote', label?, quote: [paragraphs], cite }
 //       { type: 'video', label, videos: [{ vimeo, title, ratio }], columns? }
 // `summary` is the short text used on the home page card and in search/share previews.
+// `section: 'experiments'` lists a project on /experiments/ (at /experiments/<slug>/)
+// instead of the home page (at /work/<slug>/).
 
 export const projects = [
   {
@@ -148,6 +150,7 @@ export const projects = [
   },
   {
     slug: 'velocafe',
+    section: 'experiments',
     title: 'The Velocafé',
     client: 'Independent project',
     year: '2023', // PLACEHOLDER year — confirm
@@ -205,6 +208,7 @@ export const projects = [
   },
   {
     slug: 'networked-beings',
+    section: 'experiments',
     title: 'Networked Beings',
     client: 'Independent project',
     year: '2023', // PLACEHOLDER year — confirm
@@ -339,6 +343,7 @@ export const projects = [
   },
   {
     slug: 'think-twice',
+    section: 'experiments',
     title: 'Think Twice',
     client: 'BBC UX&D',
     year: '2024', // PLACEHOLDER year — confirm
@@ -463,6 +468,7 @@ export const projects = [
   },
   {
     slug: 'stories-for-the-road',
+    section: 'experiments',
     title: 'Stories for the Road',
     client: 'Independent project',
     year: '2023', // PLACEHOLDER year — confirm
@@ -486,7 +492,13 @@ export const projects = [
   },
 ];
 
-export const getProject = (slug) => projects.find((project) => project.slug === slug);
+export const SECTIONS = ['work', 'experiments'];
+export const sectionOf = (project) => project.section ?? 'work';
+export const projectsIn = (section) => projects.filter((project) => sectionOf(project) === section);
+
+// Find a project by slug, optionally only within one section.
+export const getProject = (slug, section) =>
+  projects.find((project) => project.slug === slug && (!section || sectionOf(project) === section));
 
 // Every image a project uses (cover first), for tests and tooling.
 export const projectImages = (project) => [

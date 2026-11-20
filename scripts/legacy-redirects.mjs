@@ -1,10 +1,8 @@
 // Old URLs from the legacy static site (archived at tag legacy-site-2024) and
 // the /preview/ era, mapped to their new home. The prerender step writes a
 // tiny redirect page at each old path so existing links keep working.
-//
-// `LAB` resolves to /lab/ once the Lab has entries, otherwise the home page.
 
-export const LAB = Symbol('lab');
+const EXPERIMENTS = '/experiments/';
 
 export const legacyRedirects = {
   // Case studies
@@ -13,24 +11,24 @@ export const legacyRedirects = {
   'site-map/prj-pages/jupiter.html': '/work/jupiter-heating/',
   'site-map/prj-pages/kalas-l2p.html': '/work/london-to-paris/',
   'site-map/prj-pages/leanne-prosvic.html': '/work/leanne-prosvic/',
-  'site-map/prj-pages/networked-beings.html': '/work/networked-beings/',
+  'site-map/prj-pages/networked-beings.html': '/experiments/networked-beings/',
   'site-map/prj-pages/slate.html': '/work/slate/',
-  'site-map/prj-pages/think-twice.html': '/work/think-twice/',
-  'site-map/prj-pages/velocafe.html': '/work/velocafe/',
-  'velocafe/velocafe.html': '/work/velocafe/',
-  'projects/velocafe.html': '/work/velocafe/',
-  'project_stories/landing.html': '/work/stories-for-the-road/',
-  'project_stories/computer.html': '/work/stories-for-the-road/',
-  'project_stories/phone.html': '/work/stories-for-the-road/',
+  'site-map/prj-pages/think-twice.html': '/experiments/think-twice/',
+  'site-map/prj-pages/velocafe.html': '/experiments/velocafe/',
+  'velocafe/velocafe.html': '/experiments/velocafe/',
+  'projects/velocafe.html': '/experiments/velocafe/',
+  'project_stories/landing.html': '/experiments/stories-for-the-road/',
+  'project_stories/computer.html': '/experiments/stories-for-the-road/',
+  'project_stories/phone.html': '/experiments/stories-for-the-road/',
 
   // Pages
   'site-map/site-contact.html': '/about/',
   'pages/contact.html': '/about/',
   'pages/index.html': '/',
   'pages/renders.html': '/',
-  'site-map/site-creative-computing.html': LAB,
-  'pages/creative-computing.html': LAB,
-  'pages/playground.html': LAB,
+  'site-map/site-creative-computing.html': EXPERIMENTS,
+  'pages/creative-computing.html': EXPERIMENTS,
+  'pages/playground.html': EXPERIMENTS,
   '404-page-not-found.html': '/',
 
   // Coding experiments
@@ -53,5 +51,5 @@ export const legacyRedirects = {
       'cycling-cafe', 'data-currency', 'dynamic-prototype-2', 'generative-isotype', 'not(!)-a-poem',
       'project-WOOP', 'regression', 'slate3d_model', 'type-size',
     ].map((name) => `projects/${name}.html`),
-  ].map((path) => [path, LAB])),
+  ].map((path) => [path, EXPERIMENTS])),
 };

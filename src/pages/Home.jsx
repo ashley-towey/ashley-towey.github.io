@@ -2,7 +2,7 @@ import ButtonLink from '../components/ButtonLink';
 import Page from '../components/Page';
 import ProjectCard from '../components/ProjectCard';
 import RegistrationLine from '../components/RegistrationLine';
-import { projects } from '../data/projects';
+import { projectsIn } from '../data/projects';
 import './Home.css';
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       </section>
       <RegistrationLine as="h2">All projects</RegistrationLine>
       <section className="project-grid frame-box" aria-label="Selected projects">
-        {projects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}
+        {projectsIn('work').map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}
       </section>
       <section className="home-closer frame-sides">
         <p className="eyebrow caption-2">Have something in mind?</p>

@@ -15,4 +15,4 @@ export function render(path) {
 }
 export { site } from './config/site';
 export { base } from './lib/paths';
-export { lab } from './data/lab';
+export { projects, sectionOf } from './data/projects';

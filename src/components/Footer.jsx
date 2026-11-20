@@ -6,6 +6,7 @@ export default function Footer() {
     <footer className="site-footer caption-2">
       <ButtonLink variant="secondary" to="/">{site.name}</ButtonLink>
       <span>{site.tagline}</span>
+      <ButtonLink variant="secondary" to="/experiments/">Experiments</ButtonLink>
       <ButtonLink variant="secondary" href={mailto}>Say hello</ButtonLink>
       <span>© {new Date().getFullYear()}</span>
     </footer>
