@@ -17,6 +17,10 @@
   border: 2px solid var(--ink);
   border-radius: 99px;
   color: var(--ink);
+  font-size: 17px;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: .01em;
+  text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -101,9 +105,47 @@
 }
 .button-link--primary:not([data-ready]) .button-link__segment--first::after { clip-path: none; }
 
-.button-link--secondary {
-  padding: 8px 13px;
-  background: var(--paper);
+/* ---- Bracket (secondary) button: LABEL [ ● ] ---- */
+
+.bracket-button {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .6em;
+  padding: 4px 0;
+  border: 0;
+  color: var(--ink);
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.bracket-button__box {
+  display: inline-flex;
+  align-items: center;
+  gap: .45em;
+}
+
+.bracket-button__dot {
+  width: .8em;
+  height: .8em;
+  border-radius: 50%;
+  background: transparent;
+  transition: background-color .2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bracket-button:hover .bracket-button__dot { background: var(--muted); }
+}
+
+.bracket-button[data-active] .bracket-button__dot,
+.bracket-button[aria-pressed='true'] .bracket-button__dot,
+.bracket-button[aria-current='page'] .bracket-button__dot { background: var(--ink); }
+
+.bracket-button:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
 }
 
 .button-link:focus-visible {
@@ -112,6 +154,6 @@
 }
 
 @media (max-width: 780px) {
-  .button-link { min-height: 36px; }
+  .button-link { min-height: 36px; font-size: 14px; }
   .button-link--primary .button-link__segment { padding-inline: 10px; }
 }

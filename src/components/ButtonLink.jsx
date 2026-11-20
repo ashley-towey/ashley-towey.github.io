@@ -6,7 +6,9 @@ import './ButtonLink.css';
 const useBrowserLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
 // `to` renders an internal router link; `href` renders a plain anchor.
-export default function ButtonLink({ variant = 'primary', first, second, className = '', children, to, ...rest }) {
+// variant="primary" is the two-part sliding pill (first/second labels);
+// variant="secondary" is the bracket button: LABEL [ ● ], dot on hover/active.
+export default function ButtonLink({ variant = 'primary', first, second, className = '', children, to, active = false, ...rest }) {
   const ref = useRef(null);
 
   useBrowserLayoutEffect(() => {
@@ -32,11 +34,15 @@ export default function ButtonLink({ variant = 'primary', first, second, classNa
 
   const Anchor = to ? Link : 'a';
   const linkProps = to ? { to, ...rest } : rest;
-  const classes = `button-link button-link--${variant} caption-1 ${className}`.trim();
-
   if (variant === 'secondary') {
-    return <Anchor className={classes} {...linkProps}>{children}</Anchor>;
+    return (
+      <Anchor className={`bracket-button caption-2 ${className}`.trim()} data-active={active || undefined} {...linkProps}>
+        {children}<BracketBox />
+      </Anchor>
+    );
   }
+
+  const classes = `button-link button-link--primary ${className}`.trim();
 
   return (
     <Anchor ref={ref} className={classes} aria-label={`${first} ${second}`} {...linkProps}>
@@ -44,5 +50,24 @@ export default function ButtonLink({ variant = 'primary', first, second, classNa
       <span className="button-link__segment button-link__segment--first" data-segment data-label={first}>{first}</span>
       <span className="button-link__segment button-link__segment--last" data-segment data-label={second}>{second}</span>
     </Anchor>
+  );
+}
+
+// The "[ ● ]" after a bracket button's label. The dot always takes up space,
+// so the label never shifts; CSS only changes its colour.
+export function BracketBox() {
+  return (
+    <span className="bracket-button__box" aria-hidden="true">
+      [<span className="bracket-button__dot" />]
+    </span>
+  );
+}
+
+// A bracket button that toggles something on the page (e.g. GRID / LIST).
+export function ToggleButton({ pressed, className = '', children, ...rest }) {
+  return (
+    <button type="button" className={`bracket-button caption-2 ${className}`.trim()} aria-pressed={pressed} {...rest}>
+      {children}<BracketBox />
+    </button>
   );
 }

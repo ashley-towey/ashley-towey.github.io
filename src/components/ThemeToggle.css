@@ -3,7 +3,7 @@
   height: 40px;
   display: grid;
   place-items: center;
-  border: 2px solid var(--ink);
+  border: 1.5px solid var(--ink);
   border-radius: 50%;
   color: var(--ink);
   background: var(--paper);
@@ -28,7 +28,7 @@
   height: 20px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 2px;
+  stroke-width: 1.5px;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
