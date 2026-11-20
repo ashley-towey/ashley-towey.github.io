@@ -58,17 +58,20 @@ export default function Home() {
 }
 
 // One word of the heading. Its bracketed number links to a project (showing
-// the project's position in the portfolio) or to a page (showing a count).
+// the project's position in the portfolio) or to a page (showing a count),
+// with a tooltip naming it.
 function HeadlineWord({ word, work, last }) {
   const project = word.project && getProject(word.project, 'work');
   const to = project ? projectPath(project) : word.to;
   const number = project ? work.indexOf(project) + 1 : word.count();
+  const title = project ? project.title : word.linkLabel;
 
   return (
     <span className="headline-word">
       {last ? word.label : `${word.label},`}
       <sup className="headline-word__number caption-2">
-        <Link to={to} aria-label={project ? project.title : word.linkLabel}>[{number}]</Link>
+        {/* The tooltip is drawn by CSS from data-title, so it stays out of the heading's text. */}
+        <Link to={to} aria-label={title} data-title={title}>[{number}]</Link>
       </sup>
     </span>
   );
