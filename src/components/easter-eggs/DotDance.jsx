@@ -55,10 +55,12 @@ const DANCES = {
   }),
 
   // Random dots flash the site's orange (the --orange variable, so it follows
-  // any change to it). Also the stand-in when motion is reduced.
+  // any change to it). Each flash is solid orange from start to end, with no
+  // fade, so every lit dot is exactly the same colour. Also the stand-in
+  // when motion is reduced.
   sparkle: () => ({
-    keyframes: [{ fill: 'var(--orange)', offset: 0.2 }, { fill: 'var(--orange)', offset: 0.6 }],
-    options: { duration: 700, delay: random(0, 1200), iterations: Math.random() < 0.3 ? 2 : 1 },
+    keyframes: [{ fill: 'var(--orange)' }, { fill: 'var(--orange)' }],
+    options: { duration: 450, delay: random(0, 1400), iterations: 1 },
   }),
 };
 
