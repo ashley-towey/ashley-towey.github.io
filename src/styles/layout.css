@@ -153,12 +153,16 @@
   gap: 14px;
 }
 
-.site-footer__copyright {
+/* LinkedIn above the copyright, on the right. */
+.site-footer__aside {
   position: relative;
   z-index: 1;
   grid-column: 2;
   grid-row: 2;
   align-self: center;
+  display: grid;
+  justify-items: end;
+  gap: 14px;
 }
 
 .site-footer__art {

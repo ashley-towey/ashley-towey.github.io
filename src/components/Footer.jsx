@@ -11,9 +11,11 @@ export default function Footer() {
         <ButtonLink variant="secondary" to="/">Portfolio</ButtonLink>
         <ButtonLink variant="secondary" to="/experiments/">Experiments</ButtonLink>
         <ButtonLink variant="secondary" to="/about/">Contact me</ButtonLink>
-        {linkedIn && <ButtonLink variant="secondary" href={linkedIn.href} target="_blank" rel="noreferrer">LinkedIn</ButtonLink>}
       </nav>
-      <span className="site-footer__copyright caption-2">© {new Date().getFullYear()}</span>
+      <div className="site-footer__aside">
+        {linkedIn && <ButtonLink variant="secondary" href={linkedIn.href} target="_blank" rel="noreferrer">LinkedIn</ButtonLink>}
+        <span className="caption-2">© {new Date().getFullYear()}</span>
+      </div>
       {/* A huge, faint dot-matrix wordmark, cropped by the bottom of the page. */}
       <div className="site-footer__art">
         <DotWordmark />
