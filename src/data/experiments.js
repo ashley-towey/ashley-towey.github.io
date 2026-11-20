@@ -14,7 +14,6 @@
 //
 // Notes in comments are reminders, not shown on the site.
 export const EXPERIMENTS = [
-  { title: 'Navigation tutorial' }, // note: product
   { title: 'LH Interactive experiment' }, // note: but on the web
   {
     title: 'The Velocafé',
