@@ -70,8 +70,12 @@ function HeadlineWord({ word, work, last }) {
     <span className="headline-word">
       {last ? word.label : `${word.label},`}
       <sup className="headline-word__number caption-2">
-        {/* The tooltip is drawn by CSS from data-title, so it stays out of the heading's text. */}
-        <Link to={to} aria-label={title} data-title={title}>[{number}]</Link>
+        <Link to={to} aria-label={title}>
+          [{number}]
+          {/* Empty on purpose: CSS draws the title from data-title, so it stays
+              out of the heading's text. The link's aria-label names it. */}
+          <span className="headline-word__tip" data-title={title} aria-hidden="true" />
+        </Link>
       </sup>
     </span>
   );

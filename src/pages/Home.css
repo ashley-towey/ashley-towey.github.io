@@ -66,16 +66,21 @@
   border-radius: 2px;
 }
 
-.headline-word__number a::after {
-  content: attr(data-title);
+/* Speech-bubble tooltip: outlined on paper, its tail at the bottom left
+   pointing down at the number. */
+.headline-word__tip {
+  --tip-border: 1.5px;
+  --tip-tail-w: 26px;
+  --tip-tail-h: 16px;
   position: absolute;
   z-index: 5;
-  bottom: calc(100% + 10px);
-  left: 50%;
-  padding: 6px 10px;
-  border-radius: 6px;
-  color: var(--paper);
-  background: var(--ink);
+  left: 0;
+  bottom: calc(100% + var(--tip-tail-h) + 2px);
+  padding: 12px 20px;
+  border: var(--tip-border) solid var(--ink);
+  border-radius: 16px 16px 16px 0;
+  color: var(--ink);
+  background: var(--paper);
   font-size: var(--type-caption-size);
   font-weight: var(--font-weight-regular);
   letter-spacing: var(--type-caption-letter-spacing);
@@ -84,14 +89,37 @@
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  transform: translate(-50%, 4px);
+  transform: translateY(4px);
   transition: opacity .15s ease, transform .15s ease;
 }
 
-.headline-word__number a:hover::after,
-.headline-word__number a:focus-visible::after {
+.headline-word__tip::before { content: attr(data-title); }
+
+/* The tail: a right triangle under the bubble's bottom-left corner. Its left
+   side continues the bubble's outline; the diagonal is drawn by a gradient
+   ("to bottom right" runs exactly corner to corner). It covers the bubble's
+   bottom border where they meet. */
+.headline-word__tip::after {
+  content: "";
+  position: absolute;
+  left: calc(0px - var(--tip-border));
+  top: calc(100% - var(--tip-border));
+  width: var(--tip-tail-w);
+  height: var(--tip-tail-h);
+  border-left: var(--tip-border) solid var(--ink);
+  background: linear-gradient(
+    to bottom right,
+    var(--paper) calc(50% - 1.25px),
+    var(--ink) calc(50% - 1.25px),
+    var(--ink) calc(50% + .75px),
+    transparent calc(50% + .75px)
+  );
+}
+
+.headline-word__number a:hover .headline-word__tip,
+.headline-word__number a:focus-visible .headline-word__tip {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translateY(0);
 }
 
 /* ---- GRID / LIST toggle in the registration line ---- */
