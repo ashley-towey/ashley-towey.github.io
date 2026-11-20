@@ -1,0 +1,110 @@
+@property --paper {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #CFCBC0;
+}
+
+@property --surface {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #d6d9dd;
+}
+
+@property --ink {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #101112;
+}
+
+@property --muted {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #53565b;
+}
+
+@property --line-strong {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(35, 39, 43, .48);
+}
+
+@property --orange {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ed5a08;
+}
+
+@font-face {
+  font-family: 'Neue Regrade';
+  src: url('/fonts/neue-regrade-variable.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Domestique';
+  src: url('/fonts/domestique-regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  /* Typography tokens shared by the app. Keep roles here so each page and
+     component uses the same family, scale, and weights. */
+  --font-family-sans: 'Neue Regrade', Arial, sans-serif;
+  --font-family-numerical: 'Domestique', var(--font-family-sans);
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --type-h1-size: clamp(38px, 3.6vw, 62px);
+  --type-h1-weight: var(--font-weight-bold);
+  --type-h2-size: clamp(32px, 3vw, 50px);
+  --type-h2-weight: var(--font-weight-medium);
+  --type-h3-size: clamp(24px, 2.5vw, 36px);
+  --type-h3-weight: var(--font-weight-medium);
+  --type-h3-line-height: 1.15;
+  --type-h3-letter-spacing: -.02em;
+  --type-body-size: 16px;
+  --type-body-weight: var(--font-weight-regular);
+  --type-body-line-height: 1.5;
+  --type-caption-1-size: 13px;
+  --type-caption-1-weight: var(--font-weight-semibold);
+  color-scheme: light;
+  --paper: #CFCBC0;
+  --surface: #d6d9dd;
+  --ink: #101112;
+  --muted: #53565b;
+  --line-strong: rgba(35, 39, 43, .48);
+  --orange: #ed5a08;
+  transition: --paper .3s cubic-bezier(.65, 0, .35, 1),
+    --surface .3s cubic-bezier(.65, 0, .35, 1),
+    --ink .3s cubic-bezier(.65, 0, .35, 1),
+    --muted .3s cubic-bezier(.65, 0, .35, 1),
+    --line-strong .3s cubic-bezier(.65, 0, .35, 1),
+    --orange .3s cubic-bezier(.65, 0, .35, 1);
+  --registration-mark-image: url('../assets/plus-icon.svg');
+  --registration-line-overlap: 14px;
+  --section-inset: 24px;
+  --registration-mark-size: 18px;
+  --registration-mark-offset: 9px;
+  --registration-mark-clearance: 24px;
+  /* A 1px vertical rule that stops short of the registration marks at each
+     end. Used for the left/right sides of framed sections. */
+  --frame-rule: linear-gradient(to bottom, transparent var(--registration-mark-clearance), var(--line-strong) var(--registration-mark-clearance), var(--line-strong) calc(100% - var(--registration-mark-clearance)), transparent calc(100% - var(--registration-mark-clearance)));
+  --frame-hrule: linear-gradient(var(--line-strong), var(--line-strong));
+  --frame-hrule-width: calc(100% - var(--registration-mark-clearance) - var(--registration-mark-clearance));
+  background: var(--paper);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #302F2B;
+  --surface: #3B3933;
+  --ink: #F0EEE8;
+  --muted: #B9B6AE;
+  --line-strong: rgba(235, 232, 222, .42);
+  --orange: #ff7830;
+}

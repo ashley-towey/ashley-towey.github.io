@@ -1,0 +1,167 @@
+/* Site shell, header, footer, and the framing system (side rules,
+   registration lines and "+" marks) shared by every page. */
+
+.site-shell {
+  width: min(100% - 8.2vw, 1780px);
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  padding: 8px 13px;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  color: var(--ink);
+  background: var(--paper);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible { transform: none; outline: 2px solid var(--orange); outline-offset: 4px; }
+
+.eyebrow {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* ---- Header ---- */
+
+.site-header {
+  position: relative;
+  height: 88px;
+  padding-inline: var(--section-inset);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background:
+    linear-gradient(to bottom, var(--line-strong) calc(100% - var(--registration-mark-clearance)), transparent calc(100% - var(--registration-mark-clearance))) left top / 1px 100% no-repeat,
+    linear-gradient(to bottom, var(--line-strong) calc(100% - var(--registration-mark-clearance)), transparent calc(100% - var(--registration-mark-clearance))) right top / 1px 100% no-repeat,
+    var(--frame-hrule) center bottom / var(--frame-hrule-width) 1px no-repeat,
+    var(--paper);
+}
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ---- Framing ---- */
+
+/* Registration "+" marks drawn at the ends of a horizontal rule. */
+.site-header::before,
+.site-header::after,
+.registration-line::before,
+.registration-line::after,
+.frame-box::before,
+.frame-box::after,
+.site-footer::before,
+.site-footer::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  width: var(--registration-mark-size);
+  height: var(--registration-mark-size);
+  background-color: var(--line-strong);
+  -webkit-mask: var(--registration-mark-image) center / contain no-repeat;
+  mask: var(--registration-mark-image) center / contain no-repeat;
+}
+
+.site-header::before,
+.site-header::after,
+.frame-box::before,
+.frame-box::after { bottom: calc(0px - var(--registration-mark-offset)); }
+.site-header::before,
+.frame-box::before { left: 0; transform: translateX(-50%); }
+.site-header::after,
+.frame-box::after { right: 0; transform: translateX(50%); }
+
+/* Left and right side rules. */
+.frame-sides {
+  position: relative;
+  background:
+    var(--frame-rule) left top / 1px 100% no-repeat,
+    var(--frame-rule) right top / 1px 100% no-repeat;
+}
+
+/* Side rules plus a bottom rule with registration marks; sits under a
+   .registration-line and overlaps it. */
+.frame-box {
+  position: relative;
+  margin-top: calc(0px - var(--registration-line-overlap));
+  background:
+    var(--frame-rule) left top / 1px 100% no-repeat,
+    var(--frame-rule) right top / 1px 100% no-repeat,
+    var(--frame-hrule) center bottom / var(--frame-hrule-width) 1px no-repeat;
+}
+
+.registration-line {
+  min-height: 28px;
+  margin-top: calc(0px - var(--registration-line-overlap));
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 var(--section-inset);
+  position: relative;
+  background: var(--frame-hrule) center / var(--frame-hrule-width) 1px no-repeat;
+}
+
+.registration-line::before { left: 0; top: 50%; transform: translate(-50%, -50%); }
+.registration-line::after { right: 0; top: 50%; transform: translate(50%, -50%); }
+
+.registration-line__label {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding-left: 12px;
+  background: var(--paper);
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+/* ---- Footer ---- */
+
+.site-footer {
+  position: relative;
+  min-height: 90px;
+  border: 0;
+  border-bottom: 1px solid var(--line-strong);
+  margin-top: 0;
+  padding: 0 var(--section-inset);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  color: var(--muted);
+  background:
+    linear-gradient(to bottom, transparent var(--registration-mark-clearance), var(--line-strong) var(--registration-mark-clearance), var(--line-strong) 100%) left top / 1px 100% no-repeat,
+    linear-gradient(to bottom, transparent var(--registration-mark-clearance), var(--line-strong) var(--registration-mark-clearance), var(--line-strong) 100%) right top / 1px 100% no-repeat,
+    var(--frame-hrule) center top / var(--frame-hrule-width) 1px no-repeat;
+}
+
+.site-footer::before,
+.site-footer::after { top: calc(0px - var(--registration-mark-offset)); }
+.site-footer::before { left: 0; transform: translateX(-50%); }
+.site-footer::after { right: 0; transform: translateX(50%); }
+
+/* ---- Not found ---- */
+
+.not-found { min-height: 60vh; padding: 50px 24px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.not-found h1 { max-width: 650px; font-size: var(--type-h1-size); letter-spacing: -.02em; line-height: 1; font-weight: var(--type-h1-weight); }
+
+@media (max-width: 780px) {
+  :root { --section-inset: 16px; }
+  .site-shell { width: calc(100% - 36px); }
+  .site-header { height: 70px; }
+  .site-header nav { gap: 10px; }
+  .registration-line { padding-inline: var(--section-inset); }
+  .site-footer { flex-wrap: wrap; justify-content: space-between; padding-block: 20px; }
+}
+
+@media (max-width: 500px) {
+  .site-shell { width: calc(100% - 28px); }
+  .site-header nav { gap: 7px; }
+  .site-footer > span:nth-of-type(1) { display: none; }
+}

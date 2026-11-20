@@ -1,0 +1,71 @@
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-family-sans);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-family-sans); }
+h2 {
+  font-size: var(--type-h2-size);
+  font-weight: var(--type-h2-weight);
+  letter-spacing: -.02em;
+}
+h3 {
+  margin: 0;
+  font-size: var(--type-h3-size);
+  font-weight: var(--type-h3-weight);
+  line-height: var(--type-h3-line-height);
+  letter-spacing: var(--type-h3-letter-spacing);
+}
+.type-numerical { font-family: var(--font-family-numerical); font-weight: var(--font-weight-regular); }
+.type-body {
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-line-height);
+}
+.caption-2 {
+  font-size: 13px;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.caption-1 {
+  font-size: var(--type-caption-1-size);
+  font-weight: var(--type-caption-1-weight);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+img { max-width: 100%; height: auto; }
+
+/* <Picture> wrappers shouldn't affect layout; style the <img> inside. */
+picture { display: contents; }
+
+::selection { background: var(--orange); color: white; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+main:focus { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}

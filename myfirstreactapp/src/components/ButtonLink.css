@@ -90,6 +90,17 @@
   }
 }
 
+/* Before JavaScript measures the segments (prerendered HTML), show the
+   resting state with plain CSS and don't animate. */
+.button-link--primary:not([data-ready]) { transition: none; }
+.button-link--primary:not([data-ready]) .button-link__slider,
+.button-link--primary:not([data-ready]) .button-link__segment--last::after { display: none; }
+.button-link--primary:not([data-ready]) .button-link__segment--first {
+  border-radius: 99px;
+  background: var(--paper);
+}
+.button-link--primary:not([data-ready]) .button-link__segment--first::after { clip-path: none; }
+
 .button-link--secondary {
   padding: 8px 13px;
   background: var(--paper);
@@ -103,7 +114,4 @@
 @media (max-width: 780px) {
   .button-link { min-height: 36px; }
   .button-link--primary .button-link__segment { padding-inline: 10px; }
-}
-
-@media (max-width: 500px) {
 }
