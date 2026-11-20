@@ -25,7 +25,7 @@
   padding: 54px var(--section-inset) 62px;
 }
 
-.about-photo img { display: block; width: 100%; max-height: 610px; object-fit: cover; filter: grayscale(100%); }
+.about-photo img { display: block; width: 100%; max-height: 610px; object-fit: cover; border-radius: var(--radius-media); }
 .about-photo .eyebrow { display: block; margin-top: 12px; }
 .about-copy { max-width: 590px; padding-top: 10px; }
 .about-copy h2 { margin: 18px 0 22px; }

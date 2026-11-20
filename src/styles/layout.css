@@ -123,21 +123,19 @@
 
 /* ---- Footer ---- */
 
+/* Top rule with registration marks; side rules run to the bottom of the
+   page, where the wordmark is cropped. */
 .site-footer {
   position: relative;
-  min-height: 90px;
-  border: 0;
-  border-bottom: 1px solid var(--line-strong);
-  margin-top: 0;
-  padding: 0 var(--section-inset);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  color: var(--muted);
+  min-height: clamp(360px, 34vw, 600px);
+  padding: 28px var(--section-inset) 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  color: var(--ink);
   background:
-    linear-gradient(to bottom, transparent var(--registration-mark-clearance), var(--line-strong) var(--registration-mark-clearance), var(--line-strong) 100%) left top / 1px 100% no-repeat,
-    linear-gradient(to bottom, transparent var(--registration-mark-clearance), var(--line-strong) var(--registration-mark-clearance), var(--line-strong) 100%) right top / 1px 100% no-repeat,
+    linear-gradient(to bottom, transparent var(--registration-mark-clearance), var(--line-strong) var(--registration-mark-clearance)) left top / 1px 100% no-repeat,
+    linear-gradient(to bottom, transparent var(--registration-mark-clearance), var(--line-strong) var(--registration-mark-clearance)) right top / 1px 100% no-repeat,
     var(--frame-hrule) center top / var(--frame-hrule-width) 1px no-repeat;
 }
 
@@ -146,22 +144,86 @@
 .site-footer::before { left: 0; transform: translateX(-50%); }
 .site-footer::after { right: 0; transform: translateX(50%); }
 
+.site-footer__links {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 14px;
+}
+
+/* Email and social links on the right, level with the left-hand links. */
+.site-footer__aside {
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  display: grid;
+  justify-items: end;
+  gap: 14px;
+}
+
+.site-footer__copyright {
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 2;
+  align-self: center;
+  justify-self: end;
+}
+
+.site-footer__art {
+  position: absolute;
+  inset: 0 1px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* "ashley" spans the frame's width, with a small gap at each end, and sits
+   on the bottom of the page, which cuts through the lower part of the
+   letters. Only the dots themselves catch clicks. */
+.dot-wordmark {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+  /* The lower dots sit outside the viewBox; .site-footer__art crops them. */
+  overflow: visible;
+}
+
+.dot-wordmark__dot {
+  fill: color-mix(in srgb, var(--ink) 9%, var(--paper));
+  cursor: pointer;
+  pointer-events: auto;
+  transition: fill .2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dot-wordmark__dot:hover { fill: color-mix(in srgb, var(--orange) 35%, var(--paper)); }
+}
+
+.dot-wordmark__dot--lit,
+.dot-wordmark__dot--lit:hover { fill: var(--orange); }
+
 /* ---- Not found ---- */
 
 .not-found { min-height: 60vh; padding: 50px 24px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
 .not-found h1 { max-width: 650px; font-size: var(--type-h1-size); letter-spacing: -.02em; line-height: 1; font-weight: var(--type-h1-weight); }
 
 @media (max-width: 780px) {
-  :root { --section-inset: 16px; }
+  :root { --section-inset: 16px; --type-caption-size: 14px; --grid-gap: 16px; }
   .site-shell { width: calc(100% - 36px); }
   .site-header { height: 70px; }
   .site-header nav { gap: 10px; }
   .registration-line { padding-inline: var(--section-inset); }
-  .site-footer { flex-wrap: wrap; justify-content: space-between; padding-block: 20px; }
+  .site-footer { min-height: 300px; padding-top: 22px; }
 }
 
 @media (max-width: 500px) {
   .site-shell { width: calc(100% - 28px); }
   .site-header nav { gap: 7px; }
-  .site-footer > span:nth-of-type(1) { display: none; }
 }

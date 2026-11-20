@@ -1,3 +1,5 @@
+/* ---- Intro ---- */
+
 .home-intro {
   min-height: clamp(350px, 27vw, 450px);
   display: flex;
@@ -17,17 +19,196 @@
   letter-spacing: -.02em;
 }
 
-/* "I design:" runs into the h1 text at the same size, in the h2 weight. */
+/* Home: the same 3-column grid as the projects below. The heading spans
+   two columns and the bio fills the third, both sitting on the rule. */
+.home-intro--split {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+  column-gap: var(--grid-gap);
+}
+
+.home-intro--split h1 { grid-column: span 2; max-width: none; }
+
+/* "I design;" sits on its own line at the same size, in the h2 weight. */
 .home-intro__lead {
+  display: block;
   font-weight: var(--type-h2-weight);
 }
 
-.project-grid {
+.home-intro__bio {
+  margin: 0;
+  font-size: 15px;
+}
+
+/* ---- Heading words and their numbered links ---- */
+
+.headline-word { white-space: nowrap; }
+
+.headline-word__number {
+  margin-left: .15em;
+  vertical-align: super;
+  line-height: 0;
+  text-transform: none;
+}
+
+.headline-word__number a {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.headline-word__number a:hover,
+.headline-word__number a:focus-visible { color: var(--orange); }
+
+.headline-word__number a:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Standard tooltip: a rounded box above the number with a small arrow
+   underneath, in paper with an ink border. The arrow sits towards the
+   box's left; the box is shifted so the arrow still points at the number. */
+.headline-word__tip {
+  --tip-arrow-x: 15px;
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: calc(100% + 12px);
+  padding: 6px 10px 5px;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  color: var(--ink);
+  background: var(--paper);
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--type-caption-letter-spacing);
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(calc(0px - var(--tip-arrow-x)), 4px);
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.headline-word__tip::before { content: attr(data-title); }
+
+/* The arrow: an ink triangle with a paper triangle over it, nudged up so
+   only a 1px ink edge shows. The paper triangle also covers the box's
+   bottom border where the arrow joins, so the outline runs unbroken. */
+.headline-word__tip::after,
+.headline-word__arrow {
+  content: "";
+  position: absolute;
+  left: var(--tip-arrow-x);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 7px 0;
+  transform: translateX(-50%);
+}
+
+.headline-word__tip::after {
+  top: 100%;
+  border-color: var(--ink) transparent transparent;
+}
+
+.headline-word__arrow {
+  z-index: 1; /* above the ink triangle, which comes later in the box */
+  top: calc(100% - 1.5px);
+  border-color: var(--paper) transparent transparent;
+}
+
+.headline-word__number a:hover .headline-word__tip,
+.headline-word__number a:focus-visible .headline-word__tip {
+  opacity: 1;
+  transform: translate(calc(0px - var(--tip-arrow-x)), 0);
+}
+
+/* ---- GRID / LIST toggle in the registration line ---- */
+
+.registration-line--toggle .registration-line__label {
+  display: flex;
+  gap: 22px;
+  padding-inline: 12px;
+}
+
+/* ---- Projects ---- */
+
+.home-projects {
+  position: relative;
+  padding: 24px var(--section-inset) 36px;
+}
+
+.home-projects--grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 2.8vw, 42px);
-  padding: 24px var(--section-inset);
+  gap: var(--grid-gap);
+  padding-bottom: 24px;
 }
+
+.home-projects--list {
+  display: grid;
+  gap: 20px;
+}
+
+/* In list view, "ALL PROJECTS" sits on the footer's top rule. */
+.home-projects__end {
+  position: absolute;
+  z-index: 3;
+  right: var(--section-inset);
+  bottom: 0;
+  padding-inline: 12px;
+  background: var(--paper);
+  transform: translateY(50%);
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* Full-colour image with an orange tint that fades in on hover or focus. */
+.media-tint {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-media);
+  background: var(--surface);
+  isolation: isolate;
+}
+
+.media-tint img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .7s cubic-bezier(.2, .7, .2, 1);
+}
+
+.media-tint::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--orange);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.project-card:hover .media-tint::after,
+.project-card:focus-visible .media-tint::after,
+.project-row:hover .media-tint::after,
+.project-row:focus-visible .media-tint::after { opacity: .88; }
+
+.project-card:hover .media-tint img,
+.project-card:focus-visible .media-tint img { transform: scale(1.035); }
+
+/* ---- Grid card ---- */
 
 .project-card {
   color: var(--ink);
@@ -36,111 +217,95 @@
   display: block;
 }
 
-.project-card__image {
-  position: relative;
-  aspect-ratio: 1.3 / 1;
-  overflow: hidden;
-  border-radius: 10px;
-  background: var(--surface);
-  isolation: isolate;
-}
-
-.project-card__image::after {
-  content: "";
-  position: absolute;
-  inset: 35% 0 0;
-  z-index: 0;
-  background: linear-gradient(transparent, rgba(8, 8, 8, .68));
-  transition: opacity .25s ease, background .25s ease;
-}
-
-.project-card__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: grayscale(100%);
-  transition: filter .45s ease, transform .7s cubic-bezier(.2,.7,.2,1);
-}
-
-.project-card:hover img,
-.project-card:focus-visible img { filter: grayscale(0%); transform: scale(1.035); }
+.project-card__image { aspect-ratio: 1.3 / 1; }
 
 .project-card__caption {
   position: absolute;
   z-index: 1;
-  inset: auto 0 0;
-  padding: 18px 20px;
+  inset: 0;
+  padding: clamp(16px, 1.6vw, 26px);
   color: white;
-  display: grid;
-  gap: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
   transition: opacity .25s ease;
 }
 
-.project-card__caption > .type-body {
+.project-card__summary {
   max-width: 440px;
   margin: 0;
-  max-height: 90px;
-  overflow: hidden;
-  transition: opacity .2s ease, transform .2s ease, max-height .3s ease;
+  font-size: 15px;
 }
 
-.project-card__open {
-  max-height: 24px;
-  overflow: hidden;
-  margin-top: 3px;
-  transition: opacity .2s ease, max-height .25s ease;
-}
-
-.project-card:focus-visible {
+.project-card:focus-visible,
+.project-row:focus-visible {
   outline: 2px solid var(--orange);
   outline-offset: 4px;
 }
 
-/* Captions are always visible on touch screens. With a mouse on wider
-   screens they are revealed on hover or keyboard focus. */
-@media (hover: hover) and (pointer: fine) and (min-width: 781px) {
-  .project-card__image::after,
-  .project-card__caption { opacity: 0; }
-  .project-card__caption > .type-body { max-height: 0; opacity: 0; transform: translateY(6px); }
-  .project-card__open { max-height: 0; opacity: 0; }
+/* Touch screens and narrow windows: no hover, so show the year and title
+   over a dark fade, and leave out the summary. */
+@media (hover: none), (pointer: coarse), (max-width: 780px) {
+  .project-card__image::before {
+    content: "";
+    position: absolute;
+    inset: 35% 0 0;
+    z-index: 1;
+    background: linear-gradient(transparent, rgba(8, 8, 8, .7));
+  }
+  .project-card__caption { z-index: 2; justify-content: flex-end; }
+  .project-card__year { order: -1; position: absolute; top: 16px; left: 16px; }
+  .project-card__summary { display: none; }
+}
 
-  .project-card:hover .project-card__image::after,
-  .project-card:focus-visible .project-card__image::after,
+@media (hover: hover) and (pointer: fine) and (min-width: 781px) {
+  .project-card__caption { opacity: 0; }
   .project-card:hover .project-card__caption,
   .project-card:focus-visible .project-card__caption { opacity: 1; }
-  .project-card:hover .project-card__caption > .type-body,
-  .project-card:focus-visible .project-card__caption > .type-body { max-height: 90px; opacity: 1; transform: translateY(0); }
-  .project-card:hover .project-card__open,
-  .project-card:focus-visible .project-card__open { max-height: 24px; opacity: 1; }
 }
 
-.home-closer {
-  min-height: 320px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 50px var(--section-inset);
-  margin-top: 0;
+/* ---- List row ---- */
+
+.project-row {
+  display: grid;
+  grid-template-columns: clamp(120px, 13vw, 200px) minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: clamp(20px, 3vw, 44px);
+  color: var(--ink);
+  text-decoration: none;
 }
 
-.home-closer h2 {
-  line-height: .98;
-  margin: 16px 0 24px;
+.project-row__image { aspect-ratio: 1.3 / 1; }
+
+.project-row__text p {
+  max-width: 62ch;
+  margin: 10px 0 0;
+  font-size: 15px;
+}
+
+.project-row__year {
+  padding-right: clamp(0px, 3vw, 50px);
 }
 
 @media (max-width: 780px) {
   .home-intro { min-height: 360px; padding: 34px var(--section-inset) 26px; }
-  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 24px var(--section-inset); }
-  .project-card__image { aspect-ratio: 1.15 / 1; border-radius: 7px; }
-  .project-card__image::after { background: linear-gradient(transparent, rgba(8, 8, 8, .78)); }
+  .home-intro--split { grid-template-columns: 1fr; row-gap: 26px; }
+  .home-intro--split h1 { grid-column: auto; }
+  .home-projects--grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .media-tint { border-radius: 7px; }
+  .project-card__image { aspect-ratio: 1.15 / 1; }
   .project-card__caption { padding: 12px; }
+  .project-row { grid-template-columns: 110px minmax(0, 1fr); column-gap: 16px; }
+  .project-row__text { grid-column: 2; }
+  .project-row__year { grid-column: 2; grid-row: 1; align-self: start; padding: 0; font-size: 20px; }
+  .project-row__text { grid-row: 1; padding-top: 28px; }
 }
 
 @media (max-width: 500px) {
   .home-intro { min-height: 340px; }
-  .project-grid { grid-template-columns: 1fr; gap: 16px; }
+  .home-projects--grid { grid-template-columns: 1fr; }
   .project-card__image { aspect-ratio: 1.18 / 1; }
   .project-card__caption { padding: 16px; }
+  .project-row__text p { display: none; }
 }

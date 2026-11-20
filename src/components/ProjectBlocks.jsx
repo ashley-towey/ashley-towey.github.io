@@ -2,14 +2,21 @@ import { Fragment } from 'react';
 import Clip, { clipRatio } from './Clip';
 import Picture, { imageRatio } from './Picture';
 import RegistrationLine from './RegistrationLine';
+import { projectHero } from '../data/projects';
 
 // Renders a project's content blocks (see the schema in data/projects.js).
 // Each block sits under its own registration line; the last one closes the
 // frame with a bottom rule.
+// The hero image is shown in the intro, so it's dropped from the blocks.
 export default function ProjectBlocks({ project }) {
-  return project.blocks.map((block, index) => {
+  const hero = projectHero(project).src;
+  const blocks = project.blocks
+    .map((block) => (block.type === 'images' ? { ...block, images: block.images.filter((image) => image.src !== hero) } : block))
+    .filter((block) => block.type !== 'images' || block.images.length > 0);
+
+  return blocks.map((block, index) => {
     const Block = BLOCKS[block.type];
-    const frame = index === project.blocks.length - 1 ? 'frame-box' : 'frame-sides';
+    const frame = index === blocks.length - 1 ? 'frame-box' : 'frame-sides';
     return (
       <Fragment key={`${block.type}-${index}`}>
         <RegistrationLine>{block.label ?? block.heading}</RegistrationLine>

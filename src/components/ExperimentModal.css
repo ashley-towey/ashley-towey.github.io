@@ -1,0 +1,43 @@
+.experiment-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 4vw, 48px);
+  background: color-mix(in srgb, var(--ink) 55%, transparent);
+  animation: experiment-modal-in .2s ease both;
+}
+
+.experiment-modal__box {
+  width: min(100%, 1280px);
+  height: min(100%, 860px);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-media);
+  background: var(--paper);
+}
+
+.experiment-modal__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.experiment-modal__frame {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  background: white;
+}
+
+@keyframes experiment-modal-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

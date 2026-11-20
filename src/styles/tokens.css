@@ -70,8 +70,23 @@
   --type-body-size: 16px;
   --type-body-weight: var(--font-weight-regular);
   --type-body-line-height: 1.5;
-  --type-caption-1-size: 13px;
+  /* One size for both captions and both button styles. */
+  --type-caption-size: 16px;
+  --type-caption-1-size: var(--type-caption-size);
   --type-caption-1-weight: var(--font-weight-semibold);
+  --type-caption-2-size: var(--type-caption-size);
+  --type-caption-2-weight: var(--font-weight-regular);
+  --type-caption-letter-spacing: .04em;
+  /* Domestique (dot-matrix) for years and counts. */
+  --type-numerical-lg: clamp(28px, 2.6vw, 40px);
+  /* A lighter ink for resting/inactive text (e.g. the experiments list).
+     Mixed from --ink and --paper, so it follows the theme; adjust the % to
+     make it darker or lighter. */
+  --ink-soft: color-mix(in srgb, var(--ink) 45%, var(--paper));
+  /* Gap between project grid columns; the home hero uses the same grid. */
+  --grid-gap: clamp(18px, 2.8vw, 46px);
+  /* Shared corner radius for every image: cards, rows, heroes, galleries. */
+  --radius-media: 10px;
   color-scheme: light;
   --paper: #CFCBC0;
   --surface: #d6d9dd;

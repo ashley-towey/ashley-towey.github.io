@@ -4,13 +4,13 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { legacyRedirects } from './legacy-redirects.mjs';
+import { FORMER_EXPERIMENT_PAGES, legacyRedirects } from './legacy-redirects.mjs';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const dist = path.join(root, 'dist');
 const ssrDir = path.join(root, 'dist-ssr');
 
-const { render, routeMeta, prerenderRoutes, site, base, projects, sectionOf } = await import(
+const { render, routeMeta, prerenderRoutes, site, base } = await import(
   pathToFileURL(path.join(ssrDir, 'entry-server.js')).href
 );
 const template = await fs.readFile(path.join(dist, 'index.html'), 'utf8');
@@ -61,10 +61,12 @@ const redirects = {
   ...legacyRedirects,
   // The new site was previewed under /preview/ before launch.
   ...Object.fromEntries(routes.map((route) => [`preview${route}index.html`, route])),
-  // Experiments were previewed at /work/<slug>/ before getting their own section.
-  ...Object.fromEntries(projects.filter((p) => sectionOf(p) === 'experiments').flatMap((p) => [
-    [`work/${p.slug}/index.html`, `/experiments/${p.slug}/`],
-    [`preview/work/${p.slug}/index.html`, `/experiments/${p.slug}/`],
+  // Experiments used to have their own pages (and were previewed at
+  // /work/<slug>/ before that); they all live on /experiments/ now.
+  ...Object.fromEntries(FORMER_EXPERIMENT_PAGES.flatMap((slug) => [
+    [`experiments/${slug}/index.html`, '/experiments/'],
+    [`work/${slug}/index.html`, '/experiments/'],
+    [`preview/work/${slug}/index.html`, '/experiments/'],
   ])),
 };
 await Promise.all(Object.entries(redirects).map(async ([from, to]) => {
