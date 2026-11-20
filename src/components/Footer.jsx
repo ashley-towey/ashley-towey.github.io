@@ -12,7 +12,7 @@ export default function Footer() {
         <ButtonLink variant="secondary" to="/about/">Contact me</ButtonLink>
         {linkedIn && <ButtonLink variant="secondary" href={linkedIn.href} target="_blank" rel="noreferrer">LinkedIn</ButtonLink>}
       </nav>
-      <span className="site-footer__copyright type-numerical">© {new Date().getFullYear()}</span>
+      <span className="site-footer__copyright caption-2">© {new Date().getFullYear()}</span>
       {/* A huge, faint dot-matrix wordmark, cropped by the bottom of the page. */}
       <div className="site-footer__art">
         <DotWordmark />

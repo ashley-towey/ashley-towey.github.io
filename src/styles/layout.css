@@ -159,7 +159,6 @@
   grid-column: 2;
   grid-row: 2;
   align-self: center;
-  font-size: 18px;
 }
 
 .site-footer__art {
@@ -207,7 +206,6 @@
   .site-header nav { gap: 10px; }
   .registration-line { padding-inline: var(--section-inset); }
   .site-footer { min-height: 300px; padding-top: 22px; }
-  .site-footer__copyright { font-size: 15px; }
 }
 
 @media (max-width: 500px) {
