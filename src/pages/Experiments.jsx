@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BracketBox } from '../components/ButtonLink';
 import ExperimentModal from '../components/ExperimentModal';
@@ -11,8 +11,6 @@ import './Home.css';
 import './Experiments.css';
 
 const IMAGES_ON_HOVER = 3;
-// Built once, so the hovered entry keeps its identity between renders.
-const ENTRIES = experimentEntries();
 const random = (min, max) => min + Math.random() * (max - min);
 
 // Pick up to `count` images at random and place them in the panel: one per
@@ -34,6 +32,8 @@ function scatter(images, width, height, count = IMAGES_ON_HOVER) {
 }
 
 export default function Experiments() {
+  // Built once per visit, so the hovered entry keeps its identity between renders.
+  const entries = useMemo(experimentEntries, []);
   const panel = useRef(null);
   const [active, setActive] = useState(null);
   const [placed, setPlaced] = useState([]);
@@ -66,7 +66,7 @@ export default function Experiments() {
       <RegistrationLine as="h2"><span className="visually-hidden">All experiments</span></RegistrationLine>
       <section className="experiments frame-sides" aria-label="Experiments" onMouseLeave={clear}>
         <ol className="experiments__list">
-          {ENTRIES.map((entry) => {
+          {entries.map((entry) => {
             const label = (
               <>
                 <span className="experiment-row__number">{entry.number}</span>
