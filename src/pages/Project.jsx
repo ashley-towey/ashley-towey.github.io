@@ -1,8 +1,11 @@
+import { useCallback, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import ButtonLink from '../components/ButtonLink';
+import ButtonLink, { BracketBox } from '../components/ButtonLink';
+import ExperimentModal from '../components/ExperimentModal';
 import Page from '../components/Page';
 import ProjectBlocks from '../components/ProjectBlocks';
 import Picture from '../components/Picture';
+import { EXPERIMENTS } from '../data/experiments';
 import { getProject, projectHero, projectsIn } from '../data/projects';
 import { projectPath, sectionPath } from '../lib/paths';
 import NotFound from './NotFound';
@@ -15,6 +18,8 @@ const LABELS = {
 
 export default function Project({ section = 'work' }) {
   const { slug } = useParams();
+  const [trying, setTrying] = useState(false);
+  const closeModal = useCallback(() => setTrying(false), []);
   const project = getProject(slug, section);
   const labels = LABELS[section];
   if (!project) return <NotFound eyebrow={`${labels.item} not found`} />;
@@ -23,6 +28,8 @@ export default function Project({ section = 'work' }) {
   const index = list.indexOf(project);
   const nextProject = list[(index + 1) % list.length];
   const hero = projectHero(project);
+  // A live code experiment (set as `tryIt` in data/experiments.js) can be tried in a modal.
+  const tryIt = EXPERIMENTS.find((entry) => entry.project === project.slug)?.tryIt;
 
   return (
     <Page className="project-page">
@@ -35,9 +42,14 @@ export default function Project({ section = 'work' }) {
             {project.credits && (
               <p className="project-credits"><span className="eyebrow caption-2">In collaboration with</span>{project.credits}</p>
             )}
-            {project.links?.length > 0 && (
+            {(project.links?.length > 0 || tryIt) && (
               <div className="project-links">
-                {project.links.map((link) => (
+                {tryIt && (
+                  <button type="button" className="bracket-button caption-2" onClick={() => setTrying(true)} aria-label={`Try ${project.title}`}>
+                    Try it<BracketBox />
+                  </button>
+                )}
+                {project.links?.map((link) => (
                   <ButtonLink key={link.href} variant="secondary" href={link.href} target="_blank" rel="noreferrer">{link.label} ↗</ButtonLink>
                 ))}
               </div>
@@ -56,6 +68,7 @@ export default function Project({ section = 'work' }) {
         </h2>
         <ButtonLink variant="secondary" to={sectionPath(section)}>{labels.all}</ButtonLink>
       </section>
+      {trying && <ExperimentModal title={project.title} src={tryIt} onClose={closeModal} />}
     </Page>
   );
 }

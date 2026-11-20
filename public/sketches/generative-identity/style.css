@@ -1,0 +1,81 @@
+/* Generative Identity sketch page, styled to sit inside the site's modal. */
+@font-face {
+  font-family: 'Neue Regrade';
+  src: url('/fonts/neue-regrade-variable.woff2') format('woff2');
+  font-weight: 300 800;
+}
+
+:root { color-scheme: light; }
+
+html, body {
+  margin: 0;
+  background: #CFCBC0;
+  color: #101112;
+  font-family: 'Neue Regrade', Arial, sans-serif;
+}
+
+.sketch {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.sketch__stage canvas {
+  display: block;
+  width: min(600px, 100%) !important;
+  height: auto !important;
+  border-radius: 10px;
+}
+
+.sketch__stage { width: min(600px, 100%); }
+
+.sketch__controls {
+  width: min(280px, 100%);
+  display: grid;
+  gap: 8px;
+}
+
+.sketch__controls p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.sketch__controls p:empty { display: none; }
+
+.sketch__controls input,
+.sketch__controls select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #101112;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 16px;
+}
+
+.sketch__controls button {
+  justify-self: start;
+  margin-top: 12px;
+  padding: 8px 18px;
+  border: 2px solid #101112;
+  border-radius: 99px;
+  background: #101112;
+  color: #CFCBC0;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.sketch__controls button:hover { background: #ed5a08; border-color: #ed5a08; color: white; }

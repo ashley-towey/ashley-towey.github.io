@@ -526,6 +526,32 @@ export const projects = [
       },
     ],
   },
+  {
+    slug: 'generative-identity',
+    section: 'experiments',
+    title: 'Generative Identity',
+    client: 'Independent project',
+    year: '2021',
+    disciplines: ['Creative computing', 'Generative art', 'p5.js'],
+    summary: 'A generative artwork that turns your name, age, height and mood into a visual representation of your emotional identity, exploring how we represent ourselves in our largely online lives.',
+    description: [
+      'This project aims to explore how we represent ourselves in our largely online lives. Through the medium of generative art the participant is able to produce a visual representation of their emotional identity over time. Each outcome is different, reflecting our ever changing sense of self.',
+      '‘Generative identity’ explores questions of identity as it relates to mental health and how we represent ourselves in a digital world. Try it for yourself, and ask yourself: how do you want to be represented?',
+    ],
+    cover: 'generative-identity/generative-identity-4.jpg',
+    alt: 'A generated identity for Ashley Towey: pale circles and teal hexagons on navy, with the name and time in yellow',
+    blocks: [
+      {
+        type: 'images',
+        label: 'Outcomes',
+        images: [
+          { src: 'generative-identity/generative-identity-1.jpg', alt: 'A grid of nine generated identities, each in a different colour scheme for a different mood', wide: true },
+          { src: 'generative-identity/generative-identity-3.png', alt: 'The text receipt saved alongside each identity, listing the name, age, height and mood entered' },
+          { src: 'generative-identity/generative-identity-2.jpg', alt: 'A blue bike multi-tool photographed beside a generated pattern of circles and hexagons in matching colours' },
+        ],
+      },
+    ],
+  },
 ];
 
 export const SECTIONS = ['work', 'experiments'];

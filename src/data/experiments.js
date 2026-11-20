@@ -18,7 +18,7 @@ export const EXPERIMENTS = [
   { title: 'Networked Beings', project: 'networked-beings' },
   { title: 'Think Twice', project: 'think-twice' }, // note: communicate the aim more clearly
   { title: 'Stories for the Road', project: 'stories-for-the-road' },
-  { title: 'Generative identity' },
+  { title: 'Generative Identity', project: 'generative-identity', tryIt: '/sketches/generative-identity/' },
   { title: 'CSM identity experiment' },
   { title: 'The Tragic Everyday' }, // note: fun and quirky video
   { title: 'SLATE online version' },

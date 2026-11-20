@@ -198,14 +198,16 @@ test('every referenced image has generated variants in public/portfolio', () => 
 describe('experiments', () => {
   test('lists every experiment, numbered, linking those with pages, and none are on the home page', () => {
     const experiments = projectsIn('experiments');
-    expect(experiments.map((p) => p.slug)).toEqual(['velocafe', 'networked-beings', 'think-twice', 'stories-for-the-road']);
+    expect(experiments.map((p) => p.slug)).toEqual(['velocafe', 'networked-beings', 'think-twice', 'stories-for-the-road', 'generative-identity']);
     renderAt('/experiments/');
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/^Experiments;/);
     const list = within(screen.getByRole('region', { name: 'Experiments' }));
     expect(list.getAllByRole('listitem')).toHaveLength(EXPERIMENTS.length);
     expect(list.getByText('001')).toBeInTheDocument();
     const links = list.getAllByRole('link');
-    expect(links.map((a) => a.getAttribute('href'))).toEqual(experiments.map(projectPath));
+    const listed = EXPERIMENTS.filter((e) => e.project).map((e) => getProject(e.project, 'experiments'));
+    expect(links.map((a) => a.getAttribute('href'))).toEqual(listed.map(projectPath));
+    expect(listed.map((p) => p.slug).sort()).toEqual(experiments.map((p) => p.slug).sort());
     cleanup();
     renderAt('/');
     const home = within(screen.getByRole('region', { name: 'Selected projects' }));
@@ -224,6 +226,18 @@ describe('experiments', () => {
     } finally {
       EXPERIMENTS.pop();
     }
+  });
+
+  test('Generative Identity can be tried in a modal from the list and from its page', () => {
+    renderAt('/experiments/');
+    fireEvent.click(screen.getByRole('button', { name: 'Try Generative Identity' }));
+    expect(within(screen.getByRole('dialog', { name: 'Generative Identity' })).getByTitle('Generative Identity'))
+      .toHaveAttribute('src', '/sketches/generative-identity/');
+    fireEvent.keyDown(document, { key: 'Escape' });
+    cleanup();
+    renderAt('/experiments/generative-identity/');
+    fireEvent.click(screen.getByRole('button', { name: 'Try Generative Identity' }));
+    expect(screen.getByRole('dialog', { name: 'Generative Identity' })).toBeInTheDocument();
   });
 
   test('experiment pages are labelled as experiments', () => {
