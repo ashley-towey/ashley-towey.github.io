@@ -166,6 +166,14 @@ describe('experiments', () => {
     expect(screen.getByRole('link', { name: 'All experiments' })).toHaveAttribute('href', '/experiments/');
   });
 
+  test('the footer email button is hidden on the home page only', () => {
+    renderAt('/');
+    expect(within(screen.getByRole('contentinfo')).queryByRole('link', { name: 'Say hello' })).not.toBeInTheDocument();
+    cleanup();
+    renderAt('/about/');
+    expect(within(screen.getByRole('contentinfo')).getByRole('link', { name: 'Say hello' })).toBeInTheDocument();
+  });
+
   test('the footer links to experiments', () => {
     renderAt('/');
     expect(within(screen.getByRole('contentinfo')).getByRole('link', { name: 'Experiments' })).toHaveAttribute('href', '/experiments/');
