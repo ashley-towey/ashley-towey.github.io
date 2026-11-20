@@ -17,7 +17,7 @@
   border: 2px solid var(--ink);
   border-radius: 99px;
   color: var(--ink);
-  font-size: 16px;
+  font-size: var(--type-caption-2-size);
   font-weight: var(--font-weight-semibold);
   letter-spacing: .01em;
   text-transform: uppercase;
@@ -154,6 +154,6 @@
 }
 
 @media (max-width: 780px) {
-  .button-link { min-height: 36px; font-size: 14px; }
+  .button-link { min-height: 36px; }
   .button-link--primary .button-link__segment { padding-inline: 10px; }
 }

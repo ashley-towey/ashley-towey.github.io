@@ -72,7 +72,7 @@
   --type-body-line-height: 1.5;
   --type-caption-1-size: 13px;
   --type-caption-1-weight: var(--font-weight-semibold);
-  --type-caption-2-size: 13px;
+  --type-caption-2-size: 16px; /* also the primary and secondary button size */
   --type-caption-2-weight: var(--font-weight-regular);
   --type-caption-letter-spacing: .04em;
   /* Domestique (dot-matrix) for years and counts. */
