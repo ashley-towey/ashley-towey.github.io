@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BracketBox } from './ButtonLink';
+import ButtonLink from './ButtonLink';
 import { site } from '../config/site';
 import './ContactForm.css';
 
@@ -57,9 +57,7 @@ export default function ContactForm() {
       {/* Spam trap: hidden from people, bots fill it in and Web3Forms drops the message. */}
       <input type="checkbox" name="botcheck" className="visually-hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
       <div className="contact-form__footer">
-        <button type="submit" className="bracket-button caption-2" disabled={status === 'sending'} data-active={status === 'sent' || undefined}>
-          Send<BracketBox />
-        </button>
+        <ButtonLink as="button" type="submit" first="Send" second="it !!" disabled={status === 'sending'} />
         <p className="contact-form__status caption-2" role="status" data-status={status}>
           {MESSAGES[status] ?? ''}
         </p>

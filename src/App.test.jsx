@@ -120,7 +120,7 @@ describe('about page', () => {
     expect(screen.getByLabelText('Name')).toBeRequired();
     expect(screen.getByLabelText('Email')).toHaveAttribute('type', 'email');
     expect(screen.getByLabelText('Message')).toBeRequired();
-    expect(screen.getByRole('button', { name: 'Send' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Send it !!' })).toBeInTheDocument();
     expect(container.querySelector('a[href^="mailto:"]')).toBeNull();
     expect(site.email).toBe('ashleytowey.design@gmail.com');
   });
@@ -132,7 +132,7 @@ describe('about page', () => {
     fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Sam' } });
     fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'sam@example.com' } });
     fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Hello' } });
-    fireEvent.click(screen.getByRole('button', { name: 'Send' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Send it !!' }));
     expect(await screen.findByText(/Thanks for getting in touch/)).toBeInTheDocument();
     const [url, options] = fetchMock.mock.calls[0];
     expect(url).toBe('https://api.web3forms.com/submit');
@@ -145,7 +145,7 @@ describe('about page', () => {
     fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Sam' } });
     fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'sam@example.com' } });
     fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Hello' } });
-    fireEvent.click(screen.getByRole('button', { name: 'Send' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Send it !!' }));
     expect(await screen.findByText(/Something went wrong/)).toBeInTheDocument();
   });
 });

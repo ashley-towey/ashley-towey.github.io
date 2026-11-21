@@ -18,7 +18,7 @@ export default function About() {
         </div>
         <div className="about-contact__intro">
           <Picture src="about/headshot_2.jpg" alt="Portrait of Ashley Towey" sizes="(max-width: 780px) 92vw, 40vw" />
-          <p className="type-body">I’m Ashley, a designer working between the digital and the physical. I’m currently a Marketing Designer at Encord, living in London, and a graduate of Graphic Communication Design at Central Saint Martins.</p>
+          <p className="type-body">I’m currently a Marketing Designer at Encord, living in London, and a graduate of Graphic Communication Design at Central Saint Martins.</p>
           <div className="about-links">
             {site.socials.map((social) => (
               <ButtonLink key={social.label} variant="secondary" href={social.href} target="_blank" rel="noreferrer">{social.label}</ButtonLink>
