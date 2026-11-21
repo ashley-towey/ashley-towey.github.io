@@ -1,7 +1,7 @@
 @property --paper {
   syntax: '<color>';
   inherits: true;
-  initial-value: #CFCBC0;
+  initial-value: #A855F7;
 }
 
 @property --surface {
@@ -88,7 +88,7 @@
   /* Shared corner radius for every image: cards, rows, heroes, galleries. */
   --radius-media: 10px;
   color-scheme: light;
-  --paper: #CFCBC0;
+  --paper: #A855F7;
   --surface: #d6d9dd;
   --ink: #101112;
   --muted: #53565b;
