@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { BracketBox } from '../components/ButtonLink';
 import ExperimentModal from '../components/ExperimentModal';
 import Page from '../components/Page';
@@ -14,6 +14,7 @@ import './Experiments.css';
 // experiment in a modal. Rows don't link anywhere.
 
 const IMAGES_ON_HOVER = 3;
+const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 const random = (min, max) => min + Math.random() * (max - min);
 const numberOf = (index) => String(index + 1).padStart(3, '0');
 
@@ -35,8 +36,37 @@ function scatter(images, width, height, count = IMAGES_ON_HOVER) {
   });
 }
 
+// Titles always sit on one line (TRY IT drops below a title when there's no
+// room beside it). If a number and title alone are wider than the list, every
+// title shrinks by the same amount, so they stay the same size as each other,
+// until they fit. Sets --experiment-title-scale on the list.
+function useTitlesOnOneLine(list) {
+  useIsomorphicLayoutEffect(() => {
+    const element = list.current;
+    if (!element) return undefined;
+    const fit = () => {
+      element.style.setProperty('--experiment-title-scale', '1');
+      let scale = 1;
+      element.querySelectorAll('.experiment-row').forEach((row) => {
+        const titleWidth = row.querySelector('.experiment-row__title').scrollWidth;
+        const overflow = row.querySelector('.experiment-row__main').offsetWidth - row.clientWidth;
+        if (overflow > 0 && titleWidth > 0) scale = Math.min(scale, (titleWidth - overflow) / titleWidth);
+      });
+      element.style.setProperty('--experiment-title-scale', String(Math.max(scale * 0.99, 0.4)));
+    };
+    fit();
+    document.fonts?.ready.then(fit);
+    if (typeof ResizeObserver === 'undefined') return undefined;
+    const observer = new ResizeObserver(fit);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [list]);
+}
+
 export default function Experiments() {
   const panel = useRef(null);
+  const list = useRef(null);
+  useTitlesOnOneLine(list);
   const [activeIndex, setActiveIndex] = useState(null); // the clicked row
   const [placed, setPlaced] = useState([]); // its scattered images
   const [trying, setTrying] = useState(null); // the experiment open in the modal
@@ -63,7 +93,7 @@ export default function Experiments() {
       </section>
       <RegistrationLine as="h2"><span className="visually-hidden">All experiments</span></RegistrationLine>
       <section className="experiments frame-sides" aria-label="Experiments">
-        <ol className="experiments__list">
+        <ol className="experiments__list" ref={list}>
           {EXPERIMENTS.map((experiment, index) => (
             <li key={experiment.title} className="experiment-row">
               <button
