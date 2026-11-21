@@ -52,6 +52,7 @@ export const EXPERIMENTS = [
       'stories/homepage-1.jpg',
       'stories/directory-1.jpg',
     ],
+    tryIt: '/sketches/stories-for-the-road/index.html',
   },
   {
     title: 'Generative Identity',
