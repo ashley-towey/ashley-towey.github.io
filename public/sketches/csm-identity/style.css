@@ -1,0 +1,52 @@
+/* CSM identity experiment: a variable typeface whose 'opsz' axis follows the pointer. */
+@font-face {
+  font-family: 'CSM 2.5D';
+  src: url('./2-5DVF.ttf') format('truetype');
+  font-display: block;
+}
+
+:root { color-scheme: light; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #414b9a;
+  color: white;
+  font-family: 'Spline Sans Mono', 'Courier New', monospace;
+}
+
+.stage {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.mark {
+  color: #e7411c;
+  font-family: 'CSM 2.5D', 'Courier New', monospace;
+  font-size: min(34vw, 55vh);
+  line-height: 1;
+  font-variation-settings: 'opsz' 50;
+}
+
+h1 {
+  margin: .4em 0 0;
+  font-size: clamp(24px, 6vw, 64px);
+  font-weight: 600;
+}
+
+.hint {
+  margin: 1.5em 0 0;
+  font-size: 14px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  opacity: .7;
+}

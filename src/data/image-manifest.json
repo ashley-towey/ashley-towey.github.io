@@ -1,6 +1,7 @@
 {
   "about/headshot_1.jpg": {"width":1200,"height":1665,"widths":[800,1200]},
   "about/headshot_2.jpg": {"width":1718,"height":1920,"widths":[800,1600]},
+  "csm-identity/csm-type.jpg": {"width":1000,"height":1000,"widths":[800,1000]},
   "csm-shows/csm-shows_1.jpg": {"width":1000,"height":665,"widths":[800,1000]},
   "csm-shows/granary-window-1.jpg": {"width":2500,"height":2501,"widths":[800,1600]},
   "csm-shows/lethaby-window_1.jpg": {"width":2879,"height":2159,"widths":[800,1600]},

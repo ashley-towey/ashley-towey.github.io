@@ -16,8 +16,9 @@
 
 .experiment-row {
   display: flex;
+  flex-wrap: wrap; /* TRY IT drops below the title rather than wrapping it */
   align-items: center;
-  gap: clamp(20px, 3vw, 48px);
+  column-gap: clamp(20px, 3vw, 48px);
   padding-block: 6px;
 }
 
@@ -27,6 +28,7 @@
    active   (clicked, its images showing) number in --orange, title in --ink */
 .experiment-row__main {
   display: flex;
+  flex-shrink: 0;
   align-items: baseline;
   gap: clamp(24px, 4vw, 64px);
   padding: 0;
@@ -60,7 +62,9 @@
 }
 
 .experiment-row__title {
-  font-size: var(--type-h2-size);
+  /* Never wraps; Experiments.jsx shrinks every title together if one won't fit. */
+  white-space: nowrap;
+  font-size: calc(var(--type-h2-size) * var(--experiment-title-scale, 1));
   font-weight: var(--type-h2-weight);
   line-height: 1.25;
   letter-spacing: -.02em;
@@ -99,5 +103,5 @@
 
 @media (max-width: 780px) {
   .experiment-row__main { gap: 20px; }
-  .experiment-row__title { font-size: var(--type-h3-size); }
+  .experiment-row__title { font-size: calc(var(--type-h3-size) * var(--experiment-title-scale, 1)); }
 }
