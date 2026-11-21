@@ -248,6 +248,13 @@ describe('experiments', () => {
       .toHaveAttribute('src', '/sketches/stories-for-the-road/index.html');
   });
 
+  test('CSM identity experiment can be tried in a modal', () => {
+    renderAt('/experiments/');
+    fireEvent.click(screen.getByRole('button', { name: 'Try CSM identity experiment' }));
+    expect(within(screen.getByRole('dialog', { name: 'CSM identity experiment' })).getByTitle('CSM identity experiment'))
+      .toHaveAttribute('src', '/sketches/csm-identity/index.html');
+  });
+
   test('every TRY IT sketch in public/ exists', () => {
     const local = EXPERIMENTS.filter((e) => e.tryIt?.startsWith('/'));
     local.forEach((e) => expect(fs.existsSync(path.resolve(__dirname, '../public', `.${e.tryIt}`)), e.tryIt).toBe(true));

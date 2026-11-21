@@ -64,7 +64,11 @@ export const EXPERIMENTS = [
     ],
     tryIt: '/sketches/generative-identity/index.html',
   },
-  { title: 'CSM identity experiment' },
+  {
+    title: 'CSM identity experiment',
+    images: ['csm-identity/csm-type.jpg'],
+    tryIt: '/sketches/csm-identity/index.html',
+  },
   { title: 'The Tragic Everyday' }, // note: fun and quirky video
   { title: 'SLATE online version' },
   { title: 'The Passing Place' }, // note: simple and nice photography
