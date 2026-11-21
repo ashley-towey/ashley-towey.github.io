@@ -241,6 +241,13 @@ describe('experiments', () => {
       .toHaveAttribute('src', '/sketches/generative-identity/index.html');
   });
 
+  test('Stories for the Road can be tried in a modal', () => {
+    renderAt('/experiments/');
+    fireEvent.click(screen.getByRole('button', { name: 'Try Stories for the Road' }));
+    expect(within(screen.getByRole('dialog', { name: 'Stories for the Road' })).getByTitle('Stories for the Road'))
+      .toHaveAttribute('src', '/sketches/stories-for-the-road/index.html');
+  });
+
   test('every TRY IT sketch in public/ exists', () => {
     const local = EXPERIMENTS.filter((e) => e.tryIt?.startsWith('/'));
     local.forEach((e) => expect(fs.existsSync(path.resolve(__dirname, '../public', `.${e.tryIt}`)), e.tryIt).toBe(true));
