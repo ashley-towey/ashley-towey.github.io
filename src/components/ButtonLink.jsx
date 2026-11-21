@@ -5,10 +5,11 @@ import './ButtonLink.css';
 // useLayoutEffect warns during server prerendering; it only matters in the browser.
 const useBrowserLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
-// `to` renders an internal router link; `href` renders a plain anchor.
+// `to` renders an internal router link; `href` renders a plain anchor;
+// as="button" renders a real <button> (e.g. a form's submit).
 // variant="primary" is the two-part sliding pill (first/second labels);
 // variant="secondary" is the bracket button: LABEL [ ● ], dot on hover/active.
-export default function ButtonLink({ variant = 'primary', first, second, className = '', children, to, active = false, ...rest }) {
+export default function ButtonLink({ variant = 'primary', first, second, className = '', children, to, as, active = false, ...rest }) {
   const ref = useRef(null);
 
   useBrowserLayoutEffect(() => {
@@ -32,7 +33,7 @@ export default function ButtonLink({ variant = 'primary', first, second, classNa
     };
   }, [first, second, variant]);
 
-  const Anchor = to ? Link : 'a';
+  const Anchor = as ?? (to ? Link : 'a');
   const linkProps = to ? { to, ...rest } : rest;
   if (variant === 'secondary') {
     // NavLink marks the current page with aria-current, which fills the dot.

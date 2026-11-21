@@ -12,7 +12,7 @@ export function routeMeta(pathname) {
   const path = pathname.replace(/\/+$/, '') || '/';
   if (path === '/') return { title: `${site.name} — Selected work`, description: site.description };
   if (path === '/about') {
-    return { title: `About${suffix}`, description: `About ${site.name}: designer, programmer and cyclist based in ${site.location}.` };
+    return { title: `About${suffix}`, description: `About and contact: ${site.name} is a designer, programmer and cyclist based in ${site.location}.` };
   }
   if (path === '/experiments') {
     return { title: `Experiments${suffix}`, description: `Experiments, prototypes and self-initiated projects by ${site.name}.` };
