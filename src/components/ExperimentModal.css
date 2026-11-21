@@ -6,6 +6,7 @@
   place-items: center;
   padding: clamp(12px, 4vw, 48px);
   background: color-mix(in srgb, var(--ink) 55%, transparent);
+  overscroll-behavior: contain;
   animation: experiment-modal-in .2s ease both;
 }
 
@@ -34,7 +35,9 @@
   height: 100%;
   display: block;
   border: 0;
-  background: white;
+  /* Shows while the experiment loads and when it's over-scrolled. */
+  background: var(--paper);
+  overscroll-behavior: contain;
 }
 
 @keyframes experiment-modal-in {
