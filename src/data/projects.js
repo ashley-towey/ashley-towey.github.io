@@ -15,8 +15,29 @@
 // `summary` is the short text used on the home page card and in search/share previews.
 // Every project is portfolio work, at /work/<slug>/. Experiments live in
 // data/experiments.js instead and have no pages of their own.
+//
+// Projects are shown newest first, sorted by `year` (projects from the same year
+// keep the order they're listed in here).
 
-export const projects = [
+const allProjects = [
+  {
+    slug: 'long-horizon-summit',
+    title: 'Long Horizon Summit',
+    client: 'Encord',
+    year: '2026',
+    disciplines: ['Identity', 'Event design', 'Digital design'],
+    // DRAFT copy — to review
+    summary: 'Event branding for Long Horizon, Encord’s first Physical AI summit, held at Fort Mason in San Francisco. The work covered the summit identity, billboard campaigns, event signage and an interactive installation.',
+    description: [
+      'Long Horizon is Encord’s inaugural Physical AI summit, bringing together the people building robotics, embodied AI and autonomous systems for two days at Fort Mason, San Francisco, in October 2026.',
+      'Working within Encord’s design team, I helped shape the event from the first announcement to the venue itself: the event branding, billboard campaigns to build awareness ahead of the summit, signage and wayfinding on site, and an interactive installation for attendees to explore during the event.',
+    ],
+    credits: 'Hyemin Kang, Oliver Blaire, Mavis Lok, Nat Mannering, Jack Henchy, Tom Kennedy and George Burton-Fletcher',
+    links: [{ label: 'Event website', href: 'https://encord.com/long-horizon/' }],
+    cover: 'long-horizon-summit/lh-cover.jpg', // PLACEHOLDER cover — to replace
+    alt: 'The Encord team in green T-shirts outside Gateway Pavilion at Fort Mason, beneath Long Horizon summit banners',
+    blocks: [],
+  },
   {
     slug: 'domestique-display',
     title: 'The Domestique Display',
@@ -351,6 +372,8 @@ export const projects = [
   },
 ];
 
+export const projects = [...allProjects].sort((a, b) => Number(b.year) - Number(a.year));
+
 // The home heading: "I design & build; websites,[5] products,[2] …". Each word's
 // bracketed number links to one project (`project`, a slug) and shows that
 // project's position in the portfolio, like a footnote; or links to the
@@ -360,7 +383,7 @@ export const HEADLINE = [
   { label: 'products', project: 'slate' },
   { label: 'brands', project: 'csm-showcase' },
   { label: 'campaigns', project: 'london-to-paris' },
-  { label: 'billboards', project: 'domestique-display' },
+  { label: 'billboards', project: 'long-horizon-summit' },
   { label: 'etc', to: '/experiments/', linkLabel: 'Experiments' },
 ];
 
