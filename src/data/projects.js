@@ -31,12 +31,12 @@ const allProjects = [
     title: 'Long Horizon Summit',
     client: 'Encord',
     year: '2026',
-    disciplines: ['Identity', 'Event design', 'Digital design'],
+    disciplines: ['Campaign design', 'Signage & wayfinding', 'Creative technology'],
     // DRAFT copy — to review
-    summary: 'Event branding for Long Horizon, Encord’s first Physical AI summit, held at Fort Mason in San Francisco. The work covered the summit identity, billboard campaigns, event signage and an interactive installation.',
+    summary: 'Billboard campaigns, event signage and an interactive installation for Long Horizon, Encord’s first Physical AI summit, held at Fort Mason in San Francisco.',
     description: [
       'Long Horizon is Encord’s inaugural Physical AI summit, bringing together the people building robotics, embodied AI and autonomous systems for two days at Fort Mason, San Francisco, in October 2026.',
-      'Working within Encord’s design team, I helped shape the event from the first announcement to the venue itself: the event branding, billboard campaigns to build awareness ahead of the summit, signage and wayfinding on site, and an interactive installation for attendees to explore during the event.',
+      'Working within Encord’s design team, I helped bring the event to life from the first announcement to the venue itself: billboard campaigns to build awareness ahead of the summit, signage and wayfinding on site, and an interactive installation for attendees to explore during the event.',
     ],
     cover: 'long-horizon-summit/lh-expo-hall.jpg',
     alt: 'The Long Horizon hall at Fort Mason: attendees at tables and stands under a white steel roof, a robot demo in the aisle and a large Long Horizon banner at the far end',
@@ -70,7 +70,7 @@ const allProjects = [
         heading: 'Interactive installation',
         // DRAFT copy — to review
         body: [
-          'Alongside the event identity, I designed and built an interactive installation for the summit floor. Two tall screens, each with its own camera, turn the people walking past into live portraits of the event.',
+          'Alongside the event signage, I designed and built an interactive installation for the summit floor. Two tall screens, each with its own camera, turn the people walking past into live portraits of the event.',
         ],
         // The same web version as the experiments page's Long Horizon installation.
         tryIt: { title: 'Long Horizon installation', src: '/sketches/lh-installation/index.html' },
