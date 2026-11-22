@@ -1,8 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
-import ButtonLink from '../components/ButtonLink';
+import ButtonLink, { BracketBox } from '../components/ButtonLink';
 import Page from '../components/Page';
 import ProjectBlocks from '../components/ProjectBlocks';
 import Picture from '../components/Picture';
+import RegistrationLine from '../components/RegistrationLine';
 import { getProject, projectHero, projects } from '../data/projects';
 import { projectPath } from '../lib/paths';
 import NotFound from './NotFound';
@@ -14,7 +15,9 @@ export default function Project() {
   const project = getProject(slug);
   if (!project) return <NotFound eyebrow="Project not found" />;
 
-  const nextProject = projects[(projects.indexOf(project) + 1) % projects.length];
+  const index = projects.indexOf(project);
+  const previous = projects.at(index - 1);
+  const next = projects[(index + 1) % projects.length];
   const hero = projectHero(project);
 
   return (
@@ -42,13 +45,28 @@ export default function Project() {
         </div>
       </section>
       <ProjectBlocks project={project} />
-      <section className="next-project frame-sides">
-        <span className="eyebrow caption-2">Next project</span>
-        <h2 className="next-project__title">
-          <Link to={projectPath(nextProject)}>{nextProject.title}</Link>
-        </h2>
-        <ButtonLink variant="secondary" to="/">All projects</ButtonLink>
-      </section>
+      <RegistrationLine as="h2"><Link className="project-nav__all" to="/">All projects</Link></RegistrationLine>
+      {/* Side rules only: the footer's top rule closes it. */}
+      <nav className="project-nav frame-sides" aria-label="More projects">
+        <ProjectNavLink project={previous} direction="previous" />
+        <ProjectNavLink project={next} direction="next" />
+      </nav>
     </Page>
+  );
+}
+
+// One half of the previous / next links: title and direction.
+// Hovering shows a small cover, like the headline tooltips.
+function ProjectNavLink({ project, direction }) {
+  const label = direction === 'next' ? 'Next' : 'Previous';
+  return (
+    <Link className={`project-nav__link project-nav__link--${direction}`} to={projectPath(project)} aria-label={`${label} project: ${project.title}`}>
+      <span className="project-nav__title">{project.title}</span>
+      {/* Styled as a secondary (bracket) button; the whole half is the link. */}
+      <span className="project-nav__direction bracket-button caption-2">{label}<BracketBox /></span>
+      <span className="project-nav__thumb" aria-hidden="true">
+        <Picture src={project.cover} alt="" loading="lazy" sizes="180px" />
+      </span>
+    </Link>
   );
 }

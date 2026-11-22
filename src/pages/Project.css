@@ -97,33 +97,87 @@
 }
 .project-quote figcaption { margin-top: 18px; }
 
-.next-project {
-  min-height: 200px;
-  padding: 28px 24px;
+/* ---- Previous / next projects ---- */
+
+.project-nav__all { color: inherit; text-decoration: none; }
+.project-nav__all:hover { text-decoration: underline; text-underline-offset: .2em; }
+
+.project-nav {
   display: grid;
-  grid-template-columns: 1fr 2fr auto;
-  gap: 20px;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
 }
 
-.next-project__title {
-  margin: 0;
+.project-nav__link {
+  /* Size of the square cover, and the padding around it and the text. */
+  --thumb: clamp(150px, 14vw, 210px);
+  --pad-y: 30px;
+  position: relative;
+  min-height: calc(var(--thumb) + var(--pad-y) * 2);
+  padding: var(--pad-y) var(--section-inset);
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* The rule between the two halves, stopping short like the frame's sides. */
+.project-nav__link--previous {
+  background: var(--frame-rule) right top / 1px 100% no-repeat;
+}
+
+.project-nav__link--next { text-align: right; }
+
+/* Keep the text clear of the cover on the opposite side. */
+.project-nav__link--previous { padding-right: calc(var(--section-inset) * 2 + var(--thumb)); }
+.project-nav__link--next { padding-left: calc(var(--section-inset) * 2 + var(--thumb)); }
+
+.project-nav__title {
+  max-width: 14em;
   font-size: var(--type-h3-size);
   font-weight: var(--type-h3-weight);
   line-height: var(--type-h3-line-height);
   letter-spacing: var(--type-h3-letter-spacing);
 }
 
-.next-project__title a {
-  color: var(--ink);
-  text-decoration: none;
+.project-nav__link--next .project-nav__title { justify-self: end; }
+
+.project-nav__direction { cursor: inherit; }
+.project-nav__link--next .project-nav__direction { justify-self: end; }
+
+/* The bracket dot fills on hover, like a secondary button. */
+.project-nav__link:hover .bracket-button__dot,
+.project-nav__link:focus-visible .bracket-button__dot { background: var(--muted); }
+
+/* Square cover, fixed on the side opposite the text and filling the
+   height of the half. It fades in on hover. */
+.project-nav__thumb {
+  position: absolute;
+  top: var(--pad-y);
+  width: var(--thumb);
+  height: var(--thumb);
+  overflow: hidden;
+  border-radius: var(--radius-media);
+  background: var(--surface);
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
 }
 
-.next-project__title a:hover { text-decoration: underline; text-underline-offset: .12em; text-decoration-thickness: 2px; }
+.project-nav__link--previous .project-nav__thumb { right: var(--section-inset); }
+.project-nav__link--next .project-nav__thumb { left: var(--section-inset); }
+.project-nav__thumb img { width: 100%; height: 100%; display: block; object-fit: cover; }
 
-.next-project__title a:focus-visible {
+.project-nav__link:hover .project-nav__thumb,
+.project-nav__link:focus-visible .project-nav__thumb { opacity: 1; }
+
+.project-nav__link:focus-visible {
   outline: 2px solid var(--orange);
-  outline-offset: 4px;
+  outline-offset: -6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-nav__thumb { transition: none; }
 }
 
 @media (max-width: 780px) {
@@ -132,7 +186,10 @@
   .project-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 24px var(--section-inset); }
   .project-text { grid-template-columns: 1fr 1fr; gap: 16px 22px; padding: 24px var(--section-inset) 34px; }
   .project-quote { grid-column: 1 / -1; }
-  .next-project { grid-template-columns: 1fr; gap: 14px; padding: 24px var(--section-inset); }
+  .project-nav__link,
+  .project-nav__link--previous,
+  .project-nav__link--next { min-height: 170px; padding: 26px 16px 28px; }
+  .project-nav__thumb { display: none; }
 }
 
 @media (max-width: 500px) {

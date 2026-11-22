@@ -76,13 +76,14 @@ describe('project pages', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(project.title);
   });
 
-  test('the next-project link wraps round', () => {
+  test('the previous and next links wrap round', () => {
     const list = projects;
     renderAt(projectPath(list[0]));
-    expect(screen.getByRole('link', { name: list[1].title })).toHaveAttribute('href', projectPath(list[1]));
+    expect(screen.getByRole('link', { name: `Next project: ${list[1].title}` })).toHaveAttribute('href', projectPath(list[1]));
+    expect(screen.getByRole('link', { name: `Previous project: ${list.at(-1).title}` })).toHaveAttribute('href', projectPath(list.at(-1)));
     cleanup();
     renderAt(projectPath(list.at(-1)));
-    expect(screen.getByRole('link', { name: list[0].title })).toHaveAttribute('href', projectPath(list[0]));
+    expect(screen.getByRole('link', { name: `Next project: ${list[0].title}` })).toHaveAttribute('href', projectPath(list[0]));
   });
 
   test('the intro shows the year and hero image, and no client or disciplines', () => {

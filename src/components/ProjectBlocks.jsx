@@ -5,8 +5,8 @@ import RegistrationLine from './RegistrationLine';
 import { projectHero } from '../data/projects';
 
 // Renders a project's content blocks (see the schema in data/projects.js).
-// Each block sits under its own registration line; the last one closes the
-// frame with a bottom rule.
+// Each block sits under its own registration line. The page's previous / next
+// line closes the frame, so no block draws a bottom rule of its own.
 // The hero image is shown in the intro, so it's dropped from the blocks.
 export default function ProjectBlocks({ project }) {
   const hero = projectHero(project).src;
@@ -16,11 +16,10 @@ export default function ProjectBlocks({ project }) {
 
   return blocks.map((block, index) => {
     const Block = BLOCKS[block.type];
-    const frame = index === blocks.length - 1 ? 'frame-box' : 'frame-sides';
     return (
       <Fragment key={`${block.type}-${index}`}>
         <RegistrationLine>{block.label ?? block.heading}</RegistrationLine>
-        <Block block={block} project={project} frame={frame} eager={index === 0} />
+        <Block block={block} project={project} frame="frame-sides" eager={index === 0} />
       </Fragment>
     );
   });
