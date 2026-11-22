@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Long Horizon installation</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #EDF6EF; }
+    canvas { display: block; }
+
+    /* --- DEV UI: on-screen style toggle (testing only) --- */
+    #devui { position: fixed; top: 12px; left: 12px; z-index: 10;
+             display: flex; flex-wrap: wrap; gap: 6px; max-width: 60vw;
+             font-family: -apple-system, system-ui, sans-serif; }
+    #devui .devbtn { padding: 7px 12px; border-radius: 999px;
+             border: 1px solid rgba(0,0,0,0.15); background: rgba(255,255,255,0.7);
+             color: #1c2a22; font-size: 12px; cursor: pointer;
+             backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    #devui .devbtn:hover { background: rgba(255,255,255,0.95); }
+    #devui .devbtn.active { background: #148F5A; color: #fff; border-color: #148F5A; }
+
+    /* --- DEV UI: live knob controls --- */
+    #controls { position: fixed; top: 12px; right: 12px; z-index: 10; width: 210px;
+             max-height: 92vh; overflow-y: auto; padding: 8px 10px; border-radius: 10px;
+             background: rgba(255,255,255,0.75); backdrop-filter: blur(8px);
+             -webkit-backdrop-filter: blur(8px); color: #1c2a22;
+             font-family: -apple-system, system-ui, sans-serif; font-size: 11px; }
+    #controls .cgroup { font-weight: 600; margin: 9px 0 3px; opacity: 0.85; }
+    #controls .cgroup:first-child { margin-top: 0; }
+    #controls .crow { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
+    #controls .clabel { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #controls .cval { width: 32px; text-align: right; opacity: 0.6; font-variant-numeric: tabular-nums; }
+    #controls input[type=range] { width: 78px; }
+
+    /* --- Installation: dev panels only show in dev mode (press D or ?dev=1) --- */
+    body:not(.dev) #devui, body:not(.dev) #controls { display: none; }
+
+    /* --- Installation: calibration panel (press C or ?calib=1) --- */
+    #calib { position: fixed; top: 12px; left: 12px; z-index: 20; width: 270px;
+             max-height: calc(100vh - 24px); overflow-y: auto; padding: 12px 14px 14px;
+             border-radius: 12px; background: rgba(255,255,255,0.86);
+             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+             color: #1c2a22; font: 12px/1.4 -apple-system, system-ui, sans-serif;
+             box-shadow: 0 6px 24px rgba(10,18,14,0.18); display: none; }
+    body.calib #calib { display: block; }
+    body.dev.calib #devui { top: auto; bottom: 12px; }
+    #calib h2 { font: 500 20px/1.1 "Chakra Petch", -apple-system, sans-serif; margin: 0 0 2px; }
+    #calib .sub { opacity: 0.65; margin-bottom: 10px; }
+    #calib .sect { font-weight: 600; margin: 12px 0 4px; }
+    #calib select { width: 100%; font: inherit; padding: 4px; border-radius: 6px;
+             border: 1px solid rgba(0,0,0,0.2); background: #fff; color: inherit; }
+    #calib .row { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+    #calib .row label { flex: 1; }
+    #calib .row input[type=range] { width: 110px; accent-color: #148F5A; }
+    #calib .row .v { width: 36px; text-align: right; font-variant-numeric: tabular-nums; opacity: 0.7; }
+    #calib .info { font-variant-numeric: tabular-nums; background: rgba(20,143,90,0.08);
+             border-radius: 8px; padding: 6px 8px; margin-top: 6px; white-space: pre-line; }
+    #calib .warn { color: #a33a00; }
+    #calib .btns { display: flex; gap: 6px; margin-top: 12px; }
+    #calib button { flex: 1; font: inherit; padding: 6px 8px; border-radius: 999px; cursor: pointer;
+             border: 1px solid #148F5A; background: #fff; color: #148F5A; }
+    #calib button.primary { background: #148F5A; color: #fff; }
+    #calib .keys { margin-top: 10px; opacity: 0.6; font-size: 11px; }
+    #calib :focus-visible { outline: 2px solid #148F5A; outline-offset: 2px; }
+
+    /* --- Installation: bottom banner, full screen width, height follows the artwork's ratio --- */
+    :root { --banner-w: 100vw; --banner-h: calc(var(--banner-w) * 4935 / 21600); }
+    #banner { position: fixed; left: 50%; bottom: 0; z-index: 5; transform: translateX(-50%);
+             width: var(--banner-w); height: auto; aspect-ratio: 21600 / 4935;
+             display: block; pointer-events: none; user-select: none; }
+    #banner { transition: filter 1.2s ease-in-out; }
+    body.banner-light #banner { filter: invert(1); }   /* dark styles: flip the dark artwork to light */
+    body.no-banner #banner { display: none; }
+    body.no-banner { --banner-h: 0px; }
+    body.dev.calib #devui { bottom: calc(var(--banner-h) + 12px); }
+
+    /* --- Installation: start-up / error messages --- */
+    #status { position: fixed; left: 50%; bottom: calc(var(--banner-h) + 24px); transform: translateX(-50%); z-index: 30;
+             padding: 8px 14px; border-radius: 999px; background: rgba(10,18,14,0.8); color: #E7FFD6;
+             font: 13px/1.3 -apple-system, system-ui, sans-serif; max-width: 80vw; text-align: center; }
+    #status:empty { display: none; }
+    #status.retry { cursor: pointer; }
+  </style>
+</head>
+<body>
+<!-- DEV UI: remove this div (and the #devui styles + buildUI/highlightUI below) for production -->
+<div id="devui"></div>
+<!-- DEV UI: live knob controls (remove #controls div + styles + buildControls for production) -->
+<div id="controls"></div>
+<!-- INSTALLATION: calibration panel + status line -->
+<div id="calib"></div>
+<img id="banner" src="long-horizon-bottom-banner.svg" alt="" aria-hidden="true"
+     onerror="document.body.classList.add('no-banner')">
+<div id="status"></div>
+<script>
+// WEB VERSION of the Long Horizon installation, for the portfolio's
+// experiments page. Changes from the installation build: it never reloads
+// itself in a loop when the camera is blocked or slow to start (it asks the
+// visitor to click to try again instead), and the cursor stays visible.
+
+// ---- Tunable settings -------------------------------------------------
+const CAM_W = 640, CAM_H = 480;   // webcam capture size
+const STEP  = 6;                  // grid resolution (smaller = finer + heavier)
+let EASE  = 0.16;               // motion delay: lower = more lag / smokier trail
+
+// LH Noir (heat / thermal glow)
+let FIELD_BLUR_RADIUS = 4;      // blur radius in cells (bigger = softer, hotter core)
+let FIELD_BLUR_PASSES = 4;      // box-blur passes ~ Gaussian (3-4 reads smooth)
+let HEAT_GAMMA = 1.35;          // >1 concentrates the hot core, dims thin limbs
+let HEAT_GAIN  = 1.15;          // overall intensity multiplier
+let CANVAS_BLUR = 12;           // extra final blur in px
+let GRAIN = true;               // subtle film grain (heat styles)
+let GRAIN_ALPHA = 90;           // 0-255
+
+// LH Scatter drift: Scatter's dissolve + flow-field trail, drawn as Drift's
+// white outlined circles and pills on the green-to-grey gradient
+let SD_DENSITY  = 0.6;          // share of body cells that get a shape (higher = denser, more overlap)
+let SD_JITTER   = 0.45;         // random offset per shape (fraction of a cell)
+let SD_SCATTER  = 5.0;          // how far fading shapes drift (in cells) = trail length
+let SD_SIZE     = 0.8;          // shape height vs cell
+let SD_SIZE_VAR = 0.25;         // random size variation (fraction of SD_SIZE)
+let SD_PILL     = 0.5;          // share of shapes that are pills rather than circles
+let SD_FILL_A   = 0.45;         // semi-transparent white fill
+let SD_STROKE_W = 1.5;          // white outline weight
+
+// View cycle: every screen shows the same view at the same time (synced to the clock)
+let CYCLE_SECONDS = 15;         // time on each view (URL ?cycle=15, or cycle=0 to hold one view)
+let FADE_SECONDS  = 1.2;        // crossfade between views
+
+let MIRROR = true;              // selfie-style mirroring
+let PERSON_IS_TRANSPARENT = true; // flip to false if the figure lands on the background
+
+// LH Dots: outline + fake-3D volume (dots shrink toward the interior)
+let DOTS_MAX_DEPTH   = 12;   // grid steps from the edge before dots reach min size
+let DOTS_EDGE        = 5;    // dot size on the outline (before window scaling)
+let DOTS_CENTER      = 1.2;  // dot size deep inside the body
+let DOTS_FADE_CENTER = true; // dim dots slightly toward the interior
+let DOTS_TRAIL_DECAY = 0.94; // trail memory decay (higher = longer trail behind you)
+const EDGE_DIRS = [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
+
+// LH Type: people-removed blurred video + repeating wordmark
+// LH Figure: typographic portrait — the scene rendered as a field of letters
+let FIG_BLUR  = 10;        // blur of the person-on-gray base photo
+let FIG_CELL  = 18;        // character cell size in px (smaller = finer + heavier)
+let FIG_DROP  = 0.32;      // chance a light cell shows a letter (dark cells almost always do)
+const FIG_LIGHT = '#E8ECE7'; // letter colour over dark areas
+const FIG_DARK  = '#252A29'; // letter colour over light areas
+let FIG_SMEAR_MAX = 0.82;  // max motion-blur smear when moving fast (0 = off)
+let FIG_SMEAR_REF = 5;     // grid-cells/frame of movement that reaches max smear
+
+// ---- Styles (switch with the on-screen buttons) -----------------------
+// 'heat'      -> soft thermal glow; ramp runs edge->core, ramp[0] is the background.
+// 'scatterdrift' -> white pills that dissolve and drift away behind you, on the LH gradient.
+// 'dots'      -> outline dots that shrink toward the interior (fake volume).
+const STYLES = [
+  { name: 'LH Noir',    type: 'heat', glow: true,
+    ramp: ['#0A120E', '#176B4B', '#37B978', '#8FF0B8', '#E7FFD6'] },
+  { name: 'LH Scatter drift', type: 'scatterdrift', bg: '#E8ECE7' },   // Scatter physics, Drift styling
+  { name: 'LH Dots',    type: 'dots', bg: '#000000', color: '#7BF1D0' },
+  { name: 'LH Figure',  type: 'figure', bg: '#E8ECE7' },  // typographic portrait of the person
+];
+// ----------------------------------------------------------------------
+
+// ---- Installation config: URL params + per-screen saved calibration ----
+// installation.html?screen=1&style=noir&cam=2&dev=1&calib=1
+//   screen : 1 or 2 (each screen keeps its own saved settings)
+//   cycle  : seconds per view (default 15); 0 holds the single view set by style
+//   style  : noir, scatterdrift, dots, figure (or 1-4), used when cycle=0
+//   cam    : optional override, a number (order in cameras.html) or part of the camera's name
+//   dev    : 1 shows the original style buttons + sliders
+//   calib  : 1 opens the calibration panel on load
+//   banner : 0 hides the bottom banner
+const PARAMS = new URLSearchParams(location.search);
+const SCREEN_ID = Math.max(1, parseInt(PARAMS.get('screen') || '1', 10) || 1);
+const STORE_KEY = 'lh-installation:screen-' + SCREEN_ID;
+const DEFAULT_CALIB = {
+  deviceId: null, label: null, labelIndex: 0,      // which camera
+  cropL: 0, cropR: 0, cropT: 0, cropB: 0,          // active zone insets, as seen on screen (0-0.45)
+  minSize: 0.03,                                   // ignore figures smaller than this share of the frame
+  largestOnly: false,                              // only react to the biggest (usually closest) figure
+  bannerWidth: 1,                                  // bottom banner width as a share of the screen width (0.2-1)
+};
+let CALIB = loadCalib();
+function loadCalib() {
+  try { return Object.assign({}, DEFAULT_CALIB, JSON.parse(localStorage.getItem(STORE_KEY) || '{}')); }
+  catch (e) { return Object.assign({}, DEFAULT_CALIB); }
+}
+function saveCalib() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(CALIB)); } catch (e) {}
+}
+function styleSlug(x) { return x.toLowerCase().replace(/^lh\s+/, '').replace(/[^a-z]/g, ''); }
+function styleFromParam() {
+  const s = PARAMS.get('style');
+  if (!s) return 0;
+  const n = parseInt(s, 10);
+  if (String(n) === s.trim() && n >= 1 && n <= STYLES.length) return n - 1;
+  const i = STYLES.findIndex(st => styleSlug(st.name) === styleSlug(s));
+  return i < 0 ? 0 : i;
+}
+
+let camInfo = { list: [], chosen: null, how: '' };
+let segStarted = false, lastSegTime = 0, segCount = 0, segFps = 0;
+let rawGrid, rawUnfiltered, compLabel, keepMask, keepDil, bfsStack;
+let figStats = { kept: 0, ignored: 0 };
+let previewImg = null;
+
+let video, bodySegmentation;
+let segmentation = null;
+
+let cols, rows;
+let presence, heatField, tmpField;   // Float32 grids
+let maskGfx, heatImg, grainImg;
+let vidGfx, outImg;                 // LH Figure: video buffer + person-on-gray output
+let figPrev = null;                 // LH Figure: previous frame (for the motion/speed smear)
+let figCX = 0, figCY = 0, figSpeed = 0;   // silhouette centroid + smoothed speed
+let lut = { r: null, g: null, b: null };
+let bgCol;
+let styleIndex = styleFromParam();
+let gridBg = null;                 // LH Scatter drift: cached gradient background
+let cycleOn = true, shownIndex = -1, warmedUp = false, fadeGfx = null;
+let dotsGrid = null, dotsTrail = null;   // LH Dots: binary silhouette + fading trail memory
+
+function preload() {
+  bodySegmentation = ml5.bodySegmentation('SelfieSegmentation', { maskType: 'person' });
+}
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  pixelDensity(1);
+  noStroke();
+
+  startCamera();   // INSTALLATION: picks this screen's camera, then starts tracking
+
+  cols = Math.ceil(CAM_W / STEP);
+  rows = Math.ceil(CAM_H / STEP);
+  presence  = new Float32Array(cols * rows);
+  heatField = new Float32Array(cols * rows);
+  tmpField  = new Float32Array(cols * rows);
+  dotsGrid  = new Uint8Array(cols * rows);
+  dotsTrail = new Float32Array(cols * rows);
+  rawGrid       = new Float32Array(cols * rows);
+  rawUnfiltered = new Float32Array(cols * rows);
+  compLabel     = new Int32Array(cols * rows);
+  keepMask      = new Uint8Array(cols * rows);
+  keepDil       = new Uint8Array(cols * rows);
+  bfsStack      = new Int32Array(cols * rows);
+  previewImg    = createImage(cols, rows);
+
+  maskGfx = createGraphics(cols, rows);
+  maskGfx.pixelDensity(1);
+  heatImg = createImage(cols, rows);
+  vidGfx = createGraphics(CAM_W, CAM_H); vidGfx.pixelDensity(1);
+  outImg = createImage(CAM_W, CAM_H);
+  figPrev = new Float32Array(CAM_W * CAM_H * 3);
+  if (document.fonts && document.fonts.load) document.fonts.load('500 20px "Chakra Petch"');
+
+  buildGrain();
+  cacheGradient();
+  prepareStyles();     // INSTALLATION: colour tables + backgrounds for every view, built once
+  const cp = PARAMS.get('cycle');
+  if (cp !== null && cp !== '') CYCLE_SECONDS = Math.max(0, parseFloat(cp) || 0);
+  cycleOn = CYCLE_SECONDS > 0;
+  setStyle(cycleOn ? cycleIndexAt(Date.now()) : styleIndex, true);
+  buildUI();
+  buildControls();
+
+  // INSTALLATION
+  if (PARAMS.get('dev') === '1') document.body.classList.add('dev');
+  if (PARAMS.get('banner') === '0') document.body.classList.add('no-banner');
+  applyBanner();
+  buildCalibPanel();
+  toggleCalib(PARAMS.get('calib') === '1');
+  setInterval(watchdog, 1000);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  cacheGradient();
+  if (fadeGfx) { fadeGfx.remove(); fadeGfx = null; }
+}
+
+// ---- Switch style -----------------------------------------------------
+function setStyle(i, fromCycle) {
+  if (!fromCycle) cycleOn = false;   // picking a view by hand holds it
+  styleIndex = i;
+  useStyle(STYLES[i]);
+  // INSTALLATION: light banner on dark backgrounds, dark banner on light ones
+  document.body.classList.toggle('banner-light', STYLES[i].dark);
+  highlightUI();
+  buildControls();
+}
+
+// INSTALLATION: build each view's colour table + background once, so switching is instant
+function prepareStyles() {
+  STYLES.forEach(st => {
+    if (st.type === 'heat') { buildLUT(st); st.lut = lut; st.bgc = bgCol; lut = { r: null, g: null, b: null }; }
+    else st.bgc = color(st.bg);
+    st.dark = (red(st.bgc) * 299 + green(st.bgc) * 587 + blue(st.bgc) * 114) / 1000 < 128;
+  });
+}
+function useStyle(st) {
+  bgCol = st.bgc;
+  if (st.lut) lut = st.lut;
+}
+function cycleIndexAt(ms) {
+  return Math.floor(ms / (CYCLE_SECONDS * 1000)) % STYLES.length;
+}
+// clear trail memory a view built up the last time it was on screen
+function resetStyleState(st) {
+  if (st.type === 'dots') dotsTrail.fill(0);
+  if (st.type === 'figure') { figPrev.fill(232); figSpeed = 0; }
+}
+
+// ---- Colour ramp -> 256-entry lookup table ----------------------------
+function hexRGB(h) {
+  const n = parseInt(h.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+function buildLUT(style) {
+  const stops = style.ramp.map(hexRGB);
+  const seg = stops.length - 1;
+  lut.r = new Uint8Array(256); lut.g = new Uint8Array(256); lut.b = new Uint8Array(256);
+  for (let k = 0; k < 256; k++) {
+    const t = (k / 255) * seg;
+    const i = Math.min(seg - 1, Math.floor(t));
+    const f = t - i;
+    lut.r[k] = stops[i][0] + (stops[i + 1][0] - stops[i][0]) * f;
+    lut.g[k] = stops[i][1] + (stops[i + 1][1] - stops[i][1]) * f;
+    lut.b[k] = stops[i][2] + (stops[i + 1][2] - stops[i][2]) * f;
+  }
+  bgCol = color(...stops[0]);
+}
+
+// ---- Separable box blur on the grid (approximates a Gaussian) ---------
+function boxBlur(field) {
+  const R = FIELD_BLUR_RADIUS;
+  for (let p = 0; p < FIELD_BLUR_PASSES; p++) {
+    for (let y = 0; y < rows; y++) {
+      const base = y * cols;
+      for (let x = 0; x < cols; x++) {
+        let sum = 0, n = 0;
+        for (let dx = -R; dx <= R; dx++) {
+          const nx = x + dx;
+          if (nx >= 0 && nx < cols) { sum += field[base + nx]; n++; }
+        }
+        tmpField[base + x] = sum / n;
+      }
+    }
+    for (let x = 0; x < cols; x++) {
+      for (let y = 0; y < rows; y++) {
+        let sum = 0, n = 0;
+        for (let dy = -R; dy <= R; dy++) {
+          const ny = y + dy;
+          if (ny >= 0 && ny < rows) { sum += tmpField[ny * cols + x]; n++; }
+        }
+        field[y * cols + x] = sum / n;
+      }
+    }
+  }
+}
+
+// ---- Grain texture ----------------------------------------------------
+function buildGrain() {
+  const GN = 220;
+  grainImg = createImage(GN, GN);
+  grainImg.loadPixels();
+  for (let i = 0; i < GN * GN; i++) {
+    const v = 96 + Math.random() * 96;
+    grainImg.pixels[i * 4] = v;
+    grainImg.pixels[i * 4 + 1] = v;
+    grainImg.pixels[i * 4 + 2] = v;
+    grainImg.pixels[i * 4 + 3] = 255;
+  }
+  grainImg.updatePixels();
+}
+
+// Fine film grain, tiled at native size (soft) rather than stretched (harsh).
+function drawFineGrain(alpha) {
+  push();
+  blendMode(OVERLAY);
+  tint(255, alpha);
+  const gs = grainImg.width;
+  const ox = -Math.floor(Math.random() * gs);
+  const oy = -Math.floor(Math.random() * gs);
+  for (let y = oy; y < height; y += gs)
+    for (let x = ox; x < width; x += gs) image(grainImg, x, y);
+  pop();
+}
+
+// stable per-cell pseudo-random, 0..1
+function hash(a, b) {
+  const n = Math.sin(a * 127.1 + b * 311.7) * 43758.5453;
+  return n - Math.floor(n);
+}
+
+// ---- Shared: pull the person mask into the eased presence grid ---------
+function updatePresence() {
+  if (!segmentation || !segmentation.mask) return;
+  maskGfx.clear();
+  maskGfx.image(segmentation.mask, 0, 0, cols, rows);
+  maskGfx.loadPixels();
+  for (let i = 0; i < cols * rows; i++) {
+    const a = maskGfx.pixels[i * 4 + 3] / 255;
+    rawGrid[i] = PERSON_IS_TRANSPARENT ? 1 - a : a;
+  }
+  filterRaw();   // INSTALLATION: active zone + ignore small / extra figures
+  for (let i = 0; i < cols * rows; i++) {
+    presence[i] += (rawGrid[i] - presence[i]) * EASE;
+  }
+}
+
+function coverTransform() {
+  const scl = Math.max(width / CAM_W, height / CAM_H);
+  return { scl, dw: CAM_W * scl, dh: CAM_H * scl,
+           offX: (width - CAM_W * scl) / 2, offY: (height - CAM_H * scl) / 2 };
+}
+
+// bilinear sample of a grid field, clamped to bounds
+function fieldAt(field, gxf, gyf) {
+  let x0 = Math.floor(gxf), y0 = Math.floor(gyf);
+  const fx = gxf - x0, fy = gyf - y0;
+  x0 = Math.max(0, Math.min(cols - 1, x0));
+  y0 = Math.max(0, Math.min(rows - 1, y0));
+  const x1 = Math.min(cols - 1, x0 + 1), y1 = Math.min(rows - 1, y0 + 1);
+  const a = field[y0 * cols + x0], b = field[y0 * cols + x1];
+  const c = field[y1 * cols + x0], d = field[y1 * cols + x1];
+  return (a + (b - a) * fx) + ((c + (d - c) * fx) - (a + (b - a) * fx)) * fy;
+}
+
+// ---- Renderer: LH Noir (heat / thermal scan) --------------------------
+function drawHeat(st) {
+  const gamma = st.gamma != null ? st.gamma : HEAT_GAMMA;
+  heatField.set(presence);
+  boxBlur(heatField);
+
+  heatImg.loadPixels();
+  for (let i = 0; i < cols * rows; i++) {
+    let v = heatField[i];
+    v = Math.pow(v < 0 ? 0 : v > 1 ? 1 : v, gamma) * HEAT_GAIN;
+    if (v > 1) v = 1;
+    const k = (v * 255) | 0;
+    heatImg.pixels[i * 4]     = lut.r[k];
+    heatImg.pixels[i * 4 + 1] = lut.g[k];
+    heatImg.pixels[i * 4 + 2] = lut.b[k];
+    heatImg.pixels[i * 4 + 3] = 255;
+  }
+  heatImg.updatePixels();
+
+  const { dw, dh, offX, offY } = coverTransform();
+  const drawScan = (blurPx, alpha, additive) => {
+    push();
+    if (additive) drawingContext.globalCompositeOperation = 'lighter';
+    drawingContext.filter = `blur(${blurPx}px)`;
+    drawingContext.imageSmoothingEnabled = true;
+    if (alpha < 255) tint(255, alpha);
+    if (MIRROR) { translate(width, 0); scale(-1, 1); }
+    image(heatImg, offX, offY, dw, dh);
+    drawingContext.filter = 'none';
+    noTint();
+    pop();
+  };
+  drawScan(CANVAS_BLUR, 255, false);
+  if (st.glow) drawScan(CANVAS_BLUR * 2.4, 150, true);
+
+  if (GRAIN) drawFineGrain(st.grainAlpha != null ? st.grainAlpha : GRAIN_ALPHA);
+}
+
+// ---- Gradient background for LH Scatter drift (built once per screen size) --
+function cacheGradient() {
+  if (gridBg) gridBg.remove();
+  gridBg = createGraphics(width, height);
+  const ctx = gridBg.drawingContext;
+  const g = ctx.createRadialGradient(width / 2, height, 0,
+                                     width / 2, height, Math.hypot(width / 2, height));
+  g.addColorStop(0.00, '#DEFFB8');   // light green, pooled at the bottom
+  g.addColorStop(0.35, '#7BF1D0');   // green
+  g.addColorStop(0.75, '#E8ECE7');   // grey
+  g.addColorStop(1.00, '#E8ECE7');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, width, height);
+}
+
+// ---- Renderer: LH Scatter drift (Scatter physics, Drift styling) --------
+function drawScatterDrift(st) {
+  if (gridBg) image(gridBg, 0, 0); else background(bgCol);   // green-to-grey gradient
+
+  const { scl, offX, offY } = coverTransform();
+  const cw = STEP * scl;
+  const t = frameCount * 0.01;
+
+  rectMode(CENTER);
+  strokeWeight(SD_STROKE_W);
+  for (let gy = 0; gy < rows; gy++) {
+    for (let gx = 0; gx < cols; gx++) {
+      const i = gy * cols + gx;
+      const pr = presence[i];
+      if (pr < 0.05) continue;
+
+      const h = hash(gx, gy);
+      if (h >= pr * SD_DENSITY) continue;   // density tracks presence -> edges dissolve, trails thin out
+
+      let px = offX + (gx * STEP + STEP / 2) * scl;
+      const py = offY + (gy * STEP + STEP / 2) * scl;
+      if (MIRROR) px = width - px;
+
+      // fading (trailing) shapes drift outward on a flow field
+      const fade = 1 - pr;
+      const ang = noise(gx * 0.15, gy * 0.15, t) * TWO_PI;
+      const drift = fade * SD_SCATTER * cw;
+      const jx = (hash(gx + 13, gy + 5) - 0.5) * SD_JITTER * cw + Math.cos(ang) * drift;
+      const jy = (hash(gy, gx) - 0.5) * SD_JITTER * cw + Math.sin(ang) * drift - drift * 0.35;
+
+      // Drift styling: white outline + semi-transparent white fill, fading with the trail
+      const a = Math.min(255, pr * 255 * 1.4);
+      stroke(255, a);
+      fill(255, 255, 255, a * SD_FILL_A);
+
+      const d = cw * SD_SIZE * (1 - SD_SIZE_VAR / 2 + hash(gx + 7, gy + 3) * SD_SIZE_VAR);
+      if (hash(gx + 1, gy + 9) < SD_PILL) rect(px + jx, py + jy, d * 1.8, d, d / 2);   // pill
+      else circle(px + jx, py + jy, d);
+    }
+  }
+  rectMode(CORNER);
+  noStroke();
+}
+
+// ---- Renderer: LH Dots (outline + fake-3D volume) ---------------------
+function edgeDistance(gx, gy, grid, maxD) {
+  for (let r = 1; r <= maxD; r++) {
+    for (let k = 0; k < 8; k++) {
+      const nx = gx + EDGE_DIRS[k][0] * r;
+      const ny = gy + EDGE_DIRS[k][1] * r;
+      if (nx < 0 || ny < 0 || nx >= cols || ny >= rows || grid[ny * cols + nx] === 0) return r;
+    }
+  }
+  return maxD;
+}
+
+function drawDots(st) {
+  const c = color(st.color);
+  const dr = red(c), dg = green(c), db = blue(c);
+
+  // trail memory: snaps to the person, decays slowly behind them
+  for (let i = 0; i < cols * rows; i++) {
+    const v = dotsTrail[i] * DOTS_TRAIL_DECAY;
+    dotsTrail[i] = presence[i] > v ? presence[i] : v;
+    dotsGrid[i] = dotsTrail[i] > 0.5 ? 1 : 0;      // shape includes the fading wake
+  }
+
+  const { scl, offX, offY } = coverTransform();
+  noStroke();
+  for (let gy = 0; gy < rows; gy++) {
+    for (let gx = 0; gx < cols; gx++) {
+      const i = gy * cols + gx;
+      if (dotsGrid[i] === 0) continue;
+      const d = edgeDistance(gx, gy, dotsGrid, DOTS_MAX_DEPTH);
+      const sz = map(d, 1, DOTS_MAX_DEPTH, DOTS_EDGE, DOTS_CENTER, true) * scl;
+      let px = offX + (gx * STEP + STEP / 2) * scl;
+      const py = offY + (gy * STEP + STEP / 2) * scl;
+      if (MIRROR) px = width - px;
+      let a = DOTS_FADE_CENTER ? map(d, 1, DOTS_MAX_DEPTH, 255, 150, true) : 255;
+      a *= constrain(map(dotsTrail[i], 0.5, 0.9, 0.2, 1), 0, 1);   // fade out with the trail
+      fill(dr, dg, db, a);
+      circle(px, py, sz);
+    }
+  }
+}
+
+// ---- Renderer: LH Figure (typographic portrait of the person) ----------
+// luminance of the person-on-gray base at a screen point (inverse cover + mirror)
+function figLum(op, cx, cy, scl, offX, offY) {
+  let camX = (cx - offX) / scl, camY = (cy - offY) / scl;
+  if (MIRROR) camX = CAM_W - camX;
+  let ix = camX | 0, iy = camY | 0;
+  if (ix < 0) ix = 0; else if (ix > CAM_W - 1) ix = CAM_W - 1;
+  if (iy < 0) iy = 0; else if (iy > CAM_H - 1) iy = CAM_H - 1;
+  const j = (iy * CAM_W + ix) * 4;
+  return 0.299 * op[j] + 0.587 * op[j + 1] + 0.114 * op[j + 2];
+}
+
+function drawFigure(st) {
+  background(bgCol);   // gray field
+
+  // estimate movement speed from the silhouette centroid -> motion-blur amount
+  let sx = 0, sy = 0, sw = 0;
+  for (let gy = 0; gy < rows; gy++) {
+    const base = gy * cols;
+    for (let gx = 0; gx < cols; gx++) {
+      const p = presence[base + gx];
+      if (p > 0.5) { sx += gx * p; sy += gy * p; sw += p; }
+    }
+  }
+  if (sw > 0) {
+    const ncx = sx / sw, ncy = sy / sw;
+    figSpeed = figSpeed * 0.7 + Math.hypot(ncx - figCX, ncy - figCY) * 0.3;
+    figCX = ncx; figCY = ncy;
+  } else {
+    figSpeed *= 0.8;
+  }
+  let smear = figSpeed / FIG_SMEAR_REF; if (smear > 1) smear = 1; smear *= FIG_SMEAR_MAX;
+
+  // base: person composited over gray (studio look), with a speed smear over previous frames
+  vidGfx.image(video, 0, 0, CAM_W, CAM_H);
+  vidGfx.loadPixels();
+  if (vidGfx.pixels.length) {
+    outImg.loadPixels();
+    const vp = vidGfx.pixels, op = outImg.pixels, fp = figPrev, keep = smear, mix = 1 - smear;
+    for (let y = 0; y < CAM_H; y++) {
+      const gyf = y / STEP, fy = gyf - (gyf | 0);
+      let gy0 = gyf | 0; if (gy0 > rows - 1) gy0 = rows - 1;
+      let gy1 = gy0 + 1; if (gy1 > rows - 1) gy1 = rows - 1;
+      const r0 = gy0 * cols, r1 = gy1 * cols;
+      for (let x = 0; x < CAM_W; x++) {
+        const gxf = x / STEP, fx = gxf - (gxf | 0);
+        let gx0 = gxf | 0; if (gx0 > cols - 1) gx0 = cols - 1;
+        let gx1 = gx0 + 1; if (gx1 > cols - 1) gx1 = cols - 1;
+        const pt = presence[r0 + gx0] + (presence[r0 + gx1] - presence[r0 + gx0]) * fx;
+        const pb = presence[r1 + gx0] + (presence[r1 + gx1] - presence[r1 + gx0]) * fx;
+        let cov = pt + (pb - pt) * fy; if (cov > 1) cov = 1; else if (cov < 0) cov = 0;
+        const j = (y * CAM_W + x) * 4, k = (y * CAM_W + x) * 3, inv = 1 - cov;
+        let r = vp[j]     * cov + 232 * inv;   // person video where present, gray elsewhere
+        let g = vp[j + 1] * cov + 236 * inv;
+        let b = vp[j + 2] * cov + 231 * inv;
+        r = fp[k] * keep + r * mix;            // smear against the previous frame (motion blur)
+        g = fp[k + 1] * keep + g * mix;
+        b = fp[k + 2] * keep + b * mix;
+        fp[k] = r; fp[k + 1] = g; fp[k + 2] = b;
+        op[j] = r; op[j + 1] = g; op[j + 2] = b; op[j + 3] = 255;
+      }
+    }
+    outImg.updatePixels();
+  }
+
+  const { scl, dw, dh, offX, offY } = coverTransform();
+
+  // soft blurred base photo
+  push();
+  drawingContext.filter = `blur(${FIG_BLUR}px)`;
+  drawingContext.imageSmoothingEnabled = true;
+  if (MIRROR) { translate(width, 0); scale(-1, 1); }
+  image(outImg, offX, offY, dw, dh);
+  drawingContext.filter = 'none';
+  pop();
+
+  // typographic overlay: one letter per cell, density + tone follow the image
+  const op = outImg.pixels;
+  const ctx = drawingContext;
+  ctx.save();
+  ctx.font = `500 ${FIG_CELL}px "Chakra Petch", monospace`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  const PH = 'LONGHORIZON';
+  const ctCols = Math.ceil(width / FIG_CELL);
+  const ctRows = Math.ceil(height / FIG_CELL);
+  for (let cj = 0; cj < ctRows; cj++) {
+    const cy = cj * FIG_CELL + FIG_CELL / 2;
+    for (let ci = 0; ci < ctCols; ci++) {
+      const cx = ci * FIG_CELL + FIG_CELL / 2;
+      const L = figLum(op, cx, cy, scl, offX, offY);
+      const darkness = 1 - L / 255;
+      if (hash(ci, cj) > FIG_DROP + darkness * (1 - FIG_DROP)) continue;   // sparse in light areas
+      ctx.fillStyle = L < 110 ? FIG_LIGHT : FIG_DARK;                     // stay visible on dark or light
+      ctx.globalAlpha = 0.5 + darkness * 0.5;
+      ctx.fillText(PH[(ci + cj * 3) % PH.length], cx, cy);                 // flowing letters
+    }
+  }
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
+
+function renderStyle(st) {
+  useStyle(st);
+  resetMatrix();
+  drawingContext.filter = 'none';
+  drawingContext.globalAlpha = 1;
+  drawingContext.globalCompositeOperation = 'source-over';
+  background(bgCol);
+  if (st.type === 'heat') drawHeat(st);
+  else if (st.type === 'scatterdrift') drawScatterDrift(st);
+  else if (st.type === 'dots') drawDots(st);
+  else drawFigure(st);
+}
+
+function draw() {
+  background(bgCol);
+  if (!segStarted) return;   // INSTALLATION: wait for the camera
+  updatePresence();
+
+  // Pre-load: draw every view once off-screen, so the first switch to each has no hitch
+  if (!warmedUp) {
+    STYLES.forEach(st => renderStyle(st));
+    STYLES.forEach(st => resetStyleState(st));
+    warmedUp = true;
+  }
+
+  let fadeFrom = -1, fadeT = 1;
+  if (cycleOn) {
+    const now = Date.now(), slotMs = CYCLE_SECONDS * 1000;
+    const idx = cycleIndexAt(now);
+    if (idx !== styleIndex) {
+      resetStyleState(STYLES[idx]);
+      setStyle(idx, true);
+    }
+    const intoSlot = now % slotMs;
+    const fadeMs = Math.min(FADE_SECONDS * 1000, slotMs / 2);
+    if (intoSlot < fadeMs && shownIndex !== -1) {
+      fadeFrom = (idx - 1 + STYLES.length) % STYLES.length;
+      const x = intoSlot / fadeMs;
+      fadeT = x * x * (3 - 2 * x);   // ease in-out
+    }
+  }
+
+  if (fadeFrom >= 0 && fadeFrom !== styleIndex) {
+    // crossfade: outgoing view (still live) -> buffer, then incoming view, then buffer on top fading out
+    if (!fadeGfx) { fadeGfx = createGraphics(width, height); fadeGfx.pixelDensity(1); }
+    renderStyle(STYLES[fadeFrom]);
+    fadeGfx.drawingContext.globalAlpha = 1;
+    fadeGfx.drawingContext.drawImage(drawingContext.canvas, 0, 0, width, height);
+    renderStyle(STYLES[styleIndex]);
+    resetMatrix();
+    drawingContext.globalAlpha = 1 - fadeT;
+    drawingContext.drawImage(fadeGfx.elt, 0, 0, width, height);
+    drawingContext.globalAlpha = 1;
+  } else {
+    renderStyle(STYLES[styleIndex]);
+  }
+  shownIndex = styleIndex;
+
+  if (calibOn) drawCalibOverlay();
+}
+
+// =======================================================================
+// INSTALLATION: camera selection, active zone, figure filter, calibration
+// =======================================================================
+
+function setStatus(msg) { document.getElementById('status').textContent = msg || ''; }
+
+// WEB: show a message the visitor can click to reload, instead of reloading on a timer
+let retrying = false;
+function setRetry(msg) {
+  retrying = true;
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.classList.add('retry');
+  el.onclick = () => location.reload();
+}
+
+// Choose this screen's camera: URL override > saved device > saved name > screen order
+function chooseCamera(list) {
+  if (!list.length) return { device: null, how: 'none' };
+  const p = (PARAMS.get('cam') || '').trim();
+  if (p) {
+    const n = parseInt(p, 10);
+    if (String(n) === p) {
+      if (list[n - 1]) return { device: list[n - 1], how: 'set in launch script (camera ' + n + ')' };
+    } else {
+      const m = list.find(d => d.label.toLowerCase().includes(p.toLowerCase()));
+      if (m) return { device: m, how: 'set in launch script ("' + p + '")' };
+    }
+  }
+  if (CALIB.deviceId) {
+    const d = list.find(d => d.deviceId === CALIB.deviceId);
+    if (d) return { device: d, how: 'saved in calibration' };
+  }
+  if (CALIB.label) {
+    const same = list.filter(d => d.label === CALIB.label);
+    const d = same[CALIB.labelIndex] || same[0];
+    if (d) return { device: d, how: 'saved in calibration (matched by name)', warn: true };
+  }
+  return { device: list[(SCREEN_ID - 1) % list.length], how: 'not chosen yet, using camera ' +
+           (((SCREEN_ID - 1) % list.length) + 1) + ' by default', warn: true };
+}
+
+async function startCamera() {
+  setStatus('Starting camera…');
+  try {
+    // ask once so camera names become visible, then release it
+    const probe = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+    probe.getTracks().forEach(t => t.stop());
+  } catch (e) {
+    setRetry(e.name === 'NotAllowedError'
+      ? 'This piece needs your camera, and nothing leaves your device. Allow camera access, then click here to try again.'
+      : 'No camera found (' + e.name + '). Click here to try again.');
+    return;
+  }
+  const all = await navigator.mediaDevices.enumerateDevices();
+  camInfo.list = all.filter(d => d.kind === 'videoinput');
+  const pick = chooseCamera(camInfo.list);
+  camInfo.chosen = pick.device; camInfo.how = pick.how; camInfo.warn = !!pick.warn;
+  buildCalibPanel();
+  if (!pick.device) {
+    setRetry('No camera found. Click here to try again.');
+    return;
+  }
+
+  const constraints = {
+    audio: false,
+    video: { deviceId: { exact: pick.device.deviceId },
+             width: { ideal: CAM_W }, height: { ideal: CAM_H }, aspectRatio: { ideal: CAM_W / CAM_H } },
+  };
+  video = createCapture(constraints, () => {
+    video.size(CAM_W, CAM_H);
+    bodySegmentation.detectStart(video, r => {
+      segmentation = r; segCount++; lastSegTime = millis();
+      if (!segStarted) { segStarted = true; setStatus(''); }
+    });
+    const stream = video.elt.srcObject;
+    const track = stream && stream.getVideoTracks()[0];
+    if (track) track.addEventListener('ended', () => {
+      setStatus('Camera disconnected. Restarting in 3 seconds.');
+      setTimeout(() => location.reload(), 3000);
+    });
+  });
+  video.hide();
+  setStatus('Loading person tracking…');
+}
+
+// Runs every second: tracking rate + automatic recovery
+function watchdog() {
+  segFps = segCount; segCount = 0;
+  const t = millis();
+  if (segStarted && t - lastSegTime > 15000) {
+    setStatus('Tracking stopped. Restarting…');
+    location.reload();
+  } else if (!segStarted && video && t > 45000 && !retrying) {
+    setRetry('Tracking did not start. Click here to try again.');
+  }
+  if (calibOn) updateCalibInfo();
+}
+
+// ---- Filter the raw person mask before it drives the visuals ----------
+function filterRaw() {
+  const n = cols * rows;
+  rawUnfiltered.set(rawGrid);
+
+  // 1. Active zone. Insets are as seen on screen, so flip left/right when mirrored.
+  const insL = MIRROR ? CALIB.cropR : CALIB.cropL;
+  const insR = MIRROR ? CALIB.cropL : CALIB.cropR;
+  const x0 = Math.floor(cols * insL), x1 = Math.ceil(cols * (1 - insR));
+  const y0 = Math.floor(rows * CALIB.cropT), y1 = Math.ceil(rows * (1 - CALIB.cropB));
+  for (let y = 0; y < rows; y++) {
+    const inY = y >= y0 && y < y1;
+    for (let x = 0; x < cols; x++) {
+      if (!inY || x < x0 || x >= x1) rawGrid[y * cols + x] = 0;
+    }
+  }
+
+  // 2. Split into separate figures (connected regions) and measure each
+  compLabel.fill(0);
+  const areas = [0];
+  let nComp = 0;
+  for (let i = 0; i < n; i++) {
+    if (rawGrid[i] <= 0.5 || compLabel[i] !== 0) continue;
+    nComp++;
+    let sp = 0, area = 0;
+    bfsStack[sp++] = i; compLabel[i] = nComp;
+    while (sp > 0) {
+      const j = bfsStack[--sp]; area++;
+      const jx = j % cols;
+      if (jx > 0        && compLabel[j - 1] === 0    && rawGrid[j - 1] > 0.5)    { compLabel[j - 1] = nComp;    bfsStack[sp++] = j - 1; }
+      if (jx < cols - 1 && compLabel[j + 1] === 0    && rawGrid[j + 1] > 0.5)    { compLabel[j + 1] = nComp;    bfsStack[sp++] = j + 1; }
+      if (j >= cols     && compLabel[j - cols] === 0 && rawGrid[j - cols] > 0.5) { compLabel[j - cols] = nComp; bfsStack[sp++] = j - cols; }
+      if (j < n - cols  && compLabel[j + cols] === 0 && rawGrid[j + cols] > 0.5) { compLabel[j + cols] = nComp; bfsStack[sp++] = j + cols; }
+    }
+    areas.push(area);
+  }
+
+  // 3. Decide which figures to keep
+  const minCells = CALIB.minSize * n, noise = 0.004 * n;
+  let best = 0;
+  for (let c = 1; c <= nComp; c++) if (areas[c] > (areas[best] || 0)) best = c;
+  const keep = new Uint8Array(nComp + 1);
+  figStats.kept = 0; figStats.ignored = 0;
+  for (let c = 1; c <= nComp; c++) {
+    keep[c] = areas[c] >= minCells && (!CALIB.largestOnly || c === best) ? 1 : 0;
+    if (keep[c]) figStats.kept++; else if (areas[c] >= noise) figStats.ignored++;
+  }
+
+  // 4. Keep mask, grown by 2 cells so the soft edge of a kept figure survives
+  for (let i = 0; i < n; i++) keepMask[i] = keep[compLabel[i]] && compLabel[i] ? 1 : 0;
+  const R = 2;
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      let v = 0;
+      for (let dx = -R; dx <= R && !v; dx++) {
+        const nx = x + dx;
+        if (nx >= 0 && nx < cols && keepMask[y * cols + nx]) v = 1;
+      }
+      keepDil[y * cols + x] = v;
+    }
+  }
+  keepMask.set(keepDil);
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      let v = 0;
+      for (let dy = -R; dy <= R && !v; dy++) {
+        const ny = y + dy;
+        if (ny >= 0 && ny < rows && keepMask[ny * cols + x]) v = 1;
+      }
+      keepDil[y * cols + x] = v;
+    }
+  }
+  for (let i = 0; i < n; i++) if (!keepDil[i]) rawGrid[i] = 0;
+}
+
+// ---- Calibration overlay on the canvas --------------------------------
+let calibOn = false;
+function toggleCalib(force) {
+  calibOn = typeof force === 'boolean' ? force : !calibOn;
+  document.body.classList.toggle('calib', calibOn);
+  if (calibOn) updateCalibInfo();   // WEB: the cursor stays visible
+}
+
+function drawCalibOverlay() {
+  const { dw, dh, offX, offY } = coverTransform();
+  // active zone on the full screen (the camera frame is centred, so on-screen fractions map directly)
+  const zx0 = offX + CALIB.cropL * dw, zx1 = offX + (1 - CALIB.cropR) * dw;
+  const zy0 = offY + CALIB.cropT * dh, zy1 = offY + (1 - CALIB.cropB) * dh;
+  push();
+  noStroke(); fill(10, 18, 14, 120);
+  rect(0, 0, width, Math.max(0, zy0));
+  rect(0, zy1, width, height - zy1);
+  rect(0, zy0, Math.max(0, zx0), zy1 - zy0);
+  rect(zx1, zy0, width - zx1, zy1 - zy0);
+  noFill(); stroke(55, 185, 120); strokeWeight(3);
+  drawingContext.setLineDash([12, 8]);
+  rect(zx0, zy0, zx1 - zx0, zy1 - zy0);
+  drawingContext.setLineDash([]);
+  pop();
+
+  // camera preview: red = detected but ignored, green = what drives the visuals
+  const bannerEl = document.getElementById('banner');
+  const bannerH = bannerEl && !document.body.classList.contains('no-banner') ? bannerEl.offsetHeight : 0;
+  const pw = 320, ph = 240, px = width - pw - 16, py = Math.max(16, height - bannerH - ph - 16);
+  previewImg.loadPixels();
+  for (let i = 0; i < cols * rows; i++) {
+    const kept = rawGrid[i], orig = rawUnfiltered[i];
+    const j = i * 4;
+    if (kept > 0.3) { previewImg.pixels[j] = 55; previewImg.pixels[j + 1] = 185; previewImg.pixels[j + 2] = 120; previewImg.pixels[j + 3] = 150; }
+    else if (orig > 0.5) { previewImg.pixels[j] = 255; previewImg.pixels[j + 1] = 89; previewImg.pixels[j + 2] = 0; previewImg.pixels[j + 3] = 150; }
+    else previewImg.pixels[j + 3] = 0;
+  }
+  previewImg.updatePixels();
+  push();
+  translate(px, py);
+  if (MIRROR) { translate(pw, 0); scale(-1, 1); }
+  image(video, 0, 0, pw, ph);
+  drawingContext.imageSmoothingEnabled = false;
+  image(previewImg, 0, 0, pw, ph);
+  pop();
+  push();
+  noFill(); stroke(255); strokeWeight(1);
+  rect(px, py, pw, ph);
+  stroke(55, 185, 120); strokeWeight(2);
+  rect(px + CALIB.cropL * pw, py + CALIB.cropT * ph,
+       (1 - CALIB.cropL - CALIB.cropR) * pw, (1 - CALIB.cropT - CALIB.cropB) * ph);
+  noStroke(); fill(255); textSize(12); textAlign(LEFT, BOTTOM);
+  text('Camera view: green is tracked, orange is ignored', px, py - 6);
+  pop();
+}
+
+// ---- Bottom banner width -------------------------------------------------
+function applyBanner() {
+  const w = Math.min(1, Math.max(0.2, CALIB.bannerWidth || 1));
+  document.documentElement.style.setProperty('--banner-w', (w * 100) + 'vw');
+}
+
+// ---- Calibration panel (DOM) ------------------------------------------
+function buildCalibPanel() {
+  const el = document.getElementById('calib');
+  if (!el) return;
+  const camOpts = camInfo.list.map((d, i) => {
+    const sel = camInfo.chosen && d.deviceId === camInfo.chosen.deviceId ? ' selected' : '';
+    return `<option value="${i}"${sel}>${i + 1}. ${escapeHTML(d.label || 'Camera ' + (i + 1))}</option>`;
+  }).join('');
+  const styleOpts = `<option value="__cycle"${cycleOn ? ' selected' : ''}>Cycle all, ${CYCLE_SECONDS || 15} s each</option>` +
+    STYLES.map((st, i) =>
+      `<option value="${styleSlug(st.name)}"${!cycleOn && i === styleIndex ? ' selected' : ''}>Hold: ${st.name}</option>`).join('');
+  const slider = (key, label, max, min = 0) => `
+    <div class="row"><label for="c-${key}">${label}</label>
+      <input id="c-${key}" type="range" min="${min}" max="${max}" step="0.01" value="${CALIB[key]}">
+      <span class="v" id="v-${key}">${Math.round(CALIB[key] * 100)}%</span></div>`;
+  el.innerHTML = `
+    <h2>Screen ${SCREEN_ID}</h2>
+    <div class="sub">Settings save automatically for this screen.</div>
+    <div class="sect">Camera</div>
+    <select id="c-cam" aria-label="Camera">${camOpts || '<option>No cameras found</option>'}</select>
+    <div class="sect">View</div>
+    <select id="c-style" aria-label="Style">${styleOpts}</select>
+    <div class="sect">Active zone</div>
+    ${slider('cropL', 'Trim left', 0.45)}
+    ${slider('cropR', 'Trim right', 0.45)}
+    ${slider('cropT', 'Trim top', 0.45)}
+    ${slider('cropB', 'Trim bottom', 0.45)}
+    <div class="sect">Who counts</div>
+    ${slider('minSize', 'Ignore figures under', 0.25)}
+    <div class="row"><label for="c-largest">Only the biggest figure</label>
+      <input id="c-largest" type="checkbox"${CALIB.largestOnly ? ' checked' : ''}></div>
+    <div class="sect">Banner</div>
+    ${slider('bannerWidth', 'Width', 1, 0.2)}
+    <div class="info" id="c-info"></div>
+    <div class="btns">
+      <button id="c-reset">Reset zone</button>
+      <button id="c-close" class="primary">Done</button>
+    </div>
+    <div class="keys">Keys: C calibration, D style sliders, F full screen, R restart</div>`;
+
+  el.querySelector('#c-cam').onchange = e => {
+    const d = camInfo.list[parseInt(e.target.value, 10)];
+    if (!d) return;
+    const same = camInfo.list.filter(x => x.label === d.label);
+    CALIB.deviceId = d.deviceId; CALIB.label = d.label; CALIB.labelIndex = same.indexOf(d);
+    saveCalib();
+    reloadWith({ calib: '1', cam: null });   // the saved choice now wins over a launch-script default
+  };
+  el.querySelector('#c-style').onchange = e => {
+    const v = e.target.value;
+    if (v === '__cycle') reloadWith({ cycle: String(CYCLE_SECONDS || 15), style: null, calib: '1' });
+    else reloadWith({ cycle: '0', style: v, calib: '1' });
+  };
+  ['cropL', 'cropR', 'cropT', 'cropB', 'minSize', 'bannerWidth'].forEach(k => {
+    const inp = el.querySelector('#c-' + k);
+    inp.oninput = () => {
+      CALIB[k] = parseFloat(inp.value);
+      el.querySelector('#v-' + k).textContent = Math.round(CALIB[k] * 100) + '%';
+      saveCalib();
+      if (k === 'bannerWidth') applyBanner();
+    };
+  });
+  el.querySelector('#c-largest').onchange = e => { CALIB.largestOnly = e.target.checked; saveCalib(); };
+  el.querySelector('#c-reset').onclick = () => {
+    Object.assign(CALIB, { cropL: 0, cropR: 0, cropT: 0, cropB: 0, minSize: DEFAULT_CALIB.minSize, largestOnly: false });
+    saveCalib(); buildCalibPanel(); updateCalibInfo();
+  };
+  el.querySelector('#c-close').onclick = () => toggleCalib(false);
+}
+
+function updateCalibInfo() {
+  const box = document.getElementById('c-info');
+  if (!box) return;
+  const v = video && video.elt;
+  const res = v && v.videoWidth ? v.videoWidth + '×' + v.videoHeight : 'waiting';
+  const camLine = camInfo.chosen ? (camInfo.chosen.label || 'Unnamed camera') : 'none';
+  const ratioWarn = v && v.videoWidth && Math.abs(v.videoWidth / v.videoHeight - 4 / 3) > 0.02;
+  box.innerHTML =
+    escapeHTML(camLine) + '\n' +
+    '<span class="' + (camInfo.warn ? 'warn' : '') + '">Camera ' + escapeHTML(camInfo.how) + '</span>\n' +
+    'Feed ' + res + (ratioWarn ? ' <span class="warn">(not 4:3, image will stretch)</span>' : '') + '\n' +
+    'Drawing ' + Math.round(frameRate()) + ' fps, tracking ' + segFps + ' fps\n' +
+    'Figures tracked ' + figStats.kept + ', ignored ' + figStats.ignored;
+}
+
+function reloadWith(changes) {
+  const u = new URL(location.href);
+  Object.entries(changes).forEach(([k, v]) => v == null ? u.searchParams.delete(k) : u.searchParams.set(k, v));
+  location.href = u.toString();
+}
+
+function escapeHTML(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function keyPressed() {
+  if (document.activeElement && document.activeElement.tagName === 'SELECT') return;
+  const k = (key || '').toLowerCase();
+  if (k === 'c') toggleCalib();
+  else if (k === 'd') document.body.classList.toggle('dev');
+  else if (k === 'f') fullscreen(!fullscreen());
+  else if (k === 'r') location.reload();
+}
+
+// ---- DEV UI: on-screen style toggle (remove this block for production) --
+function buildUI() {
+  const ui = document.getElementById('devui');
+  if (!ui) return;
+  STYLES.forEach((st, i) => {
+    const b = document.createElement('button');
+    b.textContent = st.name;
+    b.className = 'devbtn';
+    b.onclick = () => setStyle(i);
+    ui.appendChild(b);
+  });
+  highlightUI();
+}
+function highlightUI() {
+  document.querySelectorAll('#devui .devbtn')
+    .forEach((b, i) => b.classList.toggle('active', i === styleIndex));
+}
+
+// ---- DEV UI: live knob controls (remove this block for production) ------
+function ctrl(label, min, max, step, get, set, opts) {
+  return Object.assign({ label, min, max, step, get, set }, opts || {});
+}
+function fmtVal(v) {
+  if (typeof v === 'boolean') return v ? 'on' : 'off';
+  return Number.isInteger(v) ? String(v) : v.toFixed(2);
+}
+function controlGroups() {
+  return [
+    { name: 'Global', when: 'all', items: [
+      ctrl('Ease (trail)', 0.02, 0.6, 0.01, () => EASE, v => EASE = v),
+      ctrl('Mirror', 0, 0, 0, () => MIRROR, v => MIRROR = v, { bool: true }),
+      ctrl('Person=transp.', 0, 0, 0, () => PERSON_IS_TRANSPARENT, v => PERSON_IS_TRANSPARENT = v, { bool: true }),
+    ]},
+    { name: 'LH Noir', when: 'heat', items: [
+      ctrl('Field blur R', 1, 8, 1, () => FIELD_BLUR_RADIUS, v => FIELD_BLUR_RADIUS = v, { int: true }),
+      ctrl('Field passes', 1, 6, 1, () => FIELD_BLUR_PASSES, v => FIELD_BLUR_PASSES = v, { int: true }),
+      ctrl('Heat gamma', 0.4, 2.5, 0.05, () => HEAT_GAMMA, v => HEAT_GAMMA = v),
+      ctrl('Heat gain', 0.5, 2, 0.05, () => HEAT_GAIN, v => HEAT_GAIN = v),
+      ctrl('Canvas blur', 0, 40, 1, () => CANVAS_BLUR, v => CANVAS_BLUR = v, { int: true }),
+      ctrl('Grain', 0, 0, 0, () => GRAIN, v => GRAIN = v, { bool: true }),
+      ctrl('Grain alpha', 0, 255, 1, () => GRAIN_ALPHA, v => GRAIN_ALPHA = v, { int: true }),
+    ]},
+    { name: 'LH Scatter drift', when: 'scatterdrift', items: [
+      ctrl('Density', 0.1, 1.5, 0.05, () => SD_DENSITY, v => SD_DENSITY = v),
+      ctrl('Jitter', 0, 2, 0.05, () => SD_JITTER, v => SD_JITTER = v),
+      ctrl('Scatter/trail', 0, 12, 0.5, () => SD_SCATTER, v => SD_SCATTER = v),
+      ctrl('Size', 0.2, 2, 0.05, () => SD_SIZE, v => SD_SIZE = v),
+      ctrl('Size variation', 0, 1, 0.05, () => SD_SIZE_VAR, v => SD_SIZE_VAR = v),
+      ctrl('Pill share', 0, 1, 0.05, () => SD_PILL, v => SD_PILL = v),
+      ctrl('Fill alpha', 0, 1, 0.05, () => SD_FILL_A, v => SD_FILL_A = v),
+      ctrl('Stroke wt', 0, 5, 0.5, () => SD_STROKE_W, v => SD_STROKE_W = v),
+    ]},
+    { name: 'LH Dots', when: 'dots', items: [
+      ctrl('Max depth', 2, 30, 1, () => DOTS_MAX_DEPTH, v => DOTS_MAX_DEPTH = v, { int: true }),
+      ctrl('Edge size', 1, 12, 0.5, () => DOTS_EDGE, v => DOTS_EDGE = v),
+      ctrl('Center size', 0.2, 6, 0.2, () => DOTS_CENTER, v => DOTS_CENTER = v),
+      ctrl('Fade center', 0, 0, 0, () => DOTS_FADE_CENTER, v => DOTS_FADE_CENTER = v, { bool: true }),
+      ctrl('Trail decay', 0, 0.99, 0.01, () => DOTS_TRAIL_DECAY, v => DOTS_TRAIL_DECAY = v),
+    ]},
+    { name: 'LH Figure', when: 'figure', items: [
+      ctrl('Base blur', 0, 30, 1, () => FIG_BLUR, v => FIG_BLUR = v, { int: true }),
+      ctrl('Cell size', 8, 40, 1, () => FIG_CELL, v => FIG_CELL = v, { int: true }),
+      ctrl('Dropout', 0, 1, 0.02, () => FIG_DROP, v => FIG_DROP = v),
+      ctrl('Smear max', 0, 0.95, 0.02, () => FIG_SMEAR_MAX, v => FIG_SMEAR_MAX = v),
+      ctrl('Smear ref', 1, 15, 0.5, () => FIG_SMEAR_REF, v => FIG_SMEAR_REF = v),
+    ]},
+  ];
+}
+function makeControl(it) {
+  const row = document.createElement('div');
+  row.className = 'crow';
+  const label = document.createElement('span');
+  label.className = 'clabel';
+  label.textContent = it.label;
+  row.appendChild(label);
+  if (it.bool) {
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.checked = !!it.get();
+    cb.onchange = () => { it.set(cb.checked); if (it.after) it.after(); };
+    row.appendChild(cb);
+  } else {
+    const sl = document.createElement('input');
+    sl.type = 'range';
+    sl.min = it.min; sl.max = it.max; sl.step = it.step; sl.value = it.get();
+    const val = document.createElement('span');
+    val.className = 'cval';
+    val.textContent = fmtVal(it.get());
+    sl.oninput = () => {
+      let v = parseFloat(sl.value);
+      if (it.int) v = Math.round(v);
+      it.set(v);
+      val.textContent = fmtVal(v);
+      if (it.after) it.after();
+    };
+    row.appendChild(sl);
+    row.appendChild(val);
+  }
+  return row;
+}
+function buildControls() {
+  const panel = document.getElementById('controls');
+  if (!panel) return;
+  panel.innerHTML = '';
+  const type = STYLES[styleIndex].type;
+  controlGroups().forEach(g => {
+    if (g.when !== 'all' && g.when !== type) return;
+    const h = document.createElement('div');
+    h.className = 'cgroup';
+    h.textContent = g.name;
+    panel.appendChild(h);
+    g.items.forEach(it => panel.appendChild(makeControl(it)));
+  });
+}
+</script>
+</body>
+</html>

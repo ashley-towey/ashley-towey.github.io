@@ -37,25 +37,9 @@ const allProjects = [
       'Long Horizon is Encord’s inaugural Physical AI summit, bringing together the people building robotics, embodied AI and autonomous systems for two days at Fort Mason, San Francisco, in October 2026.',
       'Working within Encord’s design team, I helped shape the event from the first announcement to the venue itself: the event branding, billboard campaigns to build awareness ahead of the summit, signage and wayfinding on site, and an interactive installation for attendees to explore during the event.',
     ],
-    links: [{ label: 'Event website', href: 'https://encord.com/long-horizon/' }],
     cover: 'long-horizon-summit/lh-expo-hall.jpg',
     alt: 'The Long Horizon hall at Fort Mason: attendees at tables and stands under a white steel roof, a robot demo in the aisle and a large Long Horizon banner at the far end',
     blocks: [
-      {
-        type: 'video',
-        label: 'Recap',
-        videos: [
-          {
-            vimeo: '1249142318',
-            title: 'Long Horizon Recap',
-            ratio: 16 / 9,
-            credits: [
-              { role: 'Editing & Direction', names: 'Oliver Blair' },
-              { role: 'Filming', names: 'Oliver Wang & Nat Mannering' },
-            ],
-          },
-        ],
-      },
       {
         type: 'feature',
         label: 'Billboards',
@@ -77,6 +61,21 @@ const allProjects = [
           { src: 'long-horizon-summit/signage-4.png', alt: 'An orange “Elevator” wayfinding sign with three arrows, beside a robotics demo' },
           { src: 'long-horizon-summit/signage-5.png', alt: 'Attendees talking in front of a large green Long Horizon wall' },
           { src: 'long-horizon-summit/signage-6.png', alt: 'The busy main hall from above: the Frontier Stage, the What’s On sign and a hanging Long Horizon banner' },
+        ],
+      },
+      {
+        type: 'video',
+        label: 'Recap',
+        videos: [
+          {
+            vimeo: '1249142318',
+            title: 'Long Horizon Recap',
+            ratio: 16 / 9,
+            credits: [
+              { role: 'Editing & Direction', names: 'Oliver Blair' },
+              { role: 'Filming', names: 'Oliver Wang & Nat Mannering' },
+            ],
+          },
         ],
       },
       {
