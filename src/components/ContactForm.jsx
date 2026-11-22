@@ -67,7 +67,7 @@ export default function ContactForm() {
       {/* Spam trap: hidden from people, bots fill it in and Web3Forms drops the message. */}
       <input type="checkbox" name="botcheck" className="visually-hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
       <div className="contact-form__footer">
-        <ButtonLink as="button" type="submit" first="Send" second="it!!!" disabled={status === 'sending'} />
+        <ButtonLink as="button" type="submit" first="Send" second="it" disabled={status === 'sending'} />
         <p className="contact-form__status caption-2" role="status" data-status={status}>
           {MESSAGES[status] ?? ''}
         </p>

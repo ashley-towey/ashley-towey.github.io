@@ -1,0 +1,67 @@
+/* An image pop-up over the dimmed page, matching the experiment pop-up. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 4vw, 48px);
+  background: color-mix(in srgb, var(--ink) 55%, transparent);
+  overscroll-behavior: contain;
+  animation: lightbox-in .2s ease both;
+}
+
+.lightbox__box {
+  max-width: min(100%, 1280px);
+  max-height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-media);
+  background: var(--paper);
+}
+
+.lightbox__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.lightbox__controls { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 22px; }
+
+.lightbox__figure {
+  min-height: 0;
+  margin: 0;
+  padding: 16px;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+
+.lightbox__figure picture { display: contents; }
+
+/* Fits inside the viewport, less the backdrop padding, bar and box padding. */
+.lightbox__figure img {
+  max-width: 100%;
+  max-height: calc(100dvh - 2 * clamp(12px, 4vw, 48px) - 90px);
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: calc(var(--radius-media) - 4px);
+}
+
+.lightbox__figure figcaption { color: var(--muted); }
+
+@keyframes lightbox-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox { animation: none; }
+}

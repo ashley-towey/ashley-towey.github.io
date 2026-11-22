@@ -14,7 +14,16 @@
 //
 // Notes in comments are reminders, not shown on the site.
 export const EXPERIMENTS = [
-  { title: 'LH Interactive experiment' }, // note: but on the web
+  {
+    title: 'Long Horizon installation',
+    images: [
+      'lh-installation/lh-installation-1.png',
+      'lh-installation/lh-installation-dots.png',
+      'lh-installation/lh-installation-noir.png',
+    ],
+    // Web version of the Long Horizon installation; uses the visitor's camera.
+    tryIt: '/sketches/lh-installation/index.html',
+  },
   {
     title: 'The Velocafé',
     images: [
@@ -49,7 +58,6 @@ export const EXPERIMENTS = [
     title: 'Stories for the Road',
     images: [
       'stories/stories-cover_1.jpg',
-      'stories/homepage-1.jpg',
       'stories/directory-1.jpg',
     ],
     tryIt: '/sketches/stories-for-the-road/index.html',

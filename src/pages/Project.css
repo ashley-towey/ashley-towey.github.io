@@ -45,6 +45,26 @@
 
 .gallery-image { margin: 0; min-width: 0; }
 
+/* An images block with a heading and/or body: text beside the images. */
+.project-gallery--with-text {
+  grid-template-columns: minmax(260px, .55fr) minmax(0, 1fr);
+  column-gap: clamp(30px, 3vw, 48px);
+  align-items: start;
+}
+.project-gallery__text { display: grid; gap: 18px; max-width: 500px; align-self: center; }
+.project-gallery__text p { margin: 0 0 1em; }
+.project-gallery__text p:last-child { margin-bottom: 0; }
+/* Beside text, a wide image or clip is at most 70% of the screen tall and
+   isn't cropped: its width shrinks to keep its shape, and it sits on the right. */
+.project-gallery--with-text .gallery-image--wide .gallery-image__frame { max-width: calc(70vh * var(--ratio)); margin-left: auto; }
+.project-gallery--with-text .gallery-image--wide figcaption { text-align: right; }
+
+.project-gallery__images {
+  display: grid;
+  grid-template-columns: repeat(var(--columns, 1), minmax(0, 1fr));
+  gap: clamp(14px, 2.6vw, 34px);
+}
+
 .gallery-image__frame {
   aspect-ratio: 1.2 / 1;
   overflow: hidden;
@@ -55,6 +75,23 @@
 .project-gallery--square .gallery-image__frame { aspect-ratio: 1; }
 
 .gallery-image--wide { grid-column: 1 / -1; }
+
+/* Masonry: images keep their own shape, stacked in columns. */
+.project-gallery--masonry { display: block; columns: var(--columns, 3); column-gap: clamp(14px, 2.6vw, 34px); }
+.project-gallery--masonry .gallery-image { break-inside: avoid; margin-bottom: clamp(14px, 2.6vw, 34px); }
+.project-gallery--masonry .gallery-image__frame { aspect-ratio: var(--ratio); }
+
+/* A frame that opens the image full screen. */
+.gallery-image__frame--zoom {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  display: block;
+  cursor: zoom-in;
+}
+.gallery-image__frame--zoom img { transition: transform .4s ease; }
+.gallery-image__frame--zoom:hover img { transform: scale(1.02); }
+.gallery-image__frame--zoom:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
 .gallery-image--wide .gallery-image__frame { aspect-ratio: var(--ratio); max-height: 85vh; }
 
 .gallery-image__frame img,
@@ -64,6 +101,31 @@
 .gallery-image__frame--video iframe { width: 100%; height: 100%; display: block; border: 0; }
 
 .gallery-image figcaption { margin-top: 10px; color: var(--muted); }
+
+/* A video's credits: one role per line, e.g. "Filming: …". The role is
+   caption 2, the names caption 1. */
+.video-credits { display: grid; gap: 2px; }
+.video-credits__names { color: var(--ink); }
+
+/* Feature: a large image beside a smaller image and a stat. */
+.project-feature {
+  padding: 24px var(--section-inset) 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: clamp(14px, 2.6vw, 34px);
+  align-items: stretch;
+}
+
+.project-feature__side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.project-stat { margin: 0; display: grid; gap: 8px; }
+
+.project-stat__text { color: var(--muted); }
 
 .project-text {
   padding: 30px var(--section-inset) 46px;
@@ -97,42 +159,97 @@
 }
 .project-quote figcaption { margin-top: 18px; }
 
-.next-project {
-  min-height: 200px;
-  padding: 28px 24px;
+/* ---- Previous / next projects ---- */
+
+.project-nav__all { color: inherit; text-decoration: none; }
+.project-nav__all:hover { text-decoration: underline; text-underline-offset: .2em; }
+
+.project-nav {
   display: grid;
-  grid-template-columns: 1fr 2fr auto;
-  gap: 20px;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
 }
 
-.next-project__title {
-  margin: 0;
-  font-size: var(--type-h3-size);
-  font-weight: var(--type-h3-weight);
-  line-height: var(--type-h3-line-height);
-  letter-spacing: var(--type-h3-letter-spacing);
-}
-
-.next-project__title a {
+.project-nav__link {
+  /* Size of the square cover, and the padding around it and the text. */
+  --thumb: clamp(150px, 14vw, 210px);
+  --pad-y: 30px;
+  position: relative;
+  min-height: calc(var(--thumb) + var(--pad-y) * 2);
+  padding: var(--pad-y) var(--section-inset);
+  display: grid;
+  align-content: center;
+  gap: 10px;
   color: var(--ink);
   text-decoration: none;
 }
 
-.next-project__title a:hover { text-decoration: underline; text-underline-offset: .12em; text-decoration-thickness: 2px; }
+/* The rule between the two halves, stopping short like the frame's sides. */
+.project-nav__link--previous {
+  background: var(--frame-rule) right top / 1px 100% no-repeat;
+}
 
-.next-project__title a:focus-visible {
+.project-nav__link--next { text-align: right; }
+
+/* Keep the text clear of the cover on the opposite side. */
+.project-nav__link--previous { padding-right: calc(var(--section-inset) * 2 + var(--thumb)); }
+.project-nav__link--next { padding-left: calc(var(--section-inset) * 2 + var(--thumb)); }
+
+.project-nav__title { max-width: 14em; }
+
+.project-nav__link--next .project-nav__title { justify-self: end; }
+
+.project-nav__direction { cursor: inherit; }
+.project-nav__link--next .project-nav__direction { justify-self: end; }
+
+/* The bracket dot fills on hover, like a secondary button. */
+.project-nav__link:hover .bracket-button__dot,
+.project-nav__link:focus-visible .bracket-button__dot { background: var(--muted); }
+
+/* Square cover, fixed on the side opposite the text and filling the
+   height of the half. It fades in on hover. */
+.project-nav__thumb {
+  position: absolute;
+  top: var(--pad-y);
+  width: var(--thumb);
+  height: var(--thumb);
+  overflow: hidden;
+  border-radius: var(--radius-media);
+  background: var(--surface);
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+
+.project-nav__link--previous .project-nav__thumb { right: var(--section-inset); }
+.project-nav__link--next .project-nav__thumb { left: var(--section-inset); }
+.project-nav__thumb img { width: 100%; height: 100%; display: block; object-fit: cover; }
+
+.project-nav__link:hover .project-nav__thumb,
+.project-nav__link:focus-visible .project-nav__thumb { opacity: 1; }
+
+.project-nav__link:focus-visible {
   outline: 2px solid var(--orange);
-  outline-offset: 4px;
+  outline-offset: -6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-nav__thumb { transition: none; }
 }
 
 @media (max-width: 780px) {
   .project-intro { grid-template-columns: 1fr; row-gap: 24px; }
   .project-intro__hero { grid-row: 1; }
   .project-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 24px var(--section-inset); }
+  .project-gallery--with-text { grid-template-columns: 1fr; row-gap: 20px; }
+  .project-feature { grid-template-columns: 1fr; padding: 24px var(--section-inset); }
+  .project-gallery--masonry { columns: 2; }
+  .project-gallery--masonry .gallery-image { margin-bottom: 12px; }
   .project-text { grid-template-columns: 1fr 1fr; gap: 16px 22px; padding: 24px var(--section-inset) 34px; }
   .project-quote { grid-column: 1 / -1; }
-  .next-project { grid-template-columns: 1fr; gap: 14px; padding: 24px var(--section-inset); }
+  .project-nav__link,
+  .project-nav__link--previous,
+  .project-nav__link--next { min-height: 170px; padding: 26px 16px 28px; }
+  .project-nav__thumb { display: none; }
 }
 
 @media (max-width: 500px) {
