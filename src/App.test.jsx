@@ -128,6 +128,8 @@ describe('about page', () => {
   test('sending the form posts to Web3Forms and thanks the visitor', async () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve({ success: true }) });
     vi.stubGlobal('fetch', fetchMock);
+    const gtagMock = vi.fn();
+    vi.stubGlobal('gtag', gtagMock);
     renderAt('/about/');
     fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Sam' } });
     fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'sam@example.com' } });
@@ -137,16 +139,20 @@ describe('about page', () => {
     const [url, options] = fetchMock.mock.calls[0];
     expect(url).toBe('https://api.web3forms.com/submit');
     expect(JSON.parse(options.body)).toMatchObject({ access_key: site.web3formsKey, name: 'Sam', email: 'sam@example.com', message: 'Hello' });
+    expect(gtagMock).toHaveBeenCalledWith('event', 'generate_lead', { form_name: 'contact' });
   });
 
-  test('a failed send shows an error', async () => {
+  test('a failed send shows an error and is not counted', async () => {
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')));
+    const gtagMock = vi.fn();
+    vi.stubGlobal('gtag', gtagMock);
     renderAt('/about/');
     fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Sam' } });
     fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'sam@example.com' } });
     fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Hello' } });
     fireEvent.click(screen.getByRole('button', { name: 'Send it !!' }));
     expect(await screen.findByText(/Something went wrong/)).toBeInTheDocument();
+    expect(gtagMock).not.toHaveBeenCalled();
   });
 });
 

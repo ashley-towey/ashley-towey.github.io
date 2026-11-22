@@ -11,6 +11,15 @@ const MESSAGES = {
   error: 'Something went wrong. Please try again, or message me on LinkedIn.',
 };
 
+// Counts successful sends in Google Analytics (gtag is loaded in index.html).
+// generate_lead is GA4's recommended event for contact forms; it shows under
+// Reports → Engagement → Events and can be marked as a key event.
+function trackSubmission() {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'generate_lead', { form_name: 'contact' });
+  }
+}
+
 // Sends the message through Web3Forms, which emails it to site.email.
 export default function ContactForm() {
   const [status, setStatus] = useState('idle');
@@ -35,6 +44,7 @@ export default function ContactForm() {
       if (!response.ok || !result.success) throw new Error(result.message);
       form.reset();
       setStatus('sent');
+      trackSubmission();
     } catch {
       setStatus('error');
     }
