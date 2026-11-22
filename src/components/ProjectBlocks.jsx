@@ -1,5 +1,7 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useCallback, useState } from 'react';
+import { BracketBox } from './ButtonLink';
 import Clip, { clipRatio } from './Clip';
+import ExperimentModal from './ExperimentModal';
 import Lightbox from './Lightbox';
 import Picture, { imageRatio } from './Picture';
 import RegistrationLine from './RegistrationLine';
@@ -32,6 +34,10 @@ function ImagesBlock({ block, project, frame, eager }) {
   const largeSizes = columns > 2 ? `(max-width: 500px) 46vw, (max-width: 780px) 46vw, ${Math.round(92 / columns)}vw` : sizes;
   // With `lightbox`, clicking a still image opens it full screen.
   const [open, setOpen] = useState(null);
+  // With `tryIt`, a button under the text opens a live sketch in the
+  // experiments page's pop-up.
+  const [trying, setTrying] = useState(false);
+  const closeTry = useCallback(() => setTrying(false), []);
   const stills = block.images.filter((image) => image.src);
   const Frame = block.lightbox ? 'button' : 'div';
 
@@ -59,7 +65,7 @@ function ImagesBlock({ block, project, frame, eager }) {
   const lightbox = open !== null && <Lightbox images={stills} index={open} onChange={setOpen} onClose={() => setOpen(null)} />;
 
   // With a heading or body, the text sits beside the images, like the intro.
-  if (block.heading || block.body || block.credits) {
+  if (block.heading || block.body || block.credits || block.tryIt) {
     return (
       <section className={`project-gallery project-gallery--with-text ${frame}`} aria-label={`${project.title}: ${block.label}`}>
         <div className="project-gallery__text">
@@ -72,7 +78,15 @@ function ImagesBlock({ block, project, frame, eager }) {
           {block.credits && (
             <p className="project-credits type-body"><span className="eyebrow caption-2">In collaboration with</span>{block.credits}</p>
           )}
+          {block.tryIt && (
+            <div>
+              <button type="button" className="bracket-button caption-2" onClick={() => setTrying(true)}>
+                {block.tryIt.label ?? 'Try it'}<BracketBox />
+              </button>
+            </div>
+          )}
         </div>
+        {trying && <ExperimentModal title={block.tryIt.title ?? block.heading} src={block.tryIt.src} onClose={closeTry} />}
         <div className="project-gallery__images" style={{ '--columns': block.columns ?? 1 }}>{figures}</div>
         {lightbox}
       </section>

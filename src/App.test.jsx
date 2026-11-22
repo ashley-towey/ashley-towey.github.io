@@ -196,6 +196,11 @@ describe('project content', () => {
     renderAt('/work/long-horizon-summit/');
     expect(screen.getByTitle('Long Horizon Recap')).toHaveAttribute('src', expect.stringContaining('player.vimeo.com/video/1249142318'));
     expect(screen.getByText('Filming:')).toBeInTheDocument();
+    // The installation's button opens the live sketch in a pop-up.
+    fireEvent.click(screen.getByRole('button', { name: /^Try it/ }));
+    expect(screen.getByTitle('Long Horizon installation')).toHaveAttribute('src', '/sketches/lh-installation/index.html');
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(screen.queryByTitle('Long Horizon installation')).not.toBeInTheDocument();
     // Signage images open full screen, and the arrow keys move through them.
     fireEvent.click(screen.getByRole('button', { name: /View full screen: Long Horizon banners above the doors/ }));
     expect(screen.getByRole('dialog')).toHaveTextContent('1 / 6');

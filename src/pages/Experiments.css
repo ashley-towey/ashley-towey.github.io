@@ -15,10 +15,12 @@
 }
 
 .experiment-row {
+  /* One gap between number and title, and between title and TRY IT. */
+  --experiment-gap: clamp(14px, 1.8vw, 28px);
   display: flex;
   flex-wrap: wrap; /* TRY IT drops below the title rather than wrapping it */
   align-items: center;
-  column-gap: clamp(20px, 3vw, 48px);
+  column-gap: var(--experiment-gap);
   padding-block: 6px;
 }
 
@@ -30,7 +32,7 @@
   display: flex;
   flex-shrink: 0;
   align-items: baseline;
-  gap: clamp(24px, 4vw, 64px);
+  gap: var(--experiment-gap);
   padding: 0;
   border: 0;
   color: var(--ink-soft);
@@ -102,6 +104,6 @@
 }
 
 @media (max-width: 780px) {
-  .experiment-row__main { gap: 20px; }
+  .experiment-row { --experiment-gap: 14px; }
   .experiment-row__title { font-size: calc(var(--type-h3-size) * var(--experiment-title-scale, 1)); }
 }

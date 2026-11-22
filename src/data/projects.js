@@ -7,6 +7,7 @@
 //       { type: 'images', label, heading?, body?, credits?, images: [{ src, alt, caption?, wide? }], columns?, square?, masonry?, lightbox? }
 //         (masonry: images keep their own shape in columns; lightbox: click an image to view it full screen)
 //         (with a heading, body or credits, the text sits beside the images; columns defaults to 1 there)
+//         (tryIt?: { label?, title, src } adds a TRY IT button (or `label`) under the text that opens a live sketch in a pop-up)
 //         (an item can use `clip: 'folder/file.gif'` instead of `src` for a looping
 //          silent video made by `npm run videos`)
 //       { type: 'text', label?, heading, body: [paragraphs], list?: [items] }
@@ -46,7 +47,7 @@ const allProjects = [
         main: { src: 'long-horizon-summit/billboard-street.png', alt: 'Street billboard: “Qasar Younis is speaking at Long Horizon”, with his portrait and the Applied Intuition logo, presented by Encord, 20–21 October, Fort Mason, SF' },
         side: { src: 'long-horizon-summit/billboard-wall.png', alt: 'Wall-mounted Long Horizon billboard showing five speakers from Google X, Skild AI, DeepMind, Boston Dynamics and Waymo' },
         // DRAFT copy — to review
-        stat: { value: '1500', text: 'Tickets sold in the summit’s first year, helped by a billboard campaign across San Francisco. Many of the featured speakers shared their billboards on LinkedIn, carrying the campaign well beyond the streets and extending the conference’s reach.' },
+        stat: { value: '1500', text: 'Tickets sold in the summit’s first year, helped in part by a billboard campaign across San Francisco that featured the top speakers. Many of them shared their billboards on LinkedIn, carrying the campaign well beyond the streets and extending the conference’s reach.' },
       },
       {
         type: 'images',
@@ -61,6 +62,20 @@ const allProjects = [
           { src: 'long-horizon-summit/signage-4.png', alt: 'An orange “Elevator” wayfinding sign with three arrows, beside a robotics demo' },
           { src: 'long-horizon-summit/signage-5.png', alt: 'Attendees talking in front of a large green Long Horizon wall' },
           { src: 'long-horizon-summit/signage-6.png', alt: 'The busy main hall from above: the Frontier Stage, the What’s On sign and a hanging Long Horizon banner' },
+        ],
+      },
+      {
+        type: 'images',
+        label: 'Installation',
+        heading: 'Interactive installation',
+        // DRAFT copy — to review
+        body: [
+          'Alongside the event identity, I designed and built an interactive installation for the summit floor. Two tall screens, each with its own camera, turn the people walking past into live portraits of the event.',
+        ],
+        // The same web version as the experiments page's Long Horizon installation.
+        tryIt: { title: 'Long Horizon installation', src: '/sketches/lh-installation/index.html' },
+        images: [
+          { clip: 'long-horizon-summit/installation.mov', alt: 'Two tall Long Horizon screens on stands. As people walk past, their silhouettes appear on screen, built from tiny LONG HORIZON letters', wide: true },
         ],
       },
       {
@@ -81,11 +96,11 @@ const allProjects = [
       {
         type: 'images',
         label: 'The team',
-        heading: 'Thank you',
+        heading: 'Thank you!',
         body: [
           'A shoutout to the amazing team who made Long Horizon possible. It was a huge effort from everyone, and an absolute pleasure to be part of.',
         ],
-        credits: 'Hyemin Kang, Oliver Blair, Mavis Lok, Nat Mannering, Jack Henchy, Tom Kennedy and George Burton-Fletcher',
+        credits: 'Hyemin Kang, Oliver Blair, Mavis Lok, Nat Mannering, Jack Henchy, Tom Kennedy, George Burton-Fletcher and so many more!',
         images: [
           { src: 'long-horizon-summit/lh-team.jpg', alt: 'The Encord team in green T-shirts outside Gateway Pavilion at Fort Mason, beneath Long Horizon summit banners', wide: true },
         ],

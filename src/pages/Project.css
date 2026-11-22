@@ -51,9 +51,14 @@
   column-gap: clamp(30px, 3vw, 48px);
   align-items: start;
 }
-.project-gallery__text { display: grid; gap: 18px; max-width: 500px; }
+.project-gallery__text { display: grid; gap: 18px; max-width: 500px; align-self: center; }
 .project-gallery__text p { margin: 0 0 1em; }
 .project-gallery__text p:last-child { margin-bottom: 0; }
+/* Beside text, a wide image or clip is at most 70% of the screen tall and
+   isn't cropped: its width shrinks to keep its shape, and it sits on the right. */
+.project-gallery--with-text .gallery-image--wide .gallery-image__frame { max-width: calc(70vh * var(--ratio)); margin-left: auto; }
+.project-gallery--with-text .gallery-image--wide figcaption { text-align: right; }
+
 .project-gallery__images {
   display: grid;
   grid-template-columns: repeat(var(--columns, 1), minmax(0, 1fr));
