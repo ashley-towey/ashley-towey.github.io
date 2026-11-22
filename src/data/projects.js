@@ -4,12 +4,17 @@
 // adding one). Each project page renders:
 //   - an intro from title, client, year, disciplines, description, credits, links
 //   - then `blocks`, in order:
-//       { type: 'images', label, images: [{ src, alt, caption?, wide? }], columns?, square? }
+//       { type: 'images', label, heading?, body?, credits?, images: [{ src, alt, caption?, wide? }], columns?, square?, masonry?, lightbox? }
+//         (masonry: images keep their own shape in columns; lightbox: click an image to view it full screen)
+//         (with a heading, body or credits, the text sits beside the images; columns defaults to 1 there)
 //         (an item can use `clip: 'folder/file.gif'` instead of `src` for a looping
 //          silent video made by `npm run videos`)
 //       { type: 'text', label?, heading, body: [paragraphs], list?: [items] }
 //       { type: 'quote', label?, quote: [paragraphs], cite }
-//       { type: 'video', label, videos: [{ vimeo, title, ratio }], columns? }
+//       { type: 'feature', label, main: { src, alt }, side?: { src, alt }, stat?: { value, text } }
+//         (a large image beside a smaller image and a big dot-matrix stat)
+//       { type: 'video', label, videos: [{ vimeo, title, ratio, credits? }], columns? }
+//         (credits: [{ role, names }], shown under the video one role per line)
 // `hero` (optional) is the image beside the title on the project page; it
 // defaults to `cover`. If it also appears in a block, it's left out there.
 // `summary` is the short text used on the home page card and in search/share previews.
@@ -32,11 +37,61 @@ const allProjects = [
       'Long Horizon is Encord’s inaugural Physical AI summit, bringing together the people building robotics, embodied AI and autonomous systems for two days at Fort Mason, San Francisco, in October 2026.',
       'Working within Encord’s design team, I helped shape the event from the first announcement to the venue itself: the event branding, billboard campaigns to build awareness ahead of the summit, signage and wayfinding on site, and an interactive installation for attendees to explore during the event.',
     ],
-    credits: 'Hyemin Kang, Oliver Blaire, Mavis Lok, Nat Mannering, Jack Henchy, Tom Kennedy and George Burton-Fletcher',
     links: [{ label: 'Event website', href: 'https://encord.com/long-horizon/' }],
-    cover: 'long-horizon-summit/lh-cover.jpg', // PLACEHOLDER cover — to replace
-    alt: 'The Encord team in green T-shirts outside Gateway Pavilion at Fort Mason, beneath Long Horizon summit banners',
-    blocks: [],
+    cover: 'long-horizon-summit/lh-expo-hall.jpg',
+    alt: 'The Long Horizon hall at Fort Mason: attendees at tables and stands under a white steel roof, a robot demo in the aisle and a large Long Horizon banner at the far end',
+    blocks: [
+      {
+        type: 'video',
+        label: 'Recap',
+        videos: [
+          {
+            vimeo: '1249142318',
+            title: 'Long Horizon Recap',
+            ratio: 16 / 9,
+            credits: [
+              { role: 'Editing & Direction', names: 'Oliver Blair' },
+              { role: 'Filming', names: 'Oliver Wang & Nat Mannering' },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'feature',
+        label: 'Billboards',
+        main: { src: 'long-horizon-summit/billboard-street.png', alt: 'Street billboard: “Qasar Younis is speaking at Long Horizon”, with his portrait and the Applied Intuition logo, presented by Encord, 20–21 October, Fort Mason, SF' },
+        side: { src: 'long-horizon-summit/billboard-wall.png', alt: 'Wall-mounted Long Horizon billboard showing five speakers from Google X, Skild AI, DeepMind, Boston Dynamics and Waymo' },
+        // DRAFT copy — to review
+        stat: { value: '1500', text: 'Tickets sold in the summit’s first year, helped by a billboard campaign across San Francisco. Many of the featured speakers shared their billboards on LinkedIn, carrying the campaign well beyond the streets and extending the conference’s reach.' },
+      },
+      {
+        type: 'images',
+        label: 'Signage',
+        columns: 3,
+        masonry: true,
+        lightbox: true,
+        images: [
+          { src: 'long-horizon-summit/signage-1.png', alt: 'Long Horizon banners above the doors of Gateway Pavilion at Fort Mason as attendees arrive' },
+          { src: 'long-horizon-summit/signage-2.png', alt: 'A tall “What’s On” sign with floor plans of both floors and a QR code for the full programme, between two plants' },
+          { src: 'long-horizon-summit/signage-3.png', alt: 'An orange coffee cart wrapped in repeating “Coffee” type, with a coffee cup worked into the O' },
+          { src: 'long-horizon-summit/signage-4.png', alt: 'An orange “Elevator” wayfinding sign with three arrows, beside a robotics demo' },
+          { src: 'long-horizon-summit/signage-5.png', alt: 'Attendees talking in front of a large green Long Horizon wall' },
+          { src: 'long-horizon-summit/signage-6.png', alt: 'The busy main hall from above: the Frontier Stage, the What’s On sign and a hanging Long Horizon banner' },
+        ],
+      },
+      {
+        type: 'images',
+        label: 'The team',
+        heading: 'Thank you',
+        body: [
+          'A shoutout to the amazing team who made Long Horizon possible. It was a huge effort from everyone, and an absolute pleasure to be part of.',
+        ],
+        credits: 'Hyemin Kang, Oliver Blair, Mavis Lok, Nat Mannering, Jack Henchy, Tom Kennedy and George Burton-Fletcher',
+        images: [
+          { src: 'long-horizon-summit/lh-team.jpg', alt: 'The Encord team in green T-shirts outside Gateway Pavilion at Fort Mason, beneath Long Horizon summit banners', wide: true },
+        ],
+      },
+    ],
   },
   {
     slug: 'domestique-display',
@@ -401,6 +456,7 @@ export const projectHero = (project) => {
 export const projectImages = (project) => [
   project.cover,
   ...project.blocks.filter((block) => block.type === 'images').flatMap((block) => block.images.filter((image) => image.src).map((image) => image.src)),
+  ...project.blocks.filter((block) => block.type === 'feature').flatMap((block) => [block.main.src, block.side?.src].filter(Boolean)),
 ];
 
 // Every looping clip a project uses.

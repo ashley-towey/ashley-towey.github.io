@@ -176,9 +176,10 @@ describe('project content', () => {
     expect(Array.isArray(project.description)).toBe(true);
     expect(project.alt).toBeTruthy();
     for (const block of project.blocks) {
-      expect(['images', 'text', 'quote', 'video']).toContain(block.type);
+      expect(['images', 'text', 'quote', 'video', 'feature']).toContain(block.type);
       if (block.type === 'images') block.images.forEach((image) => expect(image.alt, image.src ?? image.clip).toMatch(/\w{3,}/));
       if (block.type === 'text') expect(block.heading).toBeTruthy();
+      if (block.type === 'feature') [block.main, block.side].filter(Boolean).forEach((image) => expect(image.alt, image.src).toMatch(/\w{3,}/));
     }
   });
 
@@ -191,6 +192,19 @@ describe('project content', () => {
     renderAt('/work/csm-showcase/');
     expect(screen.getByRole('heading', { level: 2, name: 'Concept' })).toBeInTheDocument();
     expect(screen.getByText(/In collaboration with/)).toBeInTheDocument();
+    cleanup();
+    renderAt('/work/long-horizon-summit/');
+    expect(screen.getByTitle('Long Horizon Recap')).toHaveAttribute('src', expect.stringContaining('player.vimeo.com/video/1249142318'));
+    expect(screen.getByText('Filming:')).toBeInTheDocument();
+    // Signage images open full screen, and the arrow keys move through them.
+    fireEvent.click(screen.getByRole('button', { name: /View full screen: Long Horizon banners above the doors/ }));
+    expect(screen.getByRole('dialog')).toHaveTextContent('1 / 6');
+    fireEvent.keyDown(document, { key: 'ArrowRight' });
+    expect(screen.getByRole('dialog')).toHaveTextContent('2 / 6');
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(screen.getByRole('region', { name: 'Long Horizon Summit: Billboards' })).toHaveTextContent(/1500.*Tickets sold/);
+    expect(screen.getByRole('region', { name: 'Long Horizon Summit: The team' })).toHaveTextContent(/A shoutout to the amazing team.*In collaboration with.*Hyemin Kang/);
   });
 });
 

@@ -61,7 +61,7 @@ function ProjectNavLink({ project, direction }) {
   const label = direction === 'next' ? 'Next' : 'Previous';
   return (
     <Link className={`project-nav__link project-nav__link--${direction}`} to={projectPath(project)} aria-label={`${label} project: ${project.title}`}>
-      <span className="project-nav__title">{project.title}</span>
+      <span className="project-nav__title type-h3">{project.title}</span>
       {/* Styled as a secondary (bracket) button; the whole half is the link. */}
       <span className="project-nav__direction bracket-button caption-2">{label}<BracketBox /></span>
       <span className="project-nav__thumb" aria-hidden="true">

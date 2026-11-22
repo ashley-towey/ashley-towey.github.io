@@ -45,6 +45,21 @@
 
 .gallery-image { margin: 0; min-width: 0; }
 
+/* An images block with a heading and/or body: text beside the images. */
+.project-gallery--with-text {
+  grid-template-columns: minmax(260px, .55fr) minmax(0, 1fr);
+  column-gap: clamp(30px, 3vw, 48px);
+  align-items: start;
+}
+.project-gallery__text { display: grid; gap: 18px; max-width: 500px; }
+.project-gallery__text p { margin: 0 0 1em; }
+.project-gallery__text p:last-child { margin-bottom: 0; }
+.project-gallery__images {
+  display: grid;
+  grid-template-columns: repeat(var(--columns, 1), minmax(0, 1fr));
+  gap: clamp(14px, 2.6vw, 34px);
+}
+
 .gallery-image__frame {
   aspect-ratio: 1.2 / 1;
   overflow: hidden;
@@ -55,6 +70,23 @@
 .project-gallery--square .gallery-image__frame { aspect-ratio: 1; }
 
 .gallery-image--wide { grid-column: 1 / -1; }
+
+/* Masonry: images keep their own shape, stacked in columns. */
+.project-gallery--masonry { display: block; columns: var(--columns, 3); column-gap: clamp(14px, 2.6vw, 34px); }
+.project-gallery--masonry .gallery-image { break-inside: avoid; margin-bottom: clamp(14px, 2.6vw, 34px); }
+.project-gallery--masonry .gallery-image__frame { aspect-ratio: var(--ratio); }
+
+/* A frame that opens the image full screen. */
+.gallery-image__frame--zoom {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  display: block;
+  cursor: zoom-in;
+}
+.gallery-image__frame--zoom img { transition: transform .4s ease; }
+.gallery-image__frame--zoom:hover img { transform: scale(1.02); }
+.gallery-image__frame--zoom:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
 .gallery-image--wide .gallery-image__frame { aspect-ratio: var(--ratio); max-height: 85vh; }
 
 .gallery-image__frame img,
@@ -64,6 +96,31 @@
 .gallery-image__frame--video iframe { width: 100%; height: 100%; display: block; border: 0; }
 
 .gallery-image figcaption { margin-top: 10px; color: var(--muted); }
+
+/* A video's credits: one role per line, e.g. "Filming: …". The role is
+   caption 2, the names caption 1. */
+.video-credits { display: grid; gap: 2px; }
+.video-credits__names { color: var(--ink); }
+
+/* Feature: a large image beside a smaller image and a stat. */
+.project-feature {
+  padding: 24px var(--section-inset) 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: clamp(14px, 2.6vw, 34px);
+  align-items: stretch;
+}
+
+.project-feature__side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.project-stat { margin: 0; display: grid; gap: 8px; }
+
+.project-stat__text { color: var(--muted); }
 
 .project-text {
   padding: 30px var(--section-inset) 46px;
@@ -132,13 +189,7 @@
 .project-nav__link--previous { padding-right: calc(var(--section-inset) * 2 + var(--thumb)); }
 .project-nav__link--next { padding-left: calc(var(--section-inset) * 2 + var(--thumb)); }
 
-.project-nav__title {
-  max-width: 14em;
-  font-size: var(--type-h3-size);
-  font-weight: var(--type-h3-weight);
-  line-height: var(--type-h3-line-height);
-  letter-spacing: var(--type-h3-letter-spacing);
-}
+.project-nav__title { max-width: 14em; }
 
 .project-nav__link--next .project-nav__title { justify-self: end; }
 
@@ -184,6 +235,10 @@
   .project-intro { grid-template-columns: 1fr; row-gap: 24px; }
   .project-intro__hero { grid-row: 1; }
   .project-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 24px var(--section-inset); }
+  .project-gallery--with-text { grid-template-columns: 1fr; row-gap: 20px; }
+  .project-feature { grid-template-columns: 1fr; padding: 24px var(--section-inset); }
+  .project-gallery--masonry { columns: 2; }
+  .project-gallery--masonry .gallery-image { margin-bottom: 12px; }
   .project-text { grid-template-columns: 1fr 1fr; gap: 16px 22px; padding: 24px var(--section-inset) 34px; }
   .project-quote { grid-column: 1 / -1; }
   .project-nav__link,
