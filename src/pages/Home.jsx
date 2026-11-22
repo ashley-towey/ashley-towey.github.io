@@ -30,7 +30,7 @@ export default function Home() {
     <Page>
       <section className="home-intro home-intro--split frame-sides" aria-labelledby="home-heading">
         <h1 id="home-heading" className="home-intro__heading">
-          <span className="home-intro__lead">I design;</span>{' '}
+          <span className="home-intro__lead">I design &amp; build;</span>{' '}
           {HEADLINE.map((word, index) => (
             <Fragment key={word.label}>
               <HeadlineWord word={word} last={index === HEADLINE.length - 1} />

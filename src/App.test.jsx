@@ -22,7 +22,7 @@ describe('home', () => {
   test('lists every project as a link to its page', () => {
     renderAt('/');
     const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading).toHaveTextContent(/^I design; websites,\[\d+\] products,\[\d+\] brands,\[\d+\] campaigns,\[\d+\] billboards,\[\d+\] etc\.\[\d+\]$/);
+    expect(heading).toHaveTextContent(/^I design & build; websites,\[\d+\] products,\[\d+\] brands,\[\d+\] campaigns,\[\d+\] billboards,\[\d+\] etc\.\[\d+\]$/);
     const grid = screen.getByRole('region', { name: 'Selected projects' });
     const links = within(grid).getAllByRole('link');
     const work = projects;
