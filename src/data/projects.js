@@ -351,7 +351,7 @@ export const projects = [
   },
 ];
 
-// The home heading: "I design; websites,[5] products,[2] …". Each word's
+// The home heading: "I design & build; websites,[5] products,[2] …". Each word's
 // bracketed number links to one project (`project`, a slug) and shows that
 // project's position in the portfolio, like a footnote; or links to the
 // experiments page (`to`) and shows how many experiments are listed.

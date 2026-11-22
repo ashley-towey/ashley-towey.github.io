@@ -30,7 +30,7 @@
 
 .home-intro--split h1 { grid-column: span 2; max-width: none; }
 
-/* "I design;" sits on its own line at the same size, in the h2 weight. */
+/* "I design & build;" sits on its own line at the same size, in the h2 weight. */
 .home-intro__lead {
   display: block;
   font-weight: var(--type-h2-weight);

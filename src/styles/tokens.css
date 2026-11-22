@@ -94,6 +94,8 @@
   --muted: #53565b;
   --line-strong: rgba(35, 39, 43, .48);
   --orange: #ed5a08;
+  /* Fill of a form field while it's being typed in. */
+  --field-active: #DBD8CF;
   transition: --paper .3s cubic-bezier(.65, 0, .35, 1),
     --surface .3s cubic-bezier(.65, 0, .35, 1),
     --ink .3s cubic-bezier(.65, 0, .35, 1),
@@ -122,4 +124,5 @@
   --muted: #B9B6AE;
   --line-strong: rgba(235, 232, 222, .42);
   --orange: #ff7830;
+  --field-active: #3B3A35;
 }

@@ -4,6 +4,7 @@ import { cleanup, fireEvent, render, screen, within } from '@testing-library/rea
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
+import { vi } from 'vitest';
 import App from './App';
 import { FORMER_EXPERIMENT_PAGES, legacyRedirects } from '../scripts/legacy-redirects.mjs';
 import { site } from './config/site';
@@ -21,7 +22,7 @@ describe('home', () => {
   test('lists every project as a link to its page', () => {
     renderAt('/');
     const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading).toHaveTextContent(/^I design; websites,\[\d+\] products,\[\d+\] brands,\[\d+\] campaigns,\[\d+\] billboards,\[\d+\] etc\.\[\d+\]$/);
+    expect(heading).toHaveTextContent(/^I design & build; websites,\[\d+\] products,\[\d+\] brands,\[\d+\] campaigns,\[\d+\] billboards,\[\d+\] etc\.\[\d+\]$/);
     const grid = screen.getByRole('region', { name: 'Selected projects' });
     const links = within(grid).getAllByRole('link');
     const work = projects;
@@ -111,10 +112,48 @@ test('unknown routes show the not-found page', () => {
   expect(screen.getByText('Page not found')).toBeInTheDocument();
 });
 
-test('about page uses the canonical contact email', () => {
-  renderAt('/about/');
-  expect(screen.getByRole('link', { name: 'Email me' })).toHaveAttribute('href', `mailto:${site.email}`);
-  expect(site.email).toBe('ashleytowey.design@gmail.com');
+describe('about page', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  test('has a contact form and no mailto links', () => {
+    const { container } = renderAt('/about/');
+    expect(screen.getByLabelText('Name')).toBeRequired();
+    expect(screen.getByLabelText('Email')).toHaveAttribute('type', 'email');
+    expect(screen.getByLabelText('Message')).toBeRequired();
+    expect(screen.getByRole('button', { name: 'Send it!!!' })).toBeInTheDocument();
+    expect(container.querySelector('a[href^="mailto:"]')).toBeNull();
+    expect(site.email).toBe('ashleytowey.design@gmail.com');
+  });
+
+  test('sending the form posts to Web3Forms and thanks the visitor', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve({ success: true }) });
+    vi.stubGlobal('fetch', fetchMock);
+    const gtagMock = vi.fn();
+    vi.stubGlobal('gtag', gtagMock);
+    renderAt('/about/');
+    fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Sam' } });
+    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'sam@example.com' } });
+    fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Hello' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Send it!!!' }));
+    expect(await screen.findByText(/Thanks for getting in touch/)).toBeInTheDocument();
+    const [url, options] = fetchMock.mock.calls[0];
+    expect(url).toBe('https://api.web3forms.com/submit');
+    expect(JSON.parse(options.body)).toMatchObject({ access_key: site.web3formsKey, name: 'Sam', email: 'sam@example.com', message: 'Hello' });
+    expect(gtagMock).toHaveBeenCalledWith('event', 'generate_lead', { form_name: 'contact' });
+  });
+
+  test('a failed send shows an error and is not counted', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')));
+    const gtagMock = vi.fn();
+    vi.stubGlobal('gtag', gtagMock);
+    renderAt('/about/');
+    fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Sam' } });
+    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'sam@example.com' } });
+    fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Hello' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Send it!!!' }));
+    expect(await screen.findByText(/Something went wrong/)).toBeInTheDocument();
+    expect(gtagMock).not.toHaveBeenCalled();
+  });
 });
 
 test('theme toggle flips the document theme and remembers it', () => {
@@ -165,7 +204,7 @@ describe('routes and metadata', () => {
 
   test('project pages get their own title, description and share image', () => {
     const meta = routeMeta(projectPath(projects[0]));
-    expect(meta.title).toBe(`${projects[0].title} — Ashley Towey`);
+    expect(meta.title).toBe(`${projects[0].title} | Ashley Towey`);
     expect(meta.description).toBe(projects[0].summary);
     expect(meta.image).toContain(projects[0].cover.replace(/\.[^.]+$/, '-'));
     expect(meta.image).toMatch(/\.jpg$/);
@@ -267,7 +306,8 @@ describe('experiments', () => {
     expect(within(footer).getByRole('link', { name: 'Portfolio' })).not.toHaveAttribute('aria-current');
     expect(within(footer).getByRole('link', { name: 'Experiments' })).toHaveAttribute('aria-current', 'page');
     expect(within(footer).getByRole('link', { name: 'Contact me' })).toHaveAttribute('href', '/about/');
-    expect(within(footer).getByRole('link', { name: 'Email' })).toHaveAttribute('href', `mailto:${site.email}`);
+    expect(within(footer).queryByRole('link', { name: 'Email' })).toBeNull();
+    expect(footer.querySelector('a[href^="mailto:"]')).toBeNull();
     expect(within(footer).getByRole('link', { name: 'Instagram' })).toHaveAttribute('href', site.socials.find((s) => s.label === 'Instagram').href);
     expect(within(footer).getByRole('link', { name: 'LinkedIn' })).toHaveAttribute('href', site.socials.find((s) => s.label === 'LinkedIn').href);
   });

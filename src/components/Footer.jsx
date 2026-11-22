@@ -1,7 +1,7 @@
 import ButtonLink from './ButtonLink';
 import DotWordmark from './DotWordmark';
 import DotDance from './easter-eggs/DotDance'; // easter egg: remove with the line below
-import { mailto, site } from '../config/site';
+import { site } from '../config/site';
 
 export default function Footer() {
   return (
@@ -12,7 +12,6 @@ export default function Footer() {
         <ButtonLink variant="secondary" to="/about/">Contact me</ButtonLink>
       </nav>
       <div className="site-footer__aside">
-        <ButtonLink variant="secondary" href={mailto}>Email</ButtonLink>
         {site.socials.map((social) => (
           <ButtonLink key={social.label} variant="secondary" href={social.href} target="_blank" rel="noreferrer">{social.label}</ButtonLink>
         ))}
