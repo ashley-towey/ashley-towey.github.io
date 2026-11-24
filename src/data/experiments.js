@@ -77,11 +77,12 @@ export const EXPERIMENTS = [
     images: ['csm-identity/csm-type.jpg'],
     tryIt: '/sketches/csm-identity/index.html',
   },
-  { title: 'The Tragic Everyday' }, // note: fun and quirky video
-  { title: 'SLATE online version' },
-  { title: 'The Passing Place' }, // note: simple and nice photography
-  { title: 'A View to a Kill animation' }, // note: funny
-  { title: 'Echelon cycling apparel' }, // note: as a throwback
+  // Hidden until they have images or a sketch to show. Uncomment each one as it's ready.
+  // { title: 'The Tragic Everyday' }, // note: fun and quirky video
+  // { title: 'SLATE online version' },
+  // { title: 'The Passing Place' }, // note: simple and nice photography
+  // { title: 'A View to a Kill animation' }, // note: funny
+  // { title: 'Echelon cycling apparel' }, // note: as a throwback
 ];
 
 // Every image the experiments use, for tests and tooling.
