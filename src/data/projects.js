@@ -4,8 +4,10 @@
 // adding one). Each project page renders:
 //   - an intro from title, client, year, disciplines, description, credits, links
 //   - then `blocks`, in order:
-//       { type: 'images', label, heading?, body?, credits?, images: [{ src, alt, caption?, wide? }], columns?, square?, masonry?, lightbox? }
+//       { type: 'images', label, heading?, body?, credits?, images: [{ src, alt, caption?, wide? }], columns?, square?, masonry?, rows?, lightbox? }
 //         (masonry: images keep their own shape in columns; lightbox: click an image to view it full screen)
+//         (rows: [[0, 1], [[2, 3], 4]] lays the images out in rows by index, a nested list
+//          stacking images in one column; each row's images share a height, uncropped)
 //         (with a heading, body or credits, the text sits beside the images; columns defaults to 1 there)
 //         (tryIt?: { label?, title, src } adds a TRY IT button (or `label`) under the text that opens a live sketch in a pop-up)
 //         (an item can use `clip: 'folder/file.gif'` instead of `src` for a looping
@@ -26,6 +28,59 @@
 // keep the order they're listed in here).
 
 const allProjects = [
+  {
+    slug: 'encord-data-labs',
+    title: 'Encord Data Labs',
+    client: 'Encord',
+    year: '2026',
+    disciplines: ['Brand identity', 'Design systems', 'Motion', 'Web design', 'Data visualisation'],
+    // DRAFT copy — to review
+    summary: 'Brand identity, launch campaign and web presence for Encord Data Labs, Encord’s research division for Physical AI, launched at the Long Horizon summit.',
+    description: [
+      'Encord Data Labs is Encord’s research division, focused on applied research and automation, advanced data capture, and partnerships for Physical AI. It is the home for the work of Encord’s machine learning team and the research it does with partners.',
+      'I created the Data Labs brand identity and design system, then carried it through the launch at Long Horizon: the launch video, keynote, social posts and event signage. I also designed the website, from the main landing page to the article pages, with graphs and graphics for each piece of in-depth data analysis.',
+    ],
+    // Cover for now — may be replaced
+    cover: 'encord-data-labs/cover.png',
+    alt: 'The encord data labs logo in off-white over a grainy black-and-white close-up of skin',
+    // PLACEHOLDER sections — these become images / video blocks once the final assets are in
+    blocks: [
+      {
+        type: 'images',
+        label: 'Brand identity',
+        // Top: brand board and hand. Bottom: logo over research areas, then the teaser.
+        rows: [[0, 1], [[2, 3], 4]],
+        images: [
+          { src: 'encord-data-labs/data-labs_brand-1.png', alt: 'Data Labs brand board: a dot-matrix typeface, the encord data labs logo, a colour palette of charcoal, olive, lime and off-white, dithered textures and a photo overlaid with a dot grid' },
+          { src: 'encord-data-labs/data-labs_brand-2.png', alt: 'A hand drawn as a cloud of black dots, wearing a wristband with a tracking cube' },
+          { src: 'encord-data-labs/logo-dark.png', alt: 'The encord data labs logo, a dotted mark beside the wordmark, in light type on charcoal' },
+          { src: 'encord-data-labs/research-areas.png', alt: 'Our Research Areas: four tiles with line graphics for Advanced Data Capture, ML & Automation and Applied Research' },
+          { clip: 'encord-data-labs/data-labs_brand-teaser-1.mp4', alt: 'Data Labs brand teaser animation' },
+        ],
+      },
+      {
+        type: 'video',
+        label: 'Launch video',
+        videos: [
+          { vimeo: '1249813768', title: 'Encord Data Labs launch video', ratio: 16 / 9 },
+        ],
+      },
+      {
+        type: 'text',
+        label: 'Launch',
+        heading: 'Launch at Long Horizon',
+        // DRAFT copy — to review
+        body: ['Data Labs launched at Long Horizon, Encord’s Physical AI summit. I designed the assets for Eric’s keynote, the launch posts on LinkedIn (the hand model post drew especially high engagement) and the signage wall at the event.'],
+      },
+      {
+        type: 'text',
+        label: 'Website',
+        heading: 'Website and article graphics',
+        // DRAFT copy — to review
+        body: ['The Data Labs website, from the main landing page to the research articles, with graphs and graphics for each piece of in-depth data analysis.'],
+      },
+    ],
+  },
   {
     slug: 'long-horizon-summit',
     title: 'Long Horizon Summit',

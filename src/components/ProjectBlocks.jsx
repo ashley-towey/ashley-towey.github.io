@@ -45,7 +45,7 @@ function ImagesBlock({ block, project, frame, eager }) {
         <figure className={image.wide ? 'gallery-image gallery-image--wide' : 'gallery-image'} key={image.src ?? image.clip}>
           <Frame
             className={`gallery-image__frame${block.lightbox ? ' gallery-image__frame--zoom' : ''}`}
-            style={image.wide || block.masonry ? { '--ratio': image.clip ? clipRatio(image.clip) : imageRatio(image.src) } : undefined}
+            style={image.wide || block.masonry || block.rows ? { '--ratio': image.clip ? clipRatio(image.clip) : imageRatio(image.src) } : undefined}
             {...(block.lightbox && { type: 'button', 'aria-label': `View full screen: ${image.alt}`, onClick: () => setOpen(stills.indexOf(image)) })}
           >
             {image.clip ? (
@@ -63,6 +63,38 @@ function ImagesBlock({ block, project, frame, eager }) {
         </figure>
   ));
   const lightbox = open !== null && <Lightbox images={stills} index={open} onChange={setOpen} onClose={() => setOpen(null)} />;
+
+  // With `rows`, images are laid out in rows. Each row is a list of image
+  // indexes; a nested list stacks those images in one column. Widths follow
+  // each image's shape, so everything in a row comes out the same height.
+  if (block.rows) {
+    const ratioOf = (image) => (image.clip ? clipRatio(image.clip) : imageRatio(image.src));
+    return (
+      <section className={`project-gallery project-gallery--rows ${frame}`} aria-label={`${project.title}: ${block.label}`}>
+        {block.rows.map((row, r) => (
+          <div className="project-gallery__row" key={r}>
+            {row.map((cell, _, cells) => {
+              const stack = [].concat(cell);
+              const ratio = 1 / stack.reduce((sum, i) => sum + 1 / ratioOf(block.images[i]), 0);
+              // A stack's gaps add to its height, so the other cells get a head
+              // start in width that keeps every cell in the row the same height.
+              const gaps = Math.max(...cells.map((c) => [].concat(c).length)) - stack.length;
+              return (
+                <div
+                  className="project-gallery__cell"
+                  style={{ '--grow': ratio, '--basis': `calc(var(--gap) * ${ratio * gaps})` }}
+                  key={stack.join('-')}
+                >
+                  {stack.map((i) => figures[i])}
+                </div>
+              );
+            })}
+          </div>
+        ))}
+        {lightbox}
+      </section>
+    );
+  }
 
   // With a heading or body, the text sits beside the images, like the intro.
   if (block.heading || block.body || block.credits || block.tryIt) {
