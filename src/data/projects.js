@@ -516,11 +516,11 @@ export const projects = [...allProjects].sort((a, b) => Number(b.year) - Number(
 // project's position in the portfolio, like a footnote; or links to the
 // experiments page (`to`) and shows how many experiments are listed.
 export const HEADLINE = [
-  { label: 'websites', project: 'leanne-prosvic' },
+  { label: 'websites', project: 'encord-data-labs' }, // for now — moves to the Encord rebrand & website project once it's added
   { label: 'products', project: 'slate' },
   { label: 'brands', project: 'encord-data-labs' },
-  { label: 'campaigns', project: 'london-to-paris' },
-  { label: 'billboards', project: 'long-horizon-summit' },
+  { label: 'experiences', project: 'domestique-display' },
+  { label: 'events', project: 'long-horizon-summit' },
   { label: 'etc', to: '/experiments/', linkLabel: 'Experiments' },
 ];
 
