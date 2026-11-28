@@ -24,6 +24,8 @@
 }
 
 .theme-toggle__icon {
+  /* Both icons share one spot; the active theme's is shown. */
+  grid-area: 1 / 1;
   width: 20px;
   height: 20px;
   fill: none;
@@ -33,9 +35,20 @@
   stroke-linejoin: round;
 }
 
+/* The switch: the outgoing icon turns a quarter, shrinks and fades as the
+   incoming one turns in from the other side, over the same .3s and curve
+   as the theme's colour change, so they finish together. */
+.theme-toggle__icon {
+  transition: opacity .3s cubic-bezier(.65, 0, .35, 1), transform .3s cubic-bezier(.65, 0, .35, 1);
+}
+
 .theme-toggle__icon--moon,
-:root[data-theme='dark'] .theme-toggle__icon--sun { display: none; }
-:root[data-theme='dark'] .theme-toggle__icon--moon { display: block; }
+:root[data-theme='dark'] .theme-toggle__icon--sun { opacity: 0; transform: rotate(-90deg) scale(.5); }
+
+:root[data-theme='dark'] .theme-toggle__icon--sun { transform: rotate(90deg) scale(.5); }
+
+.theme-toggle__icon--sun,
+:root[data-theme='dark'] .theme-toggle__icon--moon { opacity: 1; transform: none; }
 
 @media (max-width: 780px) {
   .theme-toggle { width: 36px; height: 36px; }

@@ -196,6 +196,9 @@
 }
 
 .dot-wordmark__dot {
+  /* Quick clicks (or the double-tap easter egg) shouldn't select nearby text. */
+  user-select: none;
+  -webkit-user-select: none;
   fill: color-mix(in srgb, var(--ink) 9%, var(--paper));
   cursor: pointer;
   pointer-events: auto;

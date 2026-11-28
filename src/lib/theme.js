@@ -7,8 +7,20 @@ export function currentTheme() {
   return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
 }
 
+// How long the theme's colours take to change (the transitions on :root in
+// tokens.css), with a little to spare.
+const THEME_CHANGE_MS = 350;
+let changing;
+
 export function setTheme(theme) {
-  document.documentElement.dataset.theme = theme;
+  const root = document.documentElement;
+  // While the colours change, pause every element's own transitions (see
+  // base.css), so everything follows the one change on :root in step
+  // instead of trailing behind it.
+  root.setAttribute('data-theme-changing', '');
+  clearTimeout(changing);
+  changing = setTimeout(() => root.removeAttribute('data-theme-changing'), THEME_CHANGE_MS);
+  root.dataset.theme = theme;
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLORS[theme]);
   try {
     window.localStorage.setItem(THEME_KEY, theme);
