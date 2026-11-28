@@ -24,7 +24,7 @@ describe('home', () => {
   test('lists every project as a link to its page', () => {
     renderAt('/');
     const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading).toHaveTextContent(/^I design & build; websites,\[\d+\] products,\[\d+\] brands,\[\d+\] campaigns,\[\d+\] billboards,\[\d+\] etc\.\[\d+\]$/);
+    expect(heading).toHaveTextContent(/^I design & build; websites,\[\d+\] products,\[\d+\] brands,\[\d+\] experiences,\[\d+\] events,\[\d+\] etc\.\[\d+\]$/);
     const grid = screen.getByRole('region', { name: 'Selected projects' });
     const links = within(grid).getAllByRole('link');
     const work = projects;
@@ -43,9 +43,11 @@ describe('home', () => {
     const work = projects;
     for (const word of HEADLINE.filter((w) => w.project)) {
       const project = getProject(word.project);
-      const link = within(heading).getByRole('link', { name: project.title });
-      expect(link).toHaveAttribute('href', projectPath(project));
-      expect(link).toHaveTextContent(`[${work.indexOf(project) + 1}]`);
+      // Two words can share a project, so check every link to it.
+      for (const link of within(heading).getAllByRole('link', { name: project.title })) {
+        expect(link).toHaveAttribute('href', projectPath(project));
+        expect(link).toHaveTextContent(`[${work.indexOf(project) + 1}]`);
+      }
     }
     const etc = within(heading).getByRole('link', { name: 'Experiments' });
     expect(etc).toHaveAttribute('href', '/experiments/');
