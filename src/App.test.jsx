@@ -13,6 +13,8 @@ import videoManifest from './data/video-manifest.json';
 import { HEADLINE, getProject, projectClips, projectHero, projectImages, projects } from './data/projects';
 import { VIEW_KEY } from './pages/Home';
 import { EXPERIMENTS, experimentImages } from './data/experiments';
+import { colours } from './data/design-system';
+import { SECTIONS } from './pages/DesignSystem';
 import { projectPath } from './lib/paths';
 import { prerenderRoutes, routeMeta } from './routes';
 
@@ -218,8 +220,8 @@ describe('routes and metadata', () => {
     expect(new Set(projects.map((p) => p.slug)).size).toBe(projects.length);
   });
 
-  test('prerender list covers home, about and every project', () => {
-    expect(prerenderRoutes()).toEqual(['/', '/about/', '/experiments/', ...projects.map(projectPath)]);
+  test('prerender list covers home, about, experiments, the design system and every project', () => {
+    expect(prerenderRoutes()).toEqual(['/', '/about/', '/experiments/', '/design-system/', ...projects.map(projectPath)]);
   });
 
   test('project pages get their own title, description and share image', () => {
@@ -381,4 +383,73 @@ test('clicking a dot in the footer wordmark turns it orange, and clicking again 
   expect(dots[11]).not.toHaveClass('dot-wordmark__dot--lit');
   fireEvent.click(dots[10]);
   expect(dots[10]).not.toHaveClass('dot-wordmark__dot--lit');
+});
+
+describe('design system page', () => {
+  test('the footer links to it and marks it as the current page', () => {
+    renderAt('/design-system/');
+    const link = within(screen.getByRole('contentinfo')).getByRole('link', { name: 'Design system' });
+    expect(link).toHaveAttribute('href', '/design-system/');
+    expect(link).toHaveAttribute('aria-current', 'page');
+  });
+
+  test('has an h1 and a numbered h2 for each section', () => {
+    renderAt('/design-system/');
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('The system behind this site.');
+    SECTIONS.forEach((section, index) => {
+      const number = String(index + 1).padStart(2, '0');
+      expect(screen.getByRole('heading', { level: 2, name: `${number} ${section.title}` })).toBeInTheDocument();
+    });
+  });
+
+  test('gets its own title and description', () => {
+    expect(routeMeta('/design-system/').title).toBe('Design System | Ashley Towey');
+    expect(routeMeta('/design-system/').notFound).toBeUndefined();
+  });
+
+  test('shows a swatch for every colour token, with the values set in tokens.css', () => {
+    const css = fs.readFileSync(path.resolve(__dirname, 'styles/tokens.css'), 'utf8');
+    const block = (selector) => css.slice(css.indexOf(`${selector} {`)).split('}')[0];
+    const values = (selector) => Object.fromEntries([...block(selector).matchAll(/(--[\w-]+):\s*([^;]+);/g)].map(([, name, value]) => [name, value.trim().toUpperCase()]));
+    const light = values(':root');
+    const dark = values(":root[data-theme='dark']");
+    // Every token the dark theme sets is a colour; each needs a swatch.
+    const shown = new Set(colours.map((colour) => colour.token));
+    expect(Object.keys(dark).filter((token) => token !== 'color-scheme' && !shown.has(token))).toEqual([]);
+    colours.filter((colour) => !colour.mix).forEach((colour) => {
+      expect(colour.light.toUpperCase(), colour.token).toBe(light[colour.token]);
+      expect(colour.dark.toUpperCase(), colour.token).toBe(dark[colour.token]);
+    });
+  });
+
+  test('clicking a token copies it, and its tooltip changes from COPY to COPIED', async () => {
+    const writeText = vi.fn(() => Promise.resolve());
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
+    renderAt('/design-system/');
+    fireEvent.click(screen.getByRole('button', { name: 'Copy var(--paper)' }));
+    expect(writeText).toHaveBeenCalledWith('var(--paper)');
+    const button = await screen.findByRole('button', { name: 'Copied var(--paper)' });
+    const shownWord = (el) => el.querySelector('.ds-copy-tip__word[data-on]').textContent;
+    expect(shownWord(button)).toBe('Copied');
+    expect(button).toHaveAttribute('data-copied');
+    expect(shownWord(screen.getByRole('button', { name: 'Copy type-h1' }))).toBe('Copy');
+  });
+
+  test('each type sample can be typed in', () => {
+    renderAt('/design-system/');
+    const sample = screen.getByRole('textbox', { name: 'Try Heading 1' });
+    expect(sample).toHaveClass('type-h1');
+    fireEvent.change(sample, { target: { value: 'My own heading' } });
+    expect(sample).toHaveValue('My own heading');
+  });
+
+  test('the Light and Dark buttons set the theme and show which is active', () => {
+    renderAt('/design-system/');
+    const light = screen.getByRole('button', { name: 'Light' });
+    const dark = screen.getByRole('button', { name: 'Dark' });
+    fireEvent.click(dark);
+    expect(document.documentElement.dataset.theme).toBe('dark');
+    fireEvent.click(light);
+    expect(document.documentElement.dataset.theme).toBe('light');
+  });
 });
