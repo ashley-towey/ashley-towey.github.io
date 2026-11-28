@@ -518,7 +518,7 @@ export const projects = [...allProjects].sort((a, b) => Number(b.year) - Number(
 export const HEADLINE = [
   { label: 'websites', project: 'leanne-prosvic' },
   { label: 'products', project: 'slate' },
-  { label: 'brands', project: 'csm-showcase' },
+  { label: 'brands', project: 'encord-data-labs' },
   { label: 'campaigns', project: 'london-to-paris' },
   { label: 'billboards', project: 'long-horizon-summit' },
   { label: 'etc', to: '/experiments/', linkLabel: 'Experiments' },
