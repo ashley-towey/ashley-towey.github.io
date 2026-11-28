@@ -6,9 +6,13 @@
 //   - then `blocks`, in order:
 //       { type: 'images', label, heading?, body?, credits?, images: [{ src, alt, caption?, wide? }], columns?, square?, masonry?, rows?, lightbox? }
 //         (masonry: images keep their own shape in columns; lightbox: click an image to view it full screen)
+//         (continues: true makes the block part of the section above, with no line of its own)
 //         (rows: [[0, 1], [[2, 3], 4]] lays the images out in rows by index, a nested list
 //          stacking images in one column; each row's images share a height, uncropped)
 //         (with a heading, body or credits, the text sits beside the images; columns defaults to 1 there)
+//         (links?: [{ label, href }] adds buttons under the text, like the intro's)
+//         (an item's backdrop: '#hex' sets it on that colour, with a margin all round;
+//          browser: true puts a clip in a mock browser window)
 //         (tryIt?: { label?, title, src } adds a TRY IT button (or `label`) under the text that opens a live sketch in a pop-up)
 //         (an item can use `clip: 'folder/file.gif'` instead of `src` for a looping
 //          silent video made by `npm run videos`)
@@ -34,16 +38,13 @@ const allProjects = [
     client: 'Encord',
     year: '2026',
     disciplines: ['Brand identity', 'Design systems', 'Motion', 'Web design', 'Data visualisation'],
-    // DRAFT copy — to review
     summary: 'Brand identity, launch campaign and web presence for Encord Data Labs, Encord’s research division for Physical AI, launched at the Long Horizon summit.',
     description: [
-      'Encord Data Labs is Encord’s research division, focused on applied research and automation, advanced data capture, and partnerships for Physical AI. It is the home for the work of Encord’s machine learning team and the research it does with partners.',
-      'I created the Data Labs brand identity and design system, then carried it through the launch at Long Horizon: the launch video, keynote, social posts and event signage. I also designed the website, from the main landing page to the article pages, with graphs and graphics for each piece of in-depth data analysis.',
+      'Encord Data Labs is Encord’s research division for Physical AI, bringing together its machine learning team and research partners across applied research, automation, advanced data capture and partnerships.',
+      'The project covered the brand identity and design system, and their roll-out across the launch at Long Horizon: launch video, keynote, social campaign and event signage. It extended to the website, from the landing page through to the research articles, with bespoke charts and graphics for each in-depth analysis.',
     ],
-    // Cover for now — may be replaced
-    cover: 'encord-data-labs/cover.png',
-    alt: 'The encord data labs logo in off-white over a grainy black-and-white close-up of skin',
-    // PLACEHOLDER sections — these become images / video blocks once the final assets are in
+    cover: 'encord-data-labs/cover-signage.jpg',
+    alt: 'Two attendees in front of the Data Labs signage: a charcoal banner with the encord data labs logo above a poster of the dotted hand wearing a tracking cube',
     blocks: [
       {
         type: 'images',
@@ -69,15 +70,27 @@ const allProjects = [
         type: 'text',
         label: 'Launch',
         heading: 'Launch at Long Horizon',
-        // DRAFT copy — to review
-        body: ['Data Labs launched at Long Horizon, Encord’s Physical AI summit. I designed the assets for Eric’s keynote, the launch posts on LinkedIn (the hand model post drew especially high engagement) and the signage wall at the event.'],
+            body: ['Data Labs was unveiled at Long Horizon, Encord’s Physical AI summit. With the Physical AI community gathered in one room, the event was the natural place for the launch to get the most attention, and revealing it live on stage built real excitement around the new division. The identity carried across the keynote presentation and the signage wall at the event.'],
       },
       {
-        type: 'text',
+        type: 'images',
+        label: 'Launch',
+        continues: true, // part of the Launch section: keynote, then the signage wall
+        rows: [[0, 1]],
+        images: [
+          { src: 'encord-data-labs/launch-keynote.jpg', alt: 'A speaker on stage at Long Horizon in front of a slide with the encord data labs logo and tiles for Applied Research, Advanced Data Capture and Partnerships' },
+          { src: 'encord-data-labs/launch-signage.jpg', alt: 'Two attendees looking at the Data Labs signage wall: a charcoal banner with the logo above posters of the dotted hand and a wristband tracking cube' },
+        ],
+      },
+      {
+        type: 'images',
         label: 'Website',
         heading: 'Website and article graphics',
-        // DRAFT copy — to review
-        body: ['The Data Labs website, from the main landing page to the research articles, with graphs and graphics for each piece of in-depth data analysis.'],
+        links: [{ label: 'Live website', href: 'https://encord.com/data-labs/' }],
+        images: [
+          { clip: 'encord-data-labs/website-landing.mov', alt: 'Screen recording scrolling through the Encord Data Labs landing page', wide: true, backdrop: '#252A29', browser: true },
+        ],
+            body: ['A website to house the division’s research, from the landing page through to long-form articles, each supported by bespoke charts and graphics that make the data analysis clear and readable.'],
       },
     ],
   },
