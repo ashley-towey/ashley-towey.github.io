@@ -41,7 +41,7 @@ const allProjects = [
     summary: 'Brand identity, launch campaign and web presence for Encord Data Labs, Encord’s research division for Physical AI, launched at the Long Horizon summit.',
     description: [
       'Encord Data Labs is Encord’s research division for Physical AI, bringing together its machine learning team and research partners across applied research, automation, advanced data capture and partnerships.',
-      'The project covered the brand identity and design system, and their roll-out across the launch at Long Horizon: launch video, keynote, social campaign and event signage. It extended to the website, from the landing page through to the research articles, with bespoke charts and graphics for each in-depth analysis.',
+      'The project covered the brand identity and design system, and their roll-out across the launch at Long Horizon: launch video, keynote and event signage. It extended to the website, from the landing page through to the research articles, with bespoke charts and graphics for each in-depth analysis.',
     ],
     cover: 'encord-data-labs/cover-signage.jpg',
     alt: 'Two attendees in front of the Data Labs signage: a charcoal banner with the encord data labs logo above a poster of the dotted hand wearing a tracking cube',
