@@ -81,6 +81,14 @@ picture { display: contents; }
 
 main:focus { outline: none; }
 
+/* While the theme changes (lib/theme.js), elements drop their own
+   transitions and follow the colour change on :root exactly. Otherwise
+   anything with a colour transition chases the moving colours and lags.
+   [data-theme-sync] opts out: it handles the theme change itself. */
+:root[data-theme-changing] *:not([data-theme-sync]),
+:root[data-theme-changing] *::before,
+:root[data-theme-changing] *::after { transition: none !important; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
