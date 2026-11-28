@@ -34,7 +34,7 @@ export default function Project() {
             {project.links?.length > 0 && (
               <div className="project-links">
                 {project.links.map((link) => (
-                  <ButtonLink key={link.href} variant="secondary" href={link.href} target="_blank" rel="noreferrer">{link.label} ↗</ButtonLink>
+                  <ButtonLink key={link.href} variant="secondary" href={link.href} target="_blank" rel="noreferrer">{link.label}</ButtonLink>
                 ))}
               </div>
             )}

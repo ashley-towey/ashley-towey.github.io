@@ -81,6 +81,14 @@
 .project-gallery--masonry .gallery-image { break-inside: avoid; margin-bottom: clamp(14px, 2.6vw, 34px); }
 .project-gallery--masonry .gallery-image__frame { aspect-ratio: var(--ratio); }
 
+/* Rows: each row's images keep their shape and share one height. */
+.project-gallery--rows { --gap: clamp(14px, 2.6vw, 34px); display: flex; flex-direction: column; gap: var(--gap); }
+.project-gallery__row { display: flex; gap: var(--gap); align-items: flex-start; }
+.project-gallery__cell { flex: var(--grow) 1 var(--basis); min-width: 0; display: flex; flex-direction: column; gap: var(--gap); }
+.project-gallery--rows .gallery-image__frame { aspect-ratio: var(--ratio); }
+/* A block that carries on the section above it: the text above already leaves the gap. */
+.project-gallery.is-continued { padding-top: 0; }
+
 /* A frame that opens the image full screen. */
 .gallery-image__frame--zoom {
   width: 100%;
@@ -96,6 +104,19 @@
 
 .gallery-image__frame img,
 .gallery-image__frame video { width: 100%; height: 100%; display: block; object-fit: cover; }
+
+/* An image or clip set on a solid colour (`backdrop`), with a margin all round. */
+/* Doubled class so it beats the wide, with-text and mobile frame rules: the frame
+   takes the clip's height plus the margin, so nothing is cropped. */
+.gallery-image__frame.gallery-image__frame--backdrop { padding: clamp(16px, 5%, 64px); background: var(--backdrop); aspect-ratio: auto; max-height: none; max-width: none; }
+.gallery-image__frame--backdrop.gallery-image__frame--backdrop img,
+.gallery-image__frame--backdrop.gallery-image__frame--backdrop video { height: auto; aspect-ratio: var(--ratio); object-fit: contain; border-radius: calc(var(--radius-media) / 2); }
+
+/* A mock browser window (`browser: true` on a clip): a light bar with three roundels. */
+.browser-mock { overflow: hidden; border-radius: calc(var(--radius-media) / 2); background: #EDEBE6; }
+.browser-mock__bar { display: flex; gap: 5px; padding: 7px 10px; }
+.browser-mock__bar span { width: 7px; aspect-ratio: 1; border-radius: 50%; background: #CECBC4; }
+.gallery-image__frame--backdrop.gallery-image__frame--backdrop .browser-mock video { border-radius: 0; }
 
 .gallery-image__frame--video { max-height: none; }
 .gallery-image__frame--video iframe { width: 100%; height: 100%; display: block; border: 0; }
@@ -243,6 +264,7 @@
   .project-gallery--with-text { grid-template-columns: 1fr; row-gap: 20px; }
   .project-feature { grid-template-columns: 1fr; padding: 24px var(--section-inset); }
   .project-gallery--masonry { columns: 2; }
+  .project-gallery--rows { --gap: 12px; }
   .project-gallery--masonry .gallery-image { margin-bottom: 12px; }
   .project-text { grid-template-columns: 1fr 1fr; gap: 16px 22px; padding: 24px var(--section-inset) 34px; }
   .project-quote { grid-column: 1 / -1; }
@@ -254,6 +276,8 @@
 
 @media (max-width: 500px) {
   .project-gallery:not(.project-gallery--square) { grid-template-columns: 1fr; }
+  .project-gallery__row { flex-direction: column; }
+  .project-gallery__cell { flex: none; width: 100%; }
   .gallery-image__frame { aspect-ratio: 1.15 / 1; }
   .project-text { grid-template-columns: 1fr; }
 }

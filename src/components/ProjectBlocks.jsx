@@ -1,5 +1,5 @@
 import { Fragment, useCallback, useState } from 'react';
-import { BracketBox } from './ButtonLink';
+import ButtonLink, { BracketBox } from './ButtonLink';
 import Clip, { clipRatio } from './Clip';
 import ExperimentModal from './ExperimentModal';
 import Lightbox from './Lightbox';
@@ -11,6 +11,7 @@ import { projectHero } from '../data/projects';
 // Each block sits under its own registration line. The page's previous / next
 // line closes the frame, so no block draws a bottom rule of its own.
 // The hero image is shown in the intro, so it's dropped from the blocks.
+// A block with `continues: true` carries on the section above it, with no line of its own.
 export default function ProjectBlocks({ project }) {
   const hero = projectHero(project).src;
   const blocks = project.blocks
@@ -21,8 +22,8 @@ export default function ProjectBlocks({ project }) {
     const Block = BLOCKS[block.type];
     return (
       <Fragment key={`${block.type}-${index}`}>
-        <RegistrationLine>{block.label ?? block.heading}</RegistrationLine>
-        <Block block={block} project={project} frame="frame-sides" eager={index === 0} />
+        {!block.continues && <RegistrationLine>{block.label ?? block.heading}</RegistrationLine>}
+        <Block block={block} project={project} frame={block.continues ? 'frame-sides is-continued' : 'frame-sides'} eager={index === 0} />
       </Fragment>
     );
   });
@@ -44,12 +45,21 @@ function ImagesBlock({ block, project, frame, eager }) {
   const figures = block.images.map((image, i) => (
         <figure className={image.wide ? 'gallery-image gallery-image--wide' : 'gallery-image'} key={image.src ?? image.clip}>
           <Frame
-            className={`gallery-image__frame${block.lightbox ? ' gallery-image__frame--zoom' : ''}`}
-            style={image.wide || block.masonry ? { '--ratio': image.clip ? clipRatio(image.clip) : imageRatio(image.src) } : undefined}
+            className={`gallery-image__frame${block.lightbox ? ' gallery-image__frame--zoom' : ''}${image.backdrop ? ' gallery-image__frame--backdrop' : ''}`}
+            style={image.wide || block.masonry || block.rows || image.backdrop ? {
+              '--ratio': image.clip ? clipRatio(image.clip) : imageRatio(image.src),
+              ...(image.backdrop && { '--backdrop': image.backdrop }),
+            } : undefined}
             {...(block.lightbox && { type: 'button', 'aria-label': `View full screen: ${image.alt}`, onClick: () => setOpen(stills.indexOf(image)) })}
           >
             {image.clip ? (
-              <Clip src={image.clip} alt={image.alt} />
+              image.browser ? (
+                // A mock browser window around the clip: a bar with three roundels.
+                <div className="browser-mock">
+                  <div className="browser-mock__bar" aria-hidden="true"><span /><span /><span /></div>
+                  <Clip src={image.clip} alt={image.alt} />
+                </div>
+              ) : <Clip src={image.clip} alt={image.alt} />
             ) : (
               <Picture
                 src={image.src}
@@ -64,8 +74,40 @@ function ImagesBlock({ block, project, frame, eager }) {
   ));
   const lightbox = open !== null && <Lightbox images={stills} index={open} onChange={setOpen} onClose={() => setOpen(null)} />;
 
+  // With `rows`, images are laid out in rows. Each row is a list of image
+  // indexes; a nested list stacks those images in one column. Widths follow
+  // each image's shape, so everything in a row comes out the same height.
+  if (block.rows) {
+    const ratioOf = (image) => (image.clip ? clipRatio(image.clip) : imageRatio(image.src));
+    return (
+      <section className={`project-gallery project-gallery--rows ${frame}`} aria-label={`${project.title}: ${block.label}`}>
+        {block.rows.map((row, r) => (
+          <div className="project-gallery__row" key={r}>
+            {row.map((cell, _, cells) => {
+              const stack = [].concat(cell);
+              const ratio = 1 / stack.reduce((sum, i) => sum + 1 / ratioOf(block.images[i]), 0);
+              // A stack's gaps add to its height, so the other cells get a head
+              // start in width that keeps every cell in the row the same height.
+              const gaps = Math.max(...cells.map((c) => [].concat(c).length)) - stack.length;
+              return (
+                <div
+                  className="project-gallery__cell"
+                  style={{ '--grow': ratio, '--basis': `calc(var(--gap) * ${ratio * gaps})` }}
+                  key={stack.join('-')}
+                >
+                  {stack.map((i) => figures[i])}
+                </div>
+              );
+            })}
+          </div>
+        ))}
+        {lightbox}
+      </section>
+    );
+  }
+
   // With a heading or body, the text sits beside the images, like the intro.
-  if (block.heading || block.body || block.credits || block.tryIt) {
+  if (block.heading || block.body || block.credits || block.tryIt || block.links) {
     return (
       <section className={`project-gallery project-gallery--with-text ${frame}`} aria-label={`${project.title}: ${block.label}`}>
         <div className="project-gallery__text">
@@ -77,6 +119,13 @@ function ImagesBlock({ block, project, frame, eager }) {
           )}
           {block.credits && (
             <p className="project-credits type-body"><span className="eyebrow caption-2">In collaboration with</span>{block.credits}</p>
+          )}
+          {block.links?.length > 0 && (
+            <div className="project-links">
+              {block.links.map((link) => (
+                <ButtonLink key={link.href} variant="secondary" href={link.href} target="_blank" rel="noreferrer">{link.label}</ButtonLink>
+              ))}
+            </div>
           )}
           {block.tryIt && (
             <div>
