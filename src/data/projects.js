@@ -201,6 +201,13 @@ const allProjects = [
         ],
       },
       {
+        type: 'video',
+        label: 'Promotional video',
+        videos: [
+          { vimeo: '949931680', title: 'Domestique Display promotional video', ratio: 16 / 9 },
+        ],
+      },
+      {
         type: 'images',
         label: 'Process',
         images: [
@@ -246,8 +253,16 @@ const allProjects = [
         ],
       },
       {
+        type: 'video',
+        label: 'Emotion Communication Cube',
+        videos: [
+          { vimeo: '797679118', title: 'SLATE Emotion Communication Cube', ratio: 16 / 9 },
+        ],
+      },
+      {
         type: 'images',
         label: 'Emotion Communication Cube',
+        continues: true, // prototype photos under the cube video
         columns: 3,
         square: true,
         images: [
