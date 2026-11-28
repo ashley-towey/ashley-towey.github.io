@@ -185,6 +185,8 @@
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-media);
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* The chip's tooltip sits centred above it, arrow in the middle. The
@@ -576,6 +578,10 @@
 .ds-dots__svg { display: block; width: 100%; max-height: 360px; overflow: visible; }
 
 .ds-dots__dot {
+  /* Clicking dots quickly counts as a double-click, which would otherwise
+     select nearby text. Same for the colour chips below. */
+  user-select: none;
+  -webkit-user-select: none;
   fill: var(--ink);
   cursor: pointer;
   transition: fill .2s ease;
