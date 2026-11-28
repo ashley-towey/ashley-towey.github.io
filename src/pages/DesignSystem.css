@@ -1,0 +1,621 @@
+/* The fade widths at the edges of the one-line fields, registered so they
+   can transition (see "One-line fields" below). */
+@property --fade-start {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --fade-end {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+/* /design-system/: a live specimen sheet. Only the site's own type classes
+   are used for text; this file only lays things out. */
+
+/* Code-like labels (tokens, class names, props) keep their real case. */
+.ds-token {
+  font-family: inherit;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.ds-section {
+  padding: 44px var(--section-inset) 64px;
+  scroll-margin-top: 24px;
+}
+
+/* ---- Intro ---- */
+
+.ds-intro {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--grid-gap);
+  row-gap: 40px;
+  align-items: end;
+  min-height: clamp(380px, 30vw, 500px);
+  padding: 42px var(--section-inset) 36px;
+}
+
+.ds-intro h1 { grid-column: span 2; margin: 0; }
+
+/* "The system" on its own line in the h2 weight, like the home heading. */
+.ds-intro__lead { display: block; font-weight: var(--type-h2-weight); }
+
+.ds-intro__side { display: grid; gap: 24px; justify-items: start; }
+.ds-intro__side .type-body { margin: 0; color: var(--muted); }
+
+.ds-intro__contents {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+}
+
+/* A token you click to copy. Like the home heading's numbers, it turns
+   orange on hover and shows the standard tooltip (from Home.css): COPY, then
+   COPIED, which stays up for a moment after the click. */
+.ds-copy {
+  position: relative;
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.ds-copy .ds-token { transition: color .2s ease; }
+
+.ds-copy:hover .ds-token,
+.ds-copy:focus-visible .ds-token,
+.ds-copy[data-copied] .ds-token { color: var(--orange); }
+
+.ds-copy:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.ds-copy:hover .headline-word__tip,
+.ds-copy:focus-visible .headline-word__tip,
+.ds-copy[data-copied] .headline-word__tip {
+  opacity: 1;
+  transform: translate(calc(0px - var(--tip-arrow-x)), 0);
+}
+
+/* COPY and COPIED share one spot in the tooltip: the outgoing word fades
+   and lifts away while the incoming one fades and rises into place. */
+.ds-copy-tip__words { display: inline-grid; justify-items: center; }
+
+.ds-copy-tip__word {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity .3s cubic-bezier(.65, 0, .35, 1), transform .3s cubic-bezier(.65, 0, .35, 1);
+}
+
+.ds-copy-tip__word[data-on] { opacity: 1; transform: none; }
+
+/* Words leaving lift upwards, so the change reads as one movement. */
+.ds-copy-tip__word:not([data-on]):first-child { transform: translateY(-5px); }
+
+/* ---- Section lines ---- */
+
+.ds-line .registration-line__label {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.ds-line__heading { margin: 0; font: inherit; letter-spacing: inherit; }
+
+/* ---- Theme buttons ---- */
+
+.ds-theme-buttons { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+
+/* The nav's round theme toggle with a plain label beside it. Only the
+   circle is the button, so only it reacts; the active one is filled.
+   Each circle's colours are the real light/dark values (set inline from the
+   colour data), keyed on the theme itself, so on a theme change each one
+   makes a single change in step with the page. */
+.ds-theme-option { display: inline-flex; align-items: center; gap: 12px; }
+
+.ds-theme-button {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1.5px solid var(--btn-line);
+  border-radius: 50%;
+  color: var(--btn-icon);
+  background: var(--btn-fill);
+  cursor: pointer;
+  transition: color .3s cubic-bezier(.65, 0, .35, 1), background-color .3s cubic-bezier(.65, 0, .35, 1), border-color .3s cubic-bezier(.65, 0, .35, 1);
+}
+
+/* Light theme: Light is active (filled ink), Dark is outlined on paper. */
+.ds-theme-button--light { --btn-fill: var(--light-ink); --btn-icon: var(--light-paper); --btn-line: var(--light-ink); }
+.ds-theme-button--dark { --btn-fill: var(--light-paper); --btn-icon: var(--light-ink); --btn-line: var(--light-ink); }
+
+/* Dark theme: Dark is active (filled ink), Light is outlined on paper. */
+:root[data-theme='dark'] .ds-theme-button--light { --btn-fill: var(--dark-paper); --btn-icon: var(--dark-ink); --btn-line: var(--dark-ink); }
+:root[data-theme='dark'] .ds-theme-button--dark { --btn-fill: var(--dark-ink); --btn-icon: var(--dark-paper); --btn-line: var(--dark-ink); }
+
+.ds-theme-button__icon {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-theme-button[aria-pressed='false']:hover { background: color-mix(in srgb, var(--btn-icon) 8%, var(--btn-fill)); }
+}
+
+.ds-theme-button[aria-pressed='true'] { cursor: default; }
+
+.ds-theme-button:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+
+/* ---- Colour ---- */
+
+.ds-swatches {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px var(--grid-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-swatch { display: grid; align-content: start; gap: 4px; }
+
+.ds-swatch__chip {
+  position: relative;
+  display: block;
+  aspect-ratio: 5 / 2;
+  margin-bottom: 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-media);
+  cursor: pointer;
+}
+
+/* The chip's tooltip sits centred above it, arrow in the middle. The
+   percentages are of the tooltip's own width, so it stays centred. */
+.ds-swatch__chip .headline-word__tip { --tip-arrow-x: 50%; left: 50%; }
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-swatch__chip:hover .headline-word__tip {
+    opacity: 1;
+    transform: translate(calc(0px - var(--tip-arrow-x)), 0);
+  }
+}
+
+.ds-swatch__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.ds-swatch__value { white-space: nowrap; }
+
+.ds-swatch__role { margin: 0; color: var(--muted); }
+
+.ds-swatch__themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+  margin: 2px 0 0;
+  color: var(--muted);
+}
+
+.ds-swatch__themes div { display: flex; gap: 6px; }
+.ds-swatch__themes dt { color: var(--ink); }
+.ds-swatch__themes dd { margin: 0; text-transform: none; letter-spacing: 0; white-space: nowrap; }
+
+/* ---- Typography ---- */
+
+/* Variable type tester: the primary font, Neue Regrade, first in the section. */
+.ds-tester {
+  margin-bottom: 56px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.ds-tester__label { display: block; margin-bottom: 14px; color: var(--muted); }
+
+.ds-tester__text {
+  display: block;
+  width: 100%;
+  /* Room below for descenders (g, y, p), which a field would otherwise clip. */
+  padding: .04em 0 .2em;
+  border: 0;
+  /* A border, not a shadow, so the fade mask doesn't clip it away. */
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  color: var(--ink);
+  background: none;
+  font-family: var(--font-family-sans);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+}
+
+.ds-tester__text:focus { outline: none; }
+.ds-tester__text:focus-visible { border-bottom-color: var(--muted); }
+
+.ds-tester__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 48px;
+  margin-top: 24px;
+}
+
+.ds-slider {
+  display: grid;
+  grid-template-columns: auto minmax(140px, 260px) 3.2ch;
+  align-items: center;
+  gap: 16px;
+}
+
+.ds-slider > .caption-2 { color: var(--muted); }
+.ds-slider output { text-align: right; }
+
+/* Range inputs: a 1px rule with an ink dot, in the frame style. */
+.ds-slider input[type='range'] {
+  width: 100%;
+  height: 24px;
+  margin: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.ds-slider input[type='range']::-webkit-slider-runnable-track { height: 1px; background: var(--ink); }
+.ds-slider input[type='range']::-moz-range-track { height: 1px; background: var(--ink); }
+
+.ds-slider input[type='range']::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  margin-top: -9px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ink);
+  -webkit-appearance: none;
+  appearance: none;
+  transition: background-color .2s ease;
+}
+
+.ds-slider input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.ds-slider input[type='range']:hover::-webkit-slider-thumb,
+.ds-slider input[type='range']:focus-visible::-webkit-slider-thumb { background: var(--orange); }
+.ds-slider input[type='range']:hover::-moz-range-thumb,
+.ds-slider input[type='range']:focus-visible::-moz-range-thumb { background: var(--orange); }
+.ds-slider input[type='range']:focus { outline: none; }
+
+/* Type scale */
+.ds-type-scale { margin: 0; padding: 0; list-style: none; }
+
+/* Centred vertically. The sample's frame animates its height, so as it
+   gains a line it re-centres smoothly rather than jumping. */
+.ds-type-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+  gap: var(--grid-gap);
+  align-items: center;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.ds-type-row:first-child { padding-top: 0; }
+
+.ds-type-row__spec { display: grid; justify-items: start; gap: 6px; }
+
+.ds-type-row__values { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 4px 0 0; color: var(--muted); }
+.ds-type-row__values div { display: flex; gap: 6px; align-items: baseline; }
+.ds-type-row__values dd { margin: 0; color: var(--ink); text-transform: none; }
+
+.ds-type-row__usage { margin: 0; color: var(--muted); }
+
+/* The sample is a one-line field. Only its box is reset here; :where()
+   keeps these at zero specificity so the type class sets the real family,
+   size, weight and case. */
+:where(.ds-type-row__sample) {
+  font-family: var(--font-family-sans);
+  letter-spacing: normal;
+}
+
+.ds-type-row__sample {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: .08em 0 .22em;
+  border: 0;
+  /* A border, not a shadow, so the fade mask doesn't clip it away. */
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  color: var(--ink);
+  background: none;
+  line-height: 1.2;
+  text-overflow: clip;
+  outline: none;
+}
+
+.ds-type-row__sample::placeholder { color: var(--ink-soft); }
+
+/* A faint rule shows the sample can be typed in; it darkens to grey while typing. */
+.ds-type-row__sample:hover { border-bottom-color: var(--line-strong); }
+.ds-type-row__sample:focus { border-bottom-color: var(--muted); }
+
+/* One-line fields (type scale samples, the type tester): text that has
+   scrolled out of view fades out at that edge. The mask is always on, and
+   each edge's fade width is a registered property (see the top of this
+   file), so it eases in and out instead of snapping. */
+.ds-type-row__sample,
+.ds-tester__text {
+  --fade: 64px;
+  --fade-start: 0px;
+  --fade-end: 0px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--fade-start), #000 calc(100% - var(--fade-end)), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 var(--fade-start), #000 calc(100% - var(--fade-end)), transparent);
+  transition: --fade-start .45s cubic-bezier(.65, 0, .35, 1), --fade-end .45s cubic-bezier(.65, 0, .35, 1), border-color .2s ease;
+}
+
+.ds-tester__text { --fade: 120px; }
+
+.ds-page input:is([data-fade='start'], [data-fade='both']) { --fade-start: var(--fade); }
+.ds-page input:is([data-fade='end'], [data-fade='both']) { --fade-end: var(--fade); }
+
+/* ---- Components ---- */
+
+.ds-components {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+.ds-specimen { display: grid; grid-template-rows: 1fr auto; gap: 12px; margin: 0; }
+.ds-specimen--wide { grid-column: span 2; }
+
+.ds-specimen__stage {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 24px;
+  min-height: 180px;
+  padding: 28px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-media);
+}
+
+.ds-specimen__caption { display: grid; gap: 2px; }
+
+.ds-components__field { width: 100%; max-width: 420px; }
+
+.ds-components__frame { width: 100%; padding: 14px 10px 10px; }
+.ds-components__frame-box { height: 90px; }
+
+.ds-components__card { width: 100%; max-width: 380px; }
+.ds-components__row { width: 100%; }
+
+/* A primary pill used as a real <button> (e.g. REPLAY): reset its browser styles. */
+.ds-page button.button-link { padding: 0; font-family: inherit; cursor: pointer; }
+
+/* ---- Grid, spacing & motion ---- */
+
+.ds-spacing { margin: 0 0 56px; padding: 0; list-style: none; }
+
+.ds-spacing__row {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 1fr) 110px minmax(0, 1.4fr);
+  align-items: center;
+  gap: var(--grid-gap);
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.ds-spacing__visual { display: flex; align-items: center; min-height: 48px; }
+
+.ds-spacing__bar {
+  display: block;
+  height: 24px;
+  border-inline: 1px solid var(--ink);
+  background: linear-gradient(var(--orange), var(--orange)) center / 100% 1px no-repeat;
+}
+
+.ds-spacing__corner {
+  display: block;
+  width: 48px;
+  height: 48px;
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--ink);
+  border-top-left-radius: var(--radius-media);
+}
+
+.ds-spacing__size { text-align: right; }
+.ds-spacing__role { color: var(--muted); }
+
+/* Easing curve */
+.ds-easing {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: calc(var(--grid-gap) * 2);
+  align-items: center;
+}
+
+.ds-easing__graph {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 440px;
+  margin: 24px 24px 40px 40px;
+  border-left: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.ds-easing__graph svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+.ds-easing__curve { fill: none; stroke: var(--ink); stroke-width: 2px; vector-effect: non-scaling-stroke; }
+.ds-easing__guide { stroke: var(--muted); stroke-width: 1px; stroke-dasharray: 4 4; vector-effect: non-scaling-stroke; }
+
+.ds-easing__handle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--muted);
+  border-radius: 50%;
+  background: var(--paper);
+  transform: translate(-50%, 50%);
+}
+
+/* The tracer: the outer span moves across (linear), the inner one up (eased). */
+.ds-easing__tracer-x { position: absolute; top: 0; bottom: 0; left: 0; width: 0; }
+
+.ds-easing__tracer-y {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--orange);
+  transform: translate(-50%, 50%);
+}
+
+.ds-easing__axis { position: absolute; color: var(--muted); }
+.ds-easing__axis--x { right: 0; bottom: -30px; }
+.ds-easing__axis--y { left: -30px; top: 0; transform-origin: left top; transform: rotate(-90deg) translateX(-100%); }
+
+.ds-easing__side { display: grid; justify-items: start; gap: 20px; }
+.ds-easing__side .ds-token { color: var(--ink); overflow-wrap: anywhere; }
+.ds-easing__side .type-body { max-width: 460px; margin: 0; color: var(--muted); }
+
+.ds-easing__race { display: grid; gap: 14px; width: 100%; max-width: 460px; }
+.ds-easing__lane { display: grid; grid-template-columns: 9ch 1fr; align-items: center; gap: 16px; }
+.ds-easing__lane > .caption-2 { color: var(--muted); }
+
+.ds-easing__track {
+  position: relative;
+  height: 18px;
+  margin-right: 18px;
+  background: linear-gradient(var(--line-strong), var(--line-strong)) center / 100% 1px no-repeat;
+}
+
+.ds-easing__marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.ds-easing__marker--eased { background: var(--orange); }
+
+/* Grid overlay: fixed over the window, matching .site-shell and the home grid. */
+.ds-grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.ds-grid-overlay__shell {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  width: min(100% - 8.2vw, 1780px);
+  height: 100%;
+  margin-inline: auto;
+  padding-inline: var(--section-inset);
+}
+
+.ds-grid-overlay__shell span {
+  background: color-mix(in srgb, var(--orange) 12%, transparent);
+  border-inline: 1px solid color-mix(in srgb, var(--orange) 45%, transparent);
+}
+
+/* ---- Dot matrix playground ---- */
+
+.ds-dots { display: grid; gap: 32px; }
+
+.ds-dots__controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 14px 28px;
+}
+
+.ds-dots__intro { max-width: 520px; margin: 0; color: var(--muted); }
+
+.ds-dots__buttons { display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.ds-dots__buttons .bracket-button:disabled { opacity: .45; cursor: default; }
+
+.ds-dots__stage { min-height: clamp(160px, 18vw, 320px); display: flex; align-items: center; }
+
+.ds-dots__svg { display: block; width: 100%; max-height: 360px; overflow: visible; }
+
+.ds-dots__dot {
+  fill: var(--ink);
+  cursor: pointer;
+  transition: fill .2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-dots__dot:hover { fill: color-mix(in srgb, var(--orange) 60%, var(--ink)); }
+}
+
+.ds-dots__dot--lit,
+.ds-dots__dot--lit:hover { fill: var(--orange); }
+
+/* ---- Smaller screens ---- */
+
+@media (max-width: 1100px) {
+  .ds-swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ds-components { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ds-spacing__row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 110px; }
+  .ds-spacing__role { grid-column: 1 / -1; margin-top: -6px; }
+}
+
+@media (max-width: 780px) {
+  .ds-intro { grid-template-columns: 1fr; min-height: 0; padding-top: 38px; }
+  .ds-intro h1 { grid-column: auto; }
+  .ds-section { padding-block: 36px 48px; }
+  .ds-type-row { grid-template-columns: 1fr; gap: 14px; }
+  .ds-easing { grid-template-columns: 1fr; gap: 24px; }
+  .ds-grid-overlay__shell { width: calc(100% - 36px); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ds-grid-overlay__shell span:nth-child(3) { display: none; }
+  .ds-theme-button { width: 36px; height: 36px; }
+}
+
+@media (max-width: 500px) {
+  .ds-swatches { gap: 28px 16px; }
+  .ds-swatch__chip { aspect-ratio: 2 / 1; }
+  .ds-components { grid-template-columns: 1fr; }
+  .ds-specimen--wide { grid-column: auto; }
+  .ds-spacing__row { grid-template-columns: minmax(0, 1fr) 110px; }
+  .ds-spacing__visual { grid-column: 1 / -1; grid-row: 2; }
+  .ds-grid-overlay__shell { width: calc(100% - 28px); grid-template-columns: 1fr; }
+  .ds-grid-overlay__shell span:nth-child(2) { display: none; }
+  .ds-slider { grid-template-columns: 7ch minmax(0, 1fr) 3.2ch; width: 100%; }
+}

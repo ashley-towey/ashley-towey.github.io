@@ -10,6 +10,7 @@ export default function Footer() {
         <ButtonLink variant="secondary" to="/">Portfolio</ButtonLink>
         <ButtonLink variant="secondary" to="/experiments/">Experiments</ButtonLink>
         <ButtonLink variant="secondary" to="/about/">Contact me</ButtonLink>
+        <ButtonLink variant="secondary" to="/design-system/">Design system</ButtonLink>
       </nav>
       <div className="site-footer__aside">
         {site.socials.map((social) => (

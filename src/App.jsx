@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import RouteEffects from './components/RouteEffects';
 import About from './pages/About';
+import DesignSystem from './pages/DesignSystem';
 import Home from './pages/Home';
 import Experiments from './pages/Experiments';
 import NotFound from './pages/NotFound';
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/work/:slug" element={<Project />} />
         <Route path="/experiments" element={<Experiments />} />
         <Route path="/about" element={<About />} />
+        <Route path="/design-system" element={<DesignSystem />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
